@@ -15,11 +15,11 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('nama');
             $table->string('npsn')->index('npsn');
-            $table->foreignUlid('jenjang_sekolah_id')->nullable()->index('jenjang_sekolah_id');
-            $table->foreignUlid('provinsi_kode')->nullable()->index('provinsi_kode');
-            $table->foreignUlid('kabupaten_kode')->nullable()->index('kabupaten_kode');
-            $table->foreignUlid('kecamatan_kode')->nullable()->index('kecamatan_kode');
-            $table->foreignUlid('desa_kode')->nullable()->index('desa_kode');
+            $table->foreignUlid('jenjang_sekolah_id')->nullable()->index();
+            $table->foreignUlid('provinsi_kode')->nullable()->index();
+            $table->foreignUlid('kabupaten_kode')->nullable()->index();
+            $table->foreignUlid('kecamatan_kode')->nullable()->index();
+            $table->foreignUlid('desa_kode')->nullable()->index();
             $table->date('tanggal_aktif')->nullable();
             $table->date('tanggal_nonaktif')->nullable();
             $table->timestamps();

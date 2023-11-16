@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('tanggal_lahir');
             $table->string('nomor_hp')->nullable();
             $table->string('email')->nullable();
-            $table->string('jenjang_pendidikan_kode')->index('jenjang_pendidikan_kode');
+            $table->string('jenjang_pendidikan_kode')->index();
 
             $table->string('status_kepegawaian_kode');
             $table->unsignedTinyInteger('masa_kerja_tahun')->nullable();
