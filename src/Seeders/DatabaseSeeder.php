@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             BidangStudiSertifikasiInRealSeeder::class,
             // JenisPtkSeeder::class,
             JenisPtkInRealSeeder::class,
+            // JenjangSekolahSeeder::class,
+            JenjangSekolahInRealSeeder::class,
             // MataPelajaranSeeder::class,
             MataPelajaranInRealSeeder::class,
             SekolahSeeder::class,

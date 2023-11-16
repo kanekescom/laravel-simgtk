@@ -16,7 +16,7 @@ class BidangStudiPendidikan extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'bidang_studi_pendidikan';
+        return config('simgtk.table_prefix').'bidang_studi_pendidikan';
     }
 
     public function pegawai(): HasMany

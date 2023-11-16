@@ -3,17 +3,17 @@
 namespace Kanekescom\Simgtk\Seeders;
 
 use Illuminate\Database\Seeder;
-use Kanekescom\Simgtk\Factories\SekolahFactory;
+use Kanekescom\Simgtk\Models\JenjangSekolah;
 
-class SekolahSeeder extends Seeder
+class JenjangSekolahSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        SekolahFactory::new()
-            ->count(15)
+        JenjangSekolah::factory()
+            ->count(5)
             ->create();
     }
 }

@@ -1,14 +1,17 @@
 <?php
 
-namespace Database\Factories\Kanekescom\Simgtk\Factories;
+namespace Kanekescom\Simgtk\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Kanekescom\Simgtk\Models\MataPelajaran;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JenisPtk>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\MataPelajaran>
  */
-class JenisPtkFactory extends Factory
+class MataPelajaranFactory extends Factory
 {
+    protected $model = MataPelajaran::class;
+
     /**
      * Define the model's default state.
      *

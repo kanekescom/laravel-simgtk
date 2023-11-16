@@ -26,7 +26,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "filament/support": "^3.0",
+        "filament/support": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
         "illuminate/contracts": "^10.0",
         "spatie/laravel-package-tools": "^1.14.0"
@@ -46,8 +46,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Kanekescom\\Simgtk\\": "src/",
-            "Database\\Factories\\": "database/factories/"
+            "Kanekescom\\Simgtk\\": "src/"
         }
     },
     "autoload-dev": {
@@ -58,7 +57,7 @@
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-laravel-simgtk-api --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-laravel-simgtk --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",

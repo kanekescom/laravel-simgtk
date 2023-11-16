@@ -29,7 +29,7 @@ class Pegawai extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'pegawai';
+        return config('simgtk.table_prefix').'pegawai';
     }
 
     public function sekolah(): BelongsTo

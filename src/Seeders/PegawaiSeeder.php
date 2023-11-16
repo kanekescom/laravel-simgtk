@@ -3,7 +3,7 @@
 namespace Kanekescom\Simgtk\Seeders;
 
 use Illuminate\Database\Seeder;
-use Kanekescom\Simgtk\Models\Pegawai;
+use Kanekescom\Simgtk\Factories\PegawaiFactory;
 
 class PegawaiSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class PegawaiSeeder extends Seeder
      */
     public function run(): void
     {
-        Pegawai::factory()
+        PegawaiFactory::new()
             ->count(15)
             ->create();
     }

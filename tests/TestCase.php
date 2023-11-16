@@ -2,7 +2,7 @@
 
 namespace Kanekescom\Simgtk\Tests;
 
-use Kanekescom\Simgtk\ReferensiServiceProvider;
+use Kanekescom\Simgtk\SimgtkServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -15,13 +15,12 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            ReferensiServiceProvider::class,
+            SimgtkServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
-        $app['config']->set('siasn-api', require __DIR__ . '/../vendor/kanekescom/laravel-siasn-api/config/siasn-api.php');
-        $app['config']->set('simgtk-api', require __DIR__ . '/../vendor/kanekescom/laravel-simgtk-api/config/simgtk-api.php');
+        //
     }
 }

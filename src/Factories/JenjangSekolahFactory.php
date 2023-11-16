@@ -1,14 +1,17 @@
 <?php
 
-namespace Database\Factories\Kanekescom\Simgtk\Factories;
+namespace Kanekescom\Simgtk\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Kanekescom\Simgtk\Models\JenjangSekolah;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JenjangSekolah>
  */
 class JenjangSekolahFactory extends Factory
 {
+    protected $model = JenjangSekolah::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,7 +20,7 @@ class JenjangSekolahFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->unique()->sentence(1),
+            'nama' => strtoupper(fake()->unique()->word()),
         ];
     }
 }

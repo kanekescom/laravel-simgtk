@@ -1,14 +1,17 @@
 <?php
 
-namespace Database\Factories\Kanekescom\Simgtk\Factories;
+namespace Kanekescom\Simgtk\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Kanekescom\Simgtk\Models\BidangStudiSertifikasi;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BidangStudiPendidikan>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BidangStudiSertifikasi>
  */
-class BidangStudiPendidikanFactory extends Factory
+class BidangStudiSertifikasiFactory extends Factory
 {
+    protected $model = BidangStudiSertifikasi::class;
+
     /**
      * Define the model's default state.
      *
