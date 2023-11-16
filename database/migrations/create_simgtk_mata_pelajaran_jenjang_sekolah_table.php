@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('simgtk.table_prefix') . 'mata_pelajaran_jenjang_sekolah', function (Blueprint $table) {
+        Schema::create(config('simgtk.table_prefix').'mata_pelajaran_jenjang_sekolah', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignUlid('jenjang_sekolah_id')->index();
             $table->foreignUlid('mata_pelajaran_id')->index();
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('simgtk.table_prefix') . 'mata_pelajaran_jenjang_sekolah');
+        Schema::dropIfExists(config('simgtk.table_prefix').'mata_pelajaran_jenjang_sekolah');
     }
 };
