@@ -16,6 +16,7 @@ class SimgtkServiceProvider extends PackageServiceProvider
                 'create_simgtk_bidang_studi_sertifikasi_table',
                 'create_simgtk_jenis_ptk_table',
                 'create_simgtk_jenjang_sekolah_table',
+                'create_simgtk_mata_pelajaran_jenjang_sekolah_table',
                 'create_simgtk_mata_pelajaran_table',
                 'create_simgtk_pegawai_table',
                 'create_simgtk_sekolah_table',
