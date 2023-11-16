@@ -44,7 +44,7 @@ class PegawaiFactory extends Factory
         $tanggal_pangkat = now()->parse(fake()->dateTimeBetween('-3 years', '-0 years'));
 
         return [
-            'nama' => fake()->unique()->firstName($gender_kode == GenderEnum::LAKILAKI ? 'male' : 'female').' '.fake()->unique()->lastName(),
+            'nama' => fake()->unique()->firstName($gender_kode == GenderEnum::LAKILAKI ? 'male' : 'female') . ' ' . fake()->unique()->lastName(),
             'nik' => fake()->numerify('################'),
             'nuptk' => fake()->boolean(85) ? null : fake()->numerify('################'),
             'nip' => $is_asn ? null : fake()->numerify('##################'),
@@ -81,7 +81,7 @@ class PegawaiFactory extends Factory
             'jenis_ptk_id' => JenisPtk::inRandomOrder()->first()->id ?? JenisPtkFactory::new()->create(),
             'bidang_studi_pendidikan_id' => BidangStudiPendidikan::inRandomOrder()->first()->id ?? BidangStudiPendidikan::new()->create(),
             'bidang_studi_sertifikasi_id' => BidangStudiSertifikasi::inRandomOrder()->first()->id ?? BidangStudiSertifikasi::new()->create(),
-            'mata_pelajaran_diajarkan_id' => MataPelajaran::inRandomOrder()->first()->id ?? MataPelajaran::new()->create(),
+            'mata_pelajaran_id' => MataPelajaran::inRandomOrder()->first()->id ?? MataPelajaran::new()->create(),
             'jam_mengajar_perminggu' => fake()->randomFloat(1, 30, 40),
             'is_kepsek' => $is_pns ? fake()->boolean(25) : false,
         ];
