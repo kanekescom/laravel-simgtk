@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('simgtk.table_prefix') . 'sekolah', function (Blueprint $table) {
+        Schema::create(config('simgtk.table_prefix').'sekolah', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('nama');
             $table->string('npsn')->index('npsn');
@@ -20,6 +20,9 @@ return new class extends Migration
             $table->foreignUlid('kabupaten_kode')->nullable()->index();
             $table->foreignUlid('kecamatan_kode')->nullable()->index();
             $table->foreignUlid('desa_kode')->nullable()->index();
+            $table->unsignedTinyInteger('jumlah_ruang_kelas')->nullable();
+            $table->unsignedTinyInteger('jumlah_ruang_rombel')->nullable();
+            $table->unsignedTinyInteger('jumlah_siswa')->nullable();
             $table->date('tanggal_aktif')->nullable();
             $table->date('tanggal_nonaktif')->nullable();
             $table->timestamps();
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('simgtk.table_prefix') . 'sekolah');
+        Schema::dropIfExists(config('simgtk.table_prefix').'sekolah');
     }
 };
