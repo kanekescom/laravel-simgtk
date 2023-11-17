@@ -3,17 +3,17 @@
 namespace Kanekescom\Simgtk\Seeders;
 
 use Illuminate\Database\Seeder;
-use Kanekescom\Simgtk\Factories\PegawaiFactory;
+use Kanekescom\Simgtk\Factories\UsulMutasiFactory;
 
-class PegawaiSeeder extends Seeder
+class UsulMutasiSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        PegawaiFactory::new()
-            ->count(50)
+        UsulMutasiFactory::new()
+            ->count(5)
             ->create();
     }
 }
