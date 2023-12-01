@@ -58,16 +58,19 @@ class SekolahResource extends Resource
                 Forms\Components\TextInput::make('jumlah_kelas')
                     ->label('Jumlah Kelas')
                     ->integer()
-                    ->maxValue(100)
+                    ->minValue(0)
+                    ->maxValue(10000)
                     ->required(),
                 Forms\Components\TextInput::make('jumlah_rombel')
                     ->label('Jumlah Rombel')
                     ->integer()
-                    ->maxValue(100)
+                    ->minValue(0)
+                    ->maxValue(10000)
                     ->required(),
                 Forms\Components\TextInput::make('jumlah_siswa')
                     ->label('Jumlah Siswa')
                     ->integer()
+                    ->minValue(0)
                     ->maxValue(10000)
                     ->required(),
             ]);
