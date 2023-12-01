@@ -9,7 +9,6 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -17,6 +16,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\SekolahChartByJenjangSekolah;
+use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\SekolahChartByWilayah;
 
 class SimgtkPanelProvider extends PanelProvider
 {
@@ -30,15 +31,15 @@ class SimgtkPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: __DIR__ . '/Filament/Resources', for: 'Kanekescom\\Simgtk\\Filament\\Resources')
-            ->discoverPages(in: __DIR__ . '/Filament/Pages', for: 'Kanekescom\\Simgtk\\Filament\\Pages')
+            ->discoverResources(in: __DIR__.'/Filament/Resources', for: 'Kanekescom\\Simgtk\\Filament\\Resources')
+            ->discoverPages(in: __DIR__.'/Filament/Pages', for: 'Kanekescom\\Simgtk\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: __DIR__ . '/Filament/Widgets', for: 'Kanekescom\\Simgtk\\Filament\\Widgets')
+            ->discoverWidgets(in: __DIR__.'/Filament/Widgets', for: 'Kanekescom\\Simgtk\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                SekolahChartByJenjangSekolah::class,
+                SekolahChartByWilayah::class,
             ])
             ->middleware([
                 EncryptCookies::class,

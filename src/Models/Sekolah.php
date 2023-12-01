@@ -19,7 +19,7 @@ class Sekolah extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'sekolah';
+        return config('simgtk.table_prefix').'sekolah';
     }
 
     public function jenjangSekolah(): BelongsTo
@@ -35,5 +35,19 @@ class Sekolah extends Model
     public function wilayah(): BelongsTo
     {
         return $this->belongsTo(Wilayah::class, 'wilayah_kode', 'kode');
+    }
+
+    public function scopeCountByJenjangSekolah($query)
+    {
+        return $query->select('jenjang_sekolah_id', \DB::raw('COUNT(*) as count'))
+            ->with('jenjangSekolah')
+            ->groupBy('jenjang_sekolah_id');
+    }
+
+    public function scopeCountByWilayah($query)
+    {
+        return $query->select('wilayah_kode', \DB::raw('COUNT(*) as count'))
+            ->with('wilayah')
+            ->groupBy('wilayah_kode');
     }
 }
