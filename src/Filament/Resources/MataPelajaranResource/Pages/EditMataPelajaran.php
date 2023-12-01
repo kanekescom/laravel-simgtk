@@ -2,9 +2,9 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource\Pages;
 
-use Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource;
 
 class EditMataPelajaran extends EditRecord
 {

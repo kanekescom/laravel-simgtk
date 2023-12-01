@@ -2,9 +2,9 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\BidangStudiPendidikanResource\Pages;
 
-use Kanekescom\Simgtk\Filament\Resources\BidangStudiPendidikanResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Kanekescom\Simgtk\Filament\Resources\BidangStudiPendidikanResource;
 
 class ListBidangStudiPendidikans extends ListRecords
 {

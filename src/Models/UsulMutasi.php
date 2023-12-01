@@ -18,7 +18,7 @@ class UsulMutasi extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'usul_mutasi';
+        return config('simgtk.table_prefix').'usul_mutasi';
     }
 
     public function pegawai(): BelongsTo

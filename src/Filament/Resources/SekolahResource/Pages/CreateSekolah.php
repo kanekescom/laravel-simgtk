@@ -2,8 +2,8 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\SekolahResource\Pages;
 
-use Kanekescom\Simgtk\Filament\Resources\SekolahResource;
 use Filament\Resources\Pages\CreateRecord;
+use Kanekescom\Simgtk\Filament\Resources\SekolahResource;
 
 class CreateSekolah extends CreateRecord
 {

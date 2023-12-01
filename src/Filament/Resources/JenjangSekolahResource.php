@@ -2,13 +2,13 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
-use Kanekescom\Simgtk\Filament\Resources\JenjangSekolahResource\Pages;
-use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Kanekescom\Simgtk\Filament\Resources\JenjangSekolahResource\Pages;
+use Kanekescom\Simgtk\Models\JenjangSekolah;
 
 class JenjangSekolahResource extends Resource
 {

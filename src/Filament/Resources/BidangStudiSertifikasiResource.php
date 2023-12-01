@@ -2,13 +2,13 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
-use Kanekescom\Simgtk\Filament\Resources\BidangStudiSertifikasiResource\Pages;
-use Kanekescom\Simgtk\Models\BidangStudiSertifikasi;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Kanekescom\Simgtk\Filament\Resources\BidangStudiSertifikasiResource\Pages;
+use Kanekescom\Simgtk\Models\BidangStudiSertifikasi;
 
 class BidangStudiSertifikasiResource extends Resource
 {

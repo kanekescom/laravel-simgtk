@@ -2,9 +2,9 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\JenjangSekolahResource\Pages;
 
-use Kanekescom\Simgtk\Filament\Resources\JenjangSekolahResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Kanekescom\Simgtk\Filament\Resources\JenjangSekolahResource;
 
 class EditJenjangSekolah extends EditRecord
 {

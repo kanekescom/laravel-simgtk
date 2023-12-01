@@ -28,7 +28,7 @@ class SekolahFactory extends Factory
         $jumlah_siswa = $jumlah_kelas * fake()->numberBetween(35, 45);
 
         return [
-            'nama' => $jenjang_sekolah->nama . ' ' . fake()->unique()->company(),
+            'nama' => $jenjang_sekolah->nama.' '.fake()->unique()->company(),
             'npsn' => fake()->unique()->numerify('########'),
             'jenjang_sekolah_id' => $jenjang_sekolah->id,
             'wilayah_kode' => $wilayah->kode,

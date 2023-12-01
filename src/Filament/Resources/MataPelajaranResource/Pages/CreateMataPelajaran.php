@@ -2,8 +2,8 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource\Pages;
 
-use Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource;
 use Filament\Resources\Pages\CreateRecord;
+use Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource;
 
 class CreateMataPelajaran extends CreateRecord
 {

@@ -2,8 +2,8 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\BidangStudiSertifikasiResource\Pages;
 
-use Kanekescom\Simgtk\Filament\Resources\BidangStudiSertifikasiResource;
 use Filament\Resources\Pages\CreateRecord;
+use Kanekescom\Simgtk\Filament\Resources\BidangStudiSertifikasiResource;
 
 class CreateBidangStudiSertifikasi extends CreateRecord
 {

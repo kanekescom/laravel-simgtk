@@ -2,13 +2,13 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
-use Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource\Pages;
-use Kanekescom\Simgtk\Models\MataPelajaran;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource\Pages;
+use Kanekescom\Simgtk\Models\MataPelajaran;
 
 class MataPelajaranResource extends Resource
 {

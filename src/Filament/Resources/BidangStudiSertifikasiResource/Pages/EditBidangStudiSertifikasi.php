@@ -2,9 +2,9 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\BidangStudiSertifikasiResource\Pages;
 
-use Kanekescom\Simgtk\Filament\Resources\BidangStudiSertifikasiResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Kanekescom\Simgtk\Filament\Resources\BidangStudiSertifikasiResource;
 
 class EditBidangStudiSertifikasi extends EditRecord
 {

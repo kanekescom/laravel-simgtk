@@ -2,9 +2,9 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\JenisPtkResource\Pages;
 
-use Kanekescom\Simgtk\Filament\Resources\JenisPtkResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Kanekescom\Simgtk\Filament\Resources\JenisPtkResource;
 
 class EditJenisPtk extends EditRecord
 {

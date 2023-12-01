@@ -2,8 +2,8 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\JenisPtkResource\Pages;
 
-use Kanekescom\Simgtk\Filament\Resources\JenisPtkResource;
 use Filament\Resources\Pages\CreateRecord;
+use Kanekescom\Simgtk\Filament\Resources\JenisPtkResource;
 
 class CreateJenisPtk extends CreateRecord
 {
