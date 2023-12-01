@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             JenjangSekolahInRealSeeder::class,
             // MataPelajaranSeeder::class,
             MataPelajaranInRealSeeder::class,
+            // Wilayah::class,
+            WilayahInRealSeeder::class,
             SekolahSeeder::class,
             // MataPelajaranJenjangSekolahSeeder::class,
             MataPelajaranJenjangSekolahInRealSeeder::class,
