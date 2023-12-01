@@ -83,7 +83,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Kanekescom\\Simgtk\\SimgtkServiceProvider"
+                "Kanekescom\\Simgtk\\SimgtkServiceProvider",
+                "Kanekescom\\Simgtk\\SimgtkPanelProvider"
             ],
             "aliases": {}
         },
