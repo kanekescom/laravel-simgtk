@@ -14,9 +14,11 @@ class MataPelajaran extends Model
     use HasUlids;
     use SoftDeletes;
 
+    protected $guarded = [];
+
     public function getTable()
     {
-        return config('simgtk.table_prefix').'mata_pelajaran';
+        return config('simgtk.table_prefix') . 'mata_pelajaran';
     }
 
     public function pegawai(): HasMany

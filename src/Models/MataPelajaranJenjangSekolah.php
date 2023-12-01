@@ -14,9 +14,11 @@ class MataPelajaranJenjangSekolah extends Model
     use HasUlids;
     use SoftDeletes;
 
+    protected $guarded = [];
+
     public function getTable()
     {
-        return config('simgtk.table_prefix').'mata_pelajaran_jenjang_sekolah';
+        return config('simgtk.table_prefix') . 'mata_pelajaran_jenjang_sekolah';
     }
 
     public function jenjangSekolah(): HasMany

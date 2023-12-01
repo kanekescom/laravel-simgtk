@@ -14,9 +14,11 @@ class BidangStudiPendidikan extends Model
     use HasUlids;
     use SoftDeletes;
 
+    protected $guarded = [];
+
     public function getTable()
     {
-        return config('simgtk.table_prefix').'bidang_studi_pendidikan';
+        return config('simgtk.table_prefix') . 'bidang_studi_pendidikan';
     }
 
     public function pegawai(): HasMany

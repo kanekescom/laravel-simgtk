@@ -14,9 +14,11 @@ class JenisPtk extends Model
     use HasUlids;
     use SoftDeletes;
 
+    protected $guarded = [];
+
     public function getTable()
     {
-        return config('simgtk.table_prefix').'jenis_ptk';
+        return config('simgtk.table_prefix') . 'jenis_ptk';
     }
 
     public function pegawai(): HasMany

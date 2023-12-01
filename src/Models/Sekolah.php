@@ -15,9 +15,11 @@ class Sekolah extends Model
     use HasUlids;
     use SoftDeletes;
 
+    protected $guarded = [];
+
     public function getTable()
     {
-        return config('simgtk.table_prefix').'sekolah';
+        return config('simgtk.table_prefix') . 'sekolah';
     }
 
     public function jenjangPendidikan(): BelongsTo
