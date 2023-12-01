@@ -16,15 +16,10 @@ return new class extends Migration
             $table->string('nama');
             $table->string('npsn')->index();
             $table->foreignUlid('jenjang_sekolah_id')->nullable()->index();
-            $table->foreignUlid('provinsi_kode')->nullable()->index();
-            $table->foreignUlid('kabupaten_kode')->nullable()->index();
-            $table->foreignUlid('kecamatan_kode')->nullable()->index();
-            $table->foreignUlid('desa_kode')->nullable()->index();
-            $table->unsignedTinyInteger('jumlah_ruang_kelas')->nullable();
-            $table->unsignedTinyInteger('jumlah_ruang_rombel')->nullable();
+            $table->string('wilayah_kode')->nullable()->index();
+            $table->unsignedTinyInteger('jumlah_kelas')->nullable();
+            $table->unsignedTinyInteger('jumlah_rombel')->nullable();
             $table->unsignedTinyInteger('jumlah_siswa')->nullable();
-            $table->date('tanggal_aktif')->nullable();
-            $table->date('tanggal_nonaktif')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

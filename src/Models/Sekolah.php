@@ -22,13 +22,18 @@ class Sekolah extends Model
         return config('simgtk.table_prefix') . 'sekolah';
     }
 
-    public function jenjangPendidikan(): BelongsTo
+    public function jenjangSekolah(): BelongsTo
     {
-        return $this->belongsTo(JenjangPendidikan::class);
+        return $this->belongsTo(JenjangSekolah::class);
     }
 
     public function pegawai(): HasMany
     {
         return $this->hasMany(Pegawai::class);
+    }
+
+    public function wilayah(): BelongsTo
+    {
+        return $this->belongsTo(Wilayah::class, 'wilayah_kode', 'kode');
     }
 }
