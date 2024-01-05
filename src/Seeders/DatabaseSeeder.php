@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             MutasiSeeder::class,
             PensiunSeeder::class,
             BezzetingSeeder::class,
+            ImporSeeder::class,
         ]);
     }
 }
