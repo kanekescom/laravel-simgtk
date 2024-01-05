@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             PegawaiSeeder::class,
             UsulMutasiSeeder::class,
             PensiunSeeder::class,
+            BezzetingSeeder::class,
         ]);
     }
 }
