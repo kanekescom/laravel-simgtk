@@ -6,7 +6,7 @@ use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource;
 
-class ListMataPelajarans extends ListRecords
+class ListMataPelajaran extends ListRecords
 {
     protected static string $resource = MataPelajaranResource::class;
 

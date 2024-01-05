@@ -31,9 +31,9 @@ class BidangStudiPendidikanResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nama')
-                    ->label('Nama')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Nama'),
             ]);
     }
 
@@ -42,9 +42,9 @@ class BidangStudiPendidikanResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
-                    ->label('Nama')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Nama'),
             ])
             ->filters([
                 //
@@ -72,7 +72,7 @@ class BidangStudiPendidikanResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBidangStudiPendidikans::route('/'),
+            'index' => Pages\ListBidangStudiPendidikan::route('/'),
             'create' => Pages\CreateBidangStudiPendidikan::route('/create'),
             'edit' => Pages\EditBidangStudiPendidikan::route('/{record}/edit'),
         ];

@@ -6,7 +6,7 @@ use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\JenisPtkResource;
 
-class ListJenisPtks extends ListRecords
+class ListJenisPtk extends ListRecords
 {
     protected static string $resource = JenisPtkResource::class;
 

@@ -31,9 +31,9 @@ class MataPelajaranResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nama')
-                    ->label('Nama')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Nama'),
             ]);
     }
 
@@ -42,9 +42,9 @@ class MataPelajaranResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
-                    ->label('Nama')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Nama'),
             ])
             ->filters([
                 //
@@ -72,7 +72,7 @@ class MataPelajaranResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMataPelajarans::route('/'),
+            'index' => Pages\ListMataPelajaran::route('/'),
             'create' => Pages\CreateMataPelajaran::route('/create'),
             'edit' => Pages\EditMataPelajaran::route('/{record}/edit'),
         ];

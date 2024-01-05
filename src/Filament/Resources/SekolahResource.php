@@ -32,47 +32,47 @@ class SekolahResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nama')
-                    ->label('Nama')
                     ->maxLength(255)
-                    ->required(),
+                    ->required()
+                    ->label('Nama'),
                 Forms\Components\TextInput::make('npsn')
-                    ->label('NPSN')
                     ->numeric()
                     ->length(8)
                     ->unique(ignoreRecord: true)
-                    ->required(),
+                    ->required()
+                    ->label('NPSN'),
                 Forms\Components\Select::make('jenjang_sekolah_id')
-                    ->label('Jenjang Sekolah')
                     ->relationship('jenjangSekolah', 'nama')
                     ->exists(table: JenjangSekolah::class, column: 'id')
                     ->searchable()
                     ->preload()
-                    ->required(),
+                    ->required()
+                    ->label('Jenjang Sekolah'),
                 Forms\Components\Select::make('wilayah_kode')
-                    ->label('Wilayah')
                     ->relationship('wilayah', 'nama')
                     ->exists()
                     ->searchable()
                     ->preload()
-                    ->required(),
+                    ->required()
+                    ->label('Wilayah'),
                 Forms\Components\TextInput::make('jumlah_kelas')
-                    ->label('Jumlah Kelas')
                     ->integer()
                     ->minValue(0)
                     ->maxValue(10000)
-                    ->required(),
+                    ->required()
+                    ->label('Jumlah Kelas'),
                 Forms\Components\TextInput::make('jumlah_rombel')
-                    ->label('Jumlah Rombel')
                     ->integer()
                     ->minValue(0)
                     ->maxValue(10000)
-                    ->required(),
+                    ->required()
+                    ->label('Jumlah Rombel'),
                 Forms\Components\TextInput::make('jumlah_siswa')
-                    ->label('Jumlah Siswa')
                     ->integer()
                     ->minValue(0)
                     ->maxValue(10000)
-                    ->required(),
+                    ->required()
+                    ->label('Jumlah Siswa'),
             ]);
     }
 
@@ -81,46 +81,41 @@ class SekolahResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
-                    ->label('Nama')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('npsn')
-                    ->label('NPSN')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jenjangSekolah.nama')
-                    ->label('Jenjang Sekolah')
                     ->searchable()
                     ->sortable()
-                    ->hidden(),
+                    ->label('Nama'),
+                Tables\Columns\TextColumn::make('npsn')
+                    ->searchable()
+                    ->sortable()
+                    ->label('NPSN'),
                 Tables\Columns\TextColumn::make('wilayah.nama')
-                    ->label('Wilayah')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Wilayah'),
                 Tables\Columns\TextColumn::make('jumlah_kelas')
-                    ->label('Kelas')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Kelas'),
                 Tables\Columns\TextColumn::make('jumlah_rombel')
-                    ->label('Rombel')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Rombel'),
                 Tables\Columns\TextColumn::make('jumlah_siswa')
-                    ->label('Siswa')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Siswa'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('jenjang_sekolah')
-                    ->label('Jenjang Sekolah')
                     ->relationship('jenjangSekolah', 'nama')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('Jenjang Sekolah'),
                 Tables\Filters\SelectFilter::make('wilayah_kode')
-                    ->label('Wilayah')
                     ->relationship('wilayah', 'nama')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('Wilayah'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -145,7 +140,7 @@ class SekolahResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSekolahs::route('/'),
+            'index' => Pages\ListSekolah::route('/'),
             'create' => Pages\CreateSekolah::route('/create'),
             'edit' => Pages\EditSekolah::route('/{record}/edit'),
         ];

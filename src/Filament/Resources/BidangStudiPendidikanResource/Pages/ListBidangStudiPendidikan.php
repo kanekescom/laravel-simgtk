@@ -6,7 +6,7 @@ use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\BidangStudiPendidikanResource;
 
-class ListBidangStudiPendidikans extends ListRecords
+class ListBidangStudiPendidikan extends ListRecords
 {
     protected static string $resource = BidangStudiPendidikanResource::class;
 

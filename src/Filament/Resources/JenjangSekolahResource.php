@@ -31,9 +31,9 @@ class JenjangSekolahResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nama')
-                    ->label('Nama')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Nama'),
             ]);
     }
 
@@ -42,9 +42,9 @@ class JenjangSekolahResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
-                    ->label('Nama')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Nama'),
             ])
             ->filters([
                 //
@@ -72,7 +72,7 @@ class JenjangSekolahResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListJenjangSekolahs::route('/'),
+            'index' => Pages\ListJenjangSekolah::route('/'),
             'create' => Pages\CreateJenjangSekolah::route('/create'),
             'edit' => Pages\EditJenjangSekolah::route('/{record}/edit'),
         ];

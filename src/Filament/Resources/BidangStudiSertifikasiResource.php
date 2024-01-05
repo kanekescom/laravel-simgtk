@@ -31,9 +31,9 @@ class BidangStudiSertifikasiResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('nama')
-                    ->label('Nama')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->label('Nama'),
             ]);
     }
 
@@ -42,9 +42,9 @@ class BidangStudiSertifikasiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
-                    ->label('Nama')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->label('Nama'),
             ])
             ->filters([
                 //
@@ -72,7 +72,7 @@ class BidangStudiSertifikasiResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBidangStudiSertifikasis::route('/'),
+            'index' => Pages\ListBidangStudiSertifikasi::route('/'),
             'create' => Pages\CreateBidangStudiSertifikasi::route('/create'),
             'edit' => Pages\EditBidangStudiSertifikasi::route('/{record}/edit'),
         ];

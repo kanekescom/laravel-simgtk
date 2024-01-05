@@ -246,55 +246,55 @@ class PegawaiResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('gender_kode')
-                    ->label('Gender')
                     ->options(GenderEnum::class)
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                ->label('Gender'),
                 Tables\Filters\SelectFilter::make('jenjang_pendidikan_kode')
-                    ->label('Jenjang Pendidikan')
                     ->options(JenjangPendidikanEnum::class)
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('Jenjang Pendidikan'),
                 Tables\Filters\SelectFilter::make('status_kepegawaian_kode')
-                    ->label('Status Kepegawaian')
                     ->options(StatusKepegawaianEnum::class)
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('Status Kepegawaian'),
                 Tables\Filters\SelectFilter::make('golongan_kode')
-                    ->label('Golongan')
                     ->options(GolonganAsnEnum::class)
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('Golongan'),
                 Tables\Filters\SelectFilter::make('status_tugas_kode')
-                    ->label('Status Tugas')
                     ->options(StatusTugasEnum::class)
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('Status Tugas'),
                 Tables\Filters\SelectFilter::make('sekolah_id')
-                    ->label('Sekolah')
                     ->relationship('sekolah', 'nama')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('Sekolah'),
                 Tables\Filters\SelectFilter::make('jenis_ptk_id')
-                    ->label('Jenis PTK')
                     ->relationship('jenisptk', 'nama')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('Jenis PTK'),
                 Tables\Filters\SelectFilter::make('bidang_studi_pendidikan_id')
-                    ->label('bidang_studi_pendidikan')
                     ->relationship('bidangStudiPendidikan', 'nama')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('bidang_studi_pendidikan'),
                 Tables\Filters\SelectFilter::make('bidang_studi_sertifikasi_id')
-                    ->label('Bidang Studi Sertifikasi')
                     ->relationship('bidangStudiSertifikasi', 'nama')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('Bidang Studi Sertifikasi'),
                 Tables\Filters\SelectFilter::make('mata_pelajaran_id')
-                    ->label('Mata Pelajaran')
                     ->relationship('mataPelajaran', 'nama')
                     ->searchable()
-                    ->preload(),
+                    ->preload()
+                    ->label('Mata Pelajaran'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
