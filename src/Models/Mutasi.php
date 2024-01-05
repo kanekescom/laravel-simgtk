@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class UsulMutasi extends Model
+class Mutasi extends Model
 {
     use HasFactory;
     use HasUlids;
@@ -18,7 +18,7 @@ class UsulMutasi extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix').'usul_mutasi';
+        return config('simgtk.table_prefix') . 'mutasi';
     }
 
     public function pegawai(): BelongsTo

@@ -5,14 +5,14 @@ namespace Kanekescom\Simgtk\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Kanekescom\Simgtk\Models\Pegawai;
 use Kanekescom\Simgtk\Models\Sekolah;
-use Kanekescom\Simgtk\Models\UsulMutasi;
+use Kanekescom\Simgtk\Models\Mutasi;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Kanekescom\Simgtk\Models\UsulMutasi>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Kanekescom\Simgtk\Models\Mutasi>
  */
-class UsulMutasiFactory extends Factory
+class MutasiFactory extends Factory
 {
-    protected $model = UsulMutasi::class;
+    protected $model = Mutasi::class;
 
     /**
      * Define the model's default state.
