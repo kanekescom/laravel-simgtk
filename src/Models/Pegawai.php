@@ -27,11 +27,12 @@ class Pegawai extends Model
         'status_kepegawaian_kode' => StatusKepegawaianEnum::class,
         'golongan_kode' => GolonganAsnEnum::class,
         'status_tugas_kode' => StatusTugasEnum::class,
+        'is_kepsek' => 'boolean',
     ];
 
     public function getTable()
     {
-        return config('simgtk.table_prefix').'pegawai';
+        return config('simgtk.table_prefix') . 'pegawai';
     }
 
     public function sekolah(): BelongsTo
@@ -57,5 +58,17 @@ class Pegawai extends Model
     public function mataPelajaran(): BelongsTo
     {
         return $this->belongsTo(MataPelajaran::class);
+    }
+
+    public function scopeCountByGender($query)
+    {
+        return $query->select('gender_kode', \DB::raw('COUNT(*) as count'))
+            ->groupBy('gender_kode');
+    }
+
+    public function scopeCountByStatusKepegawaian($query)
+    {
+        return $query->select('status_kepegawaian_kode', \DB::raw('COUNT(*) as count'))
+            ->groupBy('status_kepegawaian_kode');
     }
 }

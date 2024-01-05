@@ -1,0 +1,327 @@
+<?php
+
+namespace Kanekescom\Simgtk\Filament\Resources;
+
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Kanekescom\Simgtk\Enums\GenderEnum;
+use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
+use Kanekescom\Simgtk\Enums\JenjangPendidikanEnum;
+use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
+use Kanekescom\Simgtk\Enums\StatusTugasEnum;
+use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Pages;
+use Kanekescom\Simgtk\Models\BidangStudiPendidikan;
+use Kanekescom\Simgtk\Models\BidangStudiSertifikasi;
+use Kanekescom\Simgtk\Models\JenisPtk;
+use Kanekescom\Simgtk\Models\MataPelajaran;
+use Kanekescom\Simgtk\Models\Pegawai;
+use Kanekescom\Simgtk\Models\Sekolah;
+use Spatie\LaravelOptions\Options;
+
+class PegawaiResource extends Resource
+{
+    protected static ?string $slug = 'referensi/pegawai';
+
+    protected static ?string $pluralLabel = 'Pegawai';
+
+    protected static ?string $model = Pegawai::class;
+
+    protected static bool $shouldRegisterNavigation = true;
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationLabel = 'Pegawai';
+
+    protected static ?string $navigationGroup = null;
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\TextInput::make('nama')
+                    ->maxLength(255)
+                    ->required()
+                    ->label('Nama'),
+                Forms\Components\TextInput::make('nik')
+                    ->numeric()
+                    ->length(16)
+                    ->unique(ignoreRecord: true)
+                    ->required()
+                    ->label('NIK'),
+                Forms\Components\TextInput::make('nuptk')
+                    ->numeric()
+                    ->length(16)
+                    ->unique(ignoreRecord: true)
+                    ->label('NUPTK'),
+                Forms\Components\TextInput::make('nip')
+                    ->numeric()
+                    ->length(18)
+                    ->unique(ignoreRecord: true)
+                    ->label('NIP'),
+                Forms\Components\Select::make('gender_kode')
+                    ->options(GenderEnum::class)
+                    ->in(collect(
+                        Options::forEnum(GenderEnum::class)->toArray()
+                    )->pluck('value'))
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->label('Gender'),
+                Forms\Components\TextInput::make('tempat_lahir')
+                    ->maxLength(255)
+                    ->required()
+                    ->label('Tempat Lahir'),
+                Forms\Components\DatePicker::make('tanggal_lahir')
+                    ->date()
+                    ->required()
+                    ->label('Tanggal Lahir'),
+                Forms\Components\TextInput::make('nomor_hp')
+                    ->tel()
+                    ->label('Nomor HP'),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->label('Email'),
+                Forms\Components\Select::make('jenjang_pendidikan_kode')
+                    ->options(JenjangPendidikanEnum::class)
+                    ->in(collect(
+                        Options::forEnum(JenjangPendidikanEnum::class)->toArray()
+                    )->pluck('value'))
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->label('Jenjang Pendidikan'),
+                Forms\Components\Select::make('status_kepegawaian_kode')
+                    ->options(StatusKepegawaianEnum::class)
+                    ->in(collect(
+                        Options::forEnum(StatusKepegawaianEnum::class)->toArray()
+                    )->pluck('value'))
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->label('Status Kepegawaian'),
+                Forms\Components\TextInput::make('masa_kerja_tahun')
+                    ->numeric()
+                    ->minValue(0)
+                    ->maxValue(50)
+                    ->label('Masa Kerja Tahun'),
+                Forms\Components\TextInput::make('masa_kerja_bulan')
+                    ->numeric()
+                    ->minValue(0)
+                    ->maxValue(12)
+                    ->label('Masa Kerja Bulan'),
+                Forms\Components\DatePicker::make('tmt_cpns')
+                    ->date()
+                    ->label('TMT CPNS'),
+                Forms\Components\DatePicker::make('tanggal_sk_cpns')
+                    ->date()
+                    ->label('Tanggal SK CPNS'),
+                Forms\Components\TextInput::make('nomor_sk_cpns')
+                    ->maxLength(255)
+                    ->label('Nomor SK CPNS'),
+                Forms\Components\DatePicker::make('tmt_pns')
+                    ->date()
+                    ->label('TMT PNS'),
+                Forms\Components\DatePicker::make('tanggal_sk_pns')
+                    ->date()
+                    ->label('Tanggal SK PNS'),
+                Forms\Components\TextInput::make('nomor_sk_pns')
+                    ->maxLength(255)
+                    ->label('Nomor SK PNS'),
+                Forms\Components\Select::make('golongan_kode')
+                    ->options(GolonganAsnEnum::class)
+                    ->in(collect(
+                        Options::forEnum(GolonganAsnEnum::class)->toArray()
+                    )->pluck('value'))
+                    ->searchable()
+                    ->preload()
+                    ->label('Golongan'),
+                Forms\Components\DatePicker::make('tmt_pangkat')
+                    ->date()
+                    ->label('TMT Pangkat'),
+                Forms\Components\DatePicker::make('tanggal_sk_pangkat')
+                    ->date()
+                    ->label('Tanggal SK Pangkat'),
+                Forms\Components\TextInput::make('nomor_sk_pangkat')
+                    ->maxLength(255)
+                    ->label('Nomor SK Pangkat'),
+                Forms\Components\DatePicker::make('tmt_pensiun')
+                    ->date()
+                    ->label('TMT Pensiun'),
+                Forms\Components\DatePicker::make('tanggal_sk_pensiun')
+                    ->date()
+                    ->label('Tanggal SK Pensiun'),
+                Forms\Components\TextInput::make('nomor_sk_pensiun')
+                    ->maxLength(255)
+                    ->label('Nomor SK Pensiun'),
+                Forms\Components\Select::make('sekolah_id')
+                    ->relationship('sekolah', 'nama')
+                    ->exists(table: Sekolah::class, column: 'id')
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->label('Sekolah'),
+                Forms\Components\Select::make('status_tugas_kode')
+                    ->options(StatusTugasEnum::class)
+                    ->in(collect(
+                        Options::forEnum(StatusTugasEnum::class)->toArray()
+                    )->pluck('value'))
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->label('Status Tugas'),
+                Forms\Components\Select::make('jenis_ptk_id')
+                    ->relationship('jenisPtk', 'nama')
+                    ->exists(table: JenisPtk::class, column: 'id')
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->label('Jenis PTK'),
+                Forms\Components\Select::make('bidang_studi_pendidikan_id')
+                    ->relationship('bidangStudiPendidikan', 'nama')
+                    ->exists(table: BidangStudiPendidikan::class, column: 'id')
+                    ->searchable()
+                    ->preload()
+                    ->label('Bidang Studi Pendidikan'),
+                Forms\Components\Select::make('bidang_studi_sertifikasi_id')
+                    ->relationship('bidangStudiSertifikasi', 'nama')
+                    ->exists(table: BidangStudiSertifikasi::class, column: 'id')
+                    ->searchable()
+                    ->preload()
+                    ->label('Bidang Studi Sertifikasi'),
+                Forms\Components\Select::make('mata_pelajaran_id')
+                    ->relationship('mataPelajaran', 'nama')
+                    ->exists(table: MataPelajaran::class, column: 'id')
+                    ->searchable()
+                    ->preload()
+                    ->label('Mata Pelajaran'),
+                Forms\Components\TextInput::make('jam_mengajar_perminggu')
+                    ->numeric()
+                    ->minValue(0)
+                    ->maxValue(50)
+                    ->label('Jam Mengajar Perminggu'),
+                Forms\Components\Toggle::make('is_kepsek')
+                    ->required()
+                    ->label('Kepsek'),
+            ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                Tables\Columns\TextColumn::make('nama')
+                    ->description(fn (Pegawai $record): string => $record->nip ? 'NIP. ' . $record->nip : '')
+                    ->searchable(['nama', 'nip', 'nik', 'nuptk'])
+                    ->sortable()
+                    ->label('Nama'),
+                Tables\Columns\TextColumn::make('gender_kode')
+                    ->sortable()
+                    ->label('Gender'),
+                Tables\Columns\TextColumn::make('status_kepegawaian_kode')
+                    ->sortable()
+                    ->label('Status Kepegawaian'),
+                Tables\Columns\TextColumn::make('golongan_kode')
+                    ->wrap()
+                    ->sortable()
+                    ->label('Gol'),
+                Tables\Columns\TextColumn::make('mataPelajaran.nama')
+                    ->description(fn (Pegawai $record): string => $record->sekolah?->nama)
+                    ->wrap()
+                    ->html()
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->whereHas('mataPelajaran', function ($query) use ($search) {
+                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                            })
+                            ->orWhereHas('sekolah', function ($query) use ($search) {
+                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                            });
+                    })
+                    ->sortable()
+                    ->label('Jabatan'),
+            ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('gender_kode')
+                    ->label('Gender')
+                    ->options(GenderEnum::class)
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('jenjang_pendidikan_kode')
+                    ->label('Jenjang Pendidikan')
+                    ->options(JenjangPendidikanEnum::class)
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('status_kepegawaian_kode')
+                    ->label('Status Kepegawaian')
+                    ->options(StatusKepegawaianEnum::class)
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('golongan_kode')
+                    ->label('Golongan')
+                    ->options(GolonganAsnEnum::class)
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('status_tugas_kode')
+                    ->label('Status Tugas')
+                    ->options(StatusTugasEnum::class)
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('sekolah_id')
+                    ->label('Sekolah')
+                    ->relationship('sekolah', 'nama')
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('jenis_ptk_id')
+                    ->label('Jenis PTK')
+                    ->relationship('jenisptk', 'nama')
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('bidang_studi_pendidikan_id')
+                    ->label('bidang_studi_pendidikan')
+                    ->relationship('bidangStudiPendidikan', 'nama')
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('bidang_studi_sertifikasi_id')
+                    ->label('Bidang Studi Sertifikasi')
+                    ->relationship('bidangStudiSertifikasi', 'nama')
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\SelectFilter::make('mata_pelajaran_id')
+                    ->label('Mata Pelajaran')
+                    ->relationship('mataPelajaran', 'nama')
+                    ->searchable()
+                    ->preload(),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ])
+            ->emptyStateActions([
+                Tables\Actions\CreateAction::make(),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListPegawai::route('/'),
+            'create' => Pages\CreatePegawai::route('/create'),
+            'edit' => Pages\EditPegawai::route('/{record}/edit'),
+        ];
+    }
+}
