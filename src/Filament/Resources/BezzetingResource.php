@@ -11,7 +11,7 @@ use Kanekescom\Simgtk\Models\Bezzeting;
 
 class BezzetingResource extends Resource
 {
-    protected static ?string $slug = 'referensi/bezzeting';
+    protected static ?string $slug = 'bezzeting';
 
     protected static ?string $pluralLabel = 'Bezzeting';
 

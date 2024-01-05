@@ -11,7 +11,7 @@ use Kanekescom\Simgtk\Models\Pensiun;
 
 class PensiunResource extends Resource
 {
-    protected static ?string $slug = 'referensi/pensiun';
+    protected static ?string $slug = 'pensiun';
 
     protected static ?string $pluralLabel = 'Pensiun';
 

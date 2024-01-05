@@ -24,7 +24,7 @@ use Spatie\LaravelOptions\Options;
 
 class PegawaiResource extends Resource
 {
-    protected static ?string $slug = 'referensi/pegawai';
+    protected static ?string $slug = 'pegawai';
 
     protected static ?string $pluralLabel = 'Pegawai';
 
@@ -249,7 +249,7 @@ class PegawaiResource extends Resource
                     ->options(GenderEnum::class)
                     ->searchable()
                     ->preload()
-                ->label('Gender'),
+                    ->label('Gender'),
                 Tables\Filters\SelectFilter::make('jenjang_pendidikan_kode')
                     ->options(JenjangPendidikanEnum::class)
                     ->searchable()

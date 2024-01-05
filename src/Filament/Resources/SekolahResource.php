@@ -13,7 +13,7 @@ use Kanekescom\Simgtk\Models\Sekolah;
 
 class SekolahResource extends Resource
 {
-    protected static ?string $slug = 'referensi/sekolah';
+    protected static ?string $slug = 'sekolah';
 
     protected static ?string $pluralLabel = 'Sekolah';
 

@@ -12,7 +12,7 @@ use Kanekescom\Simgtk\Models\Mutasi;
 
 class MutasiResource extends Resource
 {
-    protected static ?string $slug = 'referensi/mutasi';
+    protected static ?string $slug = 'mutasi';
 
     protected static ?string $pluralLabel = 'Mutasi';
 

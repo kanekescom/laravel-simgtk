@@ -11,7 +11,7 @@ use Kanekescom\Simgtk\Models\Impor;
 
 class ImporResource extends Resource
 {
-    protected static ?string $slug = 'referensi/impor';
+    protected static ?string $slug = 'impor';
 
     protected static ?string $pluralLabel = 'Impor';
 
