@@ -17,6 +17,6 @@ class Pensiun extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'pensiun';
+        return config('simgtk.table_prefix').'pensiun';
     }
 }

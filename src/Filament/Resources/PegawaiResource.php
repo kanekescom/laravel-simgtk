@@ -214,7 +214,7 @@ class PegawaiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
-                    ->description(fn (Pegawai $record): string => $record->nip ? 'NIP. ' . $record->nip : '')
+                    ->description(fn (Pegawai $record): string => $record->nip ? 'NIP. '.$record->nip : '')
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
                     ->sortable()
                     ->label('Nama'),
@@ -235,10 +235,10 @@ class PegawaiResource extends Resource
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             })
                             ->orWhereHas('sekolah', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             });
                     })
                     ->sortable()
