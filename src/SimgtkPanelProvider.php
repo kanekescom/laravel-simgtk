@@ -20,6 +20,7 @@ use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByG
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByStatusKepegawaian;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\SekolahChartByJenjangSekolah;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\SekolahChartByWilayah;
+use Kanekescom\Simgtk\Filament\Widgets\StatsOverview;
 
 class SimgtkPanelProvider extends PanelProvider
 {
@@ -33,13 +34,14 @@ class SimgtkPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: __DIR__.'/Filament/Resources', for: 'Kanekescom\\Simgtk\\Filament\\Resources')
-            ->discoverPages(in: __DIR__.'/Filament/Pages', for: 'Kanekescom\\Simgtk\\Filament\\Pages')
+            ->discoverResources(in: __DIR__ . '/Filament/Resources', for: 'Kanekescom\\Simgtk\\Filament\\Resources')
+            ->discoverPages(in: __DIR__ . '/Filament/Pages', for: 'Kanekescom\\Simgtk\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: __DIR__.'/Filament/Widgets', for: 'Kanekescom\\Simgtk\\Filament\\Widgets')
+            ->discoverWidgets(in: __DIR__ . '/Filament/Widgets', for: 'Kanekescom\\Simgtk\\Filament\\Widgets')
             ->widgets([
+                StatsOverview::class,
                 PegawaiChartByStatusKepegawaian::class,
                 PegawaiChartByGender::class,
                 SekolahChartByJenjangSekolah::class,
