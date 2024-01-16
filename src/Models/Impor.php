@@ -17,6 +17,6 @@ class Impor extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'impor';
+        return config('simgtk.table_prefix').'impor';
     }
 }
