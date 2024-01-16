@@ -34,12 +34,12 @@ class SimgtkPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: __DIR__ . '/Filament/Resources', for: 'Kanekescom\\Simgtk\\Filament\\Resources')
-            ->discoverPages(in: __DIR__ . '/Filament/Pages', for: 'Kanekescom\\Simgtk\\Filament\\Pages')
+            ->discoverResources(in: __DIR__.'/Filament/Resources', for: 'Kanekescom\\Simgtk\\Filament\\Resources')
+            ->discoverPages(in: __DIR__.'/Filament/Pages', for: 'Kanekescom\\Simgtk\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: __DIR__ . '/Filament/Widgets', for: 'Kanekescom\\Simgtk\\Filament\\Widgets')
+            ->discoverWidgets(in: __DIR__.'/Filament/Widgets', for: 'Kanekescom\\Simgtk\\Filament\\Widgets')
             ->widgets([
                 StatsOverview::class,
                 PegawaiChartByStatusKepegawaian::class,
