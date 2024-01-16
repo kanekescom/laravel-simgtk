@@ -1,4 +1,4 @@
-# Laravel SIMGTK
+# Sistem Informasi Manajemen GTK
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/kanekescom/laravel-simgtk.svg?style=flat-square)](https://packagist.org/packages/kanekescom/laravel-simgtk)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/kanekescom/laravel-simgtk/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/kanekescom/laravel-simgtk/actions?query=workflow%3Arun-tests+branch%3Amain)
