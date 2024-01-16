@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
@@ -60,6 +61,11 @@ class Pegawai extends Model
         return $this->belongsTo(MataPelajaran::class);
     }
 
+    public function wilayahSekolah(): HasOneThrough
+    {
+        return $this->hasOneThrough(Wilayah::class, Sekolah::class);
+    }
+
     public function scopeCountByGender($query)
     {
         return $query->select('gender_kode', \DB::raw('COUNT(*) as count'))
@@ -70,5 +76,11 @@ class Pegawai extends Model
     {
         return $query->select('status_kepegawaian_kode', \DB::raw('COUNT(*) as count'))
             ->groupBy('status_kepegawaian_kode');
+    }
+
+    public function scopeCountByWilayahSekolah($query)
+    {
+        return $query->select('se', \DB::raw('COUNT(*) as count'))
+            ->groupBy('wilayahSekolah');
     }
 }
