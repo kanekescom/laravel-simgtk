@@ -225,20 +225,17 @@ class PegawaiResource extends Resource
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
                     ->sortable(['nama'])
                     ->label('Nama'),
-                Tables\Columns\TextColumn::make('gender_kode')
-                    ->sortable()
-                    ->label('Gender'),
                 Tables\Columns\TextColumn::make('status_kepegawaian_kode')
+                    ->description(fn (Pegawai $record): string => $record->gender_kode->getLabel())
                     ->sortable()
                     ->label('Status Kepegawaian'),
                 Tables\Columns\TextColumn::make('golongan_kode')
                     ->wrap()
                     ->sortable()
-                    ->label('Gol'),
+                    ->label('Gol/Pangkat'),
                 Tables\Columns\TextColumn::make('mataPelajaran.nama')
                     ->description(fn (Pegawai $record): string => $record->sekolah?->nama)
                     ->wrap()
-                    ->html()
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {
@@ -271,7 +268,7 @@ class PegawaiResource extends Resource
                     ->options(GolonganAsnEnum::class)
                     ->searchable()
                     ->preload()
-                    ->label('Golongan'),
+                    ->label('Gol/Pangkat'),
                 Tables\Filters\SelectFilter::make('status_tugas_kode')
                     ->options(StatusTugasEnum::class)
                     ->searchable()
