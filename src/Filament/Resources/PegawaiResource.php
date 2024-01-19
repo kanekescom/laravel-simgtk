@@ -79,6 +79,14 @@ class PegawaiResource extends Resource
                     ->date()
                     ->required()
                     ->label('Tanggal Lahir'),
+                Forms\Components\TextInput::make('gelar_depan')
+                    ->maxLength(255)
+                    ->required()
+                    ->label('Gelar Depan'),
+                Forms\Components\TextInput::make('gelar_belakang')
+                    ->maxLength(255)
+                    ->required()
+                    ->label('Gelar Belakang'),
                 Forms\Components\TextInput::make('nomor_hp')
                     ->tel()
                     ->label('Nomor HP'),
@@ -204,7 +212,6 @@ class PegawaiResource extends Resource
                     ->maxValue(50)
                     ->label('Jam Mengajar Perminggu'),
                 Forms\Components\Toggle::make('is_kepsek')
-                    ->required()
                     ->label('Kepsek'),
             ]);
     }
@@ -213,10 +220,10 @@ class PegawaiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')
-                    ->description(fn (Pegawai $record): string => $record->nip ? 'NIP. '.$record->nip : '')
+                Tables\Columns\TextColumn::make('nama_gelar')
+                    ->description(fn (Pegawai $record): string => $record->nip ? 'NIP. ' . $record->nip : '')
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
-                    ->sortable()
+                    ->sortable(['nama'])
                     ->label('Nama'),
                 Tables\Columns\TextColumn::make('gender_kode')
                     ->sortable()
@@ -235,10 +242,10 @@ class PegawaiResource extends Resource
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%'.$search.'%');
+                                $query->where('nama', 'LIKE', '%' . $search . '%');
                             })
                             ->orWhereHas('sekolah', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%'.$search.'%');
+                                $query->where('nama', 'LIKE', '%' . $search . '%');
                             });
                     })
                     ->sortable()

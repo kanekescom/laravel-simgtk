@@ -44,13 +44,15 @@ class PegawaiFactory extends Factory
         $tanggal_pangkat = now()->parse(fake()->dateTimeBetween('-3 years', '-0 years'));
 
         return [
-            'nama' => fake()->unique()->firstName($gender_kode == GenderEnum::LAKILAKI ? 'male' : 'female').' '.fake()->unique()->lastName(),
+            'nama' => fake()->unique()->firstName($gender_kode == GenderEnum::LAKILAKI ? 'male' : 'female') . ' ' . fake()->unique()->lastName(),
             'nik' => fake()->numerify('################'),
             'nuptk' => fake()->boolean(85) ? null : fake()->numerify('################'),
             'nip' => $is_asn ? null : fake()->numerify('##################'),
             'gender_kode' => $gender_kode,
             'tempat_lahir' => fake()->city(),
             'tanggal_lahir' => fake()->dateTimeBetween('-50 years', '-18 years'),
+            'gelar_depan' => fake()->randomElement([null, 'H.', 'Prof.', 'Dr.']),
+            'gelar_belakang' => fake()->randomElement([null, 'S.Pd', 'S.Pd.I']),
             'nomor_hp' => fake()->boolean(85) ? null : fake()->e164PhoneNumber(),
             'email' => fake()->boolean(85) ? null : fake()->unique()->safeEmail(),
             'jenjang_pendidikan_kode' => fake()->randomElement(JenjangPendidikanEnum::class),

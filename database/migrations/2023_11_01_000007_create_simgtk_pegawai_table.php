@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('gender_kode')->index();
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
-            $table->string('gelar_depan');
-            $table->string('gelar_belakang');
+            $table->string('gelar_depan')->nullable();
+            $table->string('gelar_belakang')->nullable();
             $table->string('nomor_hp')->nullable();
             $table->string('email')->nullable();
             $table->string('jenjang_pendidikan_kode')->index();
