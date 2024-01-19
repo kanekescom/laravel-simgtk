@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Kanekescom\Simgtk\Filament\Resources\MutasiResource\Pages;
 use Kanekescom\Simgtk\Models\Mutasi;
 
@@ -32,6 +33,7 @@ class MutasiResource extends Resource
             ->schema([
                 Forms\Components\Select::make('pegawai_id')
                     ->relationship('pegawai', 'nama')
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_id_gelar}")
                     ->searchable(['nama', 'nik', 'nuptk', 'nip'])
                     ->preload()
                     ->required()
