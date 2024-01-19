@@ -228,7 +228,7 @@ class PegawaiResource extends Resource
                 Tables\Columns\TextColumn::make('status_kepegawaian_kode')
                     ->description(fn (Pegawai $record): string => $record->gender_kode->getLabel())
                     ->sortable()
-                    ->label('Status Kepegawaian'),
+                    ->label('Status'),
                 Tables\Columns\TextColumn::make('golongan_kode')
                     ->wrap()
                     ->sortable()
