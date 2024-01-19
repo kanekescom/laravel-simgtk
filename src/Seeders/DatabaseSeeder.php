@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             PensiunSeeder::class,
             BezzetingSeeder::class,
             ImporSeeder::class,
+            RancanganMutasiSeeder::class,
         ]);
     }
 }

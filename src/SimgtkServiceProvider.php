@@ -25,6 +25,7 @@ class SimgtkServiceProvider extends PackageServiceProvider
                 '2023_11_01_000011_create_simgtk_pensiun_table',
                 '2023_11_01_000012_create_simgtk_bezzeting_table',
                 '2023_11_01_000013_create_simgtk_impor_table',
+                '2023_11_01_000014_create_simgtk_rancangan_mutasi_table',
             ])
             ->runsMigrations()
             ->hasCommand(Commands\SeedCommand::class);
