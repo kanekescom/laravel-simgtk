@@ -53,7 +53,12 @@ class Pegawai extends Model
             return "NUPTK. {$this->nuptk}";
         }
 
-        return "NIK. {$this->nik} {$this->nama_gelar}";
+        return "NIK. {$this->nik}";
+    }
+
+    public function getNamaIdGelarAttribute()
+    {
+        return "{$this->nama_id} {$this->nama_gelar}";
     }
 
     public function sekolah(): BelongsTo

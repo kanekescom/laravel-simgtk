@@ -221,7 +221,7 @@ class PegawaiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama_gelar')
-                    ->description(fn (Pegawai $record): string => $record->nip ? 'NIP. ' . $record->nip : '')
+                    ->description(fn (Pegawai $record): string => $record->nama_id)
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
                     ->sortable(['nama'])
                     ->label('Nama'),
