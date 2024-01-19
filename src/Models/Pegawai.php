@@ -43,6 +43,19 @@ class Pegawai extends Model
             . ($this->gelar_belakang ? ", {$this->gelar_belakang}" : '');
     }
 
+    public function getNamaIdAttribute()
+    {
+        if ($this->nip) {
+            return "NIP. {$this->nik}";
+        }
+
+        if ($this->nuptk) {
+            return "NUPTK. {$this->nuptk}";
+        }
+
+        return "NIK. {$this->nik} {$this->nama_gelar}";
+    }
+
     public function sekolah(): BelongsTo
     {
         return $this->belongsTo(Sekolah::class);
