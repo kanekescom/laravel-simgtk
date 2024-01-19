@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('simgtk.table_prefix').'pegawai', function (Blueprint $table) {
+        Schema::create(config('simgtk.table_prefix') . 'pegawai', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('nama');
             $table->string('nik')->index();
@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('nip')->index()->nullable();
             $table->string('gender_kode')->index();
             $table->string('tempat_lahir');
-            $table->string('tanggal_lahir');
+            $table->date('tanggal_lahir');
+            $table->string('gelar_depan');
+            $table->string('gelar_belakang');
             $table->string('nomor_hp')->nullable();
             $table->string('email')->nullable();
             $table->string('jenjang_pendidikan_kode')->index();
@@ -64,6 +66,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('simgtk.table_prefix').'pegawai');
+        Schema::dropIfExists(config('simgtk.table_prefix') . 'pegawai');
     }
 };
