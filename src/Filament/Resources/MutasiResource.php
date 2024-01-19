@@ -55,10 +55,10 @@ class MutasiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('pegawai.nama')
-                    ->description(fn (Mutasi $record): string => $record->pegawai?->nip ? 'NIP. '.$record->pegawai?->nip : '')
+                Tables\Columns\TextColumn::make('pegawai.nama_gelar')
+                    ->description(fn (Mutasi $record): string => $record->pegawai?->nip ? 'NIP. ' . $record->pegawai?->nip : '')
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
-                    ->sortable()
+                    ->sortable(['pegawai.nama'])
                     ->label('Pegawai'),
                 Tables\Columns\TextColumn::make('asalSekolah.nama')
                     ->searchable()
