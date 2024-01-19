@@ -288,7 +288,7 @@ class PegawaiResource extends Resource
                     ->relationship('bidangStudiPendidikan', 'nama')
                     ->searchable()
                     ->preload()
-                    ->label('bidang_studi_pendidikan'),
+                    ->label('Bidang Studi Pendidikan'),
                 Tables\Filters\SelectFilter::make('bidang_studi_sertifikasi_id')
                     ->relationship('bidangStudiSertifikasi', 'nama')
                     ->searchable()
@@ -299,6 +299,8 @@ class PegawaiResource extends Resource
                     ->searchable()
                     ->preload()
                     ->label('Mata Pelajaran'),
+                Tables\Filters\TernaryFilter::make('is_kepsek')
+                    ->label('Kepsek'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
