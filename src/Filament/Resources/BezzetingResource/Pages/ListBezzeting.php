@@ -7,9 +7,9 @@ use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\BezzetingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
-use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 
 class ListBezzeting extends ListRecords
 {
@@ -24,7 +24,7 @@ class ListBezzeting extends ListRecords
                 ->exports([
                     ExcelExport::make()
                         ->fromTable()
-                        ->withFilename(fn ($resource) => $resource::getSlug() . '-' . now()->format('Y-m-d'))
+                        ->withFilename(fn ($resource) => $resource::getSlug().'-'.now()->format('Y-m-d'))
                         ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
                         ->withColumns([
                             Column::make('wilayah.nama')->heading('Wilayah'),
@@ -43,11 +43,11 @@ class ListBezzeting extends ListRecords
     public function getTabs(): array
     {
         $tabs = ['all' => Tab::make('All')
-                ->badge($this->getModel()::query()->defaultOrder()->count())
-                ->modifyQueryUsing(function ($query) {
-                    return $query
-                        ->defaultOrder();
-                })];
+            ->badge($this->getModel()::query()->defaultOrder()->count())
+            ->modifyQueryUsing(function ($query) {
+                return $query
+                    ->defaultOrder();
+            })];
 
         $jenjangSekolahs = JenjangSekolah::all();
 

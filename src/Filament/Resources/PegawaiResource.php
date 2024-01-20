@@ -3,8 +3,8 @@
 namespace Kanekescom\Simgtk\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Forms\Components\Tabs;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -238,7 +238,7 @@ class PegawaiResource extends Resource
                                     ->date()
                                     ->label('Tanggal SK Pensiun'),
                             ])->columns(3),
-                    ])
+                    ]),
             ])->columns(1);
     }
 
@@ -266,10 +266,10 @@ class PegawaiResource extends Resource
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             })
                             ->orWhereHas('sekolah', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             });
                     })
                     ->sortable()

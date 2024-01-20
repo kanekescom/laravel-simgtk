@@ -3,8 +3,8 @@
 namespace Kanekescom\Simgtk\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Forms\Components\Tabs;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -86,7 +86,7 @@ class BezzetingResource extends Resource
                                     ->required()
                                     ->label('Jumlah Siswa'),
                             ])->columns(3),
-                    ])
+                    ]),
             ])
             ->columns(1);
     }
