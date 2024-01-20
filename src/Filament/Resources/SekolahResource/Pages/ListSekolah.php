@@ -7,6 +7,9 @@ use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 
 class ListSekolah extends ListRecords
 {
@@ -17,6 +20,23 @@ class ListSekolah extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            ExportAction::make()
+                ->exports([
+                    ExcelExport::make()
+                        ->fromTable()
+                        ->withFilename(fn ($resource) => $resource::getSlug() . '-' . now()->format('Y-m-d'))
+                        ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
+                        ->withColumns([
+                            Column::make('nama')->heading('Nama'),
+                            Column::make('npsn')->heading('NPSN'),
+                            Column::make('jenjangSekolah.nama')->heading('Jenjang'),
+                            Column::make('wilayah.nama')->heading('Wilayah'),
+                            Column::make('jumlah_kelas')->heading('Jumlah Kelas'),
+                            Column::make('jumlah_rombel')->heading('Jumlah Rombel'),
+                            Column::make('jumlah_siswa')->heading('Jumlah Siswa'),
+                        ])
+                        ->ignoreFormatting(),
+                ]),
             Actions\CreateAction::make()->label('Create'),
         ];
     }
