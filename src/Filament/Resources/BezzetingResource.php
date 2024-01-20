@@ -87,17 +87,15 @@ class BezzetingResource extends Resource
                                     ->label('Jumlah Siswa'),
                             ])->columns(3),
                     ])
-            ])->columns(1);
+            ])
+            ->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultGroup('wilayah.nama')
             ->columns([
-                Tables\Columns\TextColumn::make('wilayah.nama')
-                    ->searchable()
-                    ->sortable()
-                    ->label('Wilayah'),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable()
                     ->sortable()

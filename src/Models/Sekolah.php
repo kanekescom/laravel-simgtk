@@ -61,6 +61,8 @@ class Sekolah extends Model
     public function scopeDefaultOrder($query)
     {
         return $query
-            ->orderBy('wilayah_kode', 'asc');
+            ->with(['wilayah' => function ($query) {
+                $query->orderBy('nama', 'asc');
+            }]);
     }
 }
