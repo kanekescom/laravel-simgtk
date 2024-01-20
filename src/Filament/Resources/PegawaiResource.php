@@ -246,6 +246,7 @@ class PegawaiResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query->aktif())
             ->columns([
                 Tables\Columns\TextColumn::make('nama_gelar')
                     ->description(fn (Pegawai $record): string => $record->nama_id)

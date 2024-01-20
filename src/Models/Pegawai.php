@@ -91,6 +91,20 @@ class Pegawai extends Model
         return $this->hasOneThrough(Wilayah::class, Sekolah::class);
     }
 
+    public function scopeAktif($query)
+    {
+        return $query->whereNull('tmt_pensiun')
+            ->whereNull('tanggal_sk_pensiun')
+            ->whereNull('nomor_sk_pensiun');
+    }
+
+    public function scopePensiun($query)
+    {
+        return $query->whereNotNull('tmt_pensiun')
+            ->whereNotNull('tanggal_sk_pensiun')
+            ->whereNotNull('nomor_sk_pensiun');
+    }
+
     public function scopeCountByGender($query)
     {
         return $query->select('gender_kode', \DB::raw('COUNT(*) as count'))

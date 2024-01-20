@@ -24,15 +24,18 @@ class ListPegawai extends ListRecords
 
     public function getTabs(): array
     {
-        $tabs = ['all' => Tab::make('All')->badge($this->getModel()::count())];
+        $tabs = ['all' => Tab::make('All')->badge($this->getModel()::aktif()->count())];
 
         $statusKepegawaians = Options::forEnum(StatusKepegawaianEnum::class)->toArray();
 
         foreach ($statusKepegawaians as $statusKepegawaian) {
             $tabs[$statusKepegawaian['value']] = Tab::make($statusKepegawaian['value'])
-                ->badge($this->getModel()::where('status_kepegawaian_kode', $statusKepegawaian['value'])->count())
+                ->badge($this->getModel()::query()
+                    ->aktif()
+                    ->where('status_kepegawaian_kode', $statusKepegawaian['value'])->count())
                 ->modifyQueryUsing(function ($query) use ($statusKepegawaian) {
-                    return $query->where('status_kepegawaian_kode', $statusKepegawaian['value']);
+                    return $query->query()
+                        ->where('status_kepegawaian_kode', $statusKepegawaian['value']);
                 })
                 ->label($statusKepegawaian['label']);
         }
