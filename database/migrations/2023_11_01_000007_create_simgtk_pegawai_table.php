@@ -55,6 +55,7 @@ return new class extends Migration
             $table->foreignUlid('mata_pelajaran_id')->index()->nullable();
             $table->double('jam_mengajar_perminggu', 3, 1)->nullable();
             $table->boolean('is_kepsek')->index();
+            $table->boolean('is_plt_kepsek')->index();
 
             $table->timestamps();
             $table->softDeletes();

@@ -225,6 +225,8 @@ class PegawaiResource extends Resource
                                     ->label('Jam Mengajar Perminggu'),
                                 Forms\Components\Toggle::make('is_kepsek')
                                     ->label('Kepsek'),
+                                Forms\Components\Toggle::make('is_plt_kepsek')
+                                    ->label('PLT Kepsek'),
                             ])->columns(2),
                         Tabs\Tab::make('Pensiun')
                             ->schema([

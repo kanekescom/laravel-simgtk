@@ -85,7 +85,8 @@ class PegawaiFactory extends Factory
             'bidang_studi_sertifikasi_id' => BidangStudiSertifikasi::inRandomOrder()->first()->id ?? BidangStudiSertifikasi::new()->create(),
             'mata_pelajaran_id' => MataPelajaran::inRandomOrder()->first()->id ?? MataPelajaran::new()->create(),
             'jam_mengajar_perminggu' => fake()->randomFloat(1, 30, 40),
-            'is_kepsek' => $is_pns ? fake()->boolean(25) : false,
+            'is_kepsek' => $is_kepsek = ($is_pns ? fake()->boolean(25) : false),
+            'is_plt_kepsek' => $is_pns && !$is_kepsek ? fake()->boolean(25) : false,
         ];
     }
 }
