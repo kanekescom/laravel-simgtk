@@ -34,6 +34,7 @@ class SekolahResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->maxLength(255)
                     ->required()
+                    ->columnSpanFull()
                     ->label('Nama'),
                 Forms\Components\TextInput::make('npsn')
                     ->numeric()
@@ -73,7 +74,7 @@ class SekolahResource extends Resource
                     ->maxValue(10000)
                     ->required()
                     ->label('Jumlah Siswa'),
-            ]);
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
