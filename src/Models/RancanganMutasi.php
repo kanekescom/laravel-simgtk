@@ -22,7 +22,12 @@ class RancanganMutasi extends Model
 
     public function getNamaTanggalAttribute()
     {
-        return "{$this->nama} ({$this->tanggal_mulai} - {$this->tanggal_berakhir})";
+        return "{$this->nama} ({$this->periode_tanggal})";
+    }
+
+    public function getPeriodeTanggalAttribute()
+    {
+        return "{$this->tanggal_mulai} - {$this->tanggal_berakhir}";
     }
 
     public function scopeAvailable($query)

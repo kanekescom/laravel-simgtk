@@ -19,7 +19,12 @@ class Sekolah extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix').'sekolah';
+        return config('simgtk.table_prefix') . 'sekolah';
+    }
+
+    public function getNamaWilayahAttribute()
+    {
+        return "{$this->nama}, {$this->wilayah?->nama}";
     }
 
     public function jenjangSekolah(): BelongsTo
