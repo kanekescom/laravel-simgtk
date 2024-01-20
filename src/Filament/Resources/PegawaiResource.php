@@ -3,7 +3,6 @@
 namespace Kanekescom\Simgtk\Filament\Resources;
 
 use Filament\Forms;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Form;
 use Filament\Forms\Components\Tabs;
 use Filament\Resources\Resource;
