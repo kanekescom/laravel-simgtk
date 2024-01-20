@@ -131,24 +131,36 @@ class PegawaiResource extends Resource
                                             ->minValue(0)
                                             ->maxValue(12)
                                             ->label('Masa Kerja Bulan'),
+                                    ]),
+                                Tabs\Tab::make('CPNS')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('nomor_sk_cpns')
+                                            ->maxLength(255)
+                                            ->label('Nomor SK CPNS'),
                                         Forms\Components\DatePicker::make('tmt_cpns')
                                             ->date()
                                             ->label('TMT CPNS'),
                                         Forms\Components\DatePicker::make('tanggal_sk_cpns')
                                             ->date()
                                             ->label('Tanggal SK CPNS'),
-                                        Forms\Components\TextInput::make('nomor_sk_cpns')
+                                    ]),
+                                Tabs\Tab::make('PNS')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('nomor_sk_pns')
                                             ->maxLength(255)
-                                            ->label('Nomor SK CPNS'),
+                                            ->label('Nomor SK PNS'),
                                         Forms\Components\DatePicker::make('tmt_pns')
                                             ->date()
                                             ->label('TMT PNS'),
                                         Forms\Components\DatePicker::make('tanggal_sk_pns')
                                             ->date()
                                             ->label('Tanggal SK PNS'),
-                                        Forms\Components\TextInput::make('nomor_sk_pns')
+                                    ]),
+                                Tabs\Tab::make('Pangkat')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('nomor_sk_pangkat')
                                             ->maxLength(255)
-                                            ->label('Nomor SK PNS'),
+                                            ->label('Nomor SK Pangkat'),
                                         Forms\Components\Select::make('golongan_kode')
                                             ->options(GolonganAsnEnum::class)
                                             ->in(collect(
@@ -163,18 +175,6 @@ class PegawaiResource extends Resource
                                         Forms\Components\DatePicker::make('tanggal_sk_pangkat')
                                             ->date()
                                             ->label('Tanggal SK Pangkat'),
-                                        Forms\Components\TextInput::make('nomor_sk_pangkat')
-                                            ->maxLength(255)
-                                            ->label('Nomor SK Pangkat'),
-                                        Forms\Components\DatePicker::make('tmt_pensiun')
-                                            ->date()
-                                            ->label('TMT Pensiun'),
-                                        Forms\Components\DatePicker::make('tanggal_sk_pensiun')
-                                            ->date()
-                                            ->label('Tanggal SK Pensiun'),
-                                        Forms\Components\TextInput::make('nomor_sk_pensiun')
-                                            ->maxLength(255)
-                                            ->label('Nomor SK Pensiun'),
                                     ]),
                                 Tabs\Tab::make('Jabatan')
                                     ->schema([
@@ -227,6 +227,18 @@ class PegawaiResource extends Resource
                                             ->label('Jam Mengajar Perminggu'),
                                         Forms\Components\Toggle::make('is_kepsek')
                                             ->label('Kepsek'),
+                                    ]),
+                                Tabs\Tab::make('Pensiun')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('nomor_sk_pensiun')
+                                            ->maxLength(255)
+                                            ->label('Nomor SK Pensiun'),
+                                        Forms\Components\DatePicker::make('tmt_pensiun')
+                                            ->date()
+                                            ->label('TMT Pensiun'),
+                                        Forms\Components\DatePicker::make('tanggal_sk_pensiun')
+                                            ->date()
+                                            ->label('Tanggal SK Pensiun'),
                                     ]),
                             ])
                     ])
