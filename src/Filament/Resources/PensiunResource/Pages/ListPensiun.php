@@ -62,9 +62,4 @@ class ListPensiun extends ListRecords
                 ->label('Akan Pensiun'),
         ];
     }
-
-    public function getDefaultActiveTab(): string | int | null
-    {
-        return 'pensiun';
-    }
 }
