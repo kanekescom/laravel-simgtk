@@ -33,14 +33,14 @@ class Pegawai extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'pegawai';
+        return config('simgtk.table_prefix').'pegawai';
     }
 
     public function getNamaGelarAttribute()
     {
         return ($this->gelar_depan ? "{$this->gelar_depan} " : '')
-            . $this->nama
-            . ($this->gelar_belakang ? ", {$this->gelar_belakang}" : '');
+            .$this->nama
+            .($this->gelar_belakang ? ", {$this->gelar_belakang}" : '');
     }
 
     public function getNamaIdAttribute()
