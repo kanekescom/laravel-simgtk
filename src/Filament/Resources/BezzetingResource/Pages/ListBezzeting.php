@@ -7,6 +7,8 @@ use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\BezzetingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
+use Konnco\FilamentImport\Actions\ImportField;
+use Konnco\FilamentImport\Actions\ImportAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
@@ -20,6 +22,14 @@ class ListBezzeting extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            ImportAction::make()
+                ->uniqueField('id')
+                ->fields([
+                    //
+                ])
+                ->handleRecordCreation(function(array $data) {
+                    //
+                }),
             ExportAction::make()
                 ->exports([
                     ExcelExport::make()

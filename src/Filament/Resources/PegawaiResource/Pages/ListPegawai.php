@@ -3,10 +3,14 @@
 namespace Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Pages;
 
 use Filament\Actions;
+use Filament\Forms;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource;
+use Kanekescom\Simgtk\Filament\Resources\SekolahResource;
+use Konnco\FilamentImport\Actions\ImportField;
+use Konnco\FilamentImport\Actions\ImportAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
@@ -21,6 +25,14 @@ class ListPegawai extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            ImportAction::make()
+                ->uniqueField('id')
+                ->fields([
+                    //
+                ])
+                ->handleRecordCreation(function(array $data) {
+                    //
+                }),
             ExportAction::make()
                 ->exports([
                     ExcelExport::make()
@@ -47,7 +59,8 @@ class ListPegawai extends ListRecords
                             Column::make('tanggal_sk_pns')->heading('Tanggal SK PNS'),
                             Column::make('is_kepsek')->heading('Kepsek'),
                         ])
-                        ->ignoreFormatting(),
+                        ->ignoreFormatting()
+                        ->label('aa'),
                 ]),
             Actions\CreateAction::make()->label('Create'),
         ];
