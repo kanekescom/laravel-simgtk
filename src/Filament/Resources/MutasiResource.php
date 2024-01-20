@@ -38,6 +38,7 @@ class MutasiResource extends Resource
                     ->searchable()
                     ->preload()
                     ->required()
+                    ->disabledOn('edit')
                     ->label('Rancangan Mutasi'),
                 Forms\Components\Select::make('pegawai_id')
                     ->relationship('pegawai', 'nama')
@@ -45,6 +46,7 @@ class MutasiResource extends Resource
                     ->searchable(['nama', 'nik', 'nuptk', 'nip'])
                     ->preload()
                     ->required()
+                    ->disabledOn('edit')
                     ->label('Pegawai'),
                 Forms\Components\Select::make('asal_sekolah_id')
                     ->relationship('asalSekolah', 'nama')
@@ -52,6 +54,8 @@ class MutasiResource extends Resource
                     ->searchable()
                     ->preload()
                     ->required()
+                    ->hiddenOn('create')
+                    ->disabledOn('edit')
                     ->label('Asal Sekolah'),
                 Forms\Components\Select::make('tujuan_sekolah_id')
                     ->relationship('tujuanSekolah', 'nama')
@@ -60,7 +64,7 @@ class MutasiResource extends Resource
                     ->preload()
                     ->required()
                     ->label('Tujuan Sekolah'),
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
