@@ -24,7 +24,7 @@ class ListPegawai extends ListRecords
 
     public function getTabs(): array
     {
-        $tabs = ['all' => Tab::make('All')->badge($this->getModel()::aktif()->count())];
+        $tabs = ['all' => Tab::make('All')->badge($this->getModel()::query()->aktif()->count())];
 
         $statusKepegawaians = Options::forEnum(StatusKepegawaianEnum::class)->toArray();
 
