@@ -33,6 +33,7 @@ class RancanganMutasiResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->maxLength(255)
                     ->required()
+                    ->columnSpanFull()
                     ->label('Nama'),
                 Forms\Components\DatePicker::make('tanggal_mulai')
                     ->date()
