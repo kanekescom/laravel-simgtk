@@ -63,10 +63,8 @@ class RancanganMutasiResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Berakhir'),
-                Tables\Columns\IconColumn::make('is_selesai')
-                    ->boolean()
-                    ->trueIcon('heroicon-o-check-badge')
-                    ->falseIcon('heroicon-o-x-mark')
+                Tables\Columns\ToggleColumn::make('is_selesai')
+                    ->sortable()
                     ->label('Selesai'),
             ])
             ->filters([
