@@ -30,21 +30,21 @@ return new class extends Migration
             $table->unsignedTinyInteger('masa_kerja_tahun')->nullable();
             $table->unsignedTinyInteger('masa_kerja_bulan')->nullable();
 
-            $table->string('tmt_cpns')->nullable();
-            $table->string('tanggal_sk_cpns')->nullable();
+            $table->date('tmt_cpns')->nullable();
+            $table->date('tanggal_sk_cpns')->nullable();
             $table->string('nomor_sk_cpns')->nullable();
 
-            $table->string('tmt_pns')->nullable();
-            $table->string('tanggal_sk_pns')->nullable();
+            $table->date('tmt_pns')->nullable();
+            $table->date('tanggal_sk_pns')->nullable();
             $table->string('nomor_sk_pns')->nullable();
 
             $table->string('golongan_kode')->index()->nullable();
-            $table->string('tmt_pangkat')->nullable();
-            $table->string('tanggal_sk_pangkat')->nullable();
+            $table->date('tmt_pangkat')->nullable();
+            $table->date('tanggal_sk_pangkat')->nullable();
             $table->string('nomor_sk_pangkat')->nullable();
 
-            $table->string('tmt_pensiun')->nullable();
-            $table->string('tanggal_sk_pensiun')->nullable();
+            $table->date('tmt_pensiun')->nullable();
+            $table->date('tanggal_sk_pensiun')->nullable();
             $table->string('nomor_sk_pensiun')->nullable();
 
             $table->foreignUlid('sekolah_id')->index();
