@@ -5,7 +5,6 @@ namespace Kanekescom\Simgtk\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RancanganMutasi extends Model
@@ -19,5 +18,19 @@ class RancanganMutasi extends Model
     public function getTable()
     {
         return config('simgtk.table_prefix') . 'rancangan_mutasi';
+    }
+
+    public function getNamaTanggalAttribute()
+    {
+        return "{$this->nama} ({$this->tanggal_mulai} - {$this->tanggal_berakhir})";
+    }
+
+    public function scopeAvailable($query)
+    {
+        $today = now();
+
+        return $query->where('tanggal_mulai', '<=', $today)
+            ->where('tanggal_berakhir', '>=', $today)
+            ->where('is_selesai', false);
     }
 }

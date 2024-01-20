@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Kanekescom\Simgtk\Filament\Resources\MutasiResource\Pages;
 use Kanekescom\Simgtk\Models\Mutasi;
@@ -31,6 +32,13 @@ class MutasiResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('rancangan_mutasi_id')
+                    ->relationship('rancangan', 'nama', modifyQueryUsing: fn (Builder $query) => $query->available())
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_tanggal}")
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->label('Rancangan Mutasi'),
                 Forms\Components\Select::make('pegawai_id')
                     ->relationship('pegawai', 'nama')
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_id_gelar}")
@@ -57,8 +65,14 @@ class MutasiResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('rancangan.nama')
+                    ->description(fn (Mutasi $record): string => "{$record->tanggal_mulai} - $record->tanggal_berakhir")
+                    ->searchable()
+                    ->sortable()
+                    ->hidden()
+                    ->label('Rancangan Mutasi'),
                 Tables\Columns\TextColumn::make('pegawai.nama_gelar')
-                    ->description(fn (Mutasi $record): string => $record->pegawai?->nip ? 'NIP. ' . $record->pegawai?->nip : '')
+                    ->description(fn (Mutasi $record): string => $record->pegawai?->nama_id)
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
                     ->sortable(['pegawai.nama'])
                     ->label('Pegawai'),

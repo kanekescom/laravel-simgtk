@@ -31,11 +31,11 @@ class DatabaseSeeder extends Seeder
             // MataPelajaranJenjangSekolahSeeder::class,
             MataPelajaranJenjangSekolahInRealSeeder::class,
             PegawaiSeeder::class,
+            RancanganMutasiSeeder::class,
             MutasiSeeder::class,
             PensiunSeeder::class,
             BezzetingSeeder::class,
             ImporSeeder::class,
-            RancanganMutasiSeeder::class,
         ]);
     }
 }

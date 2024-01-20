@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('simgtk.table_prefix').'mutasi', function (Blueprint $table) {
+        Schema::create(config('simgtk.table_prefix') . 'mutasi', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->foreignUlid('rancangan_mutasi_id')->index();
             $table->foreignUlid('pegawai_id')->index();
             $table->foreignUlid('asal_sekolah_id')->index();
             $table->foreignUlid('tujuan_sekolah_id')->index();
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('simgtk.table_prefix').'mutasi');
+        Schema::dropIfExists(config('simgtk.table_prefix') . 'mutasi');
     }
 };

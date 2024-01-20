@@ -18,7 +18,12 @@ class Mutasi extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix').'mutasi';
+        return config('simgtk.table_prefix') . 'mutasi';
+    }
+
+    public function rancangan(): BelongsTo
+    {
+        return $this->belongsTo(RancanganMutasi::class, 'rancangan_mutasi_id');
     }
 
     public function pegawai(): BelongsTo

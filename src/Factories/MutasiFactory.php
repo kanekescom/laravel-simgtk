@@ -5,6 +5,7 @@ namespace Kanekescom\Simgtk\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Kanekescom\Simgtk\Models\Mutasi;
 use Kanekescom\Simgtk\Models\Pegawai;
+use Kanekescom\Simgtk\Models\RancanganMutasi;
 use Kanekescom\Simgtk\Models\Sekolah;
 
 /**
@@ -22,8 +23,9 @@ class MutasiFactory extends Factory
     public function definition(): array
     {
         return [
-            'pegawai_id' => Pegawai::inRandomOrder()->first()->id ?? PegawaiFactory::new()->create(),
-            'asal_sekolah_id' => Sekolah::inRandomOrder()->first()->id ?? SekolahFactory::new()->create(),
+            'rancangan_mutasi_id' => RancanganMutasi::inRandomOrder()->first()->id ?? RancanganMutasiFactory::new()->create(),
+            'pegawai_id' => ($pegawai = Pegawai::inRandomOrder()->first())->id ?? PegawaiFactory::new()->create(),
+            'asal_sekolah_id' => $pegawai->sekolah_id,
             'tujuan_sekolah_id' => Sekolah::inRandomOrder()->first()->id ?? SekolahFactory::new()->create(),
         ];
     }
