@@ -17,7 +17,7 @@ class RancanganMutasi extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'rancangan_mutasi';
+        return config('simgtk.table_prefix').'rancangan_mutasi';
     }
 
     public function getNamaTanggalAttribute()

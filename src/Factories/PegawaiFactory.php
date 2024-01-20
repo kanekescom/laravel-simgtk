@@ -44,7 +44,7 @@ class PegawaiFactory extends Factory
         $tanggal_pangkat = now()->parse(fake()->dateTimeBetween('-3 years', '-0 years'));
 
         return [
-            'nama' => fake()->unique()->firstName($gender_kode == GenderEnum::LAKILAKI ? 'male' : 'female') . ' ' . fake()->unique()->lastName(),
+            'nama' => fake()->unique()->firstName($gender_kode == GenderEnum::LAKILAKI ? 'male' : 'female').' '.fake()->unique()->lastName(),
             'nik' => fake()->numerify('################'),
             'nuptk' => fake()->boolean(85) ? null : fake()->numerify('################'),
             'nip' => $is_asn ? null : fake()->numerify('##################'),
