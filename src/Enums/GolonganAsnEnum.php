@@ -24,26 +24,49 @@ enum GolonganAsnEnum: string implements HasLabel
     case GOLONGAN44 = '44';
     case GOLONGAN45 = '45';
 
+    // public function getLabel(): ?string
+    // {
+    //     return match ($this) {
+    //         self::GOLONGAN11 => 'I/a Juru Muda',
+    //         self::GOLONGAN12 => 'I/b Juru Muda Tingkat I',
+    //         self::GOLONGAN13 => 'I/c Juru',
+    //         self::GOLONGAN14 => 'I/d Juru Tingkat I',
+    //         self::GOLONGAN21 => 'II/a Pengatur Muda',
+    //         self::GOLONGAN22 => 'II/b Pengatur Muda Tingkat I',
+    //         self::GOLONGAN23 => 'II/c Pengatur',
+    //         self::GOLONGAN24 => 'II/d Pengatur Tingkat I',
+    //         self::GOLONGAN31 => 'III/a Penata Muda',
+    //         self::GOLONGAN32 => 'III/b Penata Muda Tingkat I',
+    //         self::GOLONGAN33 => 'III/c Penata',
+    //         self::GOLONGAN34 => 'III/d Penata Tingkat I',
+    //         self::GOLONGAN41 => 'IV/a Pembina',
+    //         self::GOLONGAN42 => 'IV/b Pembina Tingkat I',
+    //         self::GOLONGAN43 => 'IV/c Pembina Utama Muda',
+    //         self::GOLONGAN44 => 'IV/d Pembina Utama Madya',
+    //         self::GOLONGAN45 => 'IV/e Pembina Utama',
+    //     };
+    // }
+
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::GOLONGAN11 => 'I/a Juru Muda',
-            self::GOLONGAN12 => 'I/b Juru Muda Tingkat I',
-            self::GOLONGAN13 => 'I/c Juru',
-            self::GOLONGAN14 => 'I/d Juru Tingkat I',
-            self::GOLONGAN21 => 'II/a Pengatur Muda',
-            self::GOLONGAN22 => 'II/b Pengatur Muda Tingkat I',
-            self::GOLONGAN23 => 'II/c Pengatur',
-            self::GOLONGAN24 => 'II/d Pengatur Tingkat I',
-            self::GOLONGAN31 => 'III/a Penata Muda',
-            self::GOLONGAN32 => 'III/b Penata Muda Tingkat I',
-            self::GOLONGAN33 => 'III/c Penata',
-            self::GOLONGAN34 => 'III/d Penata Tingkat I',
-            self::GOLONGAN41 => 'IV/a Pembina',
-            self::GOLONGAN42 => 'IV/b Pembina Tingkat I',
-            self::GOLONGAN43 => 'IV/c Pembina Utama Muda',
-            self::GOLONGAN44 => 'IV/d Pembina Utama Madya',
-            self::GOLONGAN45 => 'IV/e Pembina Utama',
+            self::GOLONGAN11 => 'I/a',
+            self::GOLONGAN12 => 'I/b',
+            self::GOLONGAN13 => 'I/c',
+            self::GOLONGAN14 => 'I/d',
+            self::GOLONGAN21 => 'II/a',
+            self::GOLONGAN22 => 'II/b',
+            self::GOLONGAN23 => 'II/c',
+            self::GOLONGAN24 => 'II/d',
+            self::GOLONGAN31 => 'III/a',
+            self::GOLONGAN32 => 'III/b',
+            self::GOLONGAN33 => 'III/c',
+            self::GOLONGAN34 => 'III/d',
+            self::GOLONGAN41 => 'IV/a',
+            self::GOLONGAN42 => 'IV/b',
+            self::GOLONGAN43 => 'IV/c',
+            self::GOLONGAN44 => 'IV/d',
+            self::GOLONGAN45 => 'IV/e',
         };
     }
 }

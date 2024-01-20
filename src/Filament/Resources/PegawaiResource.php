@@ -249,7 +249,7 @@ class PegawaiResource extends Resource
                 Tables\Columns\TextColumn::make('golongan_kode')
                     ->wrap()
                     ->sortable()
-                    ->label('Gol/Pangkat'),
+                    ->label('Gol'),
                 Tables\Columns\TextColumn::make('mataPelajaran.nama')
                     ->description(fn (Pegawai $record): string => $record->sekolah?->nama)
                     ->wrap()
@@ -285,7 +285,7 @@ class PegawaiResource extends Resource
                     ->options(GolonganAsnEnum::class)
                     ->searchable()
                     ->preload()
-                    ->label('Gol/Pangkat'),
+                    ->label('Golongan'),
                 Tables\Filters\SelectFilter::make('status_tugas_kode')
                     ->options(StatusTugasEnum::class)
                     ->searchable()
