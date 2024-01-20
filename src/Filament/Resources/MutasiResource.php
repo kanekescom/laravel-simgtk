@@ -73,7 +73,7 @@ class MutasiResource extends Resource
                     ->sortable()
                     ->label('Rancangan Mutasi'),
                 Tables\Columns\TextColumn::make('pegawai.nama_gelar')
-                    ->description(fn (Mutasi $record): string => $record->pegawai?->nama_id)
+                    ->description(fn (Mutasi $record): string => $record->pegawai?->nama_id ?? '')
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
                     ->sortable(['pegawai.nama'])
                     ->label('Pegawai'),
