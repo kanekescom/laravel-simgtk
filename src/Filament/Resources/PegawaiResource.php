@@ -45,204 +45,202 @@ class PegawaiResource extends Resource
     {
         return $form
             ->schema([
-                Grid::make(1)
-                    ->schema([
-                        Tabs::make('Tabs')
-                            ->tabs([
-                                Tabs\Tab::make('Profil')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('nama')
-                                            ->maxLength(255)
-                                            ->required()
-                                            ->label('Nama'),
-                                        Forms\Components\TextInput::make('nik')
-                                            ->numeric()
-                                            ->length(16)
-                                            ->unique(ignoreRecord: true)
-                                            ->required()
-                                            ->label('NIK'),
-                                        Forms\Components\TextInput::make('nuptk')
-                                            ->numeric()
-                                            ->length(16)
-                                            ->unique(ignoreRecord: true)
-                                            ->label('NUPTK'),
-                                        Forms\Components\TextInput::make('nip')
-                                            ->numeric()
-                                            ->length(18)
-                                            ->unique(ignoreRecord: true)
-                                            ->label('NIP'),
-                                        Forms\Components\Select::make('gender_kode')
-                                            ->options(GenderEnum::class)
-                                            ->in(collect(
-                                                Options::forEnum(GenderEnum::class)->toArray()
-                                            )->pluck('value'))
-                                            ->searchable()
-                                            ->preload()
-                                            ->required()
-                                            ->label('Gender'),
-                                        Forms\Components\TextInput::make('tempat_lahir')
-                                            ->maxLength(255)
-                                            ->required()
-                                            ->label('Tempat Lahir'),
-                                        Forms\Components\DatePicker::make('tanggal_lahir')
-                                            ->date()
-                                            ->required()
-                                            ->label('Tanggal Lahir'),
-                                        Forms\Components\TextInput::make('gelar_depan')
-                                            ->maxLength(255)
-                                            ->label('Gelar Depan'),
-                                        Forms\Components\TextInput::make('gelar_belakang')
-                                            ->maxLength(255)
-                                            ->label('Gelar Belakang'),
-                                        Forms\Components\TextInput::make('nomor_hp')
-                                            ->tel()
-                                            ->label('Nomor HP'),
-                                        Forms\Components\TextInput::make('email')
-                                            ->email()
-                                            ->label('Email'),
-                                        Forms\Components\Select::make('jenjang_pendidikan_kode')
-                                            ->options(JenjangPendidikanEnum::class)
-                                            ->in(collect(
-                                                Options::forEnum(JenjangPendidikanEnum::class)->toArray()
-                                            )->pluck('value'))
-                                            ->searchable()
-                                            ->preload()
-                                            ->required()
-                                            ->label('Jenjang Pendidikan'),
-                                    ]),
-                                Tabs\Tab::make('Kepegawaian')
-                                    ->schema([
-                                        Forms\Components\Select::make('status_kepegawaian_kode')
-                                            ->options(StatusKepegawaianEnum::class)
-                                            ->in(collect(
-                                                Options::forEnum(StatusKepegawaianEnum::class)->toArray()
-                                            )->pluck('value'))
-                                            ->searchable()
-                                            ->preload()
-                                            ->required()
-                                            ->label('Status Kepegawaian'),
-                                        Forms\Components\TextInput::make('masa_kerja_tahun')
-                                            ->numeric()
-                                            ->minValue(0)
-                                            ->maxValue(50)
-                                            ->label('Masa Kerja Tahun'),
-                                        Forms\Components\TextInput::make('masa_kerja_bulan')
-                                            ->numeric()
-                                            ->minValue(0)
-                                            ->maxValue(12)
-                                            ->label('Masa Kerja Bulan'),
-                                    ]),
-                                Tabs\Tab::make('CPNS')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('nomor_sk_cpns')
-                                            ->maxLength(255)
-                                            ->label('Nomor SK CPNS'),
-                                        Forms\Components\DatePicker::make('tmt_cpns')
-                                            ->date()
-                                            ->label('TMT CPNS'),
-                                        Forms\Components\DatePicker::make('tanggal_sk_cpns')
-                                            ->date()
-                                            ->label('Tanggal SK CPNS'),
-                                    ]),
-                                Tabs\Tab::make('PNS')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('nomor_sk_pns')
-                                            ->maxLength(255)
-                                            ->label('Nomor SK PNS'),
-                                        Forms\Components\DatePicker::make('tmt_pns')
-                                            ->date()
-                                            ->label('TMT PNS'),
-                                        Forms\Components\DatePicker::make('tanggal_sk_pns')
-                                            ->date()
-                                            ->label('Tanggal SK PNS'),
-                                    ]),
-                                Tabs\Tab::make('Pangkat')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('nomor_sk_pangkat')
-                                            ->maxLength(255)
-                                            ->label('Nomor SK Pangkat'),
-                                        Forms\Components\Select::make('golongan_kode')
-                                            ->options(GolonganAsnEnum::class)
-                                            ->in(collect(
-                                                Options::forEnum(GolonganAsnEnum::class)->toArray()
-                                            )->pluck('value'))
-                                            ->searchable()
-                                            ->preload()
-                                            ->label('Golongan'),
-                                        Forms\Components\DatePicker::make('tmt_pangkat')
-                                            ->date()
-                                            ->label('TMT Pangkat'),
-                                        Forms\Components\DatePicker::make('tanggal_sk_pangkat')
-                                            ->date()
-                                            ->label('Tanggal SK Pangkat'),
-                                    ]),
-                                Tabs\Tab::make('Jabatan')
-                                    ->schema([
-                                        Forms\Components\Select::make('sekolah_id')
-                                            ->relationship('sekolah', 'nama')
-                                            ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_wilayah}")
-                                            ->exists(table: Sekolah::class, column: 'id')
-                                            ->searchable()
-                                            ->preload()
-                                            ->required()
-                                            ->label('Sekolah'),
-                                        Forms\Components\Select::make('status_tugas_kode')
-                                            ->options(StatusTugasEnum::class)
-                                            ->in(collect(
-                                                Options::forEnum(StatusTugasEnum::class)->toArray()
-                                            )->pluck('value'))
-                                            ->searchable()
-                                            ->preload()
-                                            ->required()
-                                            ->label('Status Tugas'),
-                                        Forms\Components\Select::make('jenis_ptk_id')
-                                            ->relationship('jenisPtk', 'nama')
-                                            ->exists(table: JenisPtk::class, column: 'id')
-                                            ->searchable()
-                                            ->preload()
-                                            ->required()
-                                            ->label('Jenis PTK'),
-                                        Forms\Components\Select::make('bidang_studi_pendidikan_id')
-                                            ->relationship('bidangStudiPendidikan', 'nama')
-                                            ->exists(table: BidangStudiPendidikan::class, column: 'id')
-                                            ->searchable()
-                                            ->preload()
-                                            ->label('Bidang Studi Pendidikan'),
-                                        Forms\Components\Select::make('bidang_studi_sertifikasi_id')
-                                            ->relationship('bidangStudiSertifikasi', 'nama')
-                                            ->exists(table: BidangStudiSertifikasi::class, column: 'id')
-                                            ->searchable()
-                                            ->preload()
-                                            ->label('Bidang Studi Sertifikasi'),
-                                        Forms\Components\Select::make('mata_pelajaran_id')
-                                            ->relationship('mataPelajaran', 'nama')
-                                            ->exists(table: MataPelajaran::class, column: 'id')
-                                            ->searchable()
-                                            ->preload()
-                                            ->label('Mata Pelajaran'),
-                                        Forms\Components\TextInput::make('jam_mengajar_perminggu')
-                                            ->numeric()
-                                            ->minValue(0)
-                                            ->maxValue(50)
-                                            ->label('Jam Mengajar Perminggu'),
-                                        Forms\Components\Toggle::make('is_kepsek')
-                                            ->label('Kepsek'),
-                                    ]),
-                                Tabs\Tab::make('Pensiun')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('nomor_sk_pensiun')
-                                            ->maxLength(255)
-                                            ->label('Nomor SK Pensiun'),
-                                        Forms\Components\DatePicker::make('tmt_pensiun')
-                                            ->date()
-                                            ->label('TMT Pensiun'),
-                                        Forms\Components\DatePicker::make('tanggal_sk_pensiun')
-                                            ->date()
-                                            ->label('Tanggal SK Pensiun'),
-                                    ]),
-                            ])
+                Tabs::make('Tabs')
+                    ->tabs([
+                        Tabs\Tab::make('Profil')
+                            ->schema([
+                                Forms\Components\TextInput::make('gelar_depan')
+                                    ->maxLength(255)
+                                    ->label('Gelar Depan'),
+                                Forms\Components\TextInput::make('nama')
+                                    ->maxLength(255)
+                                    ->required()
+                                    ->label('Nama'),
+                                Forms\Components\TextInput::make('gelar_belakang')
+                                    ->maxLength(255)
+                                    ->label('Gelar Belakang'),
+                                Forms\Components\TextInput::make('nik')
+                                    ->numeric()
+                                    ->length(16)
+                                    ->unique(ignoreRecord: true)
+                                    ->required()
+                                    ->label('NIK'),
+                                Forms\Components\TextInput::make('nuptk')
+                                    ->numeric()
+                                    ->length(16)
+                                    ->unique(ignoreRecord: true)
+                                    ->label('NUPTK'),
+                                Forms\Components\TextInput::make('nip')
+                                    ->numeric()
+                                    ->length(18)
+                                    ->unique(ignoreRecord: true)
+                                    ->label('NIP'),
+                                Forms\Components\Select::make('gender_kode')
+                                    ->options(GenderEnum::class)
+                                    ->in(collect(
+                                        Options::forEnum(GenderEnum::class)->toArray()
+                                    )->pluck('value'))
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->label('Gender'),
+                                Forms\Components\TextInput::make('tempat_lahir')
+                                    ->maxLength(255)
+                                    ->required()
+                                    ->label('Tempat Lahir'),
+                                Forms\Components\DatePicker::make('tanggal_lahir')
+                                    ->date()
+                                    ->required()
+                                    ->label('Tanggal Lahir'),
+                                Forms\Components\TextInput::make('nomor_hp')
+                                    ->tel()
+                                    ->label('Nomor HP'),
+                                Forms\Components\TextInput::make('email')
+                                    ->email()
+                                    ->label('Email'),
+                                Forms\Components\Select::make('jenjang_pendidikan_kode')
+                                    ->options(JenjangPendidikanEnum::class)
+                                    ->in(collect(
+                                        Options::forEnum(JenjangPendidikanEnum::class)->toArray()
+                                    )->pluck('value'))
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->label('Jenjang Pendidikan'),
+                            ])->columns(3),
+                        Tabs\Tab::make('Kepegawaian')
+                            ->schema([
+                                Forms\Components\Select::make('status_kepegawaian_kode')
+                                    ->options(StatusKepegawaianEnum::class)
+                                    ->in(collect(
+                                        Options::forEnum(StatusKepegawaianEnum::class)->toArray()
+                                    )->pluck('value'))
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->label('Status Kepegawaian'),
+                                Forms\Components\TextInput::make('masa_kerja_tahun')
+                                    ->numeric()
+                                    ->minValue(0)
+                                    ->maxValue(50)
+                                    ->label('Masa Kerja Tahun'),
+                                Forms\Components\TextInput::make('masa_kerja_bulan')
+                                    ->numeric()
+                                    ->minValue(0)
+                                    ->maxValue(12)
+                                    ->label('Masa Kerja Bulan'),
+                            ])->columns(3),
+                        Tabs\Tab::make('CPNS')
+                            ->schema([
+                                Forms\Components\TextInput::make('nomor_sk_cpns')
+                                    ->maxLength(255)
+                                    ->label('Nomor SK CPNS'),
+                                Forms\Components\DatePicker::make('tmt_cpns')
+                                    ->date()
+                                    ->label('TMT CPNS'),
+                                Forms\Components\DatePicker::make('tanggal_sk_cpns')
+                                    ->date()
+                                    ->label('Tanggal SK CPNS'),
+                            ])->columns(3),
+                        Tabs\Tab::make('PNS')
+                            ->schema([
+                                Forms\Components\TextInput::make('nomor_sk_pns')
+                                    ->maxLength(255)
+                                    ->label('Nomor SK PNS'),
+                                Forms\Components\DatePicker::make('tmt_pns')
+                                    ->date()
+                                    ->label('TMT PNS'),
+                                Forms\Components\DatePicker::make('tanggal_sk_pns')
+                                    ->date()
+                                    ->label('Tanggal SK PNS'),
+                            ])->columns(3),
+                        Tabs\Tab::make('Pangkat')
+                            ->schema([
+                                Forms\Components\TextInput::make('nomor_sk_pangkat')
+                                    ->maxLength(255)
+                                    ->label('Nomor SK Pangkat'),
+                                Forms\Components\Select::make('golongan_kode')
+                                    ->options(GolonganAsnEnum::class)
+                                    ->in(collect(
+                                        Options::forEnum(GolonganAsnEnum::class)->toArray()
+                                    )->pluck('value'))
+                                    ->searchable()
+                                    ->preload()
+                                    ->label('Golongan'),
+                                Forms\Components\DatePicker::make('tmt_pangkat')
+                                    ->date()
+                                    ->label('TMT Pangkat'),
+                                Forms\Components\DatePicker::make('tanggal_sk_pangkat')
+                                    ->date()
+                                    ->label('Tanggal SK Pangkat'),
+                            ])->columns(2),
+                        Tabs\Tab::make('Jabatan')
+                            ->schema([
+                                Forms\Components\Select::make('sekolah_id')
+                                    ->relationship('sekolah', 'nama')
+                                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_wilayah}")
+                                    ->exists(table: Sekolah::class, column: 'id')
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->columnSpanFull()
+                                    ->label('Sekolah'),
+                                Forms\Components\Select::make('status_tugas_kode')
+                                    ->options(StatusTugasEnum::class)
+                                    ->in(collect(
+                                        Options::forEnum(StatusTugasEnum::class)->toArray()
+                                    )->pluck('value'))
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->label('Status Tugas'),
+                                Forms\Components\Select::make('jenis_ptk_id')
+                                    ->relationship('jenisPtk', 'nama')
+                                    ->exists(table: JenisPtk::class, column: 'id')
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->label('Jenis PTK'),
+                                Forms\Components\Select::make('bidang_studi_pendidikan_id')
+                                    ->relationship('bidangStudiPendidikan', 'nama')
+                                    ->exists(table: BidangStudiPendidikan::class, column: 'id')
+                                    ->searchable()
+                                    ->preload()
+                                    ->label('Bidang Studi Pendidikan'),
+                                Forms\Components\Select::make('bidang_studi_sertifikasi_id')
+                                    ->relationship('bidangStudiSertifikasi', 'nama')
+                                    ->exists(table: BidangStudiSertifikasi::class, column: 'id')
+                                    ->searchable()
+                                    ->preload()
+                                    ->label('Bidang Studi Sertifikasi'),
+                                Forms\Components\Select::make('mata_pelajaran_id')
+                                    ->relationship('mataPelajaran', 'nama')
+                                    ->exists(table: MataPelajaran::class, column: 'id')
+                                    ->searchable()
+                                    ->preload()
+                                    ->label('Mata Pelajaran'),
+                                Forms\Components\TextInput::make('jam_mengajar_perminggu')
+                                    ->numeric()
+                                    ->minValue(0)
+                                    ->maxValue(50)
+                                    ->label('Jam Mengajar Perminggu'),
+                                Forms\Components\Toggle::make('is_kepsek')
+                                    ->label('Kepsek'),
+                            ])->columns(2),
+                        Tabs\Tab::make('Pensiun')
+                            ->schema([
+                                Forms\Components\TextInput::make('nomor_sk_pensiun')
+                                    ->maxLength(255)
+                                    ->label('Nomor SK Pensiun'),
+                                Forms\Components\DatePicker::make('tmt_pensiun')
+                                    ->date()
+                                    ->label('TMT Pensiun'),
+                                Forms\Components\DatePicker::make('tanggal_sk_pensiun')
+                                    ->date()
+                                    ->label('Tanggal SK Pensiun'),
+                            ])->columns(3),
                     ])
-            ]);
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
