@@ -308,8 +308,8 @@ class PensiunResource extends Resource
                     })
                     ->sortable()
                     ->label('Jabatan'),
-                Tables\Columns\TextColumn::make('nomor_sk_pensiun')
-                    ->description(fn (Pegawai $record): string => $record->tmt_pensiun ?? '')
+                Tables\Columns\TextColumn::make('jadwal_tmt_pensiun')
+                    ->description(fn (Pegawai $record): string => $record->nomor_sk_pensiun ?? '')
                     ->searchable(['tmt_pensiun', 'nomor_sk_pensiun', 'tanggal_sk_pensiun'])
                     ->sortable(['tmt_pensiun'])
                     ->label('Pensiun'),

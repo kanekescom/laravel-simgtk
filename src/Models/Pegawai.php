@@ -61,6 +61,11 @@ class Pegawai extends Model
         return "{$this->nama_id} {$this->nama_gelar}";
     }
 
+    public function getJadwalTmtPensiunAttribute()
+    {
+        return $this->tmt_pensiun ?? now()->parse($this->tanggal_lahir)->addYears(60)->toDateString();
+    }
+
     public function sekolah(): BelongsTo
     {
         return $this->belongsTo(Sekolah::class);
