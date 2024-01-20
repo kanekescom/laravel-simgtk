@@ -33,7 +33,7 @@ class MutasiResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('rancangan_mutasi_id')
-                    ->relationship('rancangan', 'nama', modifyQueryUsing: fn (Builder $query) => $query->available())
+                    ->relationship('rancangan', 'nama', modifyQueryUsing: fn (Builder $query) => $query->aktif())
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_tanggal}")
                     ->searchable()
                     ->preload()

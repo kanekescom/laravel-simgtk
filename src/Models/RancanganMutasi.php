@@ -30,7 +30,7 @@ class RancanganMutasi extends Model
         return "{$this->tanggal_mulai} - {$this->tanggal_berakhir}";
     }
 
-    public function scopeAvailable($query)
+    public function scopeAktif($query)
     {
         $today = now();
 
