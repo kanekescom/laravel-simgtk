@@ -93,33 +93,47 @@ class Pegawai extends Model
 
     public function scopeAktif($query)
     {
-        return $query->whereNull('tmt_pensiun')
+        return $query
+            ->whereNull('tmt_pensiun')
             ->whereNull('tanggal_sk_pensiun')
             ->whereNull('nomor_sk_pensiun');
     }
 
     public function scopePensiun($query)
     {
-        return $query->whereNotNull('tmt_pensiun')
+        return $query
+            ->whereNotNull('tmt_pensiun')
             ->whereNotNull('tanggal_sk_pensiun')
             ->whereNotNull('nomor_sk_pensiun');
     }
 
+    public function scopeAkanPensiun($query)
+    {
+        $tanggal_pensiun = now()->subYears(60)->subYears(1)->toDateString();
+
+        return $query
+            ->aktif()
+            ->whereDate('tanggal_lahir', '<=', $tanggal_pensiun);
+    }
+
     public function scopeCountByGender($query)
     {
-        return $query->select('gender_kode', \DB::raw('COUNT(*) as count'))
+        return $query
+            ->select('gender_kode', \DB::raw('COUNT(*) as count'))
             ->groupBy('gender_kode');
     }
 
     public function scopeCountByStatusKepegawaian($query)
     {
-        return $query->select('status_kepegawaian_kode', \DB::raw('COUNT(*) as count'))
+        return $query
+            ->select('status_kepegawaian_kode', \DB::raw('COUNT(*) as count'))
             ->groupBy('status_kepegawaian_kode');
     }
 
     public function scopeCountByWilayahSekolah($query)
     {
-        return $query->select('se', \DB::raw('COUNT(*) as count'))
+        return $query
+            ->select('se', \DB::raw('COUNT(*) as count'))
             ->groupBy('wilayahSekolah');
     }
 }
