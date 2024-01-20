@@ -23,15 +23,17 @@ class ListSekolah extends ListRecords
 
     public function getTabs(): array
     {
-        $tabs = ['all' => Tab::make('All')->badge($this->getModel()::count())];
+        $tabs = ['all' => Tab::make('All')->badge($this->getModel()::query()->count())];
 
         $jenjangSekolahs = JenjangSekolah::all();
 
         foreach ($jenjangSekolahs as $jenjangSekolah) {
             $tabs[$jenjangSekolah->id] = Tab::make($jenjangSekolah->id)
-                ->badge($this->getModel()::where('jenjang_sekolah_id', $jenjangSekolah->id)->count())
+                ->badge($this->getModel()::query()
+                    ->where('jenjang_sekolah_id', $jenjangSekolah->id)->count())
                 ->modifyQueryUsing(function ($query) use ($jenjangSekolah) {
-                    return $query->where('jenjang_sekolah_id', $jenjangSekolah->id);
+                    return $query
+                        ->where('jenjang_sekolah_id', $jenjangSekolah->id);
                 })
                 ->label($jenjangSekolah->nama);
         }
