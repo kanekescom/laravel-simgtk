@@ -8,6 +8,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
 use Kanekescom\Simgtk\Enums\JenjangPendidikanEnum;
@@ -167,6 +168,7 @@ class PegawaiResource extends Resource
                     ->label('Nomor SK Pensiun'),
                 Forms\Components\Select::make('sekolah_id')
                     ->relationship('sekolah', 'nama')
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_wilayah}")
                     ->exists(table: Sekolah::class, column: 'id')
                     ->searchable()
                     ->preload()

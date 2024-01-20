@@ -48,12 +48,14 @@ class MutasiResource extends Resource
                     ->label('Pegawai'),
                 Forms\Components\Select::make('asal_sekolah_id')
                     ->relationship('asalSekolah', 'nama')
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_wilayah}")
                     ->searchable()
                     ->preload()
                     ->required()
                     ->label('Asal Sekolah'),
                 Forms\Components\Select::make('tujuan_sekolah_id')
                     ->relationship('tujuanSekolah', 'nama')
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_wilayah}")
                     ->searchable()
                     ->preload()
                     ->required()
@@ -66,21 +68,15 @@ class MutasiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('rancangan.nama')
-                    ->description(fn (Mutasi $record): string => "{$record->tanggal_mulai} - $record->tanggal_berakhir")
+                    ->description(fn (Mutasi $record): string => "{$record->rancangan?->periode_tanggal}")
                     ->searchable()
                     ->sortable()
-                    ->hidden()
                     ->label('Rancangan Mutasi'),
                 Tables\Columns\TextColumn::make('pegawai.nama_gelar')
                     ->description(fn (Mutasi $record): string => $record->pegawai?->nama_id)
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
                     ->sortable(['pegawai.nama'])
                     ->label('Pegawai'),
-                Tables\Columns\TextColumn::make('asalSekolah.nama')
-                    ->searchable()
-                    ->sortable()
-                    ->hidden()
-                    ->label('Asal Sekolah'),
                 Tables\Columns\TextColumn::make('tujuanSekolah.nama')
                     ->description(fn (Mutasi $record): string => "Asal: {$record->asalSekolah?->nama}")
                     ->searchable()
@@ -88,6 +84,12 @@ class MutasiResource extends Resource
                     ->label('Sekolah Tujuan'),
             ])
             ->filters([
+                Tables\Filters\SelectFilter::make('rancangan.nama')
+                    ->relationship('rancangan', 'nama')
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_tanggal}")
+                    ->searchable()
+                    ->preload()
+                    ->label('Rancangan Mutasi'),
                 Tables\Filters\SelectFilter::make('pegawai_id')
                     ->relationship('pegawai', 'nama')
                     ->searchable()
