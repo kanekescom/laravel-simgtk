@@ -29,6 +29,7 @@
         "filament/filament": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
         "illuminate/contracts": "^10.0",
+        "konnco/filament-import": "^1.6",
         "psr/simple-cache": "2.0",
         "pxlrbt/filament-excel": "^2.3",
         "spatie/laravel-options": "^1.1",
