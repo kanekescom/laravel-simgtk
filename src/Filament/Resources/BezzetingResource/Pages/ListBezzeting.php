@@ -52,13 +52,7 @@ class ListBezzeting extends ListRecords
 
     public function getTabs(): array
     {
-        $tabs = ['all' => Tab::make('All')
-                ->badge($this->getModel()::query()->defaultOrder()->count())
-                ->modifyQueryUsing(function ($query) {
-                    return $query
-                        ->defaultOrder();
-                })];
-
+        $tabs = [];
         $jenjangSekolahs = JenjangSekolah::all();
 
         foreach ($jenjangSekolahs as $jenjangSekolah) {
