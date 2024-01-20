@@ -34,7 +34,8 @@ class RancanganMutasi extends Model
     {
         $today = now();
 
-        return $query->where('tanggal_mulai', '<=', $today)
+        return $query
+            ->where('tanggal_mulai', '<=', $today)
             ->where('tanggal_berakhir', '>=', $today)
             ->where('is_selesai', false);
     }

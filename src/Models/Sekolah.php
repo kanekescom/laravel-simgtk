@@ -44,14 +44,16 @@ class Sekolah extends Model
 
     public function scopeCountByJenjangSekolah($query)
     {
-        return $query->select('jenjang_sekolah_id', \DB::raw('COUNT(*) as count'))
+        return $query
+            ->select('jenjang_sekolah_id', \DB::raw('COUNT(*) as count'))
             ->with('jenjangSekolah')
             ->groupBy('jenjang_sekolah_id');
     }
 
     public function scopeCountByWilayah($query)
     {
-        return $query->select('wilayah_kode', \DB::raw('COUNT(*) as count'))
+        return $query
+            ->select('wilayah_kode', \DB::raw('COUNT(*) as count'))
             ->with('wilayah')
             ->groupBy('wilayah_kode');
     }
