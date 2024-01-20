@@ -34,7 +34,7 @@ class ListPegawai extends ListRecords
                     ->aktif()
                     ->where('status_kepegawaian_kode', $statusKepegawaian['value'])->count())
                 ->modifyQueryUsing(function ($query) use ($statusKepegawaian) {
-                    return $query->query()
+                    return $query
                         ->where('status_kepegawaian_kode', $statusKepegawaian['value']);
                 })
                 ->label($statusKepegawaian['label']);
