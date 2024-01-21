@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 
 class Sekolah extends Model
 {
@@ -26,8 +27,6 @@ class Sekolah extends Model
     {
         return "{$this->nama}, {$this->wilayah?->nama}";
     }
-
-    //
 
     public function getSdKelasJumlahAttribute()
     {
@@ -57,6 +56,16 @@ class Sekolah extends Model
     public function getSdAgamaSelisihAttribute()
     {
         return $this->sd_agama_abk+$this->sd_agama_jumlah;
+    }
+
+    public function getSdAgamaNoniJumlahAttribute()
+    {
+        return $this->sd_agama_noni_pns+$this->sd_agama_noni_pppk+$this->sd_agama_noni_gtt;
+    }
+
+    public function getSdAgamaNoniSelisihAttribute()
+    {
+        return $this->sd_agama_noni_abk+$this->sd_agama_noni_jumlah;
     }
 
     //
@@ -198,7 +207,8 @@ class Sekolah extends Model
         return
             $this->sd_kelas_abk
             +$this->sd_penjaskes_abk
-            +$this->sd_agama_abk;
+            +$this->sd_agama_abk
+            +$this->sd_agama_noni_abk;
     }
 
     public function getSdJumlahFormasiAttribute()
@@ -206,7 +216,8 @@ class Sekolah extends Model
         return
             $this->sd_kelas_formasi
             +$this->sd_penjaskes_formasi
-            +$this->sd_agama_formasi;
+            +$this->sd_agama_formasi
+            +$this->sd_agama_noni_formasi;
     }
 
     public function getSdJumlahSelisihAttribute()
@@ -271,6 +282,21 @@ class Sekolah extends Model
     public function pegawai(): HasMany
     {
         return $this->hasMany(Pegawai::class);
+    }
+
+    public function pegawaiStatusKepegawaianPns(): HasMany
+    {
+        return $this->hasMany(Pegawai::class)->where('status_kepegawaian_kode', StatusKepegawaianEnum::PNS);
+    }
+
+    public function pegawaiStatusKepegawaianPppk(): HasMany
+    {
+        return $this->hasMany(Pegawai::class)->where('status_kepegawaian_kode', StatusKepegawaianEnum::PPPK);
+    }
+
+    public function pegawaiStatusKepegawaianGtt(): HasMany
+    {
+        return $this->hasMany(Pegawai::class)->where('status_kepegawaian_kode', StatusKepegawaianEnum::NONASN);
     }
 
     public function wilayah(): BelongsTo

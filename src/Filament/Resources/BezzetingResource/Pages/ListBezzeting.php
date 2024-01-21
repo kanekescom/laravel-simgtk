@@ -56,7 +56,7 @@ class ListBezzeting extends ListRecords
         $jenjangSekolahs = JenjangSekolah::all();
 
         foreach ($jenjangSekolahs as $jenjangSekolah) {
-            $tabs[$jenjangSekolah->id] = Tab::make($jenjangSekolah->id)
+            $tabs[$jenjangSekolah->kode] = Tab::make($jenjangSekolah->id)
                 ->badge($this->getModel()::query()
                     ->where('jenjang_sekolah_id', $jenjangSekolah->id)->count())
                 ->modifyQueryUsing(function ($query) use ($jenjangSekolah) {

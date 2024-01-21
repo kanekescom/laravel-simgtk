@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create(config('simgtk.table_prefix').'jenjang_sekolah', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->string('kode')->index();
             $table->string('nama');
             $table->timestamps();
             $table->softDeletes();

@@ -38,6 +38,11 @@ return new class extends Migration
             $table->unsignedSmallInteger('sd_agama_pppk')->nullable();
             $table->unsignedSmallInteger('sd_agama_gtt')->nullable();
 
+            $table->unsignedSmallInteger('sd_agama_noni_abk')->nullable();
+            $table->unsignedSmallInteger('sd_agama_noni_pns')->nullable();
+            $table->unsignedSmallInteger('sd_agama_noni_pppk')->nullable();
+            $table->unsignedSmallInteger('sd_agama_noni_gtt')->nullable();
+
             $table->unsignedSmallInteger('smp_pai_abk')->nullable();
             $table->unsignedSmallInteger('smp_pai_pns')->nullable();
             $table->unsignedSmallInteger('smp_pai_pppk')->nullable();

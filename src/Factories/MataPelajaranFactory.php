@@ -3,6 +3,7 @@
 namespace Kanekescom\Simgtk\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\MataPelajaran;
 
 /**
@@ -19,7 +20,11 @@ class MataPelajaranFactory extends Factory
      */
     public function definition(): array
     {
+        $jenjang_sekolah = JenjangSekolah::inRandomOrder()->first() ?? JenjangSekolahFactory::new()->create();
+
         return [
+            'jenjang_sekolah_id' => $jenjang_sekolah->id,
+            'kode' => fake()->unique()->numerify('##.##.##'),
             'nama' => fake()->unique()->sentence(3),
         ];
     }
