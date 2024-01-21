@@ -17,7 +17,7 @@ class ImporResource extends Resource
 
     protected static ?string $model = Impor::class;
 
-    protected static bool $shouldRegisterNavigation = true;
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
