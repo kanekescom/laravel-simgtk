@@ -31,7 +31,7 @@ class SekolahFactory extends Factory
             'nama' => $jenjang_sekolah->nama.' '.fake()->unique()->company(),
             'npsn' => fake()->unique()->numerify('########'),
             'jenjang_sekolah_id' => $jenjang_sekolah->id,
-            'wilayah_kode' => $wilayah->kode,
+            'wilayah_id' => $wilayah->id,
             'jumlah_kelas' => $jumlah_kelas,
             'jumlah_rombel' => $jumlah_rombel,
             'jumlah_siswa' => $jumlah_siswa,

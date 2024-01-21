@@ -20,12 +20,12 @@ class JenjangSekolahInRealSeeder extends Seeder
     public function data(): \Illuminate\Support\Collection
     {
         return collect([
-            ['nama' => 'PAUD'],
-            ['nama' => 'TK'],
+            // ['nama' => 'PAUD'],
+            // ['nama' => 'TK'],
             ['nama' => 'SD'],
             ['nama' => 'SMP'],
-            ['nama' => 'SMA'],
-            ['nama' => 'SMK'],
+            // ['nama' => 'SMA'],
+            // ['nama' => 'SMK'],
         ]);
     }
 }

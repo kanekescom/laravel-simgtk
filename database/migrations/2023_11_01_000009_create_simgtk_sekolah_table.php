@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->string('npsn')->index();
             $table->foreignUlid('jenjang_sekolah_id')->nullable()->index();
-            $table->string('wilayah_kode')->nullable()->index();
+            $table->foreignUlid('wilayah_id')->nullable()->index();
             $table->unsignedTinyInteger('jumlah_kelas')->nullable();
             $table->unsignedTinyInteger('jumlah_rombel')->nullable();
             $table->unsignedSmallInteger('jumlah_siswa')->nullable();

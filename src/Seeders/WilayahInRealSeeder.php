@@ -42,7 +42,7 @@ class WilayahInRealSeeder extends Seeder
             ['kode' => '36.02.20', 'nama' => 'Cilograng'],
             ['kode' => '36.02.21', 'nama' => 'Wanasalam'],
             ['kode' => '36.02.22', 'nama' => 'Sobang'],
-            ['kode' => '36.02.23', 'nama' => 'Curug bitung'],
+            ['kode' => '36.02.23', 'nama' => 'Curugbitung'],
             ['kode' => '36.02.24', 'nama' => 'Kalanganyar'],
             ['kode' => '36.02.25', 'nama' => 'Lebakgedong'],
             ['kode' => '36.02.26', 'nama' => 'Cihara'],

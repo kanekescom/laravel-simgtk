@@ -275,7 +275,7 @@ class Sekolah extends Model
 
     public function wilayah(): BelongsTo
     {
-        return $this->belongsTo(Wilayah::class, 'wilayah_kode', 'kode');
+        return $this->belongsTo(Wilayah::class);
     }
 
     public function scopeCountByJenjangSekolah($query)
@@ -289,9 +289,9 @@ class Sekolah extends Model
     public function scopeCountByWilayah($query)
     {
         return $query
-            ->select('wilayah_kode', \DB::raw('COUNT(*) as count'))
+            ->select('wilayah_id', \DB::raw('COUNT(*) as count'))
             ->with('wilayah')
-            ->groupBy('wilayah_kode');
+            ->groupBy('wilayah_id');
     }
 
     public function scopeDefaultOrder($query)

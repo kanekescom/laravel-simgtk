@@ -49,7 +49,7 @@ class SekolahResource extends Resource
                     ->preload()
                     ->required()
                     ->label('Jenjang Sekolah'),
-                Forms\Components\Select::make('wilayah_kode')
+                Forms\Components\Select::make('wilayah_id')
                     ->relationship('wilayah', 'nama')
                     ->exists()
                     ->searchable()
@@ -112,7 +112,7 @@ class SekolahResource extends Resource
                     ->searchable()
                     ->preload()
                     ->label('Jenjang Sekolah'),
-                Tables\Filters\SelectFilter::make('wilayah_kode')
+                Tables\Filters\SelectFilter::make('wilayah_id')
                     ->relationship('wilayah', 'nama')
                     ->searchable()
                     ->preload()
