@@ -112,6 +112,10 @@ class BezzetingResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Siswa'),
+                Tables\Columns\TextColumn::make('pegawai_count')
+                    ->sortable()
+                    ->counts('pegawai')
+                    ->label('Guru'),
 
                 Tables\Columns\TextInputColumn::make('sd_kelas_abk')
                     ->visible(function (){
@@ -642,11 +646,6 @@ class BezzetingResource extends Resource
                     ->label('Jumlah Selisih SMP'),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('jenjang_sekolah')
-                    ->relationship('jenjangSekolah', 'nama')
-                    ->searchable()
-                    ->preload()
-                    ->label('Jenjang Sekolah'),
                 Tables\Filters\SelectFilter::make('wilayah_kode')
                     ->relationship('wilayah', 'nama')
                     ->searchable()
