@@ -37,6 +37,7 @@ class MataPelajaranInRealSeeder extends Seeder
             ['jenjang_sekolah_id'=>JenjangSekolah::where('kode', 'smp')->first()->id, 'kode' => 'smp_prakarya', 'nama' => 'Prakarya SMP'],
             ['jenjang_sekolah_id'=>JenjangSekolah::where('kode', 'smp')->first()->id, 'kode' => 'smp_seni_budaya', 'nama' => 'Seni Budaya SMP'],
             ['jenjang_sekolah_id'=>JenjangSekolah::where('kode', 'smp')->first()->id, 'kode' => 'smp_b_sunda', 'nama' => 'B. Sunda SMP'],
+            ['jenjang_sekolah_id'=>JenjangSekolah::where('kode', 'smp')->first()->id, 'kode' => 'smp_tik', 'nama' => 'TIK'],
         ]);
     }
 }

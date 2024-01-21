@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 
@@ -286,17 +287,114 @@ class Sekolah extends Model
 
     public function pegawaiStatusKepegawaianPns(): HasMany
     {
-        return $this->hasMany(Pegawai::class)->where('status_kepegawaian_kode', StatusKepegawaianEnum::PNS);
+        return $this->pegawai()->where('status_kepegawaian_kode', StatusKepegawaianEnum::PNS);
     }
 
     public function pegawaiStatusKepegawaianPppk(): HasMany
     {
-        return $this->hasMany(Pegawai::class)->where('status_kepegawaian_kode', StatusKepegawaianEnum::PPPK);
+        return $this->pegawai()->where('status_kepegawaian_kode', StatusKepegawaianEnum::PPPK);
     }
 
     public function pegawaiStatusKepegawaianGtt(): HasMany
     {
-        return $this->hasMany(Pegawai::class)->where('status_kepegawaian_kode', StatusKepegawaianEnum::NONASN);
+        return $this->pegawai()->where('status_kepegawaian_kode', StatusKepegawaianEnum::NONASN);
+    }
+
+    public function mataPelajaran(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            MataPelajaran::class,
+            Pegawai::class,
+            'sekolah_id',
+            'id',
+            'id',
+            'mata_pelajaran_id',
+        );
+    }
+
+    public function mataPelajaranSdKelas(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'sd_kelas');
+    }
+
+    public function mataPelajaranSdPenjaskes(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'sd_penjaskes');
+    }
+
+    public function mataPelajaranSdAgama(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'sd_agama');
+    }
+
+    public function mataPelajaranSdAgamaNoni(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'sd_agama_noni');
+    }
+
+    public function mataPelajaranSmpPai(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_pai');
+    }
+
+    public function mataPelajaranSmpPjok(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_pjok');
+    }
+
+    public function mataPelajaranSmpBIndonesia(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_b_indonesia');
+    }
+
+    public function mataPelajaranSmpBInggris(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_b_inggris');
+    }
+
+    public function mataPelajaranSmpBk(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_bk');
+    }
+
+    public function mataPelajaranSmpIpa(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_ipa');
+    }
+
+    public function mataPelajaranSmpIps(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_ips');
+    }
+
+    public function mataPelajaranSmpMatematika(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_matematika');
+    }
+
+    public function mataPelajaranSmpPpkn(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_ppkn');
+    }
+
+    public function mataPelajaranSmpPrakarya(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_prakarya');
+    }
+
+    public function mataPelajaranSmpSeniBudaya(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_seni_budaya');
+    }
+
+    public function mataPelajaranSmpBSunda(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_b_sunda');
+    }
+
+    public function mataPelajaranSmpTik(): HasManyThrough
+    {
+        return $this->mataPelajaran()->where('kode', 'smp_tik');
     }
 
     public function wilayah(): BelongsTo

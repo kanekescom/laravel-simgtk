@@ -116,575 +116,376 @@ class BezzetingResource extends Resource
                     ->label('Siswa'),
 
                 Tables\Columns\TextInputColumn::make('sd_kelas_abk')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Kelas ABK'),
                 Tables\Columns\TextInputColumn::make('sd_kelas_pns')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Kelas PNS'),
                 Tables\Columns\TextInputColumn::make('sd_kelas_pppk')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Kelas PPPK'),
                 Tables\Columns\TextInputColumn::make('sd_kelas_gtt')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Kelas GTT'),
                 Tables\Columns\TextColumn::make('sd_kelas_jumlah')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSdKelas()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('sd_kelas_selisih')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('sd_penjaskes_abk')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Penjaskes ABK'),
                 Tables\Columns\TextInputColumn::make('sd_penjaskes_pns')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Penjaskes PNS'),
                 Tables\Columns\TextInputColumn::make('sd_penjaskes_pppk')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Penjaskes PPPK'),
                 Tables\Columns\TextInputColumn::make('sd_penjaskes_gtt')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Penjaskes GTT'),
                 Tables\Columns\TextColumn::make('sd_penjaskes_jumlah')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSdPenjaskes()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('sd_penjaskes_selisih')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('sd_agama_abk')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Agama ABK'),
                 Tables\Columns\TextInputColumn::make('sd_agama_pns')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Agama PNS'),
                 Tables\Columns\TextInputColumn::make('sd_agama_pppk')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Agama PPPK'),
                 Tables\Columns\TextInputColumn::make('sd_agama_gtt')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Agama GTT'),
                 Tables\Columns\TextColumn::make('sd_agama_jumlah')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSdAgama()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('sd_agama_selisih')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('sd_agama_noni_abk')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Agama ABK'),
                 Tables\Columns\TextInputColumn::make('sd_agama_noni_pns')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Agama PNS'),
                 Tables\Columns\TextInputColumn::make('sd_agama_noni_pppk')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Agama PPPK'),
                 Tables\Columns\TextInputColumn::make('sd_agama_noni_gtt')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Agama GTT'),
                 Tables\Columns\TextColumn::make('sd_agama_noni_jumlah')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSdAgamaNoni()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('sd_agama_noni_selisih')
-                    ->visible(function (){
-                         return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_pai_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PAI ABK'),
                 Tables\Columns\TextInputColumn::make('smp_pai_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PAI PNS'),
                 Tables\Columns\TextInputColumn::make('smp_pai_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PAI PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_pai_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PAI GTT'),
                 Tables\Columns\TextColumn::make('smp_pai_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpPai()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_pai_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_pjok_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PJOK ABK'),
                 Tables\Columns\TextInputColumn::make('smp_pjok_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PJOK PNS'),
                 Tables\Columns\TextInputColumn::make('smp_pjok_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PJOK PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_pjok_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PJOK GTT'),
                 Tables\Columns\TextColumn::make('smp_pjok_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpPjok()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_pjok_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_b_indonesia_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Indonesia ABK'),
                 Tables\Columns\TextInputColumn::make('smp_b_indonesia_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Indonesia PNS'),
                 Tables\Columns\TextInputColumn::make('smp_b_indonesia_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Indonesia PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_b_indonesia_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Indonesia GTT'),
                 Tables\Columns\TextColumn::make('smp_b_indonesia_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpBIndonesia()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_b_indonesia_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_b_inggris_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Inggris ABK'),
                 Tables\Columns\TextInputColumn::make('smp_b_inggris_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Inggris PNS'),
                 Tables\Columns\TextInputColumn::make('smp_b_inggris_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Inggris PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_b_inggris_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Inggris GTT'),
                 Tables\Columns\TextColumn::make('smp_b_inggris_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpBInggris()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_b_inggris_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_bk_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('BK ABK'),
                 Tables\Columns\TextInputColumn::make('smp_bk_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('BK PNS'),
                 Tables\Columns\TextInputColumn::make('smp_bk_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('BK PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_bk_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('BK GTT'),
                 Tables\Columns\TextColumn::make('smp_bk_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpBk()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_bk_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_ipa_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPA ABK'),
                 Tables\Columns\TextInputColumn::make('smp_ipa_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPA PNS'),
                 Tables\Columns\TextInputColumn::make('smp_ipa_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPA PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_ipa_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPA GTT'),
                 Tables\Columns\TextColumn::make('smp_ipa_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpIpa()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_ipa_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_ips_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPS ABK'),
                 Tables\Columns\TextInputColumn::make('smp_ips_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPS PNS'),
                 Tables\Columns\TextInputColumn::make('smp_ips_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPS PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_ips_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPS GTT'),
                 Tables\Columns\TextColumn::make('smp_ips_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpIps()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_ips_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_matematika_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Matematika ABK'),
                 Tables\Columns\TextInputColumn::make('smp_matematika_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Matematika PNS'),
                 Tables\Columns\TextInputColumn::make('smp_matematika_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Matematika PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_matematika_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Matematika GTT'),
                 Tables\Columns\TextColumn::make('smp_matematika_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpMatematika()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_matematika_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_pppkn_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PPPKN ABK'),
                 Tables\Columns\TextInputColumn::make('smp_pppkn_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PPPKN PNS'),
                 Tables\Columns\TextInputColumn::make('smp_pppkn_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PPPKN PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_pppkn_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PPPKN GTT'),
                 Tables\Columns\TextColumn::make('smp_pppkn_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpPpkn()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_pppkn_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_prakarya_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Prakarya ABK'),
                 Tables\Columns\TextInputColumn::make('smp_prakarya_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Prakarya PNS'),
                 Tables\Columns\TextInputColumn::make('smp_prakarya_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Prakarya PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_prakarya_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Prakarya GTT'),
                 Tables\Columns\TextColumn::make('smp_prakarya_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpPrakarya()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_prakarya_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_seni_budaya_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Seni Budaya ABK'),
                 Tables\Columns\TextInputColumn::make('smp_seni_budaya_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Seni Budaya PNS'),
                 Tables\Columns\TextInputColumn::make('smp_seni_budaya_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Seni Budaya PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_seni_budaya_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Seni Budaya GTT'),
                 Tables\Columns\TextColumn::make('smp_seni_budaya_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpSeniBudaya()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_seni_budaya_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_b_sunda_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Sunda ABK'),
                 Tables\Columns\TextInputColumn::make('smp_b_sunda_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Sunda PNS'),
                 Tables\Columns\TextInputColumn::make('smp_b_sunda_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Sunda PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_b_sunda_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Sunda GTT'),
                 Tables\Columns\TextColumn::make('smp_b_sunda_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpBSunda()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_b_sunda_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextInputColumn::make('smp_tik_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('TIK ABK'),
                 Tables\Columns\TextInputColumn::make('smp_tik_pns')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('TIK PNS'),
                 Tables\Columns\TextInputColumn::make('smp_tik_pppk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('TIK PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_tik_gtt')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('TIK GTT'),
                 Tables\Columns\TextColumn::make('smp_tik_jumlah')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpTik()->count())
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
                 Tables\Columns\TextColumn::make('smp_tik_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 Tables\Columns\TextColumn::make('pegawai_status_kepegawaian_pns_count')
                     ->counts('pegawaiStatusKepegawaianPns')
-                    ->label('Guru PNS'),
+                    ->label('Jumlah Guru PNS'),
                 Tables\Columns\TextColumn::make('pegawai_status_kepegawaian_pppk_count')
                     ->counts('pegawaiStatusKepegawaianPppk')
-                    ->label('Guru PPPK'),
+                    ->label('Jumlah Guru PPPK'),
                 Tables\Columns\TextColumn::make('pegawai_status_kepegawaian_gtt_count')
                     ->counts('pegawaiStatusKepegawaianGtt')
-                    ->label('Guru GTT'),
+                    ->label('Jumlah Guru GTT'),
                 Tables\Columns\TextColumn::make('pegawai_count')
                     ->counts('pegawai')
                     ->label('Jumlah Guru'),
 
                 Tables\Columns\TextColumn::make('sd_jumlah_abk')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah ABK SD'),
                 Tables\Columns\TextColumn::make('sd_jumlah_formasi')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah Formasi SD'),
                 Tables\Columns\TextColumn::make('sd_jumlah_selisih')
-                    ->visible(function (){
-                        return in_array(request()->query('activeTab'), ['','sd']);
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah Selisih SD'),
 
                 Tables\Columns\TextColumn::make('smp_jumlah_abk')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah ABK SMP'),
                 Tables\Columns\TextColumn::make('smp_jumlah_formasi')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah Formasi SMP'),
                 Tables\Columns\TextColumn::make('smp_jumlah_selisih')
-                    ->visible(function (){
-                        return request()->query('activeTab') == 'smp';
-                    })
+                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah Selisih SMP'),
             ])
             ->filters([
