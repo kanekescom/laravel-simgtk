@@ -92,6 +92,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('sd_kelas_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
@@ -115,6 +119,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('sd_penjaskes_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
@@ -138,6 +146,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('sd_agama_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
@@ -161,6 +173,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('sd_agama_noni_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
@@ -184,6 +200,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_pai_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -207,6 +227,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_pjok_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -230,6 +254,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_b_indonesia_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -253,6 +281,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_b_inggris_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -276,6 +308,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_bk_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -299,6 +335,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_ipa_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -322,6 +362,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_ips_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -345,6 +389,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_matematika_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -368,6 +416,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_ppkn_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -391,6 +443,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_prakarya_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -414,6 +470,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_seni_budaya_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -437,6 +497,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_b_sunda_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -460,6 +524,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Selisih'),
                 Tables\Columns\TextColumn::make('smp_tik_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -488,6 +556,10 @@ class BezzetingResource extends Resource
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                 //     ->label('Jumlah Selisih'),
                 Tables\Columns\TextColumn::make('smp_jumlah_selisih_existing')
+                    ->badge()
+                    ->color(function ($state) {
+                        return $state < 0 ? 'success' : ($state > 0 ? 'danger' : 'gray');
+                    })
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah Selisih'),
             ])
