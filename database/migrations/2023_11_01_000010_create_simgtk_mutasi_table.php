@@ -16,7 +16,9 @@ return new class extends Migration
             $table->foreignUlid('rancangan_mutasi_id')->index();
             $table->foreignUlid('pegawai_id')->index();
             $table->foreignUlid('asal_sekolah_id')->index();
+            $table->foreignUlid('asal_mata_pelajaran_id')->index();
             $table->foreignUlid('tujuan_sekolah_id')->index();
+            $table->foreignUlid('tujuan_mata_pelajaran_id')->index();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -27,6 +27,7 @@ class Mutasi extends Model
 
         static::creating(function ($model) {
             $model->asal_sekolah_id = $model->pegawai?->sekolah_id;
+            $model->asal_mata_pelajaran_id = $model->pegawai?->mata_pelajaran_id;
         });
     }
 
@@ -45,8 +46,18 @@ class Mutasi extends Model
         return $this->belongsTo(Sekolah::class, 'asal_sekolah_id');
     }
 
+    public function asalMataPelajaran(): BelongsTo
+    {
+        return $this->belongsTo(MataPelajaran::class, 'asal_mata_pelajaran_id');
+    }
+
     public function tujuanSekolah(): BelongsTo
     {
         return $this->belongsTo(Sekolah::class, 'tujuan_sekolah_id');
+    }
+
+    public function tujuanMataPelajaran(): BelongsTo
+    {
+        return $this->belongsTo(MataPelajaran::class, 'tujuan_mata_pelajaran_id');
     }
 }

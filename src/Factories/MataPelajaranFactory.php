@@ -20,10 +20,8 @@ class MataPelajaranFactory extends Factory
      */
     public function definition(): array
     {
-        $jenjang_sekolah = JenjangSekolah::inRandomOrder()->first() ?? JenjangSekolahFactory::new()->create();
-
         return [
-            'jenjang_sekolah_id' => $jenjang_sekolah->id,
+            'jenjang_sekolah_id' => JenjangSekolah::inRandomOrder()->first() ?? JenjangSekolahFactory::new()->create()->id,
             'kode' => fake()->unique()->numerify('##.##.##'),
             'nama' => fake()->unique()->sentence(3),
         ];

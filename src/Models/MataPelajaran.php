@@ -21,6 +21,11 @@ class MataPelajaran extends Model
         return config('simgtk.table_prefix').'mata_pelajaran';
     }
 
+    public function getNamaJenjangSekolahAttribute()
+    {
+        return "{$this->nama}, {$this->jenjangSekolah?->nama}";
+    }
+
     public function pegawai(): HasMany
     {
         return $this->hasMany(Pegawai::class);

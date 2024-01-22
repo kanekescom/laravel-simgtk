@@ -57,6 +57,15 @@ class MutasiResource extends Resource
                     ->hiddenOn('create')
                     ->disabledOn('edit')
                     ->label('Asal Sekolah'),
+                Forms\Components\Select::make('asal_mata_pelajaran_id')
+                    ->relationship('asalMataPelajaran', 'nama')
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama}")
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->hiddenOn('create')
+                    ->disabledOn('edit')
+                    ->label('Asal Mata Pelajaran'),
                 Forms\Components\Select::make('tujuan_sekolah_id')
                     ->relationship('tujuanSekolah', 'nama')
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_wilayah}")
@@ -64,6 +73,13 @@ class MutasiResource extends Resource
                     ->preload()
                     ->required()
                     ->label('Tujuan Sekolah'),
+                Forms\Components\Select::make('tujuan_mata_pelajaran_id')
+                    ->relationship('tujuanMataPelajaran', 'nama')
+                    ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama}")
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->label('Tujuan Mata Pelajaran'),
             ])->columns(1);
     }
 
@@ -81,8 +97,13 @@ class MutasiResource extends Resource
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
                     ->sortable(['pegawai.nama'])
                     ->label('Pegawai'),
+                Tables\Columns\TextColumn::make('asalSekolah.nama')
+                    ->description(fn (Mutasi $record): string => "{$record->asalMataPelajaran?->nama}")
+                    ->searchable()
+                    ->sortable()
+                    ->label('Sekolah Asal'),
                 Tables\Columns\TextColumn::make('tujuanSekolah.nama')
-                    ->description(fn (Mutasi $record): string => "Asal: {$record->asalSekolah?->nama}")
+                    ->description(fn (Mutasi $record): string => "{$record->tujuanMataPelajaran?->nama}")
                     ->searchable()
                     ->sortable()
                     ->label('Sekolah Tujuan'),
