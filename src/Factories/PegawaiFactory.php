@@ -78,15 +78,15 @@ class PegawaiFactory extends Factory
             'tanggal_sk_pensiun' => $is_pensiun ? $tanggal_pensiun : null,
             'nomor_sk_pensiun' => $is_pensiun ? fake()->numerify("802/Kep.###-BKPSDM/{$tanggal_pensiun->year}") : null,
 
-            'sekolah_id' => ($sekolah =Sekolah::inRandomOrder()->first())->id ?? ($sekolah =SekolahFactory::new())->create(),
+            'sekolah_id' => ($sekolah = Sekolah::inRandomOrder()->first())->id ?? ($sekolah = SekolahFactory::new())->create(),
             'status_tugas_kode' => fake()->randomElement(StatusTugasEnum::class),
             'jenis_ptk_id' => JenisPtk::inRandomOrder()->first()->id ?? JenisPtkFactory::new()->create(),
             'bidang_studi_pendidikan_id' => BidangStudiPendidikan::inRandomOrder()->first()->id ?? BidangStudiPendidikan::new()->create(),
             'bidang_studi_sertifikasi_id' => BidangStudiSertifikasi::inRandomOrder()->first()->id ?? BidangStudiSertifikasi::new()->create(),
-            'mata_pelajaran_id' => MataPelajaran::where('jenjang_sekolah_id',$sekolah->jenjang_sekolah_id)->inRandomOrder()->first()->id ?? MataPelajaran::new()->create(['jenjang_sekolah_id',$sekolah->jenjang_sekolah_id]),
+            'mata_pelajaran_id' => MataPelajaran::where('jenjang_sekolah_id', $sekolah->jenjang_sekolah_id)->inRandomOrder()->first()->id ?? MataPelajaran::new()->create(['jenjang_sekolah_id', $sekolah->jenjang_sekolah_id]),
             'jam_mengajar_perminggu' => fake()->randomFloat(1, 30, 40),
             'is_kepsek' => $is_kepsek = ($is_pns ? fake()->boolean(25) : false),
-            'is_plt_kepsek' => $is_pns && !$is_kepsek ? fake()->boolean(25) : false,
+            'is_plt_kepsek' => $is_pns && ! $is_kepsek ? fake()->boolean(25) : false,
         ];
     }
 }

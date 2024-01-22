@@ -7,11 +7,10 @@ use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\BezzetingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
-use Konnco\FilamentImport\Actions\ImportField;
 use Konnco\FilamentImport\Actions\ImportAction;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
-use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 
 class ListBezzeting extends ListRecords
 {
@@ -27,14 +26,14 @@ class ListBezzeting extends ListRecords
                 ->fields([
                     //
                 ])
-                ->handleRecordCreation(function(array $data) {
+                ->handleRecordCreation(function (array $data) {
                     //
                 }),
             ExportAction::make()
                 ->exports([
                     ExcelExport::make()
                         ->fromTable()
-                        ->withFilename(fn ($resource) => $resource::getSlug() . '-' . now()->format('Y-m-d'))
+                        ->withFilename(fn ($resource) => $resource::getSlug().'-'.now()->format('Y-m-d'))
                         ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
                         ->withColumns([
                             Column::make('wilayah.nama')->heading('Wilayah'),

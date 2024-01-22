@@ -8,8 +8,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Filament\Resources\BezzetingResource\Pages;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Sekolah;

@@ -3,17 +3,14 @@
 namespace Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Pages;
 
 use Filament\Actions;
-use Filament\Forms;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource;
-use Kanekescom\Simgtk\Filament\Resources\SekolahResource;
-use Konnco\FilamentImport\Actions\ImportField;
 use Konnco\FilamentImport\Actions\ImportAction;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
-use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 use Spatie\LaravelOptions\Options;
 
 class ListPegawai extends ListRecords
@@ -30,14 +27,14 @@ class ListPegawai extends ListRecords
                 ->fields([
                     //
                 ])
-                ->handleRecordCreation(function(array $data) {
+                ->handleRecordCreation(function (array $data) {
                     //
                 }),
             ExportAction::make()
                 ->exports([
                     ExcelExport::make()
                         ->fromTable()
-                        ->withFilename(fn ($resource) => $resource::getSlug() . '-' . now()->format('Y-m-d'))
+                        ->withFilename(fn ($resource) => $resource::getSlug().'-'.now()->format('Y-m-d'))
                         ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
                         ->withColumns([
                             Column::make('nama_gelar')->heading('Nama'),
