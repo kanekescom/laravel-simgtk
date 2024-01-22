@@ -32,61 +32,7 @@ class BezzetingResource extends Resource
     {
         return $form
             ->schema([
-                Tabs::make('Tabs')
-                    ->tabs([
-                        Tabs\Tab::make('Profil')
-                            ->schema([
-                                Forms\Components\TextInput::make('nama')
-                                    ->maxLength(255)
-                                    ->required()
-                                    ->disabledOn('edit')
-                                    ->label('Nama'),
-                                Forms\Components\TextInput::make('npsn')
-                                    ->numeric()
-                                    ->length(8)
-                                    ->unique(ignoreRecord: true)
-                                    ->required()
-                                    ->disabledOn('edit')
-                                    ->label('NPSN'),
-                                Forms\Components\Select::make('jenjang_sekolah_id')
-                                    ->relationship('jenjangSekolah', 'nama')
-                                    ->exists(table: JenjangSekolah::class, column: 'id')
-                                    ->searchable()
-                                    ->preload()
-                                    ->required()
-                                    ->disabledOn('edit')
-                                    ->label('Jenjang Sekolah'),
-                                Forms\Components\Select::make('wilayah_id')
-                                    ->relationship('wilayah', 'nama')
-                                    ->exists()
-                                    ->searchable()
-                                    ->preload()
-                                    ->required()
-                                    ->disabledOn('edit')
-                                    ->label('Wilayah'),
-                            ])->columns(2),
-                        Tabs\Tab::make('Data')
-                            ->schema([
-                                Forms\Components\TextInput::make('jumlah_kelas')
-                                    ->integer()
-                                    ->minValue(0)
-                                    ->maxValue(10000)
-                                    ->required()
-                                    ->label('Jumlah Kelas'),
-                                Forms\Components\TextInput::make('jumlah_rombel')
-                                    ->integer()
-                                    ->minValue(0)
-                                    ->maxValue(10000)
-                                    ->required()
-                                    ->label('Jumlah Rombel'),
-                                Forms\Components\TextInput::make('jumlah_siswa')
-                                    ->integer()
-                                    ->minValue(0)
-                                    ->maxValue(10000)
-                                    ->required()
-                                    ->label('Jumlah Siswa'),
-                            ])->columns(3),
-                    ]),
+                //
             ])
             ->columns(1);
     }
@@ -517,7 +463,6 @@ class BezzetingResource extends Resource
     {
         return [
             'index' => Pages\ListBezzeting::route('/'),
-            'edit' => Pages\EditBezzeting::route('/{record}/edit'),
         ];
     }
 }
