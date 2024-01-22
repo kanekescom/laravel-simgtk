@@ -56,8 +56,7 @@ class ListPegawai extends ListRecords
                             Column::make('tanggal_sk_pns')->heading('Tanggal SK PNS'),
                             Column::make('is_kepsek')->heading('Kepsek'),
                         ])
-                        ->ignoreFormatting()
-                        ->label('aa'),
+                        ->ignoreFormatting(),
                 ]),
             Actions\CreateAction::make()->label('Create'),
         ];
