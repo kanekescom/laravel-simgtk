@@ -50,15 +50,15 @@ class JenisPtkResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                // Tables\Actions\CreateAction::make(),
             ]);
     }
 
@@ -73,8 +73,8 @@ class JenisPtkResource extends Resource
     {
         return [
             'index' => Pages\ListJenisPtk::route('/'),
-            'create' => Pages\CreateJenisPtk::route('/create'),
-            'edit' => Pages\EditJenisPtk::route('/{record}/edit'),
+            // 'create' => Pages\CreateJenisPtk::route('/create'),
+            // 'edit' => Pages\EditJenisPtk::route('/{record}/edit'),
         ];
     }
 }

@@ -43,15 +43,15 @@ class ImporResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                // Tables\Actions\CreateAction::make(),
             ]);
     }
 
@@ -66,8 +66,8 @@ class ImporResource extends Resource
     {
         return [
             'index' => Pages\ListImpor::route('/'),
-            'create' => Pages\CreateImpor::route('/create'),
-            'edit' => Pages\EditImpor::route('/{record}/edit'),
+            // 'create' => Pages\CreateImpor::route('/create'),
+            // 'edit' => Pages\EditImpor::route('/{record}/edit'),
         ];
     }
 }

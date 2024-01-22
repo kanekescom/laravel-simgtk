@@ -54,15 +54,15 @@ class JenjangSekolahResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                // Tables\Actions\CreateAction::make(),
             ]);
     }
 
@@ -77,8 +77,8 @@ class JenjangSekolahResource extends Resource
     {
         return [
             'index' => Pages\ListJenjangSekolah::route('/'),
-            'create' => Pages\CreateJenjangSekolah::route('/create'),
-            'edit' => Pages\EditJenjangSekolah::route('/{record}/edit'),
+            // 'create' => Pages\CreateJenjangSekolah::route('/create'),
+            // 'edit' => Pages\EditJenjangSekolah::route('/{record}/edit'),
         ];
     }
 }

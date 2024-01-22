@@ -15,7 +15,7 @@ class ListJenjangSekolah extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()->label('Create'),
+            // Actions\CreateAction::make()->label('Create'),
         ];
     }
 }

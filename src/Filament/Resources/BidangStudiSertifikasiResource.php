@@ -50,15 +50,15 @@ class BidangStudiSertifikasiResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                // Tables\Actions\CreateAction::make(),
             ]);
     }
 
@@ -73,8 +73,8 @@ class BidangStudiSertifikasiResource extends Resource
     {
         return [
             'index' => Pages\ListBidangStudiSertifikasi::route('/'),
-            'create' => Pages\CreateBidangStudiSertifikasi::route('/create'),
-            'edit' => Pages\EditBidangStudiSertifikasi::route('/{record}/edit'),
+            // 'create' => Pages\CreateBidangStudiSertifikasi::route('/create'),
+            // 'edit' => Pages\EditBidangStudiSertifikasi::route('/{record}/edit'),
         ];
     }
 }
