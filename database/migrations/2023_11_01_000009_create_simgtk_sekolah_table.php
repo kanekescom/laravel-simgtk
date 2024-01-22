@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create(config('simgtk.table_prefix').'sekolah', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('nama');
-            $table->string('npsn')->index();
+            $table->string('npsn')->nullable()->index();
             $table->foreignUlid('jenjang_sekolah_id')->nullable()->index();
             $table->foreignUlid('wilayah_id')->nullable()->index();
             $table->unsignedTinyInteger('jumlah_kelas')->nullable();

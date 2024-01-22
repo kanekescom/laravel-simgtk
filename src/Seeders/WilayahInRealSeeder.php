@@ -47,7 +47,7 @@ class WilayahInRealSeeder extends Seeder
             ['kode' => '36.02.25', 'nama' => 'Lebakgedong'],
             ['kode' => '36.02.26', 'nama' => 'Cihara'],
             ['kode' => '36.02.27', 'nama' => 'Cirinten'],
-            ['kode' => '36.02.28', 'nama' => 'Cigemlong'],
+            ['kode' => '36.02.28', 'nama' => 'Cigemblong'],
         ]);
     }
 }
