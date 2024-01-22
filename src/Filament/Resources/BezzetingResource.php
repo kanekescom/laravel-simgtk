@@ -59,9 +59,9 @@ class BezzetingResource extends Resource
                     ->sortable()
                     ->label('Siswa'),
 
-                Tables\Columns\TextInputColumn::make('sd_kelas_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Kelas ABK'),
+                // Tables\Columns\TextInputColumn::make('sd_kelas_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
+                //     ->label('Kelas ABK'),
                 Tables\Columns\TextInputColumn::make('sd_kelas_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Kelas PNS'),
@@ -79,9 +79,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('sd_penjaskes_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Penjaskes ABK'),
+                // Tables\Columns\TextInputColumn::make('sd_penjaskes_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
+                //     ->label('Penjaskes ABK'),
                 Tables\Columns\TextInputColumn::make('sd_penjaskes_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Penjaskes PNS'),
@@ -99,9 +99,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('sd_agama_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Agama ABK'),
+                // Tables\Columns\TextInputColumn::make('sd_agama_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
+                //     ->label('Agama ABK'),
                 Tables\Columns\TextInputColumn::make('sd_agama_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Agama PNS'),
@@ -119,9 +119,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('sd_agama_noni_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Agama ABK'),
+                // Tables\Columns\TextInputColumn::make('sd_agama_noni_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
+                //     ->label('Agama ABK'),
                 Tables\Columns\TextInputColumn::make('sd_agama_noni_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Agama PNS'),
@@ -139,9 +139,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_pai_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('PAI ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_pai_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('PAI ABK'),
                 Tables\Columns\TextInputColumn::make('smp_pai_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PAI PNS'),
@@ -159,9 +159,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_pjok_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('PJOK ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_pjok_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('PJOK ABK'),
                 Tables\Columns\TextInputColumn::make('smp_pjok_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PJOK PNS'),
@@ -179,9 +179,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_b_indonesia_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Indonesia ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_b_indonesia_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('B. Indonesia ABK'),
                 Tables\Columns\TextInputColumn::make('smp_b_indonesia_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Indonesia PNS'),
@@ -199,9 +199,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_b_inggris_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Inggris ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_b_inggris_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('B. Inggris ABK'),
                 Tables\Columns\TextInputColumn::make('smp_b_inggris_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Inggris PNS'),
@@ -219,9 +219,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_bk_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('BK ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_bk_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('BK ABK'),
                 Tables\Columns\TextInputColumn::make('smp_bk_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('BK PNS'),
@@ -239,9 +239,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_ipa_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('IPA ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_ipa_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('IPA ABK'),
                 Tables\Columns\TextInputColumn::make('smp_ipa_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPA PNS'),
@@ -259,9 +259,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_ips_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('IPS ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_ips_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('IPS ABK'),
                 Tables\Columns\TextInputColumn::make('smp_ips_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPS PNS'),
@@ -279,9 +279,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_matematika_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Matematika ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_matematika_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Matematika ABK'),
                 Tables\Columns\TextInputColumn::make('smp_matematika_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Matematika PNS'),
@@ -299,9 +299,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_pppkn_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('PPPKN ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_pppkn_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('PPPKN ABK'),
                 Tables\Columns\TextInputColumn::make('smp_pppkn_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PPPKN PNS'),
@@ -319,9 +319,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_prakarya_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Prakarya ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_prakarya_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Prakarya ABK'),
                 Tables\Columns\TextInputColumn::make('smp_prakarya_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Prakarya PNS'),
@@ -339,9 +339,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_seni_budaya_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Seni Budaya ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_seni_budaya_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Seni Budaya ABK'),
                 Tables\Columns\TextInputColumn::make('smp_seni_budaya_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Seni Budaya PNS'),
@@ -359,9 +359,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_b_sunda_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Sunda ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_b_sunda_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('B. Sunda ABK'),
                 Tables\Columns\TextInputColumn::make('smp_b_sunda_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('B. Sunda PNS'),
@@ -379,9 +379,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextInputColumn::make('smp_tik_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('TIK ABK'),
+                // Tables\Columns\TextInputColumn::make('smp_tik_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('TIK ABK'),
                 Tables\Columns\TextInputColumn::make('smp_tik_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('TIK PNS'),
@@ -412,9 +412,9 @@ class BezzetingResource extends Resource
                     ->counts('pegawai')
                     ->label('Jumlah Guru'),
 
-                Tables\Columns\TextColumn::make('sd_jumlah_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Jumlah ABK SD'),
+                // Tables\Columns\TextColumn::make('sd_jumlah_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
+                //     ->label('Jumlah ABK SD'),
                 Tables\Columns\TextColumn::make('sd_jumlah_formasi')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah Formasi SD'),
@@ -422,9 +422,9 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah Selisih SD'),
 
-                Tables\Columns\TextColumn::make('smp_jumlah_abk')
-                    ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Jumlah ABK SMP'),
+                // Tables\Columns\TextColumn::make('smp_jumlah_abk')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Jumlah ABK SMP'),
                 Tables\Columns\TextColumn::make('smp_jumlah_formasi')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah Formasi SMP'),
