@@ -36,7 +36,7 @@ class Sekolah extends Model
 
     public function getSdKelasSelisihAttribute()
     {
-        return $this->sd_kelas_abk + $this->sd_kelas_jumlah;
+        return $this->sd_kelas_abk - $this->sd_kelas_jumlah;
     }
 
     public function getSdPenjaskesJumlahAttribute()
@@ -46,7 +46,7 @@ class Sekolah extends Model
 
     public function getSdPenjaskesSelisihAttribute()
     {
-        return $this->sd_penjaskes_abk + $this->sd_penjaskes_jumlah;
+        return $this->sd_penjaskes_abk - $this->sd_penjaskes_jumlah;
     }
 
     public function getSdAgamaJumlahAttribute()
@@ -56,7 +56,7 @@ class Sekolah extends Model
 
     public function getSdAgamaSelisihAttribute()
     {
-        return $this->sd_agama_abk + $this->sd_agama_jumlah;
+        return $this->sd_agama_abk - $this->sd_agama_jumlah;
     }
 
     public function getSdAgamaNoniJumlahAttribute()
@@ -66,7 +66,7 @@ class Sekolah extends Model
 
     public function getSdAgamaNoniSelisihAttribute()
     {
-        return $this->sd_agama_noni_abk + $this->sd_agama_noni_jumlah;
+        return $this->sd_agama_noni_abk - $this->sd_agama_noni_jumlah;
     }
 
     //
@@ -78,7 +78,7 @@ class Sekolah extends Model
 
     public function getSmpPaiSelisihAttribute()
     {
-        return $this->smp_pai_abk + $this->smp_pai_jumlah;
+        return $this->smp_pai_abk - $this->smp_pai_jumlah;
     }
 
     public function getSmpPjokJumlahAttribute()
@@ -88,7 +88,7 @@ class Sekolah extends Model
 
     public function getSmpPjokSelisihAttribute()
     {
-        return $this->smp_pjok_abk + $this->smp_pjok_jumlah;
+        return $this->smp_pjok_abk - $this->smp_pjok_jumlah;
     }
 
     public function getSmpBIndonesiaJumlahAttribute()
@@ -98,7 +98,7 @@ class Sekolah extends Model
 
     public function getSmpBIndonesiaSelisihAttribute()
     {
-        return $this->smp_b_indonesia_abk + $this->smp_b_indonesia_jumlah;
+        return $this->smp_b_indonesia_abk - $this->smp_b_indonesia_jumlah;
     }
 
     public function getSmpBInggrisJumlahAttribute()
@@ -108,7 +108,7 @@ class Sekolah extends Model
 
     public function getSmpBInggrisSelisihAttribute()
     {
-        return $this->smp_b_inggris_abk + $this->smp_b_inggris_jumlah;
+        return $this->smp_b_inggris_abk - $this->smp_b_inggris_jumlah;
     }
 
     public function getSmpBkJumlahAttribute()
@@ -118,7 +118,7 @@ class Sekolah extends Model
 
     public function getSmpBkSelisihAttribute()
     {
-        return $this->smp_bk_abk + $this->smp_bk_jumlah;
+        return $this->smp_bk_abk - $this->smp_bk_jumlah;
     }
 
     public function getSmpIpaJumlahAttribute()
@@ -128,7 +128,7 @@ class Sekolah extends Model
 
     public function getSmpIpaSelisihAttribute()
     {
-        return $this->smp_ipa_abk + $this->smp_ipa_jumlah;
+        return $this->smp_ipa_abk - $this->smp_ipa_jumlah;
     }
 
     public function getSmpIpsJumlahAttribute()
@@ -138,7 +138,7 @@ class Sekolah extends Model
 
     public function getSmpIpsSelisihAttribute()
     {
-        return $this->smp_ips_abk + $this->smp_ips_jumlah;
+        return $this->smp_ips_abk - $this->smp_ips_jumlah;
     }
 
     public function getSmpMatematikaJumlahAttribute()
@@ -148,7 +148,7 @@ class Sekolah extends Model
 
     public function getSmpMatematikaSelisihAttribute()
     {
-        return $this->smp_matematika_abk + $this->smp_matematika_jumlah;
+        return $this->smp_matematika_abk - $this->smp_matematika_jumlah;
     }
 
     public function getSmpPpknJumlahAttribute()
@@ -158,7 +158,7 @@ class Sekolah extends Model
 
     public function getSmpPpknSelisihAttribute()
     {
-        return $this->smp_pppkn_abk + $this->smp_pppkn_jumlah;
+        return $this->smp_pppkn_abk - $this->smp_pppkn_jumlah;
     }
 
     public function getSmpPrakaryaJumlahAttribute()
@@ -168,7 +168,7 @@ class Sekolah extends Model
 
     public function getSmpPrakaryaSelisihAttribute()
     {
-        return $this->smp_prakarya_abk + $this->smp_prakarya_jumlah;
+        return $this->smp_prakarya_abk - $this->smp_prakarya_jumlah;
     }
 
     public function getSmpSeniBudayaJumlahAttribute()
@@ -178,7 +178,7 @@ class Sekolah extends Model
 
     public function getSmpSeniBudayaSelisihAttribute()
     {
-        return $this->smp_seni_budaya_abk + $this->smp_seni_budaya_jumlah;
+        return $this->smp_seni_budaya_abk - $this->smp_seni_budaya_jumlah;
     }
 
     public function getSmpBSundaJumlahAttribute()
@@ -188,7 +188,7 @@ class Sekolah extends Model
 
     public function getSmpBSundaSelisihAttribute()
     {
-        return $this->smp_b_sunda_abk + $this->smp_b_sunda_jumlah;
+        return $this->smp_b_sunda_abk - $this->smp_b_sunda_jumlah;
     }
 
     public function getSmpTikJumlahAttribute()
@@ -198,7 +198,7 @@ class Sekolah extends Model
 
     public function getSmpTikSelisihAttribute()
     {
-        return $this->smp_tik_abk + $this->smp_tik_jumlah;
+        return $this->smp_tik_abk - $this->smp_tik_jumlah;
     }
 
     //
