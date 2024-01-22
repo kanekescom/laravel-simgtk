@@ -83,10 +83,10 @@ return new class extends Migration
             $table->unsignedSmallInteger('smp_matematika_pppk')->nullable();
             $table->unsignedSmallInteger('smp_matematika_gtt')->nullable();
 
-            $table->unsignedSmallInteger('smp_pppkn_abk')->nullable();
-            $table->unsignedSmallInteger('smp_pppkn_pns')->nullable();
-            $table->unsignedSmallInteger('smp_pppkn_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_pppkn_gtt')->nullable();
+            $table->unsignedSmallInteger('smp_ppkn_abk')->nullable();
+            $table->unsignedSmallInteger('smp_ppkn_pns')->nullable();
+            $table->unsignedSmallInteger('smp_ppkn_pppk')->nullable();
+            $table->unsignedSmallInteger('smp_ppkn_gtt')->nullable();
 
             $table->unsignedSmallInteger('smp_prakarya_abk')->nullable();
             $table->unsignedSmallInteger('smp_prakarya_pns')->nullable();

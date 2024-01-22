@@ -34,9 +34,19 @@ class Sekolah extends Model
         return $this->sd_kelas_pns + $this->sd_kelas_pppk + $this->sd_kelas_gtt;
     }
 
+    public function getSdKelasJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSdKelas()->count();
+    }
+
     public function getSdKelasSelisihAttribute()
     {
         return $this->sd_kelas_abk - $this->sd_kelas_jumlah;
+    }
+
+    public function getSdKelasSelisihExistingAttribute()
+    {
+        return $this->sd_kelas_jumlah_existing - $this->sd_kelas_jumlah;
     }
 
     public function getSdPenjaskesJumlahAttribute()
@@ -44,9 +54,19 @@ class Sekolah extends Model
         return $this->sd_penjaskes_pns + $this->sd_penjaskes_pppk + $this->sd_penjaskes_gtt;
     }
 
+    public function getSdPenjaskesJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSdPenjaskes()->count();
+    }
+
     public function getSdPenjaskesSelisihAttribute()
     {
         return $this->sd_penjaskes_abk - $this->sd_penjaskes_jumlah;
+    }
+
+    public function getSdPenjaskesSelisihExistingAttribute()
+    {
+        return $this->sd_penjaskes_jumlah_existing - $this->sd_penjaskes_jumlah;
     }
 
     public function getSdAgamaJumlahAttribute()
@@ -54,9 +74,19 @@ class Sekolah extends Model
         return $this->sd_agama_pns + $this->sd_agama_pppk + $this->sd_agama_gtt;
     }
 
+    public function getSdAgamaJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSdAgama()->count();
+    }
+
     public function getSdAgamaSelisihAttribute()
     {
         return $this->sd_agama_abk - $this->sd_agama_jumlah;
+    }
+
+    public function getSdAgamaSelisihExistingAttribute()
+    {
+        return $this->sd_agama_jumlah_existing - $this->sd_agama_jumlah;
     }
 
     public function getSdAgamaNoniJumlahAttribute()
@@ -64,9 +94,19 @@ class Sekolah extends Model
         return $this->sd_agama_noni_pns + $this->sd_agama_noni_pppk + $this->sd_agama_noni_gtt;
     }
 
+    public function getSdAgamaNoniJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSdAgamaNoni()->count();
+    }
+
     public function getSdAgamaNoniSelisihAttribute()
     {
         return $this->sd_agama_noni_abk - $this->sd_agama_noni_jumlah;
+    }
+
+    public function getSdAgamaNoniSelisihExistingAttribute()
+    {
+        return $this->sd_agama_noni_jumlah_existing - $this->sd_agama_noni_jumlah;
     }
 
     //
@@ -76,9 +116,19 @@ class Sekolah extends Model
         return $this->smp_pai_pns + $this->smp_pai_pppk + $this->smp_pai_gtt;
     }
 
+    public function getSmpPaiJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpPai()->count();
+    }
+
     public function getSmpPaiSelisihAttribute()
     {
         return $this->smp_pai_abk - $this->smp_pai_jumlah;
+    }
+
+    public function getSmpPaiSelisihExistingAttribute()
+    {
+        return $this->smp_pai_jumlah_existing - $this->smp_pai_jumlah;
     }
 
     public function getSmpPjokJumlahAttribute()
@@ -86,9 +136,19 @@ class Sekolah extends Model
         return $this->smp_pjok_pns + $this->smp_pjok_pppk + $this->smp_pjok_gtt;
     }
 
+    public function getSmpPjokJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpPjok()->count();
+    }
+
     public function getSmpPjokSelisihAttribute()
     {
         return $this->smp_pjok_abk - $this->smp_pjok_jumlah;
+    }
+
+    public function getSmpPjokSelisihExistingAttribute()
+    {
+        return $this->smp_pjok_jumlah_existing - $this->smp_pjok_jumlah;
     }
 
     public function getSmpBIndonesiaJumlahAttribute()
@@ -96,9 +156,19 @@ class Sekolah extends Model
         return $this->smp_b_indonesia_pns + $this->smp_b_indonesia_pppk + $this->smp_b_indonesia_gtt;
     }
 
+    public function getSmpBIndonesiaJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpBIndonesia()->count();
+    }
+
     public function getSmpBIndonesiaSelisihAttribute()
     {
         return $this->smp_b_indonesia_abk - $this->smp_b_indonesia_jumlah;
+    }
+
+    public function getSmpBIndonesiaSelisihExistingAttribute()
+    {
+        return $this->smp_b_indonesia_jumlah_existing - $this->smp_b_indonesia_jumlah;
     }
 
     public function getSmpBInggrisJumlahAttribute()
@@ -106,9 +176,19 @@ class Sekolah extends Model
         return $this->smp_b_inggris_pns + $this->smp_b_inggris_pppk + $this->smp_b_inggris_gtt;
     }
 
+    public function getSmpBInggrisJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpBInggris()->count();
+    }
+
     public function getSmpBInggrisSelisihAttribute()
     {
         return $this->smp_b_inggris_abk - $this->smp_b_inggris_jumlah;
+    }
+
+    public function getSmpBInggrisSelisihExistingAttribute()
+    {
+        return $this->smp_b_inggris_jumlah_existing - $this->smp_b_inggris_jumlah;
     }
 
     public function getSmpBkJumlahAttribute()
@@ -116,9 +196,19 @@ class Sekolah extends Model
         return $this->smp_bk_pns + $this->smp_bk_pppk + $this->smp_bk_gtt;
     }
 
+    public function getSmpBkJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpBk()->count();
+    }
+
     public function getSmpBkSelisihAttribute()
     {
         return $this->smp_bk_abk - $this->smp_bk_jumlah;
+    }
+
+    public function getSmpBkSelisihExistingAttribute()
+    {
+        return $this->smp_bk_jumlah_existing - $this->smp_bk_jumlah;
     }
 
     public function getSmpIpaJumlahAttribute()
@@ -126,9 +216,19 @@ class Sekolah extends Model
         return $this->smp_ipa_pns + $this->smp_ipa_pppk + $this->smp_ipa_gtt;
     }
 
+    public function getSmpIpaJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpIpa()->count();
+    }
+
     public function getSmpIpaSelisihAttribute()
     {
         return $this->smp_ipa_abk - $this->smp_ipa_jumlah;
+    }
+
+    public function getSmpIpaSelisihExistingAttribute()
+    {
+        return $this->smp_ipa_jumlah_existing - $this->smp_ipa_jumlah;
     }
 
     public function getSmpIpsJumlahAttribute()
@@ -136,9 +236,19 @@ class Sekolah extends Model
         return $this->smp_ips_pns + $this->smp_ips_pppk + $this->smp_ips_gtt;
     }
 
+    public function getSmpIpsJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpIps()->count();
+    }
+
     public function getSmpIpsSelisihAttribute()
     {
         return $this->smp_ips_abk - $this->smp_ips_jumlah;
+    }
+
+    public function getSmpIpsSelisihExistingAttribute()
+    {
+        return $this->smp_ips_jumlah_existing - $this->smp_ips_jumlah;
     }
 
     public function getSmpMatematikaJumlahAttribute()
@@ -146,19 +256,39 @@ class Sekolah extends Model
         return $this->smp_matematika_pns + $this->smp_matematika_pppk + $this->smp_matematika_gtt;
     }
 
+    public function getSmpMatematikaJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpMatematika()->count();
+    }
+
     public function getSmpMatematikaSelisihAttribute()
     {
         return $this->smp_matematika_abk - $this->smp_matematika_jumlah;
     }
 
+    public function getSmpMatematikaSelisihExistingAttribute()
+    {
+        return $this->smp_matematika_jumlah_existing - $this->smp_matematika_jumlah;
+    }
+
     public function getSmpPpknJumlahAttribute()
     {
-        return $this->smp_pppkn_pns + $this->smp_pppkn_pppk + $this->smp_pppkn_gtt;
+        return $this->smp_ppkn_pns + $this->smp_ppkn_pppk + $this->smp_ppkn_gtt;
+    }
+
+    public function getSmpPpknJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpPpkn()->count();
     }
 
     public function getSmpPpknSelisihAttribute()
     {
-        return $this->smp_pppkn_abk - $this->smp_pppkn_jumlah;
+        return $this->smp_ppkn_abk - $this->smp_ppkn_jumlah;
+    }
+
+    public function getSmpPpknSelisihExistingAttribute()
+    {
+        return $this->smp_ppkn_jumlah_existing - $this->smp_ppkn_jumlah;
     }
 
     public function getSmpPrakaryaJumlahAttribute()
@@ -166,9 +296,19 @@ class Sekolah extends Model
         return $this->smp_prakarya_pns + $this->smp_prakarya_pppk + $this->smp_prakarya_gtt;
     }
 
+    public function getSmpPrakaryaJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpPrakarya()->count() ;
+    }
+
     public function getSmpPrakaryaSelisihAttribute()
     {
         return $this->smp_prakarya_abk - $this->smp_prakarya_jumlah;
+    }
+
+    public function getSmpPrakaryaSelisihExistingAttribute()
+    {
+        return $this->smp_prakarya_jumlah_existing - $this->smp_prakarya_jumlah;
     }
 
     public function getSmpSeniBudayaJumlahAttribute()
@@ -176,9 +316,19 @@ class Sekolah extends Model
         return $this->smp_seni_budaya_pns + $this->smp_seni_budaya_pppk + $this->smp_seni_budaya_gtt;
     }
 
+    public function getSmpSeniBudayaJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpSeniBudaya()->count();
+    }
+
     public function getSmpSeniBudayaSelisihAttribute()
     {
         return $this->smp_seni_budaya_abk - $this->smp_seni_budaya_jumlah;
+    }
+
+    public function getSmpSeniBudayaSelisihExistingAttribute()
+    {
+        return $this->smp_seni_budaya_jumlah_existing - $this->smp_seni_budaya_jumlah;
     }
 
     public function getSmpBSundaJumlahAttribute()
@@ -186,9 +336,19 @@ class Sekolah extends Model
         return $this->smp_b_sunda_pns + $this->smp_b_sunda_pppk + $this->smp_b_sunda_gtt;
     }
 
+    public function getSmpBSundaJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpBSunda()->count();
+    }
+
     public function getSmpBSundaSelisihAttribute()
     {
         return $this->smp_b_sunda_abk - $this->smp_b_sunda_jumlah;
+    }
+
+    public function getSmpBSundaSelisihExistingAttribute()
+    {
+        return $this->smp_b_sunda_jumlah_existing - $this->smp_b_sunda_jumlah;
     }
 
     public function getSmpTikJumlahAttribute()
@@ -196,9 +356,19 @@ class Sekolah extends Model
         return $this->smp_tik_pns + $this->smp_tik_pppk + $this->smp_tik_gtt;
     }
 
+    public function getSmpTikJumlahExistingAttribute()
+    {
+        return $this->mataPelajaranSmpTik()->count();
+    }
+
     public function getSmpTikSelisihAttribute()
     {
         return $this->smp_tik_abk - $this->smp_tik_jumlah;
+    }
+
+    public function getSmpTikSelisihExistingAttribute()
+    {
+        return $this->smp_tik_jumlah_existing - $this->smp_tik_jumlah;
     }
 
     //
@@ -215,10 +385,19 @@ class Sekolah extends Model
     public function getSdJumlahFormasiAttribute()
     {
         return
-            $this->sd_kelas_formasi
-            + $this->sd_penjaskes_formasi
-            + $this->sd_agama_formasi
-            + $this->sd_agama_noni_formasi;
+            $this->sd_kelas_jumlah
+            + $this->sd_penjaskes_jumlah
+            + $this->sd_agama_jumlah
+            + $this->sd_agama_noni_jumlah;
+    }
+
+    public function getSdJumlahExistingAttribute()
+    {
+        return
+            $this->sd_kelas_jumlah_existing
+            + $this->sd_penjaskes_jumlah_existing
+            + $this->sd_agama_jumlah_existing
+            + $this->sd_agama_noni_jumlah_existing;
     }
 
     public function getSdJumlahSelisihAttribute()
@@ -226,6 +405,11 @@ class Sekolah extends Model
         return
             $this->sd_jumlah_abk
             - $this->sd_jumlah_formasi;
+    }
+
+    public function getSdJumlahSelisihExistingAttribute()
+    {
+        return $this->sd_jumlah_existing - $this->sd_jumlah_formasi;
     }
 
     //
@@ -241,7 +425,7 @@ class Sekolah extends Model
             + $this->smp_ipa_abk
             + $this->smp_ips_abk
             + $this->smp_matematika_abk
-            + $this->smp_pppkn_abk
+            + $this->smp_ppkn_abk
             + $this->smp_prakarya_abk
             + $this->smp_seni_budaya_abk
             + $this->smp_b_sunda_abk
@@ -251,19 +435,37 @@ class Sekolah extends Model
     public function getSmpJumlahFormasiAttribute()
     {
         return
-            $this->smp_pai_formasi
-            + $this->smp_pjok_formasi
-            + $this->smp_b_indonesia_formasi
-            + $this->smp_b_inggris_formasi
-            + $this->smp_bk_formasi
-            + $this->smp_ipa_formasi
-            + $this->smp_ips_formasi
-            + $this->smp_matematika_formasi
-            + $this->smp_pppkn_formasi
-            + $this->smp_prakarya_formasi
-            + $this->smp_seni_budaya_formasi
-            + $this->smp_b_sunda_formasi
-            + $this->smp_tik_formasi;
+            $this->smp_pai_jumlah
+            + $this->smp_pjok_jumlah
+            + $this->smp_b_indonesia_jumlah
+            + $this->smp_b_inggris_jumlah
+            + $this->smp_bk_jumlah
+            + $this->smp_ipa_jumlah
+            + $this->smp_ips_jumlah
+            + $this->smp_matematika_jumlah
+            + $this->smp_ppkn_jumlah
+            + $this->smp_prakarya_jumlah
+            + $this->smp_seni_budaya_jumlah
+            + $this->smp_b_sunda_jumlah
+            + $this->smp_tik_jumlah;
+    }
+
+    public function getSmpJumlahExistingAttribute()
+    {
+        return
+            $this->smp_pai_jumlah_existing
+            + $this->smp_pjok_jumlah_existing
+            + $this->smp_b_indonesia_jumlah_existing
+            + $this->smp_b_inggris_jumlah_existing
+            + $this->smp_bk_jumlah_existing
+            + $this->smp_ipa_jumlah_existing
+            + $this->smp_ips_jumlah_existing
+            + $this->smp_matematika_jumlah_existing
+            + $this->smp_ppkn_jumlah_existing
+            + $this->smp_prakarya_jumlah_existing
+            + $this->smp_seni_budaya_jumlah_existing
+            + $this->smp_b_sunda_jumlah_existing
+            + $this->smp_tik_jumlah_existing;
     }
 
     public function getSmpJumlahSelisihAttribute()
@@ -271,6 +473,11 @@ class Sekolah extends Model
         return
             $this->smp_jumlah_abk
             - $this->smp_jumlah_formasi;
+    }
+
+    public function getSmpJumlahSelisihExistingAttribute()
+    {
+        return $this->smp_jumlah_existing - $this->smp_jumlah_formasi;
     }
 
     //

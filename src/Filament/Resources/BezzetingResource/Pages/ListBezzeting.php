@@ -45,7 +45,6 @@ class ListBezzeting extends ListRecords
                         ])
                         ->ignoreFormatting(),
                 ]),
-            Actions\CreateAction::make()->label('Create'),
         ];
     }
 

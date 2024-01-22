@@ -59,83 +59,108 @@ class BezzetingResource extends Resource
                     ->sortable()
                     ->label('Siswa'),
 
+                Tables\Columns\TextColumn::make('pegawai_status_kepegawaian_pns_count')
+                    ->counts('pegawaiStatusKepegawaianPns')
+                    ->label('PNS'),
+                Tables\Columns\TextColumn::make('pegawai_status_kepegawaian_pppk_count')
+                    ->counts('pegawaiStatusKepegawaianPppk')
+                    ->label('PPPK'),
+                Tables\Columns\TextColumn::make('pegawai_status_kepegawaian_gtt_count')
+                    ->counts('pegawaiStatusKepegawaianGtt')
+                    ->label('GTT'),
+                Tables\Columns\TextColumn::make('pegawai_count')
+                    ->counts('pegawai')
+                    ->label('Jumlah'),
+
                 // Tables\Columns\TextInputColumn::make('sd_kelas_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                //     ->label('Kelas ABK'),
+                //     ->label('KELAS ABK'),
                 Tables\Columns\TextInputColumn::make('sd_kelas_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Kelas PNS'),
+                    ->label('KELAS PNS'),
                 Tables\Columns\TextInputColumn::make('sd_kelas_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Kelas PPPK'),
+                    ->label('KELAS PPPK'),
                 Tables\Columns\TextInputColumn::make('sd_kelas_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Kelas GTT'),
+                    ->label('KELAS GTT'),
                 Tables\Columns\TextColumn::make('sd_kelas_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSdKelas()->count())
+                    ->description(fn (Sekolah $record): string => $record->sd_kelas_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('sd_kelas_selisih')
+                // Tables\Columns\TextColumn::make('sd_kelas_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('sd_kelas_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
                 // Tables\Columns\TextInputColumn::make('sd_penjaskes_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                //     ->label('Penjaskes ABK'),
+                //     ->label('PENJAS ABK'),
                 Tables\Columns\TextInputColumn::make('sd_penjaskes_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Penjaskes PNS'),
+                    ->label('PENJAS PNS'),
                 Tables\Columns\TextInputColumn::make('sd_penjaskes_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Penjaskes PPPK'),
+                    ->label('PENJAS PPPK'),
                 Tables\Columns\TextInputColumn::make('sd_penjaskes_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Penjaskes GTT'),
+                    ->label('PENJAS GTT'),
                 Tables\Columns\TextColumn::make('sd_penjaskes_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSdPenjaskes()->count())
+                    ->description(fn (Sekolah $record): string => $record->sd_penjaskes_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('sd_penjaskes_selisih')
+                // Tables\Columns\TextColumn::make('sd_penjaskes_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('sd_penjaskes_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
                 // Tables\Columns\TextInputColumn::make('sd_agama_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                //     ->label('Agama ABK'),
+                //     ->label('AGAMA ABK'),
                 Tables\Columns\TextInputColumn::make('sd_agama_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Agama PNS'),
+                    ->label('AGAMA PNS'),
                 Tables\Columns\TextInputColumn::make('sd_agama_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Agama PPPK'),
+                    ->label('AGAMA PPPK'),
                 Tables\Columns\TextInputColumn::make('sd_agama_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Agama GTT'),
+                    ->label('AGAMA GTT'),
                 Tables\Columns\TextColumn::make('sd_agama_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSdAgama()->count())
+                    ->description(fn (Sekolah $record): string => $record->sd_agama_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('sd_agama_selisih')
+                // Tables\Columns\TextColumn::make('sd_agama_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('sd_agama_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
                 // Tables\Columns\TextInputColumn::make('sd_agama_noni_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                //     ->label('Agama ABK'),
+                //     ->label('AGAMA ABK'),
                 Tables\Columns\TextInputColumn::make('sd_agama_noni_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Agama PNS'),
+                    ->label('AGAMA PNS'),
                 Tables\Columns\TextInputColumn::make('sd_agama_noni_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Agama PPPK'),
+                    ->label('AGAMA PPPK'),
                 Tables\Columns\TextInputColumn::make('sd_agama_noni_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Agama GTT'),
+                    ->label('AGAMA GTT'),
                 Tables\Columns\TextColumn::make('sd_agama_noni_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSdAgamaNoni()->count())
+                    ->description(fn (Sekolah $record): string => $record->sd_agama_noni_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('sd_agama_noni_selisih')
+                // Tables\Columns\TextColumn::make('sd_agama_noni_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('sd_agama_noni_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
                     ->label('Selisih'),
 
@@ -152,10 +177,13 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PAI GTT'),
                 Tables\Columns\TextColumn::make('smp_pai_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpPai()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_pai_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_pai_selisih')
+                // Tables\Columns\TextColumn::make('smp_pai_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_pai_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -172,50 +200,59 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('PJOK GTT'),
                 Tables\Columns\TextColumn::make('smp_pjok_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpPjok()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_pjok_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_pjok_selisih')
+                // Tables\Columns\TextColumn::make('smp_pjok_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_pjok_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 // Tables\Columns\TextInputColumn::make('smp_b_indonesia_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                //     ->label('B. Indonesia ABK'),
+                //     ->label('B.IND ABK'),
                 Tables\Columns\TextInputColumn::make('smp_b_indonesia_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Indonesia PNS'),
+                    ->label('B.IND PNS'),
                 Tables\Columns\TextInputColumn::make('smp_b_indonesia_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Indonesia PPPK'),
+                    ->label('B.IND PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_b_indonesia_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Indonesia GTT'),
+                    ->label('B.IND GTT'),
                 Tables\Columns\TextColumn::make('smp_b_indonesia_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpBIndonesia()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_b_indonesia_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_b_indonesia_selisih')
+                // Tables\Columns\TextColumn::make('smp_b_indonesia_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_b_indonesia_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 // Tables\Columns\TextInputColumn::make('smp_b_inggris_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                //     ->label('B. Inggris ABK'),
+                //     ->label('B.ING ABK'),
                 Tables\Columns\TextInputColumn::make('smp_b_inggris_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Inggris PNS'),
+                    ->label('B.ING PNS'),
                 Tables\Columns\TextInputColumn::make('smp_b_inggris_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Inggris PPPK'),
+                    ->label('B.ING PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_b_inggris_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Inggris GTT'),
+                    ->label('B.ING GTT'),
                 Tables\Columns\TextColumn::make('smp_b_inggris_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpBInggris()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_b_inggris_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_b_inggris_selisih')
+                // Tables\Columns\TextColumn::make('smp_b_inggris_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_b_inggris_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -232,10 +269,13 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('BK GTT'),
                 Tables\Columns\TextColumn::make('smp_bk_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpBk()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_bk_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_bk_selisih')
+                // Tables\Columns\TextColumn::make('smp_bk_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_bk_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -252,10 +292,13 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPA GTT'),
                 Tables\Columns\TextColumn::make('smp_ipa_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpIpa()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_ipa_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_ipa_selisih')
+                // Tables\Columns\TextColumn::make('smp_ipa_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_ipa_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -272,110 +315,128 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('IPS GTT'),
                 Tables\Columns\TextColumn::make('smp_ips_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpIps()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_ips_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_ips_selisih')
+                // Tables\Columns\TextColumn::make('smp_ips_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_ips_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 // Tables\Columns\TextInputColumn::make('smp_matematika_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                //     ->label('Matematika ABK'),
+                //     ->label('MTK ABK'),
                 Tables\Columns\TextInputColumn::make('smp_matematika_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Matematika PNS'),
+                    ->label('MTK PNS'),
                 Tables\Columns\TextInputColumn::make('smp_matematika_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Matematika PPPK'),
+                    ->label('MTK PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_matematika_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Matematika GTT'),
+                    ->label('MTK GTT'),
                 Tables\Columns\TextColumn::make('smp_matematika_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpMatematika()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_matematika_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_matematika_selisih')
+                // Tables\Columns\TextColumn::make('smp_matematika_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_matematika_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                // Tables\Columns\TextInputColumn::make('smp_pppkn_abk')
+                // Tables\Columns\TextInputColumn::make('smp_ppkn_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                //     ->label('PPPKN ABK'),
-                Tables\Columns\TextInputColumn::make('smp_pppkn_pns')
+                //     ->label('PPKN ABK'),
+                Tables\Columns\TextInputColumn::make('smp_ppkn_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('PPPKN PNS'),
-                Tables\Columns\TextInputColumn::make('smp_pppkn_pppk')
+                    ->label('PPKN PNS'),
+                Tables\Columns\TextInputColumn::make('smp_ppkn_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('PPPKN PPPK'),
-                Tables\Columns\TextInputColumn::make('smp_pppkn_gtt')
+                    ->label('PPKN PPPK'),
+                Tables\Columns\TextInputColumn::make('smp_ppkn_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('PPPKN GTT'),
-                Tables\Columns\TextColumn::make('smp_pppkn_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpPpkn()->count())
+                    ->label('PPKN GTT'),
+                Tables\Columns\TextColumn::make('smp_ppkn_jumlah')
+                    ->description(fn (Sekolah $record): string => $record->smp_ppkn_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_pppkn_selisih')
+                // Tables\Columns\TextColumn::make('smp_ppkn_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_ppkn_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 // Tables\Columns\TextInputColumn::make('smp_prakarya_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                //     ->label('Prakarya ABK'),
+                //     ->label('PRKY ABK'),
                 Tables\Columns\TextInputColumn::make('smp_prakarya_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Prakarya PNS'),
+                    ->label('PRKY PNS'),
                 Tables\Columns\TextInputColumn::make('smp_prakarya_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Prakarya PPPK'),
+                    ->label('PRKY PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_prakarya_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Prakarya GTT'),
+                    ->label('PRKY GTT'),
                 Tables\Columns\TextColumn::make('smp_prakarya_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpPrakarya()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_prakarya_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_prakarya_selisih')
+                // Tables\Columns\TextColumn::make('smp_prakarya_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_prakarya_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 // Tables\Columns\TextInputColumn::make('smp_seni_budaya_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                //     ->label('Seni Budaya ABK'),
+                //     ->label('SEBUD ABK'),
                 Tables\Columns\TextInputColumn::make('smp_seni_budaya_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Seni Budaya PNS'),
+                    ->label('SEBUD PNS'),
                 Tables\Columns\TextInputColumn::make('smp_seni_budaya_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Seni Budaya PPPK'),
+                    ->label('SEBUD PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_seni_budaya_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Seni Budaya GTT'),
+                    ->label('SEBUD GTT'),
                 Tables\Columns\TextColumn::make('smp_seni_budaya_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpSeniBudaya()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_seni_budaya_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_seni_budaya_selisih')
+                // Tables\Columns\TextColumn::make('smp_seni_budaya_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_seni_budaya_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
                 // Tables\Columns\TextInputColumn::make('smp_b_sunda_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                //     ->label('B. Sunda ABK'),
+                //     ->label('B.SUN ABK'),
                 Tables\Columns\TextInputColumn::make('smp_b_sunda_pns')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Sunda PNS'),
+                    ->label('B.SUN PNS'),
                 Tables\Columns\TextInputColumn::make('smp_b_sunda_pppk')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Sunda PPPK'),
+                    ->label('B.SUN PPPK'),
                 Tables\Columns\TextInputColumn::make('smp_b_sunda_gtt')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('B. Sunda GTT'),
+                    ->label('B.SUN GTT'),
                 Tables\Columns\TextColumn::make('smp_b_sunda_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpBSunda()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_b_sunda_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_b_sunda_selisih')
+                // Tables\Columns\TextColumn::make('smp_b_sunda_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_b_sunda_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
@@ -392,45 +453,43 @@ class BezzetingResource extends Resource
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('TIK GTT'),
                 Tables\Columns\TextColumn::make('smp_tik_jumlah')
-                    ->description(fn (Sekolah $record): string => $record->mataPelajaranSmpTik()->count())
+                    ->description(fn (Sekolah $record): string => $record->smp_tik_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Jumlah'),
-                Tables\Columns\TextColumn::make('smp_tik_selisih')
+                // Tables\Columns\TextColumn::make('smp_tik_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Selisih'),
+                Tables\Columns\TextColumn::make('smp_tik_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
                     ->label('Selisih'),
 
-                Tables\Columns\TextColumn::make('pegawai_status_kepegawaian_pns_count')
-                    ->counts('pegawaiStatusKepegawaianPns')
-                    ->label('Jumlah Guru PNS'),
-                Tables\Columns\TextColumn::make('pegawai_status_kepegawaian_pppk_count')
-                    ->counts('pegawaiStatusKepegawaianPppk')
-                    ->label('Jumlah Guru PPPK'),
-                Tables\Columns\TextColumn::make('pegawai_status_kepegawaian_gtt_count')
-                    ->counts('pegawaiStatusKepegawaianGtt')
-                    ->label('Jumlah Guru GTT'),
-                Tables\Columns\TextColumn::make('pegawai_count')
-                    ->counts('pegawai')
-                    ->label('Jumlah Guru'),
-
                 // Tables\Columns\TextColumn::make('sd_jumlah_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                //     ->label('Jumlah ABK SD'),
+                //     ->label('Jumlah ABK'),
                 Tables\Columns\TextColumn::make('sd_jumlah_formasi')
+                    ->description(fn (Sekolah $record): string => $record->sd_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Jumlah Formasi SD'),
-                Tables\Columns\TextColumn::make('sd_jumlah_selisih')
+                    ->label('Jumlah Formasi'),
+                // Tables\Columns\TextColumn::make('sd_jumlah_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
+                //     ->label('Jumlah Selisih'),
+                Tables\Columns\TextColumn::make('sd_jumlah_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'sd')
-                    ->label('Jumlah Selisih SD'),
+                    ->label('Jumlah Selisih'),
 
                 // Tables\Columns\TextColumn::make('smp_jumlah_abk')
                 //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                //     ->label('Jumlah ABK SMP'),
+                //     ->label('Jumlah ABK'),
                 Tables\Columns\TextColumn::make('smp_jumlah_formasi')
+                    ->description(fn (Sekolah $record): string => $record->smp_jumlah_existing)
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Jumlah Formasi SMP'),
-                Tables\Columns\TextColumn::make('smp_jumlah_selisih')
+                    ->label('Jumlah Formasi'),
+                // Tables\Columns\TextColumn::make('smp_jumlah_selisih')
+                //     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
+                //     ->label('Jumlah Selisih'),
+                Tables\Columns\TextColumn::make('smp_jumlah_selisih_existing')
                     ->visible(fn ($livewire) => $livewire->activeTab === 'smp')
-                    ->label('Jumlah Selisih SMP'),
+                    ->label('Jumlah Selisih'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('wilayah_id')
@@ -440,15 +499,13 @@ class BezzetingResource extends Resource
                     ->label('Wilayah'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                //
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                //
             ])
             ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
+                //
             ]);
     }
 
