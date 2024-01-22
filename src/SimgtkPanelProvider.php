@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByGender;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByStatusKepegawaian;
+// use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByWilayahSekolah;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\SekolahChartByJenjangSekolah;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\SekolahChartByWilayah;
 use Kanekescom\Simgtk\Filament\Widgets\StatsOverview;
@@ -44,6 +45,7 @@ class SimgtkPanelProvider extends PanelProvider
                 StatsOverview::class,
                 PegawaiChartByStatusKepegawaian::class,
                 PegawaiChartByGender::class,
+                // PegawaiChartByWilayahSekolah::class,
                 SekolahChartByJenjangSekolah::class,
                 SekolahChartByWilayah::class,
             ])
