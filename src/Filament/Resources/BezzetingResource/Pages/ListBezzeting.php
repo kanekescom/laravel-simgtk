@@ -2,7 +2,6 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\BezzetingResource\Pages;
 
-use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\BezzetingResource;

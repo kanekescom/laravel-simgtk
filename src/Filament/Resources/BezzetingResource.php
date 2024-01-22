@@ -2,14 +2,11 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Forms\Components\Tabs;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Kanekescom\Simgtk\Filament\Resources\BezzetingResource\Pages;
-use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Sekolah;
 
 class BezzetingResource extends Resource

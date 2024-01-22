@@ -11,7 +11,7 @@ class SekolahChartByWilayah extends ChartWidget
 
     protected static ?string $pollingInterval = '10s';
 
-    protected int | string | array $columnSpan = 'full';
+    protected int|string|array $columnSpan = 'full';
 
     protected function getData(): array
     {

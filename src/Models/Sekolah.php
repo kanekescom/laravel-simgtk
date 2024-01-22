@@ -298,7 +298,7 @@ class Sekolah extends Model
 
     public function getSmpPrakaryaJumlahExistingAttribute()
     {
-        return $this->mataPelajaranSmpPrakarya()->count() ;
+        return $this->mataPelajaranSmpPrakarya()->count();
     }
 
     public function getSmpPrakaryaSelisihAttribute()
