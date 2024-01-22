@@ -70,7 +70,7 @@ class PegawaiFactory extends Factory
             'nomor_sk_pns' => $is_asn && $tanggal_pns ? fake()->numerify("802/Kep.###-BKPSDM/{$tanggal_pns->year}") : null,
 
             'golongan_kode' => $is_asn ? fake()->randomElement(GolonganAsnEnum::class) : null,
-            'tanggal_sk_pangkat' => $is_asn ? $tanggal_pangkat : null,
+            'tmt_pangkat' => $is_asn ? $tanggal_pangkat : null,
             'tanggal_sk_pangkat' => $is_asn ? $tanggal_pangkat : null,
             'nomor_sk_pangkat' => $is_asn ? fake()->numerify("802/Kep.###-BKPSDM/{$tanggal_pangkat->year}") : null,
 
