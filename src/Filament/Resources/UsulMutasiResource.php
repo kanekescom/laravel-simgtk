@@ -9,22 +9,22 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Kanekescom\Simgtk\Filament\Resources\MutasiResource\Pages;
-use Kanekescom\Simgtk\Models\Mutasi;
+use Kanekescom\Simgtk\Filament\Resources\UsulMutasiResource\Pages;
+use Kanekescom\Simgtk\Models\UsulMutasi;
 
-class MutasiResource extends Resource
+class UsulMutasiResource extends Resource
 {
-    protected static ?string $slug = 'mutasi';
+    protected static ?string $slug = 'usul-mutasi';
 
-    protected static ?string $pluralLabel = 'Mutasi';
+    protected static ?string $pluralLabel = 'Usul Mutasi';
 
-    protected static ?string $model = Mutasi::class;
+    protected static ?string $model = UsulMutasi::class;
 
     protected static bool $shouldRegisterNavigation = true;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Mutasi';
+    protected static ?string $navigationLabel = 'Usul Mutasi';
 
     protected static ?string $navigationGroup = null;
 
@@ -32,14 +32,14 @@ class MutasiResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('rancangan_mutasi_id')
-                    ->relationship('rancangan', 'nama', modifyQueryUsing: fn (Builder $query) => $query->aktif())
+                Forms\Components\Select::make('rencana_mutasi_id')
+                    ->relationship('rencana', 'nama', modifyQueryUsing: fn (Builder $query) => $query->aktif())
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_tanggal}")
                     ->searchable()
                     ->preload()
                     ->required()
                     ->disabledOn('edit')
-                    ->label('Rancangan Mutasi'),
+                    ->label('Rencana Mutasi'),
                 Forms\Components\Select::make('pegawai_id')
                     ->relationship('pegawai', 'nama')
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_id_gelar}")
@@ -87,34 +87,34 @@ class MutasiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('rancangan.nama')
-                    ->description(fn (Mutasi $record): string => "{$record->rancangan?->periode_tanggal}")
+                Tables\Columns\TextColumn::make('rencana.nama')
+                    ->description(fn (UsulMutasi $record): string => "{$record->rencana?->periode_tanggal}")
                     ->searchable()
                     ->sortable()
-                    ->label('Rancangan Mutasi'),
+                    ->label('Rencana Mutasi'),
                 Tables\Columns\TextColumn::make('pegawai.nama_gelar')
-                    ->description(fn (Mutasi $record): string => $record->pegawai?->nama_id ?? '')
+                    ->description(fn (UsulMutasi $record): string => $record->pegawai?->nama_id ?? '')
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
                     ->sortable(['pegawai.nama'])
                     ->label('Pegawai'),
                 Tables\Columns\TextColumn::make('asalSekolah.nama')
-                    ->description(fn (Mutasi $record): string => "{$record->asalMataPelajaran?->nama}")
+                    ->description(fn (UsulMutasi $record): string => "{$record->asalMataPelajaran?->nama}")
                     ->searchable()
                     ->sortable()
                     ->label('Sekolah Asal'),
                 Tables\Columns\TextColumn::make('tujuanSekolah.nama')
-                    ->description(fn (Mutasi $record): string => "{$record->tujuanMataPelajaran?->nama}")
+                    ->description(fn (UsulMutasi $record): string => "{$record->tujuanMataPelajaran?->nama}")
                     ->searchable()
                     ->sortable()
                     ->label('Sekolah Tujuan'),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('rancangan.nama')
-                    ->relationship('rancangan', 'nama')
+                Tables\Filters\SelectFilter::make('rencana.nama')
+                    ->relationship('rencana', 'nama')
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_tanggal}")
                     ->searchable()
                     ->preload()
-                    ->label('Rancangan Mutasi'),
+                    ->label('Rencana Mutasi'),
                 Tables\Filters\SelectFilter::make('pegawai_id')
                     ->relationship('pegawai', 'nama')
                     ->searchable()
@@ -154,9 +154,9 @@ class MutasiResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMutasi::route('/'),
-            'create' => Pages\CreateMutasi::route('/create'),
-            'edit' => Pages\EditMutasi::route('/{record}/edit'),
+            'index' => Pages\ListUsulMutasi::route('/'),
+            'create' => Pages\CreateUsulMutasi::route('/create'),
+            'edit' => Pages\EditUsulMutasi::route('/{record}/edit'),
         ];
     }
 }

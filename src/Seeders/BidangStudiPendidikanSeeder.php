@@ -3,7 +3,7 @@
 namespace Kanekescom\Simgtk\Seeders;
 
 use Illuminate\Database\Seeder;
-use Kanekescom\Simgtk\Models\BidangStudiPendidikan;
+use Kanekescom\Simgtk\Factories\BidangStudiPendidikanFactory;
 
 class BidangStudiPendidikanSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class BidangStudiPendidikanSeeder extends Seeder
      */
     public function run(): void
     {
-        BidangStudiPendidikan::factory()
+        BidangStudiPendidikanFactory::new()
             ->count(5)
             ->create();
     }

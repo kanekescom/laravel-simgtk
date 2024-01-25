@@ -3,7 +3,7 @@
 namespace Kanekescom\Simgtk\Seeders;
 
 use Illuminate\Database\Seeder;
-use Kanekescom\Simgtk\Models\JenisPtk;
+use Kanekescom\Simgtk\Factories\JenisPtkFactory;
 
 class JenisPtkSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class JenisPtkSeeder extends Seeder
      */
     public function run(): void
     {
-        JenisPtk::factory()
+        JenisPtkFactory::new()
             ->count(5)
             ->create();
     }

@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('simgtk.table_prefix').'bezzeting', function (Blueprint $table) {
+        Schema::create(config('simgtk.table_prefix') . 'rencana_mutasi', function (Blueprint $table) {
             $table->ulid('id')->primary();
-
+            $table->string('nama');
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_berakhir');
+            $table->boolean('is_aktif')->index();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('simgtk.table_prefix').'bezzeting');
+        Schema::dropIfExists(config('simgtk.table_prefix') . 'rencana_mutasi');
     }
 };

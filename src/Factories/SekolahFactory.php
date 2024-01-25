@@ -21,20 +21,14 @@ class SekolahFactory extends Factory
      */
     public function definition(): array
     {
-        $jenjang_sekolah = JenjangSekolah::inRandomOrder()->first() ?? JenjangSekolahFactory::new()->create();
-        $wilayah = Wilayah::inRandomOrder()->first() ?? WilayahFactory::new()->create();
-        $jumlah_kelas = fake()->numberBetween(6, 20);
-        $jumlah_rombel = $jumlah_kelas - fake()->numberBetween(0, 3);
-        $jumlah_siswa = $jumlah_kelas * fake()->numberBetween(35, 45);
-
         return [
-            'nama' => $jenjang_sekolah->nama.' '.fake()->unique()->company(),
+            'nama' => ($jenjang_sekolah = JenjangSekolah::inRandomOrder()->first() ?? JenjangSekolahFactory::new()->create())->nama . ' ' . fake()->unique()->company(),
             'npsn' => fake()->unique()->numerify('########'),
             'jenjang_sekolah_id' => $jenjang_sekolah->id,
-            'wilayah_id' => $wilayah->id,
-            'jumlah_kelas' => $jumlah_kelas,
-            'jumlah_rombel' => $jumlah_rombel,
-            'jumlah_siswa' => $jumlah_siswa,
+            'wilayah_id' => Wilayah::inRandomOrder()->first() ?? WilayahFactory::new()->create(),
+            'jumlah_kelas' => $jumlah_kelas = fake()->numberBetween(6, 20),
+            'jumlah_rombel' => $jumlah_kelas - fake()->numberBetween(0, 3),
+            'jumlah_siswa' => $jumlah_kelas * fake()->numberBetween(35, 45),
         ];
     }
 }

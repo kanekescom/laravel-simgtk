@@ -50,15 +50,15 @@ class BidangStudiPendidikanResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                // Tables\Actions\BulkActionGroup::make([
-                //     Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ])
             ->emptyStateActions([
-                // Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make(),
             ]);
     }
 
@@ -73,8 +73,8 @@ class BidangStudiPendidikanResource extends Resource
     {
         return [
             'index' => Pages\ListBidangStudiPendidikan::route('/'),
-            // 'create' => Pages\CreateBidangStudiPendidikan::route('/create'),
-            // 'edit' => Pages\EditBidangStudiPendidikan::route('/{record}/edit'),
+            'create' => Pages\CreateBidangStudiPendidikan::route('/create'),
+            'edit' => Pages\EditBidangStudiPendidikan::route('/{record}/edit'),
         ];
     }
 }

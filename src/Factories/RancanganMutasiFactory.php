@@ -3,6 +3,7 @@
 namespace Kanekescom\Simgtk\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Kanekescom\Simgtk\Models\Pegawai;
 use Kanekescom\Simgtk\Models\RancanganMutasi;
 
 /**
@@ -20,10 +21,9 @@ class RancanganMutasiFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => fake()->unique()->sentence(3),
-            'tanggal_mulai' => $tanggal_mulai = fake()->dateTimeBetween('-1 week', '+1 week'),
-            'tanggal_berakhir' => now()->parse($tanggal_mulai)->addWeeks(2),
-            'is_selesai' => fake()->boolean(25),
+            'pegawai_id' => ($pegawai = Pegawai::inRandomOrder()->first()) ?? PegawaiFactory::new()->create(),
+            'sekolah_id' => ($sekolah = Sekolah::inRandomOrder()->first()) ?? ($sekolah = SekolahFactory::new())->create(),
+            'mata_pelajaran_id' => MataPelajaran::where('jenjang_sekolah_id', $sekolah->jenjang_sekolah_id)->inRandomOrder()->first() ?? MataPelajaranFactory::new()->create(['jenjang_sekolah_id' => $sekolah->jenjang_sekolah_id]),
         ];
     }
 }

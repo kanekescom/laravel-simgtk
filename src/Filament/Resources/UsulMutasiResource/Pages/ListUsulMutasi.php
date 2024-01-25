@@ -1,19 +1,19 @@
 <?php
 
-namespace Kanekescom\Simgtk\Filament\Resources\MutasiResource\Pages;
+namespace Kanekescom\Simgtk\Filament\Resources\UsulMutasiResource\Pages;
 
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Kanekescom\Simgtk\Filament\Resources\MutasiResource;
+use Kanekescom\Simgtk\Filament\Resources\UsulMutasiResource;
 use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class ListMutasi extends ListRecords
+class ListUsulMutasi extends ListRecords
 {
-    protected static string $resource = MutasiResource::class;
+    protected static string $resource = UsulMutasiResource::class;
 
-    protected static ?string $title = 'Mutasi';
+    protected static ?string $title = 'Usul Mutasi';
 
     protected function getHeaderActions(): array
     {
@@ -22,10 +22,10 @@ class ListMutasi extends ListRecords
                 ->exports([
                     ExcelExport::make()
                         ->fromTable()
-                        ->withFilename(fn ($resource) => $resource::getSlug().'-'.now()->format('Y-m-d'))
+                        ->withFilename(fn ($resource) => $resource::getSlug() . '-' . now()->format('Y-m-d'))
                         ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
                         ->withColumns([
-                            Column::make('rancangan.nama')->heading('Rancangan'),
+                            Column::make('rencana.nama')->heading('Rencana'),
                             Column::make('pegawai.nama_gelar')->heading('Nama'),
                             Column::make('pegawai.nik')->heading('NIK'),
                             Column::make('pegawai.nuptk')->heading('NUPTK'),

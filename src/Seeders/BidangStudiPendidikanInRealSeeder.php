@@ -28,7 +28,7 @@ class BidangStudiPendidikanInRealSeeder extends Seeder
             ['nama' => 'Pendidikan Agama Islam'],
             ['nama' => 'Matematika'],
             ['nama' => 'Bahasa Inggris'],
-            ['nama' => 'Pendidikan Kewarganegaraan (Pkn)'],
+            ['nama' => 'Pendidikan Kewarganegaraan (PKn)'],
             ['nama' => 'Bahasa Indonesia'],
             ['nama' => 'Pendidikan Ilmu Pengetahuan Sosial (IPS)'],
             ['nama' => 'Umum'],

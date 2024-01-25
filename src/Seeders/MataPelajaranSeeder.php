@@ -3,7 +3,7 @@
 namespace Kanekescom\Simgtk\Seeders;
 
 use Illuminate\Database\Seeder;
-use Kanekescom\Simgtk\Models\MataPelajaran;
+use Kanekescom\Simgtk\Factories\MataPelajaranFactory;
 
 class MataPelajaranSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class MataPelajaranSeeder extends Seeder
      */
     public function run(): void
     {
-        MataPelajaran::factory()
+        MataPelajaranFactory::new()
             ->count(5)
             ->create();
     }

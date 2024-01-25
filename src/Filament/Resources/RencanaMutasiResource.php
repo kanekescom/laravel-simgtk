@@ -7,22 +7,22 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Kanekescom\Simgtk\Filament\Resources\RancanganMutasiResource\Pages;
-use Kanekescom\Simgtk\Models\RancanganMutasi;
+use Kanekescom\Simgtk\Filament\Resources\RencanaMutasiResource\Pages;
+use Kanekescom\Simgtk\Models\RencanaMutasi;
 
-class RancanganMutasiResource extends Resource
+class RencanaMutasiResource extends Resource
 {
-    protected static ?string $slug = 'rancangan-mutasi';
+    protected static ?string $slug = 'rencana-mutasi';
 
-    protected static ?string $pluralLabel = 'Rancangan Mutasi';
+    protected static ?string $pluralLabel = 'Rencana Mutasi';
 
-    protected static ?string $model = RancanganMutasi::class;
+    protected static ?string $model = RencanaMutasi::class;
 
     protected static bool $shouldRegisterNavigation = true;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Rancangan Mutasi';
+    protected static ?string $navigationLabel = 'Rencana Mutasi';
 
     protected static ?string $navigationGroup = 'Referensi Mutasi';
 
@@ -43,7 +43,7 @@ class RancanganMutasiResource extends Resource
                     ->date()
                     ->required()
                     ->label('Tanggal Berakhir'),
-                Forms\Components\Toggle::make('is_selesai')
+                Forms\Components\Toggle::make('is_aktif')
                     ->label('Selesai'),
             ]);
     }
@@ -64,12 +64,12 @@ class RancanganMutasiResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Berakhir'),
-                Tables\Columns\ToggleColumn::make('is_selesai')
+                Tables\Columns\ToggleColumn::make('is_aktif')
                     ->sortable()
                     ->label('Selesai'),
             ])
             ->filters([
-                Tables\Filters\TernaryFilter::make('is_selesai')
+                Tables\Filters\TernaryFilter::make('is_aktif')
                     ->label('Selesai'),
             ])
             ->actions([
@@ -95,9 +95,9 @@ class RancanganMutasiResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRancanganMutasi::route('/'),
-            'create' => Pages\CreateRancanganMutasi::route('/create'),
-            'edit' => Pages\EditRancanganMutasi::route('/{record}/edit'),
+            'index' => Pages\ListRencanaMutasi::route('/'),
+            'create' => Pages\CreateRencanaMutasi::route('/create'),
+            'edit' => Pages\EditRencanaMutasi::route('/{record}/edit'),
         ];
     }
 }
