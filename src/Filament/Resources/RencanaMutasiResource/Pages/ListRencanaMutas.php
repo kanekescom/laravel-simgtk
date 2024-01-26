@@ -46,6 +46,9 @@ class ListRencanaMutasi extends ListRecords
                         ->withColumns([
                             Column::make('id')->heading('ID'),
                             Column::make('nama')->heading('Nama'),
+                            Column::make('tanggal_mulai')->heading('Tanggal Mulai'),
+                            Column::make('tanggal_berakhir')->heading('Tanggal Berakhir'),
+                            Column::make('is_aktif')->heading('Aktif'),
                         ])
                         ->ignoreFormatting(),
                 ])->icon(false),

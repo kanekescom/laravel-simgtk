@@ -70,6 +70,9 @@ class RencanaMutasiResource extends Resource
                 Tables\Columns\ToggleColumn::make('is_aktif')
                     ->sortable()
                     ->label('Aktif'),
+                Tables\Columns\TextColumn::make('usul_mutasi_count')
+                    ->counts('usulMutasi')
+                    ->label('Usulan'),
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_aktif')

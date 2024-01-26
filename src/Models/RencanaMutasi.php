@@ -52,9 +52,9 @@ class RencanaMutasi extends Model
         return "{$this->tanggal_mulai} - {$this->tanggal_berakhir}";
     }
 
-    public function pegawai(): HasMany
+    public function usulMutasi(): HasMany
     {
-        return $this->hasMany(Pegawai::class);
+        return $this->hasMany(UsulMutasi::class);
     }
 
     public function scopeAktif($query)
