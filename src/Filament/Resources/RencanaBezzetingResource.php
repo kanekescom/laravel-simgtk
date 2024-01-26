@@ -14,7 +14,7 @@ use Kanekescom\Simgtk\Models\RencanaBezzeting;
 
 class RencanaBezzetingResource extends Resource
 {
-    protected static ?string $slug = 'rencana-bezzeting';
+    protected static ?string $slug = 'referensi/bezzeting/rencana-bezzeting';
 
     protected static ?string $pluralLabel = 'Rencana Bezzeting';
 

@@ -14,7 +14,7 @@ use Kanekescom\Simgtk\Models\RencanaMutasi;
 
 class RencanaMutasiResource extends Resource
 {
-    protected static ?string $slug = 'rencana-mutasi';
+    protected static ?string $slug = 'referensi/mutasi/rencana-mutasi';
 
     protected static ?string $pluralLabel = 'Rencana Mutasi';
 
