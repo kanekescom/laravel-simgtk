@@ -22,7 +22,7 @@ class DemoDatabaseSeeder extends Seeder
             MataPelajaranSeeder::class,
             WilayahSeeder::class,
             SekolahSeeder::class,
-            // BezzetingSeeder::class,
+            RencanaBezzetingSeeder::class,
             PegawaiSeeder::class,
             RencanaMutasiSeeder::class,
             UsulMutasiSeeder::class,
