@@ -18,7 +18,7 @@ class UserDemoSeedCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Seed User demo data to database from faker';
+    protected $description = 'Seed User demo data into database from faker';
 
     /**
      * Execute the console command.
