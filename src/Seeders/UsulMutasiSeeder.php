@@ -13,7 +13,7 @@ class UsulMutasiSeeder extends Seeder
     public function run(): void
     {
         UsulMutasiFactory::new()
-            ->count(5)
+            ->count(15)
             ->create();
     }
 }

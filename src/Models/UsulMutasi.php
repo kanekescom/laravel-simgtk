@@ -60,4 +60,12 @@ class UsulMutasi extends Model
     {
         return $this->belongsTo(MataPelajaran::class, 'tujuan_mata_pelajaran_id');
     }
+
+    public function scopeAktif($query)
+    {
+        return $query
+            ->withWhereHas('rencana', function ($query) {
+                $query->where('is_aktif', true);
+            });
+    }
 }

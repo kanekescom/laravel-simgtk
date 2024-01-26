@@ -59,11 +59,17 @@ class RencanaMutasi extends Model
 
     public function scopeAktif($query)
     {
+        return $query
+            ->where('is_aktif', true);
+    }
+
+    public function scopePeriodeAktif($query)
+    {
         $today = now();
 
         return $query
             ->where('tanggal_mulai', '<=', $today)
             ->where('tanggal_berakhir', '>=', $today)
-            ->where('is_aktif', false);
+            ->where('is_aktif', true);
     }
 }

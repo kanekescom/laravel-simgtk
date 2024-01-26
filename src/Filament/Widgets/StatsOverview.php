@@ -17,9 +17,9 @@ class StatsOverview extends BaseWidget
     protected function getStats(): array
     {
         return [
-            Stat::make('Jumlah Pegawai Aktif', Pegawai::count()),
+            Stat::make('Jumlah Pegawai Aktif', Pegawai::aktif()->count()),
             Stat::make('Jumlah Sekolah Aktif', Sekolah::count()),
-            Stat::make('Jumlah Usul Mutasi', UsulMutasi::count()),
+            Stat::make('Jumlah Usul Mutasi', UsulMutasi::aktif()->count()),
         ];
     }
 }
