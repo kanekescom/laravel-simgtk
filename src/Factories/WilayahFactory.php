@@ -20,7 +20,6 @@ class WilayahFactory extends Factory
     public function definition(): array
     {
         return [
-            'kode' => fake()->unique()->numerify('##.##.##'),
             'nama' => fake()->unique()->city(),
         ];
     }
