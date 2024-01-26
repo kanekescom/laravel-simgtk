@@ -55,6 +55,12 @@ class JenjangSekolahResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Nama'),
+                Tables\Columns\TextColumn::make('sekolah_count')
+                    ->counts('sekolah')
+                    ->label('Sekolah'),
+                Tables\Columns\TextColumn::make('mata_pelajaran_count')
+                    ->counts('mataPelajaran')
+                    ->label('Mata Pelajaran'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

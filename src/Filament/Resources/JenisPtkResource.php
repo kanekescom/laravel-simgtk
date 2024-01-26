@@ -48,6 +48,9 @@ class JenisPtkResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Nama'),
+                Tables\Columns\TextColumn::make('pegawai_count')
+                    ->counts('pegawai')
+                    ->label('Pegawai'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
