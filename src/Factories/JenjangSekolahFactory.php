@@ -20,8 +20,8 @@ class JenjangSekolahFactory extends Factory
     public function definition(): array
     {
         return [
-            'kode' => fake()->unique()->numerify('##.##.##'),
-            'nama' => strtoupper(fake()->unique()->word()),
+            'kode' => str($string = fake()->unique()->word())->lower()->slug(),
+            'nama' => str($string)->upper(),
         ];
     }
 }

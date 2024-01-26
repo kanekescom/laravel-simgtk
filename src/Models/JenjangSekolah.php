@@ -18,11 +18,16 @@ class JenjangSekolah extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix').'jenjang_sekolah';
+        return config('simgtk.table_prefix') . 'jenjang_sekolah';
     }
 
     public function sekolah(): HasMany
     {
         return $this->hasMany(Sekolah::class);
+    }
+
+    public function mataPelajaran(): HasMany
+    {
+        return $this->hasMany(MataPelajaran::class);
     }
 }
