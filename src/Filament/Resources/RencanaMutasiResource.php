@@ -7,6 +7,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\RencanaMutasiResource\Pages;
 use Kanekescom\Simgtk\Models\RencanaMutasi;
 
@@ -32,6 +34,7 @@ class RencanaMutasiResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('nama')
                     ->maxLength(255)
+                    ->unique(ignoreRecord: true)
                     ->required()
                     ->columnSpanFull()
                     ->label('Nama'),
@@ -40,11 +43,11 @@ class RencanaMutasiResource extends Resource
                     ->required()
                     ->label('Tanggal Mulai'),
                 Forms\Components\DatePicker::make('tanggal_berakhir')
-                    ->date()
+                    ->afterOrEqual('tanggal_mulai')
                     ->required()
                     ->label('Tanggal Berakhir'),
                 Forms\Components\Toggle::make('is_aktif')
-                    ->label('Selesai'),
+                    ->label('Aktif'),
             ]);
     }
 
@@ -66,18 +69,24 @@ class RencanaMutasiResource extends Resource
                     ->label('Berakhir'),
                 Tables\Columns\ToggleColumn::make('is_aktif')
                     ->sortable()
-                    ->label('Selesai'),
+                    ->label('Aktif'),
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_aktif')
-                    ->label('Selesai'),
+                    ->label('Aktif'),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
@@ -85,11 +94,12 @@ class RencanaMutasiResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
+    public static function getEloquentQuery(): Builder
     {
-        return [
-            //
-        ];
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 
     public static function getPages(): array
