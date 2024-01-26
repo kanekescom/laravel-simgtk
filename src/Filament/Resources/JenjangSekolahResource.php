@@ -7,6 +7,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\JenjangSekolahResource\Pages;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 
@@ -45,40 +47,50 @@ class JenjangSekolahResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('kode')
+                    ->searchable()
+                    ->sortable()
+                    ->label('Kode'),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable()
                     ->sortable()
                     ->label('Nama'),
             ])
             ->filters([
-                //
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
-                // Tables\Actions\BulkActionGroup::make([
-                //     Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
+                ]),
             ])
             ->emptyStateActions([
-                // Tables\Actions\CreateAction::make(),
+                Tables\Actions\CreateAction::make(),
             ]);
     }
 
-    public static function getRelations(): array
+    public static function getEloquentQuery(): Builder
     {
-        return [
-            //
-        ];
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListJenjangSekolah::route('/'),
-            // 'create' => Pages\CreateJenjangSekolah::route('/create'),
-            // 'edit' => Pages\EditJenjangSekolah::route('/{record}/edit'),
+            'create' => Pages\CreateJenjangSekolah::route('/create'),
+            'edit' => Pages\EditJenjangSekolah::route('/{record}/edit'),
         ];
     }
 }

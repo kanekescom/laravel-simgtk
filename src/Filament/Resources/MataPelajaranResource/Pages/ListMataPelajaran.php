@@ -5,6 +5,11 @@ namespace Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource\Pages;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource;
+use Konnco\FilamentImport\Actions\ImportAction;
+use Konnco\FilamentImport\Actions\ImportField;
+use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ListMataPelajaran extends ListRecords
 {
@@ -15,7 +20,39 @@ class ListMataPelajaran extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            // Actions\CreateAction::make()->label('Create'),
+            ImportAction::make()
+                ->fields([
+                    ImportField::make('id')
+                        ->rules('required|max:255')
+                        ->label('ID'),
+                    ImportField::make('jenjangSekolah.nama')
+                        ->rules('required|max:255')
+                        ->label('Jenjang Sekolah'),
+                    ImportField::make('kode')
+                        ->rules('required|max:255')
+                        ->label('Kode'),
+                    ImportField::make('nama')
+                        ->rules('required|max:255')
+                        ->label('Nama'),
+                    ImportField::make('singkatan')
+                        ->rules('required|max:255')
+                        ->label('Singkatan'),
+                ]),
+            ExportAction::make()
+                ->exports([
+                    ExcelExport::make()
+                        ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d'))
+                        ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
+                        ->withColumns([
+                            Column::make('id')->heading('ID'),
+                            Column::make('jenjangSekolah.nama')->heading('Jenjang Sekolah'),
+                            Column::make('kode')->heading('Kode'),
+                            Column::make('nama')->heading('Nama'),
+                            Column::make('singkatan')->heading('Singkatan'),
+                        ])
+                        ->ignoreFormatting(),
+                ])->icon(false),
+            Actions\CreateAction::make()->label('Create'),
         ];
     }
 }

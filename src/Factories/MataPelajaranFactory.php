@@ -24,6 +24,7 @@ class MataPelajaranFactory extends Factory
             'jenjang_sekolah_id' => JenjangSekolah::inRandomOrder()->first() ?? JenjangSekolahFactory::new()->create()->id,
             'kode' => fake()->unique()->numerify('##.##.##'),
             'nama' => fake()->unique()->sentence(3),
+            'singkatan' => strtoupper(fake()->unique()->word()),
         ];
     }
 }
