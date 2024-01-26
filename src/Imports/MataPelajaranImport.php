@@ -18,7 +18,7 @@ class MataPelajaranImport implements ToModel, WithHeadingRow
     {
         return new MataPelajaran([
             'id' => $row['id'],
-            'jenjang_sekolah_id' => JenjangSekolah::where('kode', $row['jenjang_sekolah_kode'])->first(),
+            'jenjang_sekolah_id' => JenjangSekolah::where('kode', $row['jenjang_sekolah'])->first()->id,
             'kode' => $row['kode'],
             'nama' => $row['nama'],
             'singkatan' => $row['singkatan'],

@@ -48,7 +48,7 @@ class MataPelajaranResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->label('Nama'),
-                Forms\Components\TextInput::make('nama')
+                Forms\Components\TextInput::make('singkatan')
                     ->required()
                     ->maxLength(255)
                     ->label('Singkatan'),
@@ -60,6 +60,7 @@ class MataPelajaranResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('jenjangSekolah.nama')
+                    ->visible(fn ($livewire) => $livewire->activeTab === '')
                     ->searchable()
                     ->sortable()
                     ->label('Jenjang Sekolah'),
@@ -77,11 +78,6 @@ class MataPelajaranResource extends Resource
                     ->label('Singkatan'),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('jenjang_sekolah')
-                    ->relationship('jenjangSekolah', 'nama')
-                    ->searchable()
-                    ->preload()
-                    ->label('Jenjang Sekolah'),
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([

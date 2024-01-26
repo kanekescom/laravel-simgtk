@@ -22,9 +22,9 @@ class MataPelajaranFactory extends Factory
     {
         return [
             'jenjang_sekolah_id' => JenjangSekolah::inRandomOrder()->first() ?? JenjangSekolahFactory::new()->create()->id,
-            'kode' => fake()->unique()->numerify('##.##.##'),
+            'kode' => str($string = fake()->unique()->word())->lower()->slug(),
             'nama' => fake()->unique()->sentence(3),
-            'singkatan' => strtoupper(fake()->unique()->word()),
+            'singkatan' => str($string)->upper(),
         ];
     }
 }
