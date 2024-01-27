@@ -76,9 +76,9 @@ class MataPelajaranResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Singkatan'),
-                Tables\Columns\TextColumn::make('pegawai_count')
-                    ->counts('pegawai')
-                    ->label('Pegawai'),
+                Tables\Columns\TextColumn::make('pegawai_aktif_count')
+                    ->counts('pegawaiAktif')
+                    ->label('Jumlah Pegawai'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

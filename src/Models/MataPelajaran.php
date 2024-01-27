@@ -36,4 +36,9 @@ class MataPelajaran extends Model
     {
         return $this->hasMany(Pegawai::class);
     }
+
+    public function pegawaiAktif(): HasMany
+    {
+        return $this->hasMany(Pegawai::class)->aktif();
+    }
 }

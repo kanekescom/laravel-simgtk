@@ -18,11 +18,16 @@ class JenisPtk extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix').'jenis_ptk';
+        return config('simgtk.table_prefix') . 'jenis_ptk';
     }
 
     public function pegawai(): HasMany
     {
         return $this->hasMany(Pegawai::class);
+    }
+
+    public function pegawaiAktif(): HasMany
+    {
+        return $this->hasMany(Pegawai::class)->aktif();
     }
 }

@@ -37,6 +37,8 @@ class ListWilayah extends ListRecords
                         ->withColumns([
                             Column::make('id')->heading('ID'),
                             Column::make('nama')->heading('Nama'),
+                            Column::make('sekolah_count')->getStateUsing(fn ($record) => $record->sekolah()->count())->heading('Jumlah Sekolah'),
+                            Column::make('pegawai_aktif_count')->getStateUsing(fn ($record) => $record->pegawaiAktif()->count())->heading('Jumlah Pegawai'),
                         ])
                         ->ignoreFormatting(),
                 ])->icon(false),

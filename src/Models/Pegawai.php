@@ -33,14 +33,14 @@ class Pegawai extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix').'pegawai';
+        return config('simgtk.table_prefix') . 'pegawai';
     }
 
     public function getNamaGelarAttribute()
     {
         return ($this->gelar_depan ? "{$this->gelar_depan} " : '')
-            .$this->nama
-            .($this->gelar_belakang ? ", {$this->gelar_belakang}" : '');
+            . $this->nama
+            . ($this->gelar_belakang ? ", {$this->gelar_belakang}" : '');
     }
 
     public function getNamaIdAttribute()
@@ -99,7 +99,6 @@ class Pegawai extends Model
     public function scopeAktif($query)
     {
         return $query
-            ->whereNull('tmt_pensiun')
             ->whereNull('tanggal_sk_pensiun')
             ->whereNull('nomor_sk_pensiun');
     }
@@ -107,9 +106,8 @@ class Pegawai extends Model
     public function scopePensiun($query)
     {
         return $query
-            ->whereNotNull('tmt_pensiun')
             ->whereNotNull('tanggal_sk_pensiun')
-            ->whereNotNull('nomor_sk_pensiun');
+            ->orWhereNotNull('nomor_sk_pensiun');
     }
 
     public function scopeAkanPensiun($query)

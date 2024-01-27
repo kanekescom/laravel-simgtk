@@ -51,6 +51,7 @@ class ListMataPelajaran extends ListRecords
                             Column::make('kode')->heading('Kode'),
                             Column::make('nama')->heading('Nama'),
                             Column::make('singkatan')->heading('Singkatan'),
+                            Column::make('pegawai_aktif_count')->getStateUsing(fn ($record) => $record->pegawaiAktif()->count())->heading('Jumlah Pegawai'),
                         ])
                         ->ignoreFormatting(),
                 ])->icon(false),
