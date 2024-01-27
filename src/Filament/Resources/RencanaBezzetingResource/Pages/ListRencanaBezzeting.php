@@ -36,7 +36,7 @@ class ListRencanaBezzeting extends ListRecords
                         ->label('Nama'),
                     ImportField::make('is_aktif')
                         ->rules('boolean')
-                        ->label('Nama'),
+                        ->label('Aktif'),
                 ]),
             ExportAction::make()
                 ->exports([
@@ -46,6 +46,9 @@ class ListRencanaBezzeting extends ListRecords
                         ->withColumns([
                             Column::make('id')->heading('ID'),
                             Column::make('nama')->heading('Nama'),
+                            Column::make('tanggal_mulai')->heading('Tanggal Mulai'),
+                            Column::make('tanggal_berakhir')->heading('Tanggal Berakhir'),
+                            Column::make('is_aktif')->heading('Aktif'),
                         ])
                         ->ignoreFormatting(),
                 ])->icon(false),
