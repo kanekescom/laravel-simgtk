@@ -36,6 +36,7 @@ class ImportCommand extends Command
         'rencana-mutasi' => Models\RencanaMutasi::class,
         'usul-mutasi' => Models\UsulMutasi::class,
         'rancangan-mutasi' => Models\RancanganMutasi::class,
+        'rancangan-bezzeting' => Models\RancanganBezzeting::class,
     ];
 
     protected $importOptions = [
@@ -51,6 +52,7 @@ class ImportCommand extends Command
         'rencana-mutasi' => Imports\RencanaMutasiImport::class,
         'usul-mutasi' => Imports\UsulMutasiImport::class,
         // 'rancangan-mutasi' => Imports\RancanganMutasiImport::class,
+        // 'rancangan-bezzeting' => Imports\RancanganBezzetingImport::class,
     ];
 
     /**
@@ -78,7 +80,7 @@ class ImportCommand extends Command
             if (isset($this->importOptions[$choice])) {
                 $path_file = $this->ask('Path to XLSX file');
 
-                if ($this->confirm('Do you wish to import data?')) {
+                if ($this->confirm('Do you wish to import data?', true)) {
                     Excel::import(new $this->importOptions[$choice], $path_file);
                 }
             }

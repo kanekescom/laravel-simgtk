@@ -7,6 +7,9 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Pages;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Sekolah;
@@ -82,26 +85,25 @@ class SekolahResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
-                    ->searchable()
-                    ->sortable()
+                    ->description(fn (Model $record): string => "{$record->npsn}")
+                    ->wrap()
+                    ->searchable(['nama', 'npsn'])
+                    ->sortable('nama')
                     ->label('Nama'),
-                Tables\Columns\TextColumn::make('npsn')
-                    ->searchable()
-                    ->sortable()
-                    ->label('NPSN'),
                 Tables\Columns\TextColumn::make('wilayah.nama')
+                    ->wrap()
                     ->searchable()
                     ->sortable()
                     ->label('Wilayah'),
-                Tables\Columns\TextColumn::make('jumlah_kelas')
+                Tables\Columns\TextInputColumn::make('jumlah_kelas')
                     ->searchable()
                     ->sortable()
                     ->label('Kelas'),
-                Tables\Columns\TextColumn::make('jumlah_rombel')
+                Tables\Columns\TextInputColumn::make('jumlah_rombel')
                     ->searchable()
                     ->sortable()
                     ->label('Rombel'),
-                Tables\Columns\TextColumn::make('jumlah_siswa')
+                Tables\Columns\TextInputColumn::make('jumlah_siswa')
                     ->searchable()
                     ->sortable()
                     ->label('Siswa'),
@@ -117,13 +119,19 @@ class SekolahResource extends Resource
                     ->searchable()
                     ->preload()
                     ->label('Wilayah'),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
@@ -131,11 +139,12 @@ class SekolahResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
+    public static function getEloquentQuery(): Builder
     {
-        return [
-            //
-        ];
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 
     public static function getPages(): array

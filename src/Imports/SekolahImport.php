@@ -21,8 +21,11 @@ class SekolahImport implements ToModel, WithHeadingRow
             'id' => $row['id'],
             'nama' => $row['nama'],
             'npsn' => $row['npsn'],
-            'jenjang_sekolah_id' => JenjangSekolah::where('kode', $row['jenjang_sekolah_kode'])->first(),
-            'wilayah_id' => Wilayah::where('kode', $row['wilayah_nama'])->first(),
+            'jenjang_sekolah_id' => JenjangSekolah::where('nama', $row['jenjang_sekolah'])->first()->id,
+            'wilayah_id' => Wilayah::where('nama', $row['wilayah'])->first()->id,
+            'jumlah_kelas' => $row['jumlah_kelas'],
+            'jumlah_rombel' => $row['jumlah_rombel'],
+            'jumlah_siswa' => $row['jumlah_siswa'],
         ]);
     }
 }
