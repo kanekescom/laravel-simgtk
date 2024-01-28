@@ -49,6 +49,7 @@ class ListRencanaBezzeting extends ListRecords
                             Column::make('tanggal_mulai')->heading('Tanggal Mulai'),
                             Column::make('tanggal_berakhir')->heading('Tanggal Berakhir'),
                             Column::make('is_aktif')->heading('Aktif'),
+                            Column::make('sekolah_count')->getStateUsing(fn ($record) => $record->sekolah()->count())->heading('Jumlah Sekolah'),
                         ])
                         ->ignoreFormatting(),
                 ])->icon(false),

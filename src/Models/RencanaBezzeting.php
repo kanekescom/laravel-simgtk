@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RencanaBezzeting extends Model
@@ -31,6 +32,13 @@ class RencanaBezzeting extends Model
             if ($is_aktif->count() > 0 && $model->is_aktif == true) {
                 $is_aktif->update(['is_aktif' => false]);
             }
+
+            $sekolah = Sekolah::select('id AS sekolah_id')
+                ->get()
+                ->toArray();
+
+            $model->rancangan()
+                ->createMany($sekolah);
         });
 
         static::updating(function ($model) {
@@ -52,9 +60,21 @@ class RencanaBezzeting extends Model
         return "{$this->tanggal_mulai} - {$this->tanggal_berakhir}";
     }
 
-    public function pegawai(): HasMany
+    public function rancangan(): HasMany
     {
-        return $this->hasMany(Pegawai::class);
+        return $this->hasMany(RancanganBezzeting::class);
+    }
+
+    public function sekolah(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Sekolah::class,
+            RancanganBezzeting::class,
+            'rencana_bezzeting_id',
+            'id',
+            'id',
+            'sekolah_id',
+        );
     }
 
     public function scopeAktif($query)

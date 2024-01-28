@@ -71,6 +71,9 @@ class RencanaBezzetingResource extends Resource
                 Tables\Columns\ToggleColumn::make('is_aktif')
                     ->sortable()
                     ->label('Aktif'),
+                Tables\Columns\TextColumn::make('sekolah_count')
+                    ->counts('sekolah')
+                    ->label('Sekolah'),
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_aktif')
