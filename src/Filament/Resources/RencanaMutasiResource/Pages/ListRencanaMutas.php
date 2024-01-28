@@ -49,7 +49,7 @@ class ListRencanaMutasi extends ListRecords
                             Column::make('tanggal_mulai')->heading('Tanggal Mulai'),
                             Column::make('tanggal_berakhir')->heading('Tanggal Berakhir'),
                             Column::make('is_aktif')->heading('Aktif'),
-                            Column::make('usulMutasi_count')->getStateUsing(fn ($record) => $record->usulMutasi()->count())->heading('Jumlah Usulan'),
+                            Column::make('usul_count')->getStateUsing(fn ($record) => $record->usul()->count())->heading('Jumlah Usulan'),
                         ])
                         ->ignoreFormatting(),
                 ])->icon(false),

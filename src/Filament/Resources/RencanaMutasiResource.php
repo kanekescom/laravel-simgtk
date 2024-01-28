@@ -71,8 +71,8 @@ class RencanaMutasiResource extends Resource
                 Tables\Columns\ToggleColumn::make('is_aktif')
                     ->sortable()
                     ->label('Aktif'),
-                Tables\Columns\TextColumn::make('usul_mutasi_count')
-                    ->counts('usulMutasi')
+                Tables\Columns\TextColumn::make('usul_count')
+                    ->counts('usul')
                     ->label('Jumlah Usulan'),
             ])
             ->filters([
