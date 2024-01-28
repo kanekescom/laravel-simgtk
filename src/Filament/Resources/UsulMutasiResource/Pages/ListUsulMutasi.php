@@ -38,9 +38,9 @@ class ListUsulMutasi extends ListRecords
                     ImportField::make('pegawai.nuptk')->label('NUPTK'),
                     ImportField::make('pegawai.nip')->label('NIP'),
                     ImportField::make('asalSekolah.nama')->label('Asal Sekolah'),
-                    ImportField::make('asalMataPelajaran.nama')->label('Asal Mata Pelajaran'),
+                    ImportField::make('asalMataPelajaran.nama')->label('Asal Mapel'),
                     ImportField::make('tujuanSekolah.nama')->label('Tujuan Sekolah'),
-                    ImportField::make('tujuanMataPelajaran.nama')->label('Tujuan Mata Pelajaran'),
+                    ImportField::make('tujuanMataPelajaran.nama')->label('Tujuan Mapel'),
                 ]),
             ExportAction::make()
                 ->exports([
@@ -55,9 +55,9 @@ class ListUsulMutasi extends ListRecords
                             Column::make('pegawai.nuptk')->heading('NUPTK'),
                             Column::make('pegawai.nip')->heading('NIP'),
                             Column::make('asalSekolah.nama')->heading('Asal Sekolah'),
-                            Column::make('asalMataPelajaran.nama')->heading('Asal Mata Pelajaran'),
+                            Column::make('asalMataPelajaran.nama')->heading('Asal Mapel'),
                             Column::make('tujuanSekolah.nama')->heading('Tujuan Sekolah'),
-                            Column::make('tujuanMataPelajaran.nama')->heading('Tujuan Mata Pelajaran'),
+                            Column::make('tujuanMataPelajaran.nama')->heading('Tujuan Mapel'),
                         ])
                         ->ignoreFormatting(),
                 ])->icon(false),
