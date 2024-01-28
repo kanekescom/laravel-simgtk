@@ -51,7 +51,7 @@ class JenisPtkResource extends Resource
                     ->label('Nama'),
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
-                    ->label('Jumlah Pegawai'),
+                    ->label('Pegawai'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

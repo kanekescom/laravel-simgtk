@@ -56,13 +56,13 @@ class JenjangSekolahResource extends Resource
                     ->label('Nama'),
                 Tables\Columns\TextColumn::make('sekolah_count')
                     ->counts('sekolah')
-                    ->label('Jumlah Sekolah'),
+                    ->label('Sekolah'),
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
-                    ->label('Jumlah Pegawai'),
+                    ->label('Pegawai'),
                 Tables\Columns\TextColumn::make('mata_pelajaran_count')
                     ->counts('mataPelajaran')
-                    ->label('Jumlah Mapel'),
+                    ->label('Mapel'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
