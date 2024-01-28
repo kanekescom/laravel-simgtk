@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\UsulMutasiResource\Pages;
+use Kanekescom\Simgtk\Models\RencanaMutasi;
 use Kanekescom\Simgtk\Models\Sekolah;
 use Kanekescom\Simgtk\Models\UsulMutasi;
 
@@ -30,6 +31,16 @@ class UsulMutasiResource extends Resource
     protected static ?string $navigationLabel = 'Usul Mutasi';
 
     protected static ?string $navigationGroup = null;
+
+    public static function canCreate(): bool
+    {
+        return RencanaMutasi::periodeAktif()->exists();
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return RencanaMutasi::periodeAktif()->exists();
+    }
 
     public static function form(Form $form): Form
     {

@@ -5,8 +5,10 @@ namespace Kanekescom\Simgtk\Filament\Resources\UsulMutasiResource\Pages;
 use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Contracts\Support\Htmlable;
 use Kanekescom\Simgtk\Filament\Resources\UsulMutasiResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
+use Kanekescom\Simgtk\Models\RencanaMutasi;
 use Konnco\FilamentImport\Actions\ImportAction;
 use Konnco\FilamentImport\Actions\ImportField;
 use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
@@ -18,6 +20,11 @@ class ListUsulMutasi extends ListRecords
     protected static string $resource = UsulMutasiResource::class;
 
     protected static ?string $title = 'Usul Mutasi';
+
+    public function getSubheading(): string | Htmlable | null
+    {
+        return RencanaMutasi::aktif()->first()?->nama_periode;
+    }
 
     protected function getHeaderActions(): array
     {
@@ -54,7 +61,7 @@ class ListUsulMutasi extends ListRecords
                         ])
                         ->ignoreFormatting(),
                 ])->icon(false),
-            Actions\CreateAction::make()->label('Create'),
+            Actions\CreateAction::make(),
         ];
     }
 
