@@ -75,7 +75,8 @@ class ListMataPelajaran extends ListRecords
             $tabs[$jenjangSekolah->id] = Tab::make($jenjangSekolah->id)
                 ->badge(
                     $this->getModel()::query()
-                        ->where('jenjang_sekolah_id', $jenjangSekolah->id)->count()
+                        ->where('jenjang_sekolah_id', $jenjangSekolah->id)
+                        ->count()
                 )
                 ->modifyQueryUsing(function ($query) use ($jenjangSekolah) {
                     return $query
