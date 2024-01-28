@@ -50,6 +50,7 @@ class ListRencanaMutasi extends ListRecords
                             Column::make('tanggal_berakhir')->heading('Tanggal Berakhir'),
                             Column::make('is_aktif')->heading('Aktif'),
                             Column::make('usul_count')->getStateUsing(fn ($record) => $record->usul()->count())->heading('Jumlah Usulan'),
+                            Column::make('pegawai_count')->getStateUsing(fn ($record) => $record->pegawai()->count())->heading('Jumlah Pegawai'),
                         ])
                         ->ignoreFormatting(),
                 ])->icon(false),
