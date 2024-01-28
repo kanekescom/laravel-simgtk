@@ -8,6 +8,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource\Pages;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
@@ -61,18 +62,18 @@ class MataPelajaranResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('jenjangSekolah.nama')
                     ->visible(fn ($livewire) => $livewire->activeTab === '')
+                    ->wrap()
                     ->searchable()
                     ->sortable()
                     ->label('Jenjang Sekolah'),
-                Tables\Columns\TextColumn::make('kode')
-                    ->searchable()
-                    ->sortable()
-                    ->label('Kode'),
                 Tables\Columns\TextColumn::make('nama')
+                    ->description(fn (Model $record): string => "{$record->kode}")
+                    ->wrap()
                     ->searchable()
                     ->sortable()
                     ->label('Nama'),
                 Tables\Columns\TextColumn::make('singkatan')
+                    ->wrap()
                     ->searchable()
                     ->sortable()
                     ->label('Singkatan'),

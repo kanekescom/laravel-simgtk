@@ -8,6 +8,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\JenjangSekolahResource\Pages;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
@@ -47,11 +48,9 @@ class JenjangSekolahResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('kode')
-                    ->searchable()
-                    ->sortable()
-                    ->label('Kode'),
                 Tables\Columns\TextColumn::make('nama')
+                    ->description(fn (Model $record): string => "{$record->kode}")
+                    ->wrap()
                     ->searchable()
                     ->sortable()
                     ->label('Nama'),

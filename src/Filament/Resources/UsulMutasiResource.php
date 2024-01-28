@@ -101,23 +101,21 @@ class UsulMutasiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('rencana.nama')
-                    ->description(fn (UsulMutasi $record): string => "{$record->rencana?->periode_tanggal}")
-                    ->searchable()
-                    ->sortable()
-                    ->label('Rencana Mutasi'),
                 Tables\Columns\TextColumn::make('pegawai.nama_gelar')
-                    ->description(fn (UsulMutasi $record): string => $record->pegawai?->nama_id ?? '')
+                    ->description(fn (Model $record): string => $record->pegawai?->nama_id ?? '')
+                    ->wrap()
                     ->searchable(['nama', 'nip', 'nuptk', 'nik'])
                     ->sortable(['pegawai.nama'])
                     ->label('Pegawai'),
                 Tables\Columns\TextColumn::make('asalSekolah.nama')
-                    ->description(fn (UsulMutasi $record): string => "{$record->asalMataPelajaran?->nama}")
+                    ->description(fn (Model $record): string => "{$record->asalMataPelajaran?->nama}")
+                    ->wrap()
                     ->searchable()
                     ->sortable()
                     ->label('Sekolah Asal'),
                 Tables\Columns\TextColumn::make('tujuanSekolah.nama')
-                    ->description(fn (UsulMutasi $record): string => "{$record->tujuanMataPelajaran?->nama}")
+                    ->description(fn (Model $record): string => "{$record->tujuanMataPelajaran?->nama}")
+                    ->wrap()
                     ->searchable()
                     ->sortable()
                     ->label('Sekolah Tujuan'),

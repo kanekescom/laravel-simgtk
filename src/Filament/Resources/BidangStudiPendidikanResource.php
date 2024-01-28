@@ -45,6 +45,7 @@ class BidangStudiPendidikanResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
+                    ->wrap()
                     ->searchable()
                     ->sortable()
                     ->label('Nama'),
