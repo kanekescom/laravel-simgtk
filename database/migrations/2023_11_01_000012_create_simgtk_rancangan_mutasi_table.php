@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create(config('simgtk.table_prefix') . 'rancangan_mutasi', function (Blueprint $table) {
             $table->ulid('id')->primary();
+            $table->foreignUlid('rencana_mutasi_id')->index();
             $table->foreignUlid('pegawai_id')->index();
             $table->foreignUlid('asal_sekolah_id')->index()->nullable();
             $table->foreignUlid('asal_mata_pelajaran_id')->index()->nullable();

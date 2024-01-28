@@ -74,6 +74,9 @@ class RencanaMutasiResource extends Resource
                 Tables\Columns\TextColumn::make('usul_count')
                     ->counts('usul')
                     ->label('Jumlah Usulan'),
+                Tables\Columns\TextColumn::make('pegawai_count')
+                    ->counts('pegawai')
+                    ->label('Jumlah Pegawai'),
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_aktif')
