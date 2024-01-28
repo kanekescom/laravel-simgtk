@@ -41,4 +41,14 @@ class MataPelajaran extends Model
     {
         return $this->hasMany(Pegawai::class)->aktif();
     }
+
+    public function scopeJenjangSekolahBy($query, $jenjang_sekolah_id = null)
+    {
+        if ($jenjang_sekolah_id) {
+            return $query
+                ->where('jenjang_sekolah_id', $jenjang_sekolah_id);
+        }
+
+        return $query;
+    }
 }

@@ -61,6 +61,14 @@ class UsulMutasi extends Model
         return $this->belongsTo(MataPelajaran::class, 'tujuan_mata_pelajaran_id');
     }
 
+    public function scopeTujuanJenjangSekolah($query, $jenjang_sekolah_id)
+    {
+        return $query
+            ->withWhereHas('tujuanSekolah', function ($query) use ($jenjang_sekolah_id) {
+                $query->where('jenjang_sekolah_id', $jenjang_sekolah_id);
+            });
+    }
+
     public function scopeAktif($query)
     {
         return $query

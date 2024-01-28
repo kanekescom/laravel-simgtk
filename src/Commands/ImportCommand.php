@@ -49,7 +49,7 @@ class ImportCommand extends Command
         // 'pegawai' => Imports\Pegawai::class,
         'rencana-bezzeting' => Imports\RencanaBezzetingImport::class,
         'rencana-mutasi' => Imports\RencanaMutasiImport::class,
-        // 'usul-mutasi' => Imports\UsulMutasiImport::class,
+        'usul-mutasi' => Imports\UsulMutasiImport::class,
         // 'rancangan-mutasi' => Imports\RancanganMutasiImport::class,
     ];
 
