@@ -35,8 +35,8 @@ class ImportCommand extends Command
         'rencana-bezzeting' => Models\RencanaBezzeting::class,
         'rencana-mutasi' => Models\RencanaMutasi::class,
         'usul-mutasi' => Models\UsulMutasi::class,
-        'rancangan-mutasi' => Models\RancanganMutasi::class,
-        'rancangan-bezzeting' => Models\RancanganBezzeting::class,
+        // 'rancangan-mutasi' => Models\RancanganMutasi::class,
+        // 'rancangan-bezzeting' => Models\RancanganBezzeting::class,
     ];
 
     protected $importOptions = [
