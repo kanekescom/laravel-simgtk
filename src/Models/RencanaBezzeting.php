@@ -33,7 +33,7 @@ class RencanaBezzeting extends Model
                 $is_aktif->update(['is_aktif' => false]);
             }
 
-            $sekolah = Sekolah::select('id AS sekolah_id')
+            $sekolah = Sekolah::select('id AS sekolah_id', 'jenjang_sekolah_id', 'wilayah_id', 'jumlah_kelas', 'jumlah_rombel', 'jumlah_siswa')
                 ->get()
                 ->toArray();
 

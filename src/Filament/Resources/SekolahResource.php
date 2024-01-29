@@ -96,14 +96,17 @@ class SekolahResource extends Resource
                     ->sortable()
                     ->label('Wilayah'),
                 Tables\Columns\TextInputColumn::make('jumlah_kelas')
+                    ->rules(['required', 'digits_between:0,100'])
                     ->searchable()
                     ->sortable()
                     ->label('Kelas'),
                 Tables\Columns\TextInputColumn::make('jumlah_rombel')
+                    ->rules(['required', 'digits_between:0,100'])
                     ->searchable()
                     ->sortable()
                     ->label('Rombel'),
                 Tables\Columns\TextInputColumn::make('jumlah_siswa')
+                    ->rules(['required', 'digits_between:0,10000'])
                     ->searchable()
                     ->sortable()
                     ->label('Siswa'),
