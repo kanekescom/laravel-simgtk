@@ -24,393 +24,268 @@ class RancanganBezzeting extends Model
         return config('simgtk.table_prefix') . 'rancangan_bezzeting';
     }
 
-    public function getSdKelasJumlahAttribute()
+    protected static function boot()
     {
-        return $this->sd_kelas_pns + $this->sd_kelas_pppk + $this->sd_kelas_gtt;
-    }
-    public function getSdKelasJumlahExistingAttribute()
-    {
-        return $this->mataPelajaranSdKelas()->count();
-    }
-    public function getSdKelasSelisihAttribute()
-    {
-        return $this->sd_kelas_abk - $this->sd_kelas_jumlah;
-    }
-    public function getSdKelasSelisihExistingAttribute()
-    {
-        return $this->sd_kelas_jumlah_existing - $this->sd_kelas_jumlah;
+        parent::boot();
+
+        static::saving(function ($model) {
+            $jenjang_mapels = [
+                'sd' => [
+                    'kelas',
+                    'penjaskes',
+                    'agama',
+                    'agama_noni',
+                ],
+                'smp' => [
+                    'pai',
+                    'pjok',
+                    'b_indonesia',
+                    'b_inggris',
+                    'bk',
+                    'ipa',
+                    'ips',
+                    'matematika',
+                    'ppkn',
+                    'prakarya',
+                    'seni_budaya',
+                    'b_sunda',
+                    'tik',
+                ],
+            ];
+
+            foreach ($jenjang_mapels as $jenjang_sekolah => $mapels) {
+                foreach ($mapels as $mapel) {
+                    $field_jenjang_sekolah_mapel_abk = "{$jenjang_sekolah}_{$mapel}_abk";
+                    $field_jenjang_sekolah_mapel_pns = "{$jenjang_sekolah}_{$mapel}_pns";
+                    $field_jenjang_sekolah_mapel_pppk = "{$jenjang_sekolah}_{$mapel}_pppk";
+                    $field_jenjang_sekolah_mapel_gtt = "{$jenjang_sekolah}_{$mapel}_gtt";
+                    $field_jenjang_sekolah_mapel_total = "{$jenjang_sekolah}_{$mapel}_total";
+                    $field_jenjang_sekolah_mapel_selisih = "{$jenjang_sekolah}_{$mapel}_selisih";
+
+                    $field_jenjang_sekolah_mapel_abk_sum[] = $model->$field_jenjang_sekolah_mapel_abk = $model->$field_jenjang_sekolah_mapel_abk;
+                    $field_jenjang_sekolah_mapel_abk_sum_status_kepegawaian_pns[] = $field_jenjang_sekolah_mapel_status_kepegawaian['pns'] = $model->$field_jenjang_sekolah_mapel_pns = $model->$field_jenjang_sekolah_mapel_pns;
+                    $field_jenjang_sekolah_mapel_abk_sum_status_kepegawaian_pppk[] = $field_jenjang_sekolah_mapel_status_kepegawaian['pppk'] = $model->$field_jenjang_sekolah_mapel_pppk = $model->$field_jenjang_sekolah_mapel_pppk;
+                    $field_jenjang_sekolah_mapel_abk_sum_status_kepegawaian_gtt[] = $field_jenjang_sekolah_mapel_status_kepegawaian['gtt'] = $model->$field_jenjang_sekolah_mapel_gtt = $model->$field_jenjang_sekolah_mapel_gtt;
+                    $model->$field_jenjang_sekolah_mapel_total = array_sum($field_jenjang_sekolah_mapel_status_kepegawaian);
+                    $model->$field_jenjang_sekolah_mapel_selisih = $model->$field_jenjang_sekolah_mapel_abk - $model->$field_jenjang_sekolah_mapel_total;
+
+                    $field_jenjang_sekolah_mapel_existing_pns = "{$jenjang_sekolah}_{$mapel}_existing_pns";
+                    $field_jenjang_sekolah_mapel_existing_pppk = "{$jenjang_sekolah}_{$mapel}_existing_pppk";
+                    $field_jenjang_sekolah_mapel_existing_gtt = "{$jenjang_sekolah}_{$mapel}_existing_gtt";
+                    $field_jenjang_sekolah_mapel_existing_total = "{$jenjang_sekolah}_{$mapel}_existing_total";
+                    $field_jenjang_sekolah_mapel_existing_selisih = "{$jenjang_sekolah}_{$mapel}_existing_selisih";
+
+                    $field_jenjang_sekolah_mapel_existing_abk_sum_status_kepegawaian_pns[] = $field_jenjang_sekolah_mapel_existing_status_kepegawaian['pns'] = $model->$field_jenjang_sekolah_mapel_existing_pns = $model->$field_jenjang_sekolah_mapel_existing_pns;
+                    $field_jenjang_sekolah_mapel_existing_abk_sum_status_kepegawaian_pppk[] = $field_jenjang_sekolah_mapel_existing_status_kepegawaian['pppk'] = $model->$field_jenjang_sekolah_mapel_existing_pppk = $model->$field_jenjang_sekolah_mapel_existing_pppk;
+                    $field_jenjang_sekolah_mapel_existing_abk_sum_status_kepegawaian_gtt[] = $field_jenjang_sekolah_mapel_existing_status_kepegawaian['gtt'] = $model->$field_jenjang_sekolah_mapel_existing_gtt = $model->$field_jenjang_sekolah_mapel_existing_gtt;
+                    $model->$field_jenjang_sekolah_mapel_existing_total = array_sum($field_jenjang_sekolah_mapel_existing_status_kepegawaian);
+                    $model->$field_jenjang_sekolah_mapel_existing_selisih = $model->$field_jenjang_sekolah_mapel_abk - $model->$field_jenjang_sekolah_mapel_total;
+                }
+
+                $field_jenjang_sekolah_formasi_abk = "{$jenjang_sekolah}_formasi_abk";
+                $field_jenjang_sekolah_formasi_pns = "{$jenjang_sekolah}_formasi_pns";
+                $field_jenjang_sekolah_formasi_pppk = "{$jenjang_sekolah}_formasi_pppk";
+                $field_jenjang_sekolah_formasi_gtt = "{$jenjang_sekolah}_formasi_gtt";
+                $field_jenjang_sekolah_formasi_total = "{$jenjang_sekolah}_formasi_total";
+                $field_jenjang_sekolah_formasi_selisih = "{$jenjang_sekolah}_formasi_selisih";
+
+                $model->$field_jenjang_sekolah_formasi_abk = array_sum($field_jenjang_sekolah_mapel_abk_sum);
+                $field_jenjang_sekolah_formasi_status_kepegawaian['pns'] = $model->$field_jenjang_sekolah_formasi_pns = array_sum($field_jenjang_sekolah_mapel_abk_sum_status_kepegawaian_pns);
+                $field_jenjang_sekolah_formasi_status_kepegawaian['pppk'] = $model->$field_jenjang_sekolah_formasi_pppk = array_sum($field_jenjang_sekolah_mapel_abk_sum_status_kepegawaian_pppk);
+                $field_jenjang_sekolah_formasi_status_kepegawaian['gtt'] = $model->$field_jenjang_sekolah_formasi_gtt = array_sum($field_jenjang_sekolah_mapel_abk_sum_status_kepegawaian_gtt);
+                $model->$field_jenjang_sekolah_formasi_total = array_sum($field_jenjang_sekolah_formasi_status_kepegawaian);
+                $model->$field_jenjang_sekolah_formasi_selisih = $model->$field_jenjang_sekolah_formasi_abk - $model->$field_jenjang_sekolah_formasi_total;
+
+                $field_jenjang_sekolah_formasi_existing_pns = "{$jenjang_sekolah}_formasi_existing_pns";
+                $field_jenjang_sekolah_formasi_existing_pppk = "{$jenjang_sekolah}_formasi_existing_pppk";
+                $field_jenjang_sekolah_formasi_existing_gtt = "{$jenjang_sekolah}_formasi_existing_gtt";
+                $field_jenjang_sekolah_formasi_existing_total = "{$jenjang_sekolah}_formasi_existing_total";
+                $field_jenjang_sekolah_formasi_existing_selisih = "{$jenjang_sekolah}_formasi_existing_selisih";
+
+                $field_jenjang_sekolah_formasi_existing_status_kepegawaian['pns'] = $model->$field_jenjang_sekolah_formasi_existing_pns = array_sum($field_jenjang_sekolah_mapel_existing_abk_sum_status_kepegawaian_pns);
+                $field_jenjang_sekolah_formasi_existing_status_kepegawaian['pppk'] = $model->$field_jenjang_sekolah_formasi_existing_pppk = array_sum($field_jenjang_sekolah_mapel_existing_abk_sum_status_kepegawaian_pppk);
+                $field_jenjang_sekolah_formasi_existing_status_kepegawaian['gtt'] = $model->$field_jenjang_sekolah_formasi_existing_gtt = array_sum($field_jenjang_sekolah_mapel_existing_abk_sum_status_kepegawaian_gtt);
+                $model->$field_jenjang_sekolah_formasi_existing_total = array_sum($field_jenjang_sekolah_formasi_existing_status_kepegawaian);
+                $model->$field_jenjang_sekolah_formasi_existing_selisih = $model->$field_jenjang_sekolah_formasi_abk - $model->$field_jenjang_sekolah_formasi_existing_total;
+            }
+        });
     }
 
-    public function getSdPenjaskesJumlahAttribute()
+    public function getNamaWilayahAttribute()
     {
-        return $this->sd_penjaskes_pns + $this->sd_penjaskes_pppk + $this->sd_penjaskes_gtt;
-    }
-    public function getSdPenjaskesJumlahExistingAttribute()
-    {
-        return $this->mataPelajaranSdPenjaskes()->count();
-    }
-    public function getSdPenjaskesSelisihAttribute()
-    {
-        return $this->sd_penjaskes_abk - $this->sd_penjaskes_jumlah;
-    }
-    public function getSdPenjaskesSelisihExistingAttribute()
-    {
-        return $this->sd_penjaskes_jumlah_existing - $this->sd_penjaskes_jumlah;
+        return "{$this->nama}, {$this->wilayah?->nama}";
     }
 
-    public function getSdAgamaJumlahAttribute()
+    public function getSdKelasExistingTotalAttribute()
     {
-        return $this->sd_agama_pns + $this->sd_agama_pppk + $this->sd_agama_gtt;
+        return $this->pegawaiSdKelas()->count();
     }
-    public function getSdAgamaJumlahExistingAttribute()
+    public function getSdKelasExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSdAgama()->count();
-    }
-    public function getSdAgamaSelisihAttribute()
-    {
-        return $this->sd_agama_abk - $this->sd_agama_jumlah;
-    }
-    public function getSdAgamaSelisihExistingAttribute()
-    {
-        return $this->sd_agama_jumlah_existing - $this->sd_agama_jumlah;
+        return $this->sd_kelas_abk - $this->sd_kelas_existing_total;
     }
 
-    public function getSdAgamaNoniJumlahAttribute()
+    public function getSdPenjaskesExistingTotalAttribute()
     {
-        return $this->sd_agama_noni_pns + $this->sd_agama_noni_pppk + $this->sd_agama_noni_gtt;
+        return $this->pegawaiSdPenjaskes()->count();
     }
-    public function getSdAgamaNoniJumlahExistingAttribute()
+    public function getSdPenjaskesExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSdAgamaNoni()->count();
-    }
-    public function getSdAgamaNoniSelisihAttribute()
-    {
-        return $this->sd_agama_noni_abk - $this->sd_agama_noni_jumlah;
-    }
-    public function getSdAgamaNoniSelisihExistingAttribute()
-    {
-        return $this->sd_agama_noni_jumlah_existing - $this->sd_agama_noni_jumlah;
+        return $this->sd_penjaskes_abk - $this->sd_penjaskes_existing_total;
     }
 
-    public function getSmpPaiJumlahAttribute()
+    public function getSdAgamaExistingTotalAttribute()
     {
-        return $this->smp_pai_pns + $this->smp_pai_pppk + $this->smp_pai_gtt;
+        return $this->pegawaiSdAgama()->count();
     }
-    public function getSmpPaiJumlahExistingAttribute()
+    public function getSdAgamaExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpPai()->count();
-    }
-    public function getSmpPaiSelisihAttribute()
-    {
-        return $this->smp_pai_abk - $this->smp_pai_jumlah;
-    }
-    public function getSmpPaiSelisihExistingAttribute()
-    {
-        return $this->smp_pai_jumlah_existing - $this->smp_pai_jumlah;
+        return $this->sd_agama_abk - $this->sd_agama_existing_total;
     }
 
-    public function getSmpPjokJumlahAttribute()
+    public function getSdAgamaNoniExistingTotalAttribute()
     {
-        return $this->smp_pjok_pns + $this->smp_pjok_pppk + $this->smp_pjok_gtt;
+        return $this->pegawaiSdAgamaNoni()->count();
     }
-    public function getSmpPjokJumlahExistingAttribute()
+    public function getSdAgamaNoniExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpPjok()->count();
-    }
-    public function getSmpPjokSelisihAttribute()
-    {
-        return $this->smp_pjok_abk - $this->smp_pjok_jumlah;
-    }
-    public function getSmpPjokSelisihExistingAttribute()
-    {
-        return $this->smp_pjok_jumlah_existing - $this->smp_pjok_jumlah;
+        return $this->sd_agama_noni_abk - $this->sd_agama_noni_existing_total;
     }
 
-    public function getSmpBIndonesiaJumlahAttribute()
+    public function getSdFormasiExistingTotalAttribute()
     {
-        return $this->smp_b_indonesia_pns + $this->smp_b_indonesia_pppk + $this->smp_b_indonesia_gtt;
+        return $this->pegawaiSd()->count();
     }
-    public function getSmpBIndonesiaJumlahExistingAttribute()
+    public function getSdFormasiExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpBIndonesia()->count();
-    }
-    public function getSmpBIndonesiaSelisihAttribute()
-    {
-        return $this->smp_b_indonesia_abk - $this->smp_b_indonesia_jumlah;
-    }
-    public function getSmpBIndonesiaSelisihExistingAttribute()
-    {
-        return $this->smp_b_indonesia_jumlah_existing - $this->smp_b_indonesia_jumlah;
+        return $this->sd_formasi_abk - $this->sd_formasi_existing_total;
     }
 
-    public function getSmpBInggrisJumlahAttribute()
+    public function getSmpPaiExistingTotalAttribute()
     {
-        return $this->smp_b_inggris_pns + $this->smp_b_inggris_pppk + $this->smp_b_inggris_gtt;
+        return $this->pegawaiSmpPai()->count();
     }
-    public function getSmpBInggrisJumlahExistingAttribute()
+    public function getSmpPaiExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpBInggris()->count();
-    }
-    public function getSmpBInggrisSelisihAttribute()
-    {
-        return $this->smp_b_inggris_abk - $this->smp_b_inggris_jumlah;
-    }
-    public function getSmpBInggrisSelisihExistingAttribute()
-    {
-        return $this->smp_b_inggris_jumlah_existing - $this->smp_b_inggris_jumlah;
+        return $this->smp_pai_abk - $this->smp_pai_existing_total;
     }
 
-    public function getSmpBkJumlahAttribute()
+    public function getSmpPjokExistingTotalAttribute()
     {
-        return $this->smp_bk_pns + $this->smp_bk_pppk + $this->smp_bk_gtt;
+        return $this->pegawaiSmpPjok()->count();
     }
-    public function getSmpBkJumlahExistingAttribute()
+    public function getSmpPjokExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpBk()->count();
-    }
-    public function getSmpBkSelisihAttribute()
-    {
-        return $this->smp_bk_abk - $this->smp_bk_jumlah;
-    }
-    public function getSmpBkSelisihExistingAttribute()
-    {
-        return $this->smp_bk_jumlah_existing - $this->smp_bk_jumlah;
+        return $this->smp_pjok_abk - $this->smp_pjok_existing_total;
     }
 
-    public function getSmpIpaJumlahAttribute()
+    public function getSmpBIndonesiaExistingTotalAttribute()
     {
-        return $this->smp_ipa_pns + $this->smp_ipa_pppk + $this->smp_ipa_gtt;
+        return $this->pegawaiSmpBIndonesia()->count();
     }
-    public function getSmpIpaJumlahExistingAttribute()
+    public function getSmpBIndonesiaExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpIpa()->count();
-    }
-    public function getSmpIpaSelisihAttribute()
-    {
-        return $this->smp_ipa_abk - $this->smp_ipa_jumlah;
-    }
-    public function getSmpIpaSelisihExistingAttribute()
-    {
-        return $this->smp_ipa_jumlah_existing - $this->smp_ipa_jumlah;
+        return $this->smp_b_indonesia_abk - $this->smp_b_indonesia_existing_total;
     }
 
-    public function getSmpIpsJumlahAttribute()
+    public function getSmpBInggrisExistingTotalAttribute()
     {
-        return $this->smp_ips_pns + $this->smp_ips_pppk + $this->smp_ips_gtt;
+        return $this->pegawaiSmpBInggris()->count();
     }
-    public function getSmpIpsJumlahExistingAttribute()
+    public function getSmpBInggrisExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpIps()->count();
-    }
-    public function getSmpIpsSelisihAttribute()
-    {
-        return $this->smp_ips_abk - $this->smp_ips_jumlah;
-    }
-    public function getSmpIpsSelisihExistingAttribute()
-    {
-        return $this->smp_ips_jumlah_existing - $this->smp_ips_jumlah;
+        return $this->smp_b_inggris_abk - $this->smp_b_inggris_existing_total;
     }
 
-    public function getSmpMatematikaJumlahAttribute()
+    public function getSmpBkExistingTotalAttribute()
     {
-        return $this->smp_matematika_pns + $this->smp_matematika_pppk + $this->smp_matematika_gtt;
+        return $this->pegawaiSmpBk()->count();
     }
-    public function getSmpMatematikaJumlahExistingAttribute()
+    public function getSmpBkExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpMatematika()->count();
-    }
-    public function getSmpMatematikaSelisihAttribute()
-    {
-        return $this->smp_matematika_abk - $this->smp_matematika_jumlah;
-    }
-    public function getSmpMatematikaSelisihExistingAttribute()
-    {
-        return $this->smp_matematika_jumlah_existing - $this->smp_matematika_jumlah;
+        return $this->smp_bk_abk - $this->smp_bk_existing_total;
     }
 
-    public function getSmpPpknJumlahAttribute()
+    public function getSmpIpaExistingTotalAttribute()
     {
-        return $this->smp_ppkn_pns + $this->smp_ppkn_pppk + $this->smp_ppkn_gtt;
+        return $this->pegawaiSmpIpa()->count();
     }
-    public function getSmpPpknJumlahExistingAttribute()
+    public function getSmpIpaExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpPpkn()->count();
-    }
-    public function getSmpPpknSelisihAttribute()
-    {
-        return $this->smp_ppkn_abk - $this->smp_ppkn_jumlah;
-    }
-    public function getSmpPpknSelisihExistingAttribute()
-    {
-        return $this->smp_ppkn_jumlah_existing - $this->smp_ppkn_jumlah;
+        return $this->smp_ipa_abk - $this->smp_ipa_existing_total;
     }
 
-    public function getSmpPrakaryaJumlahAttribute()
+    public function getSmpIpsExistingTotalAttribute()
     {
-        return $this->smp_prakarya_pns + $this->smp_prakarya_pppk + $this->smp_prakarya_gtt;
+        return $this->pegawaiSmpIps()->count();
     }
-    public function getSmpPrakaryaJumlahExistingAttribute()
+    public function getSmpIpsExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpPrakarya()->count();
-    }
-    public function getSmpPrakaryaSelisihAttribute()
-    {
-        return $this->smp_prakarya_abk - $this->smp_prakarya_jumlah;
-    }
-    public function getSmpPrakaryaSelisihExistingAttribute()
-    {
-        return $this->smp_prakarya_jumlah_existing - $this->smp_prakarya_jumlah;
+        return $this->smp_ips_abk - $this->smp_ips_existing_total;
     }
 
-    public function getSmpSeniBudayaJumlahAttribute()
+    public function getSmpMatematikaExistingTotalAttribute()
     {
-        return $this->smp_seni_budaya_pns + $this->smp_seni_budaya_pppk + $this->smp_seni_budaya_gtt;
+        return $this->pegawaiSmpMatematika()->count();
     }
-    public function getSmpSeniBudayaJumlahExistingAttribute()
+    public function getSmpMatematikaExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpSeniBudaya()->count();
-    }
-    public function getSmpSeniBudayaSelisihAttribute()
-    {
-        return $this->smp_seni_budaya_abk - $this->smp_seni_budaya_jumlah;
-    }
-    public function getSmpSeniBudayaSelisihExistingAttribute()
-    {
-        return $this->smp_seni_budaya_jumlah_existing - $this->smp_seni_budaya_jumlah;
+        return $this->smp_matematika_abk - $this->smp_matematika_existing_total;
     }
 
-    public function getSmpBSundaJumlahAttribute()
+    public function getSmpPpknExistingTotalAttribute()
     {
-        return $this->smp_b_sunda_pns + $this->smp_b_sunda_pppk + $this->smp_b_sunda_gtt;
+        return $this->pegawaiSmpPpkn()->count();
     }
-    public function getSmpBSundaJumlahExistingAttribute()
+    public function getSmpPpknExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpBSunda()->count();
-    }
-    public function getSmpBSundaSelisihAttribute()
-    {
-        return $this->smp_b_sunda_abk - $this->smp_b_sunda_jumlah;
-    }
-    public function getSmpBSundaSelisihExistingAttribute()
-    {
-        return $this->smp_b_sunda_jumlah_existing - $this->smp_b_sunda_jumlah;
+        return $this->smp_ppkn_abk - $this->smp_ppkn_existing_total;
     }
 
-    public function getSmpTikJumlahAttribute()
+    public function getSmpPrakaryaExistingTotalAttribute()
     {
-        return $this->smp_tik_pns + $this->smp_tik_pppk + $this->smp_tik_gtt;
+        return $this->pegawaiSmpPrakarya()->count();
     }
-    public function getSmpTikJumlahExistingAttribute()
+    public function getSmpPrakaryaExistingSelisihAttribute()
     {
-        return $this->mataPelajaranSmpTik()->count();
-    }
-    public function getSmpTikSelisihAttribute()
-    {
-        return $this->smp_tik_abk - $this->smp_tik_jumlah;
-    }
-    public function getSmpTikSelisihExistingAttribute()
-    {
-        return $this->smp_tik_jumlah_existing - $this->smp_tik_jumlah;
+        return $this->smp_prakarya_abk - $this->smp_prakarya_existing_total;
     }
 
-    public function getSdJumlahAbkAttribute()
+    public function getSmpSeniBudayaExistingTotalAttribute()
     {
-        return
-            $this->sd_kelas_abk
-            + $this->sd_penjaskes_abk
-            + $this->sd_agama_abk
-            + $this->sd_agama_noni_abk;
+        return $this->pegawaiSmpSeniBudaya()->count();
     }
-    public function getSdJumlahFormasiAttribute()
+    public function getSmpSeniBudayaExistingSelisihAttribute()
     {
-        return
-            $this->sd_kelas_jumlah
-            + $this->sd_penjaskes_jumlah
-            + $this->sd_agama_jumlah
-            + $this->sd_agama_noni_jumlah;
-    }
-    public function getSdJumlahExistingAttribute()
-    {
-        return
-            $this->sd_kelas_jumlah_existing
-            + $this->sd_penjaskes_jumlah_existing
-            + $this->sd_agama_jumlah_existing
-            + $this->sd_agama_noni_jumlah_existing;
-    }
-    public function getSdJumlahSelisihAttribute()
-    {
-        return
-            $this->sd_jumlah_abk
-            - $this->sd_jumlah_formasi;
-    }
-    public function getSdJumlahSelisihExistingAttribute()
-    {
-        return $this->sd_jumlah_existing - $this->sd_jumlah_formasi;
+        return $this->smp_seni_budaya_abk - $this->smp_seni_budaya_existing_total;
     }
 
-    public function getSmpJumlahAbkAttribute()
+    public function getSmpBSundaExistingTotalAttribute()
     {
-        return
-            $this->smp_pai_abk
-            + $this->smp_pjok_abk
-            + $this->smp_b_indonesia_abk
-            + $this->smp_b_inggris_abk
-            + $this->smp_bk_abk
-            + $this->smp_ipa_abk
-            + $this->smp_ips_abk
-            + $this->smp_matematika_abk
-            + $this->smp_ppkn_abk
-            + $this->smp_prakarya_abk
-            + $this->smp_seni_budaya_abk
-            + $this->smp_b_sunda_abk
-            + $this->smp_tik_abk;
+        return $this->pegawaiSmpBSunda()->count();
     }
-    public function getSmpJumlahFormasiAttribute()
+    public function getSmpBSundaExistingSelisihAttribute()
     {
-        return
-            $this->smp_pai_jumlah
-            + $this->smp_pjok_jumlah
-            + $this->smp_b_indonesia_jumlah
-            + $this->smp_b_inggris_jumlah
-            + $this->smp_bk_jumlah
-            + $this->smp_ipa_jumlah
-            + $this->smp_ips_jumlah
-            + $this->smp_matematika_jumlah
-            + $this->smp_ppkn_jumlah
-            + $this->smp_prakarya_jumlah
-            + $this->smp_seni_budaya_jumlah
-            + $this->smp_b_sunda_jumlah
-            + $this->smp_tik_jumlah;
-    }
-    public function getSmpJumlahExistingAttribute()
-    {
-        return
-            $this->smp_pai_jumlah_existing
-            + $this->smp_pjok_jumlah_existing
-            + $this->smp_b_indonesia_jumlah_existing
-            + $this->smp_b_inggris_jumlah_existing
-            + $this->smp_bk_jumlah_existing
-            + $this->smp_ipa_jumlah_existing
-            + $this->smp_ips_jumlah_existing
-            + $this->smp_matematika_jumlah_existing
-            + $this->smp_ppkn_jumlah_existing
-            + $this->smp_prakarya_jumlah_existing
-            + $this->smp_seni_budaya_jumlah_existing
-            + $this->smp_b_sunda_jumlah_existing
-            + $this->smp_tik_jumlah_existing;
-    }
-    public function getSmpJumlahSelisihAttribute()
-    {
-        return
-            $this->smp_jumlah_abk
-            - $this->smp_jumlah_formasi;
-    }
-    public function getSmpJumlahSelisihExistingAttribute()
-    {
-        return $this->smp_jumlah_existing - $this->smp_jumlah_formasi;
+        return $this->smp_b_sunda_abk - $this->smp_b_sunda_existing_total;
     }
 
-    //
+    public function getSmpTikExistingTotalAttribute()
+    {
+        return $this->pegawaiSmpTik()->count();
+    }
+    public function getSmpTikExistingSelisihAttribute()
+    {
+        return $this->smp_tik_abk - $this->smp_tik_existing_total;
+    }
+
+    public function getSmpFormasiExistingTotalAttribute()
+    {
+        return $this->pegawaiSmp()->count();
+    }
+    public function getSmpFormasiExistingSelisihAttribute()
+    {
+        return $this->smp_formasi_abk - $this->smp_formasi_existing_total;
+    }
 
     public function rencana(): BelongsTo
     {
@@ -466,92 +341,198 @@ class RancanganBezzeting extends Model
         return $this->pegawai()->where('status_kepegawaian_kode', StatusKepegawaianEnum::NONASN);
     }
 
-    public function mataPelajaran(): HasManyThrough
+    public function pegawaiSd(): HasManyThrough
     {
-        return $this->hasManyThrough(
-            MataPelajaran::class,
-            Pegawai::class,
-            'sekolah_id',
-            'id',
-            'id',
-            'mata_pelajaran_id',
-        );
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->whereIn('kode', [
+                    'sd_kelas',
+                    'sd_penjaskes',
+                    'sd_agama',
+                    'sd_agama_noni',
+                ]);
+            });
     }
 
-    public function mataPelajaranSdKelas(): HasManyThrough
+    public function pegawaiSdKelas(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'sd_kelas');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'sd_kelas');
+            });
     }
-    public function mataPelajaranSdPenjaskes(): HasManyThrough
+    public function pegawaiSdPenjaskes(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'sd_penjaskes');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'sd_penjaskes');
+            });
     }
-    public function mataPelajaranSdAgama(): HasManyThrough
+    public function pegawaiSdAgama(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'sd_agama');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'sd_agama');
+            });
     }
-    public function mataPelajaranSdAgamaNoni(): HasManyThrough
+    public function pegawaiSdAgamaNoni(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'sd_agama_noni');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'sd_agama_noni');
+            });
     }
 
-    public function mataPelajaranSmpPai(): HasManyThrough
+    public function pegawaiSdStatusKepegawaianPns(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_pai');
+        return $this->pegawaiSd()
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::PNS);
     }
-    public function mataPelajaranSmpPjok(): HasManyThrough
+    public function pegawaiSdStatusKepegawaianPppk(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_pjok');
+        return $this->pegawaiSd()
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::PPPK);
     }
-    public function mataPelajaranSmpBIndonesia(): HasManyThrough
+    public function pegawaiSdStatusKepegawaianGtt(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_b_indonesia');
+        return $this->pegawaiSd()
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::NONASN);
     }
-    public function mataPelajaranSmpBInggris(): HasManyThrough
+
+    public function pegawaiSmp(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_b_inggris');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->whereIn('kode', [
+                    'smp_pai',
+                    'smp_pjok',
+                    'smp_b_indonesia',
+                    'smp_b_inggris',
+                    'smp_bk',
+                    'smp_ipa',
+                    'smp_ips',
+                    'smp_matematika',
+                    'smp_ppkn',
+                    'smp_prakarya',
+                    'smp_seni_budaya',
+                    'smp_b_sunda',
+                    'smp_tik',
+                ]);
+            });
     }
-    public function mataPelajaranSmpBk(): HasManyThrough
+
+    public function pegawaiSmpPai(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_bk');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_pai');
+            });
     }
-    public function mataPelajaranSmpIpa(): HasManyThrough
+    public function pegawaiSmpPjok(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_ipa');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_pjok');
+            });
     }
-    public function mataPelajaranSmpIps(): HasManyThrough
+    public function pegawaiSmpBIndonesia(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_ips');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_b_indonesia');
+            });
     }
-    public function mataPelajaranSmpMatematika(): HasManyThrough
+    public function pegawaiSmpBInggris(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_matematika');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_b_inggris');
+            });
     }
-    public function mataPelajaranSmpPpkn(): HasManyThrough
+    public function pegawaiSmpBk(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_ppkn');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_bk');
+            });
     }
-    public function mataPelajaranSmpPrakarya(): HasManyThrough
+    public function pegawaiSmpIpa(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_prakarya');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_ipa');
+            });
     }
-    public function mataPelajaranSmpSeniBudaya(): HasManyThrough
+    public function pegawaiSmpIps(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_seni_budaya');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_ips');
+            });
     }
-    public function mataPelajaranSmpBSunda(): HasManyThrough
+    public function pegawaiSmpMatematika(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_b_sunda');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_matematika');
+            });
     }
-    public function mataPelajaranSmpTik(): HasManyThrough
+    public function pegawaiSmpPpkn(): HasManyThrough
     {
-        return $this->mataPelajaran()->where('kode', 'smp_tik');
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_ppkn');
+            });
+    }
+    public function pegawaiSmpPrakarya(): HasManyThrough
+    {
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_prakarya');
+            });
+    }
+    public function pegawaiSmpSeniBudaya(): HasManyThrough
+    {
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_seni_budaya');
+            });
+    }
+    public function pegawaiSmpBSunda(): HasManyThrough
+    {
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_b_sunda');
+            });
+    }
+    public function pegawaiSmpTik(): HasManyThrough
+    {
+        return $this->pegawai()
+            ->whereHas('mataPelajaran', function ($query) {
+                $query->where('kode', 'smp_tik');
+            });
+    }
+
+    public function pegawaiSmpStatusKepegawaianPns(): HasManyThrough
+    {
+        return $this->pegawaiSmp()
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::PNS);
+    }
+    public function pegawaiSmpStatusKepegawaianPppk(): HasManyThrough
+    {
+        return $this->pegawaiSmp()
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::PPPK);
+    }
+    public function pegawaiSmpStatusKepegawaianGtt(): HasManyThrough
+    {
+        return $this->pegawaiSmp()
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::NONASN);
     }
 
     public function scopeAktif($query)
     {
         return $query
-            ->withWhereHas('rencana', function ($query) {
+            ->whereHas('rencana', function ($query) {
                 $query->where('is_aktif', true);
             });
     }

@@ -33,12 +33,27 @@ class RencanaBezzeting extends Model
                 $is_aktif->update(['is_aktif' => false]);
             }
 
-            $sekolah = Sekolah::select('id AS sekolah_id', 'jenjang_sekolah_id', 'wilayah_id', 'jumlah_kelas', 'jumlah_rombel', 'jumlah_siswa')
-                ->get()
+            $sekolah = Sekolah::get()
+                ->transform(function ($sekolah) {
+                    $sekolah['sekolah_id'] = $sekolah['id'];
+                    unset($sekolah['id']);
+                    return $sekolah;
+                })
                 ->toArray();
 
-            $model->rancangan()
+            $model->bezzeting()
                 ->createMany($sekolah);
+
+            $pegawai = Pegawai::get()
+                ->transform(function ($pegawai) {
+                    $pegawai['pegawai_id'] = $pegawai['id'];
+                    unset($pegawai['id']);
+                    return $pegawai;
+                })
+                ->toArray();
+
+            $model->pegawai()
+                ->createMany($pegawai);
         });
 
         static::updating(function ($model) {
@@ -60,9 +75,14 @@ class RencanaBezzeting extends Model
         return "{$this->tanggal_mulai} - {$this->tanggal_berakhir}";
     }
 
-    public function rancangan(): HasMany
+    public function bezzeting(): HasMany
     {
         return $this->hasMany(RancanganBezzeting::class);
+    }
+
+    public function pegawai(): HasMany
+    {
+        return $this->hasMany(RancanganBezzetingPegawai::class);
     }
 
     public function sekolah(): HasManyThrough

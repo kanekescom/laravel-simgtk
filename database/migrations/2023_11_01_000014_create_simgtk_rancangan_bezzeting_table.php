@@ -15,6 +15,8 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->foreignUlid('rencana_bezzeting_id')->index();
             $table->foreignUlid('sekolah_id')->index();
+            $table->string('nama');
+            $table->string('npsn')->nullable()->index();
             $table->foreignUlid('jenjang_sekolah_id')->nullable()->index();
             $table->foreignUlid('wilayah_id')->nullable()->index();
 
@@ -22,92 +24,60 @@ return new class extends Migration
             $table->unsignedTinyInteger('jumlah_rombel')->nullable();
             $table->unsignedSmallInteger('jumlah_siswa')->nullable();
 
-            $table->unsignedSmallInteger('kepala_sekolah')->nullable();
+            $jenjang_mapels = [
+                'sd' => [
+                    'kelas',
+                    'penjaskes',
+                    'agama',
+                    'agama_noni',
+                ],
+                'smp' => [
+                    'pai',
+                    'pjok',
+                    'b_indonesia',
+                    'b_inggris',
+                    'bk',
+                    'ipa',
+                    'ips',
+                    'matematika',
+                    'ppkn',
+                    'prakarya',
+                    'seni_budaya',
+                    'b_sunda',
+                    'tik',
+                ],
+            ];
 
-            $table->unsignedSmallInteger('sd_kelas_abk')->nullable();
-            $table->unsignedSmallInteger('sd_kelas_pns')->nullable();
-            $table->unsignedSmallInteger('sd_kelas_pppk')->nullable();
-            $table->unsignedSmallInteger('sd_kelas_gtt')->nullable();
+            foreach ($jenjang_mapels as $jenjang_sekolah => $mapels) {
+                foreach ($mapels as $mapel) {
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_abk")->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_pns")->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_pppk")->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_gtt")->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_total")->nullable();
+                    $table->smallInteger("{$jenjang_sekolah}_{$mapel}_selisih")->nullable();
 
-            $table->unsignedSmallInteger('sd_penjaskes_abk')->nullable();
-            $table->unsignedSmallInteger('sd_penjaskes_pns')->nullable();
-            $table->unsignedSmallInteger('sd_penjaskes_pppk')->nullable();
-            $table->unsignedSmallInteger('sd_penjaskes_gtt')->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_pns")->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_pppk")->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_gtt")->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_total")->nullable();
+                    $table->smallInteger("{$jenjang_sekolah}_{$mapel}_existing_selisih")->nullable();
+                }
 
-            $table->unsignedSmallInteger('sd_agama_abk')->nullable();
-            $table->unsignedSmallInteger('sd_agama_pns')->nullable();
-            $table->unsignedSmallInteger('sd_agama_pppk')->nullable();
-            $table->unsignedSmallInteger('sd_agama_gtt')->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_abk")->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_pns")->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_pppk")->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_gtt")->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_total")->nullable();
+                $table->smallInteger("{$jenjang_sekolah}_formasi_selisih")->nullable();
 
-            $table->unsignedSmallInteger('sd_agama_noni_abk')->nullable();
-            $table->unsignedSmallInteger('sd_agama_noni_pns')->nullable();
-            $table->unsignedSmallInteger('sd_agama_noni_pppk')->nullable();
-            $table->unsignedSmallInteger('sd_agama_noni_gtt')->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_pns")->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_pppk")->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_gtt")->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_total")->nullable();
+                $table->smallInteger("{$jenjang_sekolah}_formasi_existing_selisih")->nullable();
+            }
 
-            $table->unsignedSmallInteger('smp_pai_abk')->nullable();
-            $table->unsignedSmallInteger('smp_pai_pns')->nullable();
-            $table->unsignedSmallInteger('smp_pai_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_pai_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_pjok_abk')->nullable();
-            $table->unsignedSmallInteger('smp_pjok_pns')->nullable();
-            $table->unsignedSmallInteger('smp_pjok_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_pjok_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_b_indonesia_abk')->nullable();
-            $table->unsignedSmallInteger('smp_b_indonesia_pns')->nullable();
-            $table->unsignedSmallInteger('smp_b_indonesia_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_b_indonesia_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_b_inggris_abk')->nullable();
-            $table->unsignedSmallInteger('smp_b_inggris_pns')->nullable();
-            $table->unsignedSmallInteger('smp_b_inggris_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_b_inggris_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_bk_abk')->nullable();
-            $table->unsignedSmallInteger('smp_bk_pns')->nullable();
-            $table->unsignedSmallInteger('smp_bk_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_bk_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_ipa_abk')->nullable();
-            $table->unsignedSmallInteger('smp_ipa_pns')->nullable();
-            $table->unsignedSmallInteger('smp_ipa_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_ipa_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_ips_abk')->nullable();
-            $table->unsignedSmallInteger('smp_ips_pns')->nullable();
-            $table->unsignedSmallInteger('smp_ips_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_ips_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_matematika_abk')->nullable();
-            $table->unsignedSmallInteger('smp_matematika_pns')->nullable();
-            $table->unsignedSmallInteger('smp_matematika_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_matematika_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_ppkn_abk')->nullable();
-            $table->unsignedSmallInteger('smp_ppkn_pns')->nullable();
-            $table->unsignedSmallInteger('smp_ppkn_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_ppkn_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_prakarya_abk')->nullable();
-            $table->unsignedSmallInteger('smp_prakarya_pns')->nullable();
-            $table->unsignedSmallInteger('smp_prakarya_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_prakarya_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_seni_budaya_abk')->nullable();
-            $table->unsignedSmallInteger('smp_seni_budaya_pns')->nullable();
-            $table->unsignedSmallInteger('smp_seni_budaya_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_seni_budaya_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_b_sunda_abk')->nullable();
-            $table->unsignedSmallInteger('smp_b_sunda_pns')->nullable();
-            $table->unsignedSmallInteger('smp_b_sunda_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_b_sunda_gtt')->nullable();
-
-            $table->unsignedSmallInteger('smp_tik_abk')->nullable();
-            $table->unsignedSmallInteger('smp_tik_pns')->nullable();
-            $table->unsignedSmallInteger('smp_tik_pppk')->nullable();
-            $table->unsignedSmallInteger('smp_tik_gtt')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
