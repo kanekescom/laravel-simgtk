@@ -33,10 +33,55 @@ class RencanaBezzeting extends Model
                 $is_aktif->update(['is_aktif' => false]);
             }
 
-            $sekolah = Sekolah::get()
+            $jenjang_mapels = [
+                'sd' => [
+                    'kelas',
+                    'penjaskes',
+                    'agama',
+                    'agama_noni',
+                ],
+                'smp' => [
+                    'pai',
+                    'pjok',
+                    'b_indonesia',
+                    'b_inggris',
+                    'bk',
+                    'ipa',
+                    'ips',
+                    'matematika',
+                    'ppkn',
+                    'prakarya',
+                    'seni_budaya',
+                    'b_sunda',
+                    'tik',
+                ],
+            ];
+
+            foreach ($jenjang_mapels as $jenjang_sekolah => $mapels) {
+                $jenjang_sekolah_studly = str($jenjang_sekolah)->studly();
+
+                foreach ($mapels as $mapel) {
+                    $mapel_studly = str($mapel)->studly();
+
+                    $with_count_relationships[] = "pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianPns as {$jenjang_sekolah}_{$mapel}_existing_pns";
+                    $with_count_relationships[] = "pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianPppk as {$jenjang_sekolah}_{$mapel}_existing_pppk";
+                    $with_count_relationships[] = "pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianGtt as {$jenjang_sekolah}_{$mapel}_existing_gtt";
+                    $with_count_relationships[] = "pegawai{$jenjang_sekolah_studly}{$mapel_studly} as {$jenjang_sekolah}_{$mapel}_existing_total";
+                }
+
+                $with_count_relationships[] = "pegawai{$jenjang_sekolah_studly}StatusKepegawaianPns as {$jenjang_sekolah}_formasi_existing_pns";
+                $with_count_relationships[] = "pegawai{$jenjang_sekolah_studly}StatusKepegawaianPppk as {$jenjang_sekolah}_formasi_existing_pppk";
+                $with_count_relationships[] = "pegawai{$jenjang_sekolah_studly}StatusKepegawaianGtt as {$jenjang_sekolah}_formasi_existing_gtt";
+                $with_count_relationships[] = "pegawai{$jenjang_sekolah_studly} as {$jenjang_sekolah}_formasi_existing_total";
+            }
+
+            $sekolah = Sekolah::query()
+                ->withCount($with_count_relationships ?? [])
+                ->get()
                 ->transform(function ($sekolah) {
                     $sekolah['sekolah_id'] = $sekolah['id'];
                     unset($sekolah['id']);
+
                     return $sekolah;
                 })
                 ->toArray();
@@ -44,10 +89,13 @@ class RencanaBezzeting extends Model
             $model->bezzeting()
                 ->createMany($sekolah);
 
-            $pegawai = Pegawai::get()
+            $pegawai = Pegawai::query()
+                ->aktif()
+                ->get()
                 ->transform(function ($pegawai) {
                     $pegawai['pegawai_id'] = $pegawai['id'];
                     unset($pegawai['id']);
+
                     return $pegawai;
                 })
                 ->toArray();
