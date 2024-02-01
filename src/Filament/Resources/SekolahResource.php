@@ -59,58 +59,26 @@ class SekolahResource extends Resource
                     ->preload()
                     ->required()
                     ->label('Wilayah'),
-                Forms\Components\TextInput::make('jumlah_kelas')
-                    ->integer()
-                    ->minValue(0)
-                    ->maxValue(10000)
-                    ->required()
-                    ->label('Jumlah Kelas'),
-                Forms\Components\TextInput::make('jumlah_rombel')
-                    ->integer()
-                    ->minValue(0)
-                    ->maxValue(10000)
-                    ->required()
-                    ->label('Jumlah Rombel'),
-                Forms\Components\TextInput::make('jumlah_siswa')
-                    ->integer()
-                    ->minValue(0)
-                    ->maxValue(10000)
-                    ->required()
-                    ->label('Jumlah Siswa'),
             ])->columns(3);
     }
 
     public static function table(Table $table): Table
     {
+        $columns = [];
+        $columns[] = Tables\Columns\TextColumn::make('nama')
+            ->wrap()
+            ->searchable()
+            ->sortable('nama')
+            ->label('Nama');
+        $columns[] = Tables\Columns\TextColumn::make('npsn')
+            ->wrap()
+            ->searchable()
+            ->sortable()
+            ->label('NPSN');
+
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('nama')
-                    ->description(fn (Model $record): string => "{$record->npsn}")
-                    ->wrap()
-                    ->searchable(['nama', 'npsn'])
-                    ->sortable('nama')
-                    ->label('Nama'),
-                Tables\Columns\TextColumn::make('wilayah.nama')
-                    ->wrap()
-                    ->searchable()
-                    ->sortable()
-                    ->label('Wilayah'),
-                Tables\Columns\TextInputColumn::make('jumlah_kelas')
-                    ->rules(['required', 'digits_between:0,100'])
-                    ->searchable()
-                    ->sortable()
-                    ->label('Kelas'),
-                Tables\Columns\TextInputColumn::make('jumlah_rombel')
-                    ->rules(['required', 'digits_between:0,100'])
-                    ->searchable()
-                    ->sortable()
-                    ->label('Rombel'),
-                Tables\Columns\TextInputColumn::make('jumlah_siswa')
-                    ->rules(['required', 'digits_between:0,10000'])
-                    ->searchable()
-                    ->sortable()
-                    ->label('Siswa'),
-            ])
+            ->defaultGroup('wilayah.nama')
+            ->columns($columns)
             ->filters([
                 Tables\Filters\SelectFilter::make('jenjang_sekolah')
                     ->relationship('jenjangSekolah', 'nama')

@@ -22,6 +22,38 @@ return new class extends Migration
             $table->unsignedTinyInteger('jumlah_rombel')->nullable();
             $table->unsignedSmallInteger('jumlah_siswa')->nullable();
 
+            $jenjang_mapels = [
+                'sd' => [
+                    'kelas',
+                    'penjaskes',
+                    'agama',
+                    'agama_noni',
+                ],
+                'smp' => [
+                    'pai',
+                    'pjok',
+                    'b_indonesia',
+                    'b_inggris',
+                    'bk',
+                    'ipa',
+                    'ips',
+                    'matematika',
+                    'ppkn',
+                    'prakarya',
+                    'seni_budaya',
+                    'b_sunda',
+                    'tik',
+                ],
+            ];
+
+            foreach ($jenjang_mapels as $jenjang_sekolah => $mapels) {
+                foreach ($mapels as $mapel) {
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_abk")->nullable();
+                }
+
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_abk")->nullable();
+            }
+
             $table->timestamps();
             $table->softDeletes();
         });

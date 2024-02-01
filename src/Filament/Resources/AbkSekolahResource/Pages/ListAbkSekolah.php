@@ -1,11 +1,10 @@
 <?php
 
-namespace Kanekescom\Simgtk\Filament\Resources\SekolahResource\Pages;
+namespace Kanekescom\Simgtk\Filament\Resources\AbkSekolahResource\Pages;
 
-use Filament\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
-use Kanekescom\Simgtk\Filament\Resources\SekolahResource;
+use Kanekescom\Simgtk\Filament\Resources\AbkSekolahResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Konnco\FilamentImport\Actions\ImportAction;
 use Konnco\FilamentImport\Actions\ImportField;
@@ -13,11 +12,11 @@ use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class ListSekolah extends ListRecords
+class ListAbkSekolah extends ListRecords
 {
-    protected static string $resource = SekolahResource::class;
+    protected static string $resource = AbkSekolahResource::class;
 
-    protected static ?string $title = 'Sekolah';
+    protected static ?string $title = 'ABK Sekolah';
 
     protected function getHeaderActions(): array
     {
@@ -67,7 +66,6 @@ class ListSekolah extends ListRecords
                         ])
                         ->ignoreFormatting(),
                 ])->icon(false),
-            Actions\CreateAction::make()->label('Create'),
         ];
     }
 
@@ -88,13 +86,11 @@ class ListSekolah extends ListRecords
                 ->badge(
                     $this->getModel()::query()
                         ->where('jenjang_sekolah_id', $jenjangSekolah->id)
-                        ->defaultOrder()
                         ->count()
                 )
                 ->modifyQueryUsing(function ($query) use ($jenjangSekolah) {
                     return $query
-                        ->where('jenjang_sekolah_id', $jenjangSekolah->id)
-                        ->defaultOrder();
+                        ->where('jenjang_sekolah_id', $jenjangSekolah->id);
                 })
                 ->label($jenjangSekolah->nama);
         }

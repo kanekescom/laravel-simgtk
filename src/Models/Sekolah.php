@@ -24,6 +24,49 @@ class Sekolah extends Model
         return config('simgtk.table_prefix') . 'sekolah';
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            $jenjang_mapels = [
+                'sd' => [
+                    'kelas',
+                    'penjaskes',
+                    'agama',
+                    'agama_noni',
+                ],
+                'smp' => [
+                    'pai',
+                    'pjok',
+                    'b_indonesia',
+                    'b_inggris',
+                    'bk',
+                    'ipa',
+                    'ips',
+                    'matematika',
+                    'ppkn',
+                    'prakarya',
+                    'seni_budaya',
+                    'b_sunda',
+                    'tik',
+                ],
+            ];
+
+            foreach ($jenjang_mapels as $jenjang_sekolah => $mapels) {
+                foreach ($mapels as $mapel) {
+                    $field_jenjang_sekolah_mapel_abk = "{$jenjang_sekolah}_{$mapel}_abk";
+
+                    $field_jenjang_sekolah_mapel_abk_sum[] = $model->$field_jenjang_sekolah_mapel_abk = $model->$field_jenjang_sekolah_mapel_abk;
+                }
+
+                $field_jenjang_sekolah_formasi_abk = "{$jenjang_sekolah}_formasi_abk";
+
+                $model->$field_jenjang_sekolah_formasi_abk = array_sum($field_jenjang_sekolah_mapel_abk_sum);
+            }
+        });
+    }
+
     public function getNamaWilayahAttribute()
     {
         return "{$this->nama}, {$this->wilayah?->nama}";
