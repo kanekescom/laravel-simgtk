@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
+use Kanekescom\Simgtk\Traits\SekolahPegawaiRelationship;
 
 class Sekolah extends Model
 {
     use HasFactory;
     use HasUlids;
     use SoftDeletes;
+    use SekolahPegawaiRelationship;
 
     protected $guarded = [];
 
@@ -72,6 +72,11 @@ class Sekolah extends Model
         return "{$this->nama}, {$this->wilayah?->nama}";
     }
 
+    public function getSdKelasExistingTotalAttribute()
+    {
+        return $this->pegawaiSdKelas()->count();
+    }
+
     public function jenjangSekolah(): BelongsTo
     {
         return $this->belongsTo(JenjangSekolah::class);
@@ -82,31 +87,9 @@ class Sekolah extends Model
         return $this->hasMany(Pegawai::class);
     }
 
-    public function pegawaiStatusKepegawaianPns(): HasMany
+    public function pegawaiAktif(): HasMany
     {
-        return $this->pegawai()->where('status_kepegawaian_kode', StatusKepegawaianEnum::PNS);
-    }
-
-    public function pegawaiStatusKepegawaianPppk(): HasMany
-    {
-        return $this->pegawai()->where('status_kepegawaian_kode', StatusKepegawaianEnum::PPPK);
-    }
-
-    public function pegawaiStatusKepegawaianGtt(): HasMany
-    {
-        return $this->pegawai()->where('status_kepegawaian_kode', StatusKepegawaianEnum::NONASN);
-    }
-
-    public function mataPelajaran(): HasManyThrough
-    {
-        return $this->hasManyThrough(
-            MataPelajaran::class,
-            Pegawai::class,
-            'sekolah_id',
-            'id',
-            'id',
-            'mata_pelajaran_id',
-        );
+        return $this->hasMany(Pegawai::class)->aktif();
     }
 
     public function wilayah(): BelongsTo

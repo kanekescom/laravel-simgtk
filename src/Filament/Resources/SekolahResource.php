@@ -75,6 +75,9 @@ class SekolahResource extends Resource
             ->searchable()
             ->sortable()
             ->label('NPSN');
+        $columns[] = Tables\Columns\TextColumn::make('pegawai_aktif_count')
+            ->counts('pegawaiAktif')
+            ->label('Pegawai');
 
         return $table
             ->defaultGroup('wilayah.nama')
