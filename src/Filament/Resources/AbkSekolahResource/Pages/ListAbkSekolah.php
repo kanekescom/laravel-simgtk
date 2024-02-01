@@ -73,12 +73,6 @@ class ListAbkSekolah extends ListRecords
     {
         $tabs = [];
 
-        $tabs[''] = Tab::make('All')
-            ->badge(
-                $this->getModel()::query()
-                    ->count()
-            );
-
         $jenjangSekolahs = JenjangSekolah::all();
 
         foreach ($jenjangSekolahs as $jenjangSekolah) {
@@ -96,5 +90,10 @@ class ListAbkSekolah extends ListRecords
         }
 
         return $tabs;
+    }
+
+    public function getDefaultActiveTab(): string | int | null
+    {
+        return JenjangSekolah::first()->kode;
     }
 }
