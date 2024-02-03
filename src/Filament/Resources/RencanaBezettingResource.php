@@ -24,7 +24,7 @@ class RencanaBezettingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Rencana Bezetting';
+    protected static ?string $navigationLabel = 'Rencana';
 
     protected static ?string $navigationGroup = 'Referensi Bezetting';
 

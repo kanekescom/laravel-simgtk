@@ -24,7 +24,7 @@ class RencanaMutasiResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Rencana Mutasi';
+    protected static ?string $navigationLabel = 'Rencana';
 
     protected static ?string $navigationGroup = 'Referensi Mutasi';
 
