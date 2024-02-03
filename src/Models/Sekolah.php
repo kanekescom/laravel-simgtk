@@ -2,6 +2,7 @@
 
 namespace Kanekescom\Simgtk\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -102,17 +103,16 @@ class Sekolah extends Model
 
     public function scopeCountGroupByWilayah($query, $jenjang_sekolah_id = null)
     {
-        if (filled($jenjang_sekolah_id)) {
-            return $query
-                ->select('wilayah_id', \DB::raw('COUNT(*) as count'))
-                ->with('wilayah')
-                ->where('jenjang_sekolah_id', $jenjang_sekolah_id)
-                ->groupBy('wilayah_id');
-        }
 
         return $query
             ->select('wilayah_id', \DB::raw('COUNT(*) as count'))
             ->with('wilayah')
+            ->where(function (Builder $query) use ($jenjang_sekolah_id) {
+                if (filled($jenjang_sekolah_id)) {
+                    return $query
+                        ->where('jenjang_sekolah_id', $jenjang_sekolah_id);
+                }
+            })
             ->groupBy('wilayah_id');
     }
 
