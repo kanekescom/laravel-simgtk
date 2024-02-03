@@ -14,11 +14,13 @@ class StatsOverview extends BaseWidget
 
     protected int|string|array $columnSpan = 'full';
 
+    protected static bool $isLazy = true;
+
     protected function getStats(): array
     {
         return [
-            Stat::make('Jumlah Pegawai Aktif', Pegawai::aktif()->count()),
-            Stat::make('Jumlah Sekolah Aktif', Sekolah::count()),
+            Stat::make('Jumlah Pegawai', Pegawai::aktif()->count()),
+            Stat::make('Jumlah Sekolah', Sekolah::count()),
             Stat::make('Jumlah Usul Mutasi', UsulMutasi::aktif()->count()),
         ];
     }
