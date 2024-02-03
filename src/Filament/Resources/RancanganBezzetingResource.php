@@ -47,34 +47,34 @@ class RancanganBezzetingResource extends Resource
             ->sortable()
             ->label('Sekolah');
 
-        $columns[] = Tables\Columns\TextInputColumn::make('jumlah_kelas')
-            ->rules(['required', 'digits_between:0,100'])
-            ->searchable()
+        $columns[] = Tables\Columns\TextColumn::make('jumlah_kelas')
             ->sortable()
             ->label('Kelas');
-        $columns[] = Tables\Columns\TextInputColumn::make('jumlah_rombel')
-            ->rules(['required', 'digits_between:0,100'])
-            ->searchable()
+        $columns[] = Tables\Columns\TextColumn::make('jumlah_rombel')
             ->sortable()
             ->label('Rombel');
-        $columns[] = Tables\Columns\TextInputColumn::make('jumlah_siswa')
-            ->rules(['required', 'digits_between:0,100'])
+        $columns[] = Tables\Columns\TextColumn::make('jumlah_siswa')
             ->searchable()
             ->sortable()
             ->label('Siswa');
 
-        $columns[] = Tables\Columns\TextColumn::make('pegawai_kepsek_count')
-            ->counts('pegawaiKepsek')
+        $columns[] = Tables\Columns\TextColumn::make('kepsek')
             ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
             ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
             ->sortable()
             ->label('Kepsek');
-        $columns[] = Tables\Columns\TextColumn::make('pegawai_plt_kepsek_count')
-            ->counts('pegawaiPltKepsek')
-            ->icon(fn (string $state, Model $record): string => $state == 1 && $record->pegawaiKepsek()->count() == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-            ->color(fn (string $state, Model $record): string => $state == 1 && $record->pegawaiKepsek()->count() == 0 ? 'success' : 'danger')
+
+        $columns[] = Tables\Columns\TextColumn::make('plt_kepsek')
+            ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+            ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
             ->sortable()
-            ->label('Plt');
+            ->label('Plt Kepsek');
+
+        $columns[] = Tables\Columns\TextColumn::make('jabatan_kepsek')
+            ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+            ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
+            ->sortable()
+            ->label('Jabatan Kepsek');
 
         $jenjang_mapel_headers = [
             'sd' => [
@@ -125,102 +125,53 @@ class RancanganBezzetingResource extends Resource
         ];
 
         foreach ($jenjang_mapels as $jenjang_sekolah => $mapels) {
-            $columns[] = Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_pns_count")
-                ->counts('pegawai' . str($jenjang_sekolah)->ucfirst() . 'StatusKepegawaianPns')
+            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_pns")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                 ->label('PNS');
-            $columns[] = Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_pppk_count")
-                ->counts('pegawai' . str($jenjang_sekolah)->ucfirst() . 'StatusKepegawaianPppk')
+            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_pppk")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                 ->label('PPPK');
-            $columns[] = Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_gtt_count")
-                ->counts('pegawai' . str($jenjang_sekolah)->ucfirst() . 'StatusKepegawaianGtt')
+            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_gtt")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                 ->label('GTT');
-            $columns[] = Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_count")
-                ->counts('pegawai' . str($jenjang_sekolah)->ucfirst())
+            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_total")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                 ->label('JML');
 
             foreach ($mapels as $mapel) {
-                $field_jenjang_sekolah_mapel_abk = "{$jenjang_sekolah}_{$mapel}_abk";
-                $field_jenjang_sekolah_mapel_pns = "{$jenjang_sekolah}_{$mapel}_pns";
-                $field_jenjang_sekolah_mapel_pppk = "{$jenjang_sekolah}_{$mapel}_pppk";
-                $field_jenjang_sekolah_mapel_gtt = "{$jenjang_sekolah}_{$mapel}_gtt";
-                $field_jenjang_sekolah_mapel_total = "{$jenjang_sekolah}_{$mapel}_total";
-                $field_jenjang_sekolah_mapel_selisih = "{$jenjang_sekolah}_{$mapel}_selisih";
-
-                $field_jenjang_sekolah_mapel_existing_pns = "{$jenjang_sekolah}_{$mapel}_existing_pns";
-                $field_jenjang_sekolah_mapel_existing_pppk = "{$jenjang_sekolah}_{$mapel}_existing_pppk";
-                $field_jenjang_sekolah_mapel_existing_gtt = "{$jenjang_sekolah}_{$mapel}_existing_gtt";
-                $field_jenjang_sekolah_mapel_existing_total = "{$jenjang_sekolah}_{$mapel}_existing_total";
-                $field_jenjang_sekolah_mapel_existing_selisih = "{$jenjang_sekolah}_{$mapel}_existing_selisih";
-
-                $columns[] = Tables\Columns\TextInputColumn::make($field_jenjang_sekolah_mapel_abk)
+                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_abk")
                     ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->rules(['required', 'digits_between:0,100'])
                     ->label("{$jenjang_mapel_headers[$jenjang_sekolah][$mapel]} ABK");
-                $columns[] = Tables\Columns\TextInputColumn::make($field_jenjang_sekolah_mapel_pns)
+
+                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_pns")
                     ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->rules(['required', 'digits_between:0,100'])
                     ->label("{$jenjang_mapel_headers[$jenjang_sekolah][$mapel]} PNS");
-                $columns[] = Tables\Columns\TextInputColumn::make($field_jenjang_sekolah_mapel_pppk)
+
+                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_pppk")
                     ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->rules(['required', 'digits_between:0,100'])
                     ->label("{$jenjang_mapel_headers[$jenjang_sekolah][$mapel]} PPPK");
-                $columns[] = Tables\Columns\TextInputColumn::make($field_jenjang_sekolah_mapel_gtt)
+
+                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_gtt")
                     ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->rules(['required', 'digits_between:0,100'])
                     ->label("{$jenjang_mapel_headers[$jenjang_sekolah][$mapel]} GTT");
-                $columns[] = Tables\Columns\TextColumn::make($field_jenjang_sekolah_mapel_total)
-                    ->icon(fn (Model $record): string => $record->$field_jenjang_sekolah_mapel_abk == $record->$field_jenjang_sekolah_mapel_total ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-                    ->color(fn (Model $record): string => $record->$field_jenjang_sekolah_mapel_abk == $record->$field_jenjang_sekolah_mapel_total ? 'success' : 'danger')
+
+                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_total")
                     ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->label('ABK');
-                $columns[] = Tables\Columns\TextColumn::make($field_jenjang_sekolah_mapel_selisih)
-                    ->icon(fn (Model $record): string => $record->$field_jenjang_sekolah_mapel_selisih == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-                    ->color(fn (Model $record): string => $record->$field_jenjang_sekolah_mapel_selisih == 0 ? 'success' : 'danger')
+                    ->label("{$jenjang_mapel_headers[$jenjang_sekolah][$mapel]} Total");
+
+                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_selisih")
                     ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->label('+/- ABK');
-                $columns[] = Tables\Columns\TextColumn::make($field_jenjang_sekolah_mapel_existing_total)
-                    ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->label('EXT');
-                $columns[] = Tables\Columns\TextColumn::make($field_jenjang_sekolah_mapel_existing_selisih)
-                    ->icon(fn (Model $record): string => $record->$field_jenjang_sekolah_mapel_existing_selisih == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-                    ->color(fn (Model $record): string => $record->$field_jenjang_sekolah_mapel_existing_selisih == 0 ? 'success' : 'danger')
-                    ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->label('+/- EXT');
+                    ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                    ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
+                    ->label("{$jenjang_mapel_headers[$jenjang_sekolah][$mapel]} +/-");
             }
 
-            $field_jenjang_sekolah_formasi_abk = "{$jenjang_sekolah}_formasi_abk";
-            $field_jenjang_sekolah_formasi_pns = "{$jenjang_sekolah}_formasi_pns";
-            $field_jenjang_sekolah_formasi_pppk = "{$jenjang_sekolah}_formasi_pppk";
-            $field_jenjang_sekolah_formasi_gtt = "{$jenjang_sekolah}_formasi_gtt";
-            $field_jenjang_sekolah_formasi_total = "{$jenjang_sekolah}_formasi_total";
-            $field_jenjang_sekolah_formasi_selisih = "{$jenjang_sekolah}_formasi_selisih";
-
-            $field_jenjang_sekolah_formasi_existing_pns = "{$jenjang_sekolah}_formasi_existing_pns";
-            $field_jenjang_sekolah_formasi_existing_pppk = "{$jenjang_sekolah}_formasi_existing_pppk";
-            $field_jenjang_sekolah_formasi_existing_gtt = "{$jenjang_sekolah}_formasi_existing_gtt";
-            $field_jenjang_sekolah_formasi_existing_total = "{$jenjang_sekolah}_formasi_existing_total";
-            $field_jenjang_sekolah_formasi_existing_selisih = "{$jenjang_sekolah}_formasi_existing_selisih";
-
-            $columns[] = Tables\Columns\TextColumn::make($field_jenjang_sekolah_formasi_abk)
+            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_abk")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->label('JML ABK');
-            $columns[] = Tables\Columns\TextColumn::make($field_jenjang_sekolah_formasi_selisih)
-                ->icon(fn (Model $record): string => $record->$field_jenjang_sekolah_formasi_selisih == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-                ->color(fn (Model $record): string => $record->$field_jenjang_sekolah_formasi_selisih == 0 ? 'success' : 'danger')
+                ->label("JML ABK");
+            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_selisih")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->label('+/- ABK');
-            $columns[] = Tables\Columns\TextColumn::make($field_jenjang_sekolah_formasi_existing_total)
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->label('JML EXT');
-            $columns[] = Tables\Columns\TextColumn::make($field_jenjang_sekolah_formasi_existing_selisih)
-                ->icon(fn (Model $record): string => $record->$field_jenjang_sekolah_formasi_existing_selisih == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-                ->color(fn (Model $record): string => $record->$field_jenjang_sekolah_formasi_existing_selisih == 0 ? 'success' : 'danger')
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->label('+/- EXT');
+                ->label("+/-");
         }
 
         return $table
@@ -228,22 +179,18 @@ class RancanganBezzetingResource extends Resource
             ->columns($columns)
             ->filtersFormColumns(2)
             ->filters([
-                Tables\Filters\TernaryFilter::make('pegawai_kepsek_count')
+                Tables\Filters\TernaryFilter::make('pegawai_kepsek')
                     ->trueLabel('Terisi')
                     ->falseLabel('Kosong/Invalid')
                     ->queries(
-                        true: fn (Builder $query) => $query->whereHas('pegawaiKepsek', function (Builder $query) {
-                            $query;
-                        }, 1),
-                        false: fn (Builder $query) => $query->whereHas('pegawaiKepsek', function (Builder $query) {
-                            $query;
-                        }, '<>', 1),
+                        true: fn (Builder $query) => $query->where('jabatan_kepsek', 1),
+                        false: fn (Builder $query) => $query->where('jabatan_kepsek', '<>', 1),
                         blank: fn (Builder $query) => $query,
                     )
                     ->placeholder('All')
                     ->native(false)
                     ->label('Kepsek'),
-                Tables\Filters\TernaryFilter::make('pegawai_plt_kepsek_count')
+                Tables\Filters\TernaryFilter::make('pegawai_plt_kepsek')
                     ->trueLabel('Terisi')
                     ->falseLabel('Kosong/Invalid')
                     ->queries(

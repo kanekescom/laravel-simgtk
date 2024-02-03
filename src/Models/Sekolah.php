@@ -72,11 +72,6 @@ class Sekolah extends Model
         return "{$this->nama}, {$this->wilayah?->nama}";
     }
 
-    public function getSdKelasExistingTotalAttribute()
-    {
-        return $this->pegawaiSdKelas()->count();
-    }
-
     public function jenjangSekolah(): BelongsTo
     {
         return $this->belongsTo(JenjangSekolah::class);

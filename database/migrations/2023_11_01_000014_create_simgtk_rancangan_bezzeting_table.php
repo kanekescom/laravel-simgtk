@@ -24,6 +24,10 @@ return new class extends Migration
             $table->unsignedTinyInteger('jumlah_rombel')->nullable();
             $table->unsignedSmallInteger('jumlah_siswa')->nullable();
 
+            $table->unsignedSmallInteger('kepsek')->nullable();
+            $table->unsignedSmallInteger('plt_kepsek')->nullable();
+            $table->smallInteger('jabatan_kepsek')->nullable();
+
             $jenjang_mapels = [
                 'sd' => [
                     'kelas',

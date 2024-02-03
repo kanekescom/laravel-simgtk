@@ -7,7 +7,6 @@ use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 
 trait SekolahPegawaiRelationship
 {
-
     public function pegawaiKepsek(): HasMany
     {
         return $this->pegawaiAktif()
@@ -17,6 +16,14 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->where('is_plt_kepsek', true);
+    }
+    public function pegawaiJabatanKepsek(): HasMany
+    {
+        return $this->pegawaiAktif()
+            ->where(function ($query) {
+                $query->where('is_kepsek', true)
+                    ->orWhere('is_plt_kepsek', true);
+            });
     }
 
     public function pegawaiStatusKepegawaianPns(): HasMany
@@ -52,7 +59,7 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_kelas');
+                $query->where('kode', 'sd_penjaskes');
             });
     }
     public function pegawaiSdKelasStatusKepegawaianPns(): HasMany

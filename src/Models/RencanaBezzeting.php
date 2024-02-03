@@ -57,6 +57,10 @@ class RencanaBezzeting extends Model
                 ],
             ];
 
+            $with_count_relationships[] = 'pegawaiKepsek as kepsek';
+            $with_count_relationships[] = 'pegawaiPltKepsek as plt_kepsek';
+            $with_count_relationships[] = 'pegawaiJabatanKepsek as jabatan_kepsek';
+
             foreach ($jenjang_mapels as $jenjang_sekolah => $mapels) {
                 $jenjang_sekolah_studly = str($jenjang_sekolah)->studly();
 
