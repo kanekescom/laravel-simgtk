@@ -92,7 +92,7 @@ class Sekolah extends Model
         return $this->belongsTo(Wilayah::class);
     }
 
-    public function scopeCountByJenjangSekolah($query)
+    public function scopeCountGroupByJenjangSekolah($query)
     {
         return $query
             ->select('jenjang_sekolah_id', \DB::raw('COUNT(*) as count'))
@@ -100,8 +100,16 @@ class Sekolah extends Model
             ->groupBy('jenjang_sekolah_id');
     }
 
-    public function scopeCountByWilayah($query)
+    public function scopeCountGroupByWilayah($query, $jenjang_sekolah_id = null)
     {
+        if (filled($jenjang_sekolah_id)) {
+            return $query
+                ->select('wilayah_id', \DB::raw('COUNT(*) as count'))
+                ->with('wilayah')
+                ->where('jenjang_sekolah_id', $jenjang_sekolah_id)
+                ->groupBy('wilayah_id');
+        }
+
         return $query
             ->select('wilayah_id', \DB::raw('COUNT(*) as count'))
             ->with('wilayah')

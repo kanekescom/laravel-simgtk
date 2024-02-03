@@ -18,8 +18,8 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByGender;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByStatusKepegawaian;
-// use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\SekolahChartByJenjangSekolah;
-// use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\SekolahChartByWilayah;
+use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByJenjangSekolah;
+use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByWilayah;
 
 class SimgtkPanelProvider extends PanelProvider
 {
@@ -42,8 +42,8 @@ class SimgtkPanelProvider extends PanelProvider
             ->widgets([
                 PegawaiChartByStatusKepegawaian::class,
                 PegawaiChartByGender::class,
-                // SekolahChartByJenjangSekolah::class,
-                // SekolahChartByWilayah::class,
+                JumlahSekolahChartByJenjangSekolah::class,
+                JumlahSekolahChartByWilayah::class,
             ])
             ->middleware([
                 EncryptCookies::class,

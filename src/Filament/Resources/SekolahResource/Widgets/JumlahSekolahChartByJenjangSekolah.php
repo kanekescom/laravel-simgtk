@@ -5,16 +5,18 @@ namespace Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets;
 use Filament\Widgets\ChartWidget;
 use Kanekescom\Simgtk\Models\Sekolah;
 
-class SekolahChartByJenjangSekolah extends ChartWidget
+class JumlahSekolahChartByJenjangSekolah extends ChartWidget
 {
-    protected static ?string $heading = 'Jumlah Sekolah Berdasarkan Jenjang Sekolah';
+    protected static ?string $heading = 'Jumlah Sekolah Berdasarkan Jenjang';
 
     protected static ?string $pollingInterval = '10s';
+
+    protected static bool $isLazy = true;
 
     protected function getData(): array
     {
         $data = Sekolah::query()
-            ->countByJenjangSekolah()
+            ->countGroupByJenjangSekolah($this->filter)
             ->get();
 
         return [
