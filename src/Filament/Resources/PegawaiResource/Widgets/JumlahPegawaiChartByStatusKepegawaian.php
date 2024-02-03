@@ -3,11 +3,13 @@
 namespace Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
+use Illuminate\Support\Arr;
+use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Pegawai;
 
-class PegawaiChartByGender extends ChartWidget
+class JumlahPegawaiChartByStatusKepegawaian extends ChartWidget
 {
-    protected static ?string $heading = 'Jumlah Pegawai Berdasarkan Gender';
+    protected static ?string $heading = 'Jumlah Pegawai Berdasarkan Status';
 
     protected static ?string $pollingInterval = '10s';
 
@@ -16,7 +18,7 @@ class PegawaiChartByGender extends ChartWidget
     protected function getData(): array
     {
         $data = Pegawai::query()
-            ->countGroupByGender()
+            ->countGroupByStatusKepegawaian($this->filter)
             ->get();
 
         return [
@@ -26,12 +28,17 @@ class PegawaiChartByGender extends ChartWidget
                     'data' => $data->map(fn ($value) => $value->count),
                 ],
             ],
-            'labels' => $data->map(fn ($value) => $value->gender_kode->getLabel()),
+            'labels' => $data->map(fn ($value) => $value->status_kepegawaian_kode->getLabel()),
         ];
     }
 
     protected function getType(): string
     {
         return 'bar';
+    }
+
+    protected function getFilters(): ?array
+    {
+        return Arr::prepend(JenjangSekolah::pluck('nama', 'id')->toArray(), 'All', '');
     }
 }
