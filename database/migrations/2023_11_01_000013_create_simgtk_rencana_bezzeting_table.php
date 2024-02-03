@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create(config('simgtk.table_prefix') . 'rencana_bezzeting', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('nama');
-            $table->date('tanggal_mulai');
-            $table->date('tanggal_berakhir');
+            $table->date('tanggal_mulai')->nullable();
+            $table->date('tanggal_berakhir')->nullable();
             $table->boolean('is_aktif')->index();
             $table->timestamps();
             $table->softDeletes();

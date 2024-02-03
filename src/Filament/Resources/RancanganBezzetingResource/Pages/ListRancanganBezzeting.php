@@ -4,8 +4,10 @@ namespace Kanekescom\Simgtk\Filament\Resources\RancanganBezzetingResource\Pages;
 
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Contracts\Support\Htmlable;
 use Kanekescom\Simgtk\Filament\Resources\RancanganBezzetingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
+use Kanekescom\Simgtk\Models\RencanaBezzeting;
 use Konnco\FilamentImport\Actions\ImportAction;
 use Konnco\FilamentImport\Actions\ImportField;
 use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
@@ -17,6 +19,11 @@ class ListRancanganBezzeting extends ListRecords
     protected static string $resource = RancanganBezzetingResource::class;
 
     protected static ?string $title = 'Bezzeting';
+
+    public function getSubheading(): string | Htmlable | null
+    {
+        return RencanaBezzeting::aktif()->first()?->nama;
+    }
 
     protected function getHeaderActions(): array
     {

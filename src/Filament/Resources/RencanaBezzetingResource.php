@@ -38,14 +38,14 @@ class RencanaBezzetingResource extends Resource
                     ->required()
                     ->columnSpanFull()
                     ->label('Nama'),
-                Forms\Components\DatePicker::make('tanggal_mulai')
-                    ->date()
-                    ->required()
-                    ->label('Tanggal Mulai'),
-                Forms\Components\DatePicker::make('tanggal_berakhir')
-                    ->afterOrEqual('tanggal_mulai')
-                    ->required()
-                    ->label('Tanggal Berakhir'),
+                // Forms\Components\DatePicker::make('tanggal_mulai')
+                //     ->date()
+                //     ->required()
+                //     ->label('Tanggal Mulai'),
+                // Forms\Components\DatePicker::make('tanggal_berakhir')
+                //     ->afterOrEqual('tanggal_mulai')
+                //     ->required()
+                //     ->label('Tanggal Berakhir'),
                 Forms\Components\Toggle::make('is_aktif')
                     ->label('Aktif'),
             ]);
@@ -60,20 +60,26 @@ class RencanaBezzetingResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Nama'),
-                Tables\Columns\TextColumn::make('tanggal_mulai')
-                    ->searchable()
-                    ->sortable()
-                    ->label('Mulai'),
-                Tables\Columns\TextColumn::make('tanggal_berakhir')
-                    ->searchable()
-                    ->sortable()
-                    ->label('Berakhir'),
+                // Tables\Columns\TextColumn::make('tanggal_mulai')
+                //     ->searchable()
+                //     ->sortable()
+                //     ->label('Mulai'),
+                // Tables\Columns\TextColumn::make('tanggal_berakhir')
+                //     ->searchable()
+                //     ->sortable()
+                //     ->label('Berakhir'),
                 Tables\Columns\ToggleColumn::make('is_aktif')
                     ->sortable()
                     ->label('Aktif'),
                 Tables\Columns\TextColumn::make('sekolah_count')
                     ->counts('sekolah')
                     ->label('Sekolah'),
+                Tables\Columns\TextColumn::make('pegawai_count')
+                    ->counts('pegawai')
+                    ->label('Pegawai'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->date()
+                    ->label('Tanggal'),
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_aktif')
