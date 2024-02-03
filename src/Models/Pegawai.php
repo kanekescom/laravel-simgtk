@@ -129,33 +129,25 @@ class Pegawai extends Model
 
     public function scopeCountGroupByGender($query, $jenjang_sekolah_id = null)
     {
-        if (filled($jenjang_sekolah_id)) {
-            return $query
-                ->select('gender_kode', \DB::raw('COUNT(*) as count'))
-                ->whereHas('sekolah', function (Builder $query) use ($jenjang_sekolah_id) {
-                    $query->where('jenjang_sekolah_id', $jenjang_sekolah_id);
-                })
-                ->groupBy('gender_kode');
-        }
-
         return $query
             ->select('gender_kode', \DB::raw('COUNT(*) as count'))
+            ->whereHas('sekolah', function (Builder $query) use ($jenjang_sekolah_id) {
+                if (filled($jenjang_sekolah_id)) {
+                    $query->where('jenjang_sekolah_id', $jenjang_sekolah_id);
+                }
+            })
             ->groupBy('gender_kode');
     }
 
     public function scopeCountGroupByStatusKepegawaian($query, $jenjang_sekolah_id = null)
     {
-        if (filled($jenjang_sekolah_id)) {
-            return $query
-                ->select('status_kepegawaian_kode', \DB::raw('COUNT(*) as count'))
-                ->whereHas('sekolah', function (Builder $query) use ($jenjang_sekolah_id) {
-                    $query->where('jenjang_sekolah_id', $jenjang_sekolah_id);
-                })
-                ->groupBy('status_kepegawaian_kode');
-        }
-
         return $query
             ->select('status_kepegawaian_kode', \DB::raw('COUNT(*) as count'))
+            ->whereHas('sekolah', function (Builder $query) use ($jenjang_sekolah_id) {
+                if (filled($jenjang_sekolah_id)) {
+                    $query->where('jenjang_sekolah_id', $jenjang_sekolah_id);
+                }
+            })
             ->groupBy('status_kepegawaian_kode');
     }
 }
