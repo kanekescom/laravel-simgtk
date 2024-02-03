@@ -16,12 +16,10 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-// use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByGender;
-// use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByStatusKepegawaian;
-// // use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByWilayahSekolah;
+use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByGender;
+use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\PegawaiChartByStatusKepegawaian;
 // use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\SekolahChartByJenjangSekolah;
 // use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\SekolahChartByWilayah;
-// use Kanekescom\Simgtk\Filament\Widgets\StatsOverview;
 
 class SimgtkPanelProvider extends PanelProvider
 {
@@ -42,10 +40,8 @@ class SimgtkPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: __DIR__ . '/Filament/Widgets', for: 'Kanekescom\\Simgtk\\Filament\\Widgets')
             ->widgets([
-                // StatsOverview::class,
-                // PegawaiChartByStatusKepegawaian::class,
-                // PegawaiChartByGender::class,
-                // // PegawaiChartByWilayahSekolah::class,
+                PegawaiChartByStatusKepegawaian::class,
+                PegawaiChartByGender::class,
                 // SekolahChartByJenjangSekolah::class,
                 // SekolahChartByWilayah::class,
             ])

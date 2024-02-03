@@ -11,10 +11,12 @@ class PegawaiChartByGender extends ChartWidget
 
     protected static ?string $pollingInterval = '10s';
 
+    protected static bool $isLazy = true;
+
     protected function getData(): array
     {
         $data = Pegawai::query()
-            ->countByGender()
+            ->countGroupByGender()
             ->get();
 
         return [

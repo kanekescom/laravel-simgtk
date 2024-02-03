@@ -91,9 +91,16 @@ class Pegawai extends Model
         return $this->belongsTo(MataPelajaran::class);
     }
 
-    public function wilayahSekolah(): HasOneThrough
+    public function wilayah(): HasOneThrough
     {
-        return $this->hasOneThrough(Wilayah::class, Sekolah::class);
+        return $this->hasOneThrough(
+            Wilayah::class,
+            Sekolah::class,
+            'id',
+            'id',
+            'sekolah_id',
+            'wilayah_id',
+        );
     }
 
     public function scopeAktif($query)
@@ -119,24 +126,17 @@ class Pegawai extends Model
             ->whereDate('tanggal_lahir', '<=', $tanggal_pensiun);
     }
 
-    public function scopeCountByGender($query)
+    public function scopeCountGroupByGender($query)
     {
         return $query
             ->select('gender_kode', \DB::raw('COUNT(*) as count'))
             ->groupBy('gender_kode');
     }
 
-    public function scopeCountByStatusKepegawaian($query)
+    public function scopeCountGroupByStatusKepegawaian($query)
     {
         return $query
             ->select('status_kepegawaian_kode', \DB::raw('COUNT(*) as count'))
             ->groupBy('status_kepegawaian_kode');
-    }
-
-    public function scopeCountByWilayahSekolah($query)
-    {
-        return $query
-            ->select('se', \DB::raw('COUNT(*) as count'))
-            ->groupBy('wilayahSekolah');
     }
 }

@@ -11,10 +11,12 @@ class PegawaiChartByStatusKepegawaian extends ChartWidget
 
     protected static ?string $pollingInterval = '10s';
 
+    protected static bool $isLazy = true;
+
     protected function getData(): array
     {
         $data = Pegawai::query()
-            ->countByStatusKepegawaian()
+            ->countGroupByStatusKepegawaian()
             ->get();
 
         return [
