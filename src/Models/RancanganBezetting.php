@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 
-class RancanganBezzeting extends Model
+class RancanganBezetting extends Model
 {
     use HasFactory;
     use HasUlids;
@@ -20,7 +20,7 @@ class RancanganBezzeting extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'rancangan_bezzeting';
+        return config('simgtk.table_prefix') . 'rancangan_bezetting';
     }
 
     protected static function boot()
@@ -87,7 +87,7 @@ class RancanganBezzeting extends Model
 
     public function rencana(): BelongsTo
     {
-        return $this->belongsTo(RencanaBezzeting::class, 'rencana_bezzeting_id');
+        return $this->belongsTo(RencanaBezetting::class, 'rencana_bezetting_id');
     }
 
     public function sekolah(): BelongsTo

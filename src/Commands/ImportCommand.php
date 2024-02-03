@@ -32,11 +32,11 @@ class ImportCommand extends Command
         'wilayah' => Models\Wilayah::class,
         'sekolah' => Models\Sekolah::class,
         'pegawai' => Models\Pegawai::class,
-        'rencana-bezzeting' => Models\RencanaBezzeting::class,
+        'rencana-bezetting' => Models\RencanaBezetting::class,
         'rencana-mutasi' => Models\RencanaMutasi::class,
         'usul-mutasi' => Models\UsulMutasi::class,
         // 'rancangan-mutasi' => Models\RancanganMutasi::class,
-        // 'rancangan-bezzeting' => Models\RancanganBezzeting::class,
+        // 'rancangan-bezetting' => Models\RancanganBezetting::class,
     ];
 
     protected $importOptions = [
@@ -48,11 +48,11 @@ class ImportCommand extends Command
         'wilayah' => Imports\WilayahImport::class,
         'sekolah' => Imports\SekolahImport::class,
         // 'pegawai' => Imports\Pegawai::class,
-        'rencana-bezzeting' => Imports\RencanaBezzetingImport::class,
+        'rencana-bezetting' => Imports\RencanaBezettingImport::class,
         'rencana-mutasi' => Imports\RencanaMutasiImport::class,
         'usul-mutasi' => Imports\UsulMutasiImport::class,
         // 'rancangan-mutasi' => Imports\RancanganMutasiImport::class,
-        // 'rancangan-bezzeting' => Imports\RancanganBezzetingImport::class,
+        // 'rancangan-bezetting' => Imports\RancanganBezettingImport::class,
     ];
 
     /**

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RencanaBezzeting extends Model
+class RencanaBezetting extends Model
 {
     use HasFactory;
     use HasUlids;
@@ -19,7 +19,7 @@ class RencanaBezzeting extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'rencana_bezzeting';
+        return config('simgtk.table_prefix') . 'rencana_bezetting';
     }
 
     protected static function boot()
@@ -90,7 +90,7 @@ class RencanaBezzeting extends Model
                 })
                 ->toArray();
 
-            $model->bezzeting()
+            $model->bezetting()
                 ->createMany($sekolah);
 
             $pegawai = Pegawai::query()
@@ -127,22 +127,22 @@ class RencanaBezzeting extends Model
         return "{$this->tanggal_mulai} - {$this->tanggal_berakhir}";
     }
 
-    public function bezzeting(): HasMany
+    public function bezetting(): HasMany
     {
-        return $this->hasMany(RancanganBezzeting::class);
+        return $this->hasMany(RancanganBezetting::class);
     }
 
     public function pegawai(): HasMany
     {
-        return $this->hasMany(RancanganBezzetingPegawai::class);
+        return $this->hasMany(RancanganBezettingPegawai::class);
     }
 
     public function sekolah(): HasManyThrough
     {
         return $this->hasManyThrough(
             Sekolah::class,
-            RancanganBezzeting::class,
-            'rencana_bezzeting_id',
+            RancanganBezetting::class,
+            'rencana_bezetting_id',
             'id',
             'id',
             'sekolah_id',

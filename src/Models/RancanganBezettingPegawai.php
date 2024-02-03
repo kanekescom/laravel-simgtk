@@ -14,7 +14,7 @@ use Kanekescom\Simgtk\Enums\JenjangPendidikanEnum;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Enums\StatusTugasEnum;
 
-class RancanganBezzetingPegawai extends Model
+class RancanganBezettingPegawai extends Model
 {
     use HasFactory;
     use HasUlids;
@@ -33,7 +33,7 @@ class RancanganBezzetingPegawai extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'rancangan_bezzeting_pegawai';
+        return config('simgtk.table_prefix') . 'rancangan_bezetting_pegawai';
     }
 
     public function getNamaGelarAttribute()
@@ -68,7 +68,7 @@ class RancanganBezzetingPegawai extends Model
 
     public function rencana(): BelongsTo
     {
-        return $this->belongsTo(RencanaBezzeting::class, 'rencana_bezzeting_id');
+        return $this->belongsTo(RencanaBezetting::class, 'rencana_bezetting_id');
     }
 
     public function pegawai(): BelongsTo

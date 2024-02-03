@@ -3,16 +3,16 @@
 namespace Kanekescom\Simgtk\Seeders;
 
 use Illuminate\Database\Seeder;
-use Kanekescom\Simgtk\Factories\RencanaBezzetingFactory;
+use Kanekescom\Simgtk\Factories\RencanaBezettingFactory;
 
-class RencanaBezzetingSeeder extends Seeder
+class RencanaBezettingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        RencanaBezzetingFactory::new()
+        RencanaBezettingFactory::new()
             ->count(5)
             ->create();
     }

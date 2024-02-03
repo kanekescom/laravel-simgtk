@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('simgtk.table_prefix') . 'rancangan_bezzeting', function (Blueprint $table) {
+        Schema::create(config('simgtk.table_prefix') . 'rancangan_bezetting', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignUlid('rencana_bezzeting_id')->index();
+            $table->foreignUlid('rencana_bezetting_id')->index();
             $table->foreignUlid('sekolah_id')->index();
             $table->string('nama');
             $table->string('npsn')->nullable()->index();
@@ -92,6 +92,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('simgtk.table_prefix') . 'rancangan_bezzeting');
+        Schema::dropIfExists(config('simgtk.table_prefix') . 'rancangan_bezetting');
     }
 };

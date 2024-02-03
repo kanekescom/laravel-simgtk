@@ -9,24 +9,24 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Kanekescom\Simgtk\Filament\Resources\RencanaBezzetingResource\Pages;
-use Kanekescom\Simgtk\Models\RencanaBezzeting;
+use Kanekescom\Simgtk\Filament\Resources\RencanaBezettingResource\Pages;
+use Kanekescom\Simgtk\Models\RencanaBezetting;
 
-class RencanaBezzetingResource extends Resource
+class RencanaBezettingResource extends Resource
 {
-    protected static ?string $slug = 'referensi/bezzeting/rencana-bezzeting';
+    protected static ?string $slug = 'referensi/bezetting/rencana-bezetting';
 
-    protected static ?string $pluralLabel = 'Rencana Bezzeting';
+    protected static ?string $pluralLabel = 'Rencana Bezetting';
 
-    protected static ?string $model = RencanaBezzeting::class;
+    protected static ?string $model = RencanaBezetting::class;
 
     protected static bool $shouldRegisterNavigation = true;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Rencana Bezzeting';
+    protected static ?string $navigationLabel = 'Rencana Bezetting';
 
-    protected static ?string $navigationGroup = 'Referensi Bezzeting';
+    protected static ?string $navigationGroup = 'Referensi Bezetting';
 
     public static function form(Form $form): Form
     {
@@ -115,9 +115,9 @@ class RencanaBezzetingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRencanaBezzeting::route('/'),
-            'create' => Pages\CreateRencanaBezzeting::route('/create'),
-            'edit' => Pages\EditRencanaBezzeting::route('/{record}/edit'),
+            'index' => Pages\ListRencanaBezetting::route('/'),
+            'create' => Pages\CreateRencanaBezetting::route('/create'),
+            'edit' => Pages\EditRencanaBezetting::route('/{record}/edit'),
         ];
     }
 }

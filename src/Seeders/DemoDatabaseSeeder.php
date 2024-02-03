@@ -25,7 +25,7 @@ class DemoDatabaseSeeder extends Seeder
             PegawaiSeeder::class,
             RencanaMutasiSeeder::class,
             UsulMutasiSeeder::class,
-            RencanaBezzetingSeeder::class,
+            RencanaBezettingSeeder::class,
         ]);
     }
 }

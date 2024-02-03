@@ -13,7 +13,7 @@ use Kanekescom\Simgtk\Models\Sekolah;
 
 class AbkSekolahResource extends Resource
 {
-    protected static ?string $slug = 'referensi/bezzeting/abk-sekolah';
+    protected static ?string $slug = 'referensi/bezetting/abk-sekolah';
 
     protected static ?string $pluralLabel = 'ABK Sekolah';
 
@@ -25,7 +25,7 @@ class AbkSekolahResource extends Resource
 
     protected static ?string $navigationLabel = 'ABK';
 
-    protected static ?string $navigationGroup = 'Referensi Bezzeting';
+    protected static ?string $navigationGroup = 'Referensi Bezetting';
 
     public static function table(Table $table): Table
     {

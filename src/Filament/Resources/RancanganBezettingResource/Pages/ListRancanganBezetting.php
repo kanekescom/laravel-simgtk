@@ -1,28 +1,28 @@
 <?php
 
-namespace Kanekescom\Simgtk\Filament\Resources\RancanganBezzetingResource\Pages;
+namespace Kanekescom\Simgtk\Filament\Resources\RancanganBezettingResource\Pages;
 
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Contracts\Support\Htmlable;
-use Kanekescom\Simgtk\Filament\Resources\RancanganBezzetingResource;
+use Kanekescom\Simgtk\Filament\Resources\RancanganBezettingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
-use Kanekescom\Simgtk\Models\RencanaBezzeting;
+use Kanekescom\Simgtk\Models\RencanaBezetting;
 use Konnco\FilamentImport\Actions\ImportAction;
 use Konnco\FilamentImport\Actions\ImportField;
 use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class ListRancanganBezzeting extends ListRecords
+class ListRancanganBezetting extends ListRecords
 {
-    protected static string $resource = RancanganBezzetingResource::class;
+    protected static string $resource = RancanganBezettingResource::class;
 
-    protected static ?string $title = 'Bezzeting';
+    protected static ?string $title = 'Bezetting';
 
     public function getSubheading(): string | Htmlable | null
     {
-        return RencanaBezzeting::aktif()->first()?->nama;
+        return RencanaBezetting::aktif()->first()?->nama;
     }
 
     protected function getHeaderActions(): array

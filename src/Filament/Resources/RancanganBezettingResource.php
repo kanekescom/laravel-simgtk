@@ -8,23 +8,23 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Kanekescom\Simgtk\Filament\Resources\RancanganBezzetingResource\Pages;
-use Kanekescom\Simgtk\Models\RancanganBezzeting;
-use Kanekescom\Simgtk\Models\RencanaBezzeting;
+use Kanekescom\Simgtk\Filament\Resources\RancanganBezettingResource\Pages;
+use Kanekescom\Simgtk\Models\RancanganBezetting;
+use Kanekescom\Simgtk\Models\RencanaBezetting;
 
-class RancanganBezzetingResource extends Resource
+class RancanganBezettingResource extends Resource
 {
-    protected static ?string $slug = 'rancangan-bezzeting';
+    protected static ?string $slug = 'rancangan-bezetting';
 
-    protected static ?string $pluralLabel = 'Bezzeting';
+    protected static ?string $pluralLabel = 'Bezetting';
 
-    protected static ?string $model = RancanganBezzeting::class;
+    protected static ?string $model = RancanganBezetting::class;
 
     protected static bool $shouldRegisterNavigation = true;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Bezzeting';
+    protected static ?string $navigationLabel = 'Bezetting';
 
     protected static ?string $navigationGroup = null;
 
@@ -35,7 +35,7 @@ class RancanganBezzetingResource extends Resource
 
     public static function canEdit(Model $record): bool
     {
-        return RencanaBezzeting::periodeAktif()->exists();
+        return RencanaBezetting::periodeAktif()->exists();
     }
 
     public static function table(Table $table): Table
@@ -217,7 +217,7 @@ class RancanganBezzetingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRancanganBezzeting::route('/'),
+            'index' => Pages\ListRancanganBezetting::route('/'),
         ];
     }
 }

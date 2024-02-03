@@ -3,14 +3,14 @@
 namespace Kanekescom\Simgtk\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Kanekescom\Simgtk\Models\RencanaBezzeting;
+use Kanekescom\Simgtk\Models\RencanaBezetting;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Kanekescom\Simgtk\Models\RencanaBezzeting>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Kanekescom\Simgtk\Models\RencanaBezetting>
  */
-class RencanaBezzetingFactory extends Factory
+class RencanaBezettingFactory extends Factory
 {
-    protected $model = RencanaBezzeting::class;
+    protected $model = RencanaBezetting::class;
 
     /**
      * Define the model's default state.
