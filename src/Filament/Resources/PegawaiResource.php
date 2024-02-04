@@ -5,11 +5,13 @@ namespace Kanekescom\Simgtk\Filament\Resources;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
 use Kanekescom\Simgtk\Enums\JenjangPendidikanEnum;
@@ -76,9 +78,10 @@ class PegawaiResource extends Resource
                                     ->label('NIP'),
                                 Forms\Components\Select::make('gender_kode')
                                     ->options(GenderEnum::class)
-                                    ->in(collect(
-                                        Options::forEnum(GenderEnum::class)->toArray()
-                                    )->pluck('value'))
+                                    ->in(
+                                        collect(Options::forEnum(GenderEnum::class)->toArray())
+                                            ->pluck('value')
+                                    )
                                     ->searchable()
                                     ->preload()
                                     ->required()
@@ -89,6 +92,7 @@ class PegawaiResource extends Resource
                                     ->label('Tempat Lahir'),
                                 Forms\Components\DatePicker::make('tanggal_lahir')
                                     ->date()
+                                    ->live()
                                     ->required()
                                     ->label('Tanggal Lahir'),
                                 Forms\Components\TextInput::make('nomor_hp')
@@ -99,9 +103,10 @@ class PegawaiResource extends Resource
                                     ->label('Email'),
                                 Forms\Components\Select::make('jenjang_pendidikan_kode')
                                     ->options(JenjangPendidikanEnum::class)
-                                    ->in(collect(
-                                        Options::forEnum(JenjangPendidikanEnum::class)->toArray()
-                                    )->pluck('value'))
+                                    ->in(
+                                        collect(Options::forEnum(JenjangPendidikanEnum::class)->toArray())
+                                            ->pluck('value')
+                                    )
                                     ->searchable()
                                     ->preload()
                                     ->required()
@@ -111,19 +116,25 @@ class PegawaiResource extends Resource
                             ->schema([
                                 Forms\Components\Select::make('status_kepegawaian_kode')
                                     ->options(StatusKepegawaianEnum::class)
-                                    ->in(collect(
-                                        Options::forEnum(StatusKepegawaianEnum::class)->toArray()
-                                    )->pluck('value'))
+                                    ->in(
+                                        collect(Options::forEnum(StatusKepegawaianEnum::class)->toArray())
+                                            ->pluck('value')
+                                    )
+                                    ->live()
                                     ->searchable()
                                     ->preload()
                                     ->required()
                                     ->label('Status Kepegawaian'),
                                 Forms\Components\TextInput::make('masa_kerja_tahun')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::NONASN)->value]))
+                                    ->required()
                                     ->numeric()
                                     ->minValue(0)
                                     ->maxValue(50)
                                     ->label('Masa Kerja Tahun'),
                                 Forms\Components\TextInput::make('masa_kerja_bulan')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::NONASN)->value]))
+                                    ->required()
                                     ->numeric()
                                     ->minValue(0)
                                     ->maxValue(12)
@@ -132,47 +143,85 @@ class PegawaiResource extends Resource
                         Tabs\Tab::make('CPNS')
                             ->schema([
                                 Forms\Components\TextInput::make('nomor_sk_cpns')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->maxLength(255)
                                     ->label('Nomor SK CPNS'),
                                 Forms\Components\DatePicker::make('tmt_cpns')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->date()
                                     ->label('TMT CPNS'),
                                 Forms\Components\DatePicker::make('tanggal_sk_cpns')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->date()
                                     ->label('Tanggal SK CPNS'),
-                            ])->columns(3),
+                            ])
+                            ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                            ->columns(3),
                         Tabs\Tab::make('PNS')
                             ->schema([
                                 Forms\Components\TextInput::make('nomor_sk_pns')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->maxLength(255)
                                     ->label('Nomor SK PNS'),
                                 Forms\Components\DatePicker::make('tmt_pns')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->date()
                                     ->label('TMT PNS'),
                                 Forms\Components\DatePicker::make('tanggal_sk_pns')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->date()
                                     ->label('Tanggal SK PNS'),
-                            ])->columns(3),
+                            ])
+                            ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                            ->columns(3),
                         Tabs\Tab::make('Pangkat')
                             ->schema([
                                 Forms\Components\TextInput::make('nomor_sk_pangkat')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->maxLength(255)
                                     ->label('Nomor SK Pangkat'),
                                 Forms\Components\Select::make('golongan_kode')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->options(GolonganAsnEnum::class)
-                                    ->in(collect(
-                                        Options::forEnum(GolonganAsnEnum::class)->toArray()
-                                    )->pluck('value'))
+                                    ->in(
+                                        collect(Options::forEnum(GolonganAsnEnum::class)->toArray())
+                                            ->pluck('value')
+                                    )
                                     ->searchable()
                                     ->preload()
                                     ->label('Golongan'),
                                 Forms\Components\DatePicker::make('tmt_pangkat')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->date()
                                     ->label('TMT Pangkat'),
                                 Forms\Components\DatePicker::make('tanggal_sk_pangkat')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->date()
                                     ->label('Tanggal SK Pangkat'),
-                            ])->columns(2),
+                                Forms\Components\TextInput::make('masa_kerja_tahun')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->required()
+                                    ->numeric()
+                                    ->minValue(0)
+                                    ->maxValue(50)
+                                    ->label('Masa Kerja Tahun'),
+                                Forms\Components\TextInput::make('masa_kerja_bulan')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->required()
+                                    ->numeric()
+                                    ->minValue(0)
+                                    ->maxValue(12)
+                                    ->label('Masa Kerja Bulan'),
+                            ])
+                            ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                            ->columns(2),
                         Tabs\Tab::make('Jabatan')
                             ->schema([
                                 Forms\Components\Select::make('sekolah_id')
@@ -186,9 +235,10 @@ class PegawaiResource extends Resource
                                     ->label('Sekolah'),
                                 Forms\Components\Select::make('status_tugas_kode')
                                     ->options(StatusTugasEnum::class)
-                                    ->in(collect(
-                                        Options::forEnum(StatusTugasEnum::class)->toArray()
-                                    )->pluck('value'))
+                                    ->in(
+                                        collect(Options::forEnum(StatusTugasEnum::class)->toArray())
+                                            ->pluck('value')
+                                    )
                                     ->searchable()
                                     ->preload()
                                     ->required()
@@ -224,18 +274,22 @@ class PegawaiResource extends Resource
                                     ->maxValue(50)
                                     ->label('Jam Mengajar Perminggu'),
                                 Forms\Components\Toggle::make('is_kepsek')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->label('Kepsek'),
                                 Forms\Components\Toggle::make('is_plt_kepsek')
+                                    ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->label('PLT Kepsek'),
                             ])->columns(2),
                         Tabs\Tab::make('Pensiun')
                             ->schema([
+                                Forms\Components\DatePicker::make('tmt_pensiun')
+                                    ->helperText(fn (Get $get) => 'TMT Umur 60 pada ' . ($get('tanggal_lahir') ? now()->parse($get('tanggal_lahir'))->addYear(60)->addMonth(1)->firstOfMonth()->toDateString() : ''))
+                                    ->date()
+                                    ->required()
+                                    ->label('TMT Pensiun'),
                                 Forms\Components\TextInput::make('nomor_sk_pensiun')
                                     ->maxLength(255)
                                     ->label('Nomor SK Pensiun'),
-                                Forms\Components\DatePicker::make('tmt_pensiun')
-                                    ->date()
-                                    ->label('TMT Pensiun'),
                                 Forms\Components\DatePicker::make('tanggal_sk_pensiun')
                                     ->date()
                                     ->label('Tanggal SK Pensiun'),
@@ -248,14 +302,15 @@ class PegawaiResource extends Resource
     {
         return $table
             ->modifyQueryUsing(fn (Builder $query) => $query->aktif())
+            ->filtersFormColumns(3)
             ->columns([
                 Tables\Columns\TextColumn::make('nama_gelar')
-                    ->description(fn (Pegawai $record): string => $record->nama_id ?? '')
+                    ->description(fn (Model $record): string => $record->nama_id ?? '')
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
                     ->sortable(['nama'])
                     ->label('Nama'),
                 Tables\Columns\TextColumn::make('status_kepegawaian_kode')
-                    ->description(fn (Pegawai $record): string => $record->gender_kode->getLabel() ?? '')
+                    ->description(fn (Model $record): string => $record->gender_kode->getLabel() ?? '')
                     ->sortable()
                     ->label('Status'),
                 Tables\Columns\TextColumn::make('golongan_kode')
@@ -263,17 +318,19 @@ class PegawaiResource extends Resource
                     ->sortable()
                     ->label('Gol'),
                 Tables\Columns\TextColumn::make('mataPelajaran.nama')
-                    ->description(fn (Pegawai $record): string => $record->sekolah?->nama ?? '')
+                    ->description(fn (Model $record): string => $record->sekolah?->nama_wilayah ?? '')
                     ->wrap()
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%'.$search.'%');
+                                $query->where('nama', 'LIKE', '%' . $search . '%');
                             })
                             ->orWhereHas('sekolah', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%'.$search.'%');
+                                $query->where('nama', 'LIKE', '%' . $search . '%');
                             });
                     })
+                    ->icon(fn (Model $record): string => $record->is_kepsek || $record->is_plt_kepsek  ? 'heroicon-o-academic-cap' : '')
+                    ->color(fn (Model $record): string => $record->is_kepsek ? 'success' : ($record->is_plt_kepsek ? 'warning' : ''))
                     ->sortable()
                     ->label('Jabatan'),
             ])
@@ -329,14 +386,41 @@ class PegawaiResource extends Resource
                     ->preload()
                     ->label('Mata Pelajaran'),
                 Tables\Filters\TernaryFilter::make('is_kepsek')
+                    ->placeholder('All')
+                    ->native(false)
                     ->label('Kepsek'),
+                Tables\Filters\TernaryFilter::make('is_plt_kepsek')
+                    ->placeholder('All')
+                    ->native(false)
+                    ->label('Plt Kepsek'),
+                Tables\Filters\TernaryFilter::make('jabatan_kepsek')
+                    ->queries(
+                        true: fn (Builder $query) => $query->where(function (Builder $query) {
+                            return $query->where('is_kepsek', true)
+                                ->orWhere('is_plt_kepsek', true);
+                        }),
+                        false: fn (Builder $query) => $query->where(function (Builder $query) {
+                            return $query->where('is_kepsek', false)
+                                ->where('is_plt_kepsek', false);
+                        }),
+                        blank: fn (Builder $query) => $query,
+                    )
+                    ->placeholder('All')
+                    ->native(false)
+                    ->label('Jabatan Kepsek'),
+                Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+                Tables\Actions\RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\ForceDeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make(),
                 ]),
             ])
             ->emptyStateActions([
@@ -344,11 +428,12 @@ class PegawaiResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
+    public static function getEloquentQuery(): Builder
     {
-        return [
-            //
-        ];
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
     }
 
     public static function getPages(): array

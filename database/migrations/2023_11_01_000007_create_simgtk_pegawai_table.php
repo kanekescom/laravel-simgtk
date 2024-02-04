@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('simgtk.table_prefix').'pegawai', function (Blueprint $table) {
+        Schema::create(config('simgtk.table_prefix') . 'pegawai', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('nama');
             $table->string('nik')->index();
@@ -54,8 +54,8 @@ return new class extends Migration
             $table->foreignUlid('bidang_studi_sertifikasi_id')->index()->nullable();
             $table->foreignUlid('mata_pelajaran_id')->index()->nullable();
             $table->double('jam_mengajar_perminggu', 3, 1)->nullable();
-            $table->boolean('is_kepsek')->index();
-            $table->boolean('is_plt_kepsek')->index();
+            $table->boolean('is_kepsek')->default(false)->index();
+            $table->boolean('is_plt_kepsek')->default(false)->index();
 
             $table->timestamps();
             $table->softDeletes();
@@ -67,6 +67,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('simgtk.table_prefix').'pegawai');
+        Schema::dropIfExists(config('simgtk.table_prefix') . 'pegawai');
     }
 };
