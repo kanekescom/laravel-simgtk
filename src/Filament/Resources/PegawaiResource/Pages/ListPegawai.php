@@ -8,6 +8,7 @@ use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource;
 use Konnco\FilamentImport\Actions\ImportAction;
+use Konnco\FilamentImport\Actions\ImportField;
 use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
@@ -25,16 +26,33 @@ class ListPegawai extends ListRecords
             ImportAction::make()
                 ->uniqueField('id')
                 ->fields([
-                    //
-                ])
-                ->handleRecordCreation(function (array $data) {
-                    //
-                }),
+                    ImportField::make('id')
+                        ->rules('required|max:255')
+                        ->label('ID'),
+                    ImportField::make('nik')
+                        ->rules('required|length:255')
+                        ->label('NIK'),
+                    ImportField::make('nuptk')
+                        ->rules('required|length:8')
+                        ->label('NUPTK'),
+                    ImportField::make('nip')
+                        ->rules('required|max:255')
+                        ->label('NIP'),
+                    ImportField::make('gender_kode')
+                        ->rules('required|max:255')
+                        ->label('Gender'),
+                    ImportField::make('status_kepegawaian_kode')
+                        ->rules('required|max:255')
+                        ->label('Status Kepegawaian'),
+                    ImportField::make('golongan_kode')
+                        ->rules('required|max:255')
+                        ->label('Golongan'),
+                ]),
             ExportAction::make()
                 ->exports([
                     ExcelExport::make()
                         ->fromTable()
-                        ->withFilename(fn ($resource) => $resource::getSlug().'-'.now()->format('Y-m-d'))
+                        ->withFilename(fn ($resource) => $resource::getSlug() . '-' . now()->format('Y-m-d'))
                         ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
                         ->withColumns([
                             Column::make('nama_gelar')->heading('Nama'),
@@ -57,24 +75,35 @@ class ListPegawai extends ListRecords
                             Column::make('is_kepsek')->heading('Kepsek'),
                         ])
                         ->ignoreFormatting(),
-                ]),
+                ])->icon(false),
             Actions\CreateAction::make()->label('Create'),
         ];
     }
 
     public function getTabs(): array
     {
-        $tabs = ['all' => Tab::make('All')->badge($this->getModel()::query()->aktif()->count())];
+        $tabs = [];
+
+        $tabs[''] = Tab::make('All')
+            ->badge(
+                $this->getModel()::query()
+                    ->aktif()
+                    ->count()
+            );
 
         $statusKepegawaians = Options::forEnum(StatusKepegawaianEnum::class)->toArray();
 
         foreach ($statusKepegawaians as $statusKepegawaian) {
             $tabs[$statusKepegawaian['value']] = Tab::make($statusKepegawaian['value'])
-                ->badge($this->getModel()::query()
-                    ->aktif()
-                    ->where('status_kepegawaian_kode', $statusKepegawaian['value'])->count())
+                ->badge(
+                    $this->getModel()::query()
+                        ->aktif()
+                        ->where('status_kepegawaian_kode', $statusKepegawaian['value'])
+                        ->count()
+                )
                 ->modifyQueryUsing(function ($query) use ($statusKepegawaian) {
                     return $query
+                        ->aktif()
                         ->where('status_kepegawaian_kode', $statusKepegawaian['value']);
                 })
                 ->label($statusKepegawaian['label']);
