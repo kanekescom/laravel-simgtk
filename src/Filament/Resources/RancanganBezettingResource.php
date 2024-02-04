@@ -179,32 +179,43 @@ class RancanganBezettingResource extends Resource
             ->columns($columns)
             ->filtersFormColumns(2)
             ->filters([
-                Tables\Filters\TernaryFilter::make('pegawai_kepsek')
-                    ->trueLabel('Terisi')
-                    ->falseLabel('Kosong/Invalid')
+                Tables\Filters\TernaryFilter::make('kepsek')
                     ->queries(
-                        true: fn (Builder $query) => $query->where('jabatan_kepsek', 1),
-                        false: fn (Builder $query) => $query->where('jabatan_kepsek', '<>', 1),
+                        true: fn (Builder $query) => $query->where('kepsek', 1),
+                        false: fn (Builder $query) => $query->where('kepsek', '<>', 1),
                         blank: fn (Builder $query) => $query,
                     )
+                    ->trueLabel('Terisi')
+                    ->falseLabel('Kosong/Invalid')
                     ->placeholder('All')
                     ->native(false)
                     ->label('Kepsek'),
-                Tables\Filters\TernaryFilter::make('pegawai_plt_kepsek')
-                    ->trueLabel('Terisi')
-                    ->falseLabel('Kosong/Invalid')
+                Tables\Filters\TernaryFilter::make('plt_kepsek')
                     ->queries(
-                        true: fn (Builder $query) => $query->whereHas('pegawaiPltKepsek', function (Builder $query) {
-                            $query;
-                        }, 1),
-                        false: fn (Builder $query) => $query->whereHas('pegawaiPltKepsek', function (Builder $query) {
-                            $query;
-                        }, '<>', 1),
+                        true: fn (Builder $query) => $query->where('kepsek', 1),
+                        false: fn (Builder $query) => $query->where('kepsek', '<>', 1),
                         blank: fn (Builder $query) => $query,
                     )
+                    ->trueLabel('Terisi')
+                    ->falseLabel('Kosong/Invalid')
                     ->placeholder('All')
                     ->native(false)
                     ->label('Plt Kepsek'),
+                Tables\Filters\TernaryFilter::make('jabatan_kepsek')
+                    ->queries(
+                        true: fn (Builder $query) => $query->where(function (Builder $query) {
+                            return $query->where('jabatan_kepsek', 1);
+                        }),
+                        false: fn (Builder $query) => $query->where(function (Builder $query) {
+                            return $query->where('jabatan_kepsek', '<>', 1);
+                        }),
+                        blank: fn (Builder $query) => $query,
+                    )
+                    ->trueLabel('Terisi')
+                    ->falseLabel('Kosong/Invalid')
+                    ->placeholder('All')
+                    ->native(false)
+                    ->label('Jabatan Kepsek'),
 
                 Tables\Filters\SelectFilter::make('wilayah_id')
                     ->relationship('wilayah', 'nama')
