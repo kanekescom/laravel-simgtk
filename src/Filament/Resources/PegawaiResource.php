@@ -6,6 +6,7 @@ use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -48,7 +49,9 @@ class PegawaiResource extends Resource
             ->schema([
                 Tabs::make('Tabs')
                     ->tabs([
-                        Tabs\Tab::make('Profil')
+                        Tabs\Tab::make('tab_tab_profil')
+                            ->label('Profil')
+                            ->columns(3)
                             ->schema([
                                 Forms\Components\TextInput::make('gelar_depan')
                                     ->maxLength(255)
@@ -111,8 +114,10 @@ class PegawaiResource extends Resource
                                     ->preload()
                                     ->required()
                                     ->label('Jenjang Pendidikan'),
-                            ])->columns(3),
-                        Tabs\Tab::make('Kepegawaian')
+                            ]),
+                        Tabs\Tab::make('tab_kepegawaian')
+                            ->label('Kepegawaian')
+                            ->columns(3)
                             ->schema([
                                 Forms\Components\Select::make('status_kepegawaian_kode')
                                     ->options(StatusKepegawaianEnum::class)
@@ -121,6 +126,25 @@ class PegawaiResource extends Resource
                                             ->pluck('value')
                                     )
                                     ->live()
+                                    ->afterStateUpdated(function (Set $set, $state) {
+                                        if (in_array($state, [(StatusKepegawaianEnum::NONASN)->value])) {
+                                            $set('nomor_sk_cpns', null);
+                                            $set('tmt_cpns', null);
+                                            $set('tanggal_sk_cpns', null);
+
+                                            $set('nomor_sk_pns', null);
+                                            $set('tmt_pns', null);
+                                            $set('tanggal_sk_pns', null);
+
+                                            $set('nomor_sk_pangkat', null);
+                                            $set('golongan_kode', null);
+                                            $set('tmt_pangkat', null);
+                                            $set('tanggal_sk_pangkat', null);
+
+                                            $set('is_kepsek', false);
+                                            $set('is_plt_kepsek', false);
+                                        }
+                                    })
                                     ->searchable()
                                     ->preload()
                                     ->required()
@@ -139,8 +163,10 @@ class PegawaiResource extends Resource
                                     ->minValue(0)
                                     ->maxValue(12)
                                     ->label('Masa Kerja Bulan'),
-                            ])->columns(3),
-                        Tabs\Tab::make('CPNS')
+                            ]),
+                        Tabs\Tab::make('tab_cpns')
+                            ->label('CPNS')
+                            ->columns(3)
                             ->schema([
                                 Forms\Components\TextInput::make('nomor_sk_cpns')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
@@ -157,36 +183,41 @@ class PegawaiResource extends Resource
                                     ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->date()
                                     ->label('Tanggal SK CPNS'),
-                            ])
-                            ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
-                            ->columns(3),
-                        Tabs\Tab::make('PNS')
+                            ]),
+                        Tabs\Tab::make('tab_pns')
+                            ->label('PNS')
+                            ->columns(3)
                             ->schema([
                                 Forms\Components\TextInput::make('nomor_sk_pns')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->requiredWith(['nomor_sk_pns', 'tmt_pns', 'tanggal_sk_pns'])
                                     ->maxLength(255)
                                     ->label('Nomor SK PNS'),
                                 Forms\Components\DatePicker::make('tmt_pns')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->requiredWith(['nomor_sk_pns', 'tmt_pns', 'tanggal_sk_pns'])
                                     ->date()
                                     ->label('TMT PNS'),
                                 Forms\Components\DatePicker::make('tanggal_sk_pns')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->requiredWith(['nomor_sk_pns', 'tmt_pns', 'tanggal_sk_pns'])
                                     ->date()
                                     ->label('Tanggal SK PNS'),
-                            ])
-                            ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
-                            ->columns(3),
-                        Tabs\Tab::make('Pangkat')
+                            ]),
+                        Tabs\Tab::make('tab_pangkat')
+                            ->label('Pangkat')
+                            ->columns(2)
                             ->schema([
                                 Forms\Components\TextInput::make('nomor_sk_pangkat')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->requiredWith(['nomor_sk_pangkat', 'golongan_kode', 'tmt_pangkat', 'tanggal_sk_pangkat'])
                                     ->maxLength(255)
                                     ->label('Nomor SK Pangkat'),
                                 Forms\Components\Select::make('golongan_kode')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->requiredWith(['nomor_sk_pangkat', 'golongan_kode', 'tmt_pangkat', 'tanggal_sk_pangkat'])
                                     ->options(GolonganAsnEnum::class)
                                     ->in(
                                         collect(Options::forEnum(GolonganAsnEnum::class)->toArray())
@@ -198,11 +229,13 @@ class PegawaiResource extends Resource
                                 Forms\Components\DatePicker::make('tmt_pangkat')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->requiredWith(['nomor_sk_pangkat', 'golongan_kode', 'tmt_pangkat', 'tanggal_sk_pangkat'])
                                     ->date()
                                     ->label('TMT Pangkat'),
                                 Forms\Components\DatePicker::make('tanggal_sk_pangkat')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
                                     ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->requiredWith(['nomor_sk_pangkat', 'golongan_kode', 'tmt_pangkat', 'tanggal_sk_pangkat'])
                                     ->date()
                                     ->label('Tanggal SK Pangkat'),
                                 Forms\Components\TextInput::make('masa_kerja_tahun')
@@ -219,10 +252,10 @@ class PegawaiResource extends Resource
                                     ->minValue(0)
                                     ->maxValue(12)
                                     ->label('Masa Kerja Bulan'),
-                            ])
-                            ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
-                            ->columns(2),
-                        Tabs\Tab::make('Jabatan')
+                            ]),
+                        Tabs\Tab::make('tab_jabatan')
+                            ->label('Jabatan')
+                            ->columns(2)
                             ->schema([
                                 Forms\Components\Select::make('sekolah_id')
                                     ->relationship('sekolah', 'nama')
@@ -263,24 +296,40 @@ class PegawaiResource extends Resource
                                     ->preload()
                                     ->label('Bidang Studi Sertifikasi'),
                                 Forms\Components\Select::make('mata_pelajaran_id')
+                                    ->requiredWith(['mata_pelajaran_id', 'jam_mengajar_perminggu'])
                                     ->relationship('mataPelajaran', 'nama')
                                     ->exists(table: MataPelajaran::class, column: 'id')
                                     ->searchable()
                                     ->preload()
                                     ->label('Mata Pelajaran'),
                                 Forms\Components\TextInput::make('jam_mengajar_perminggu')
+                                    ->requiredWith(['mata_pelajaran_id', 'jam_mengajar_perminggu'])
                                     ->numeric()
                                     ->minValue(0)
                                     ->maxValue(50)
                                     ->label('Jam Mengajar Perminggu'),
                                 Forms\Components\Toggle::make('is_kepsek')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->live()
+                                    ->afterStateUpdated(function (Set $set, $state) {
+                                        if ($state) {
+                                            $set('is_plt_kepsek', false);
+                                        }
+                                    })
                                     ->label('Kepsek'),
                                 Forms\Components\Toggle::make('is_plt_kepsek')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    ->live()
+                                    ->afterStateUpdated(function (Set $set, $state) {
+                                        if ($state) {
+                                            $set('is_kepsek', false);
+                                        }
+                                    })
                                     ->label('PLT Kepsek'),
-                            ])->columns(2),
-                        Tabs\Tab::make('Pensiun')
+                            ]),
+                        Tabs\Tab::make('tab_pensiun')
+                            ->label('Pensiun')
+                            ->columns(3)
                             ->schema([
                                 Forms\Components\DatePicker::make('tmt_pensiun')
                                     ->helperText(fn (Get $get) => 'TMT Umur 60 pada ' . ($get('tanggal_lahir') ? now()->parse($get('tanggal_lahir'))->addYear(60)->addMonth(1)->firstOfMonth()->toDateString() : ''))
@@ -288,12 +337,14 @@ class PegawaiResource extends Resource
                                     ->required()
                                     ->label('TMT Pensiun'),
                                 Forms\Components\TextInput::make('nomor_sk_pensiun')
+                                    ->requiredWith(['nomor_sk_pensiun', 'tanggal_sk_pensiun'])
                                     ->maxLength(255)
                                     ->label('Nomor SK Pensiun'),
                                 Forms\Components\DatePicker::make('tanggal_sk_pensiun')
+                                    ->requiredWith(['nomor_sk_pensiun', 'tanggal_sk_pensiun'])
                                     ->date()
                                     ->label('Tanggal SK Pensiun'),
-                            ])->columns(3),
+                            ]),
                     ]),
             ])->columns(1);
     }
