@@ -183,9 +183,13 @@ class RancanganBezettingResource extends Resource
 
             $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_abk")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                 ->label("JML ABK");
             $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_selisih")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                 ->label("JML +/-");
         }
 
