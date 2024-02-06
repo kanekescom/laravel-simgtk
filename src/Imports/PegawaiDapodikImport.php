@@ -3,6 +3,7 @@
 namespace Kanekescom\Simgtk\Imports;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -33,9 +34,11 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        $row = array_map(function ($value) {
-            return ($value === 'null') ? null : $value;
-        }, $row);
+        $row = Arr::map($row, function ($value) {
+            $cleanedString = preg_replace('/[^\p{L}\p{N}\p{P}\p{S}\s]/u', '', $value);
+
+            return $cleanedString === 'null' ? null : $cleanedString;
+        });
 
         if (!str($row[self::getField('Tempat Tugas')])->startsWith(['SDN ', 'SMPN '])) {
             return null;
@@ -50,19 +53,19 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow
 
         return Pegawai::updateOrCreate(['nik' => $row[self::getField('NIK')]], [
             // 'id' => $row[self::getField('id')],
-            'nama' => $row[self::getField('Nama')],
+            'nama' => str($row[self::getField('Nama')])->upper()->value,
             'nik' => $row[self::getField('NIK')],
             'nuptk' => $row[self::getField('NUPTK')],
             'nip' => $row[self::getField('NIP')],
-            'gender_kode' => self::getEnumGetValue(GenderEnum::class, $row[self::getField('L/P')]),
-            'tempat_lahir' => $row[self::getField('Tempat Lahir')],
+            'gender_kode' => self::getEnumValueByLabel(GenderEnum::class, $row[self::getField('L/P')]),
+            'tempat_lahir' => str($row[self::getField('Tempat Lahir')])->upper()->value,
             'tanggal_lahir' => $row[self::getField('Tanggal Lahir')],
             // 'gelar_depan' => $row[self::getField('gelar_depan')],
             // 'gelar_belakang' => $row[self::getField('gelar_belakang')],
             'nomor_hp' => $row[self::getField('Nomor HP')],
             // 'email' => $row[self::getField('email')],
             'jenjang_pendidikan_kode' => self::getEnumJenjangPendidikanGetValue($row[self::getField('Pendidikan')]),
-            'status_kepegawaian_kode' => self::getEnumGetValue(StatusKepegawaianEnum::class, $row[self::getField('Status Kepegawaian')]) ?? StatusKepegawaianEnum::NONASN,
+            'status_kepegawaian_kode' => self::getEnumStatusKepegawaianGetValue($row[self::getField('Status Kepegawaian')]),
             'masa_kerja_tahun' => $row[self::getField('Masa Kerja Tahun')],
             'masa_kerja_bulan' => $row[self::getField('Masa Kerja Bulan')],
             'tmt_cpns' => $row[self::getField('Tanggal CPNS')],
@@ -93,6 +96,11 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow
     protected static function getField($var): string|null
     {
         return str($var)->lower()->remove('/')->snake();
+    }
+
+    protected static function getEnumStatusKepegawaianGetValue($nama): string|null
+    {
+        return self::getEnumValueByLabel(StatusKepegawaianEnum::class, $nama == 'CPNS' ? 'PNS' : $nama) ?? (StatusKepegawaianEnum::NONASN)->value;
     }
 
     protected static function getMataPelajaran($nama): Model|null
@@ -171,7 +179,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow
         return collect(Options::forEnum($enum)->toArray())->pluck('label', 'value');
     }
 
-    protected static function getEnumGetValue($enum, $key, $toLower = true): string|null
+    protected static function getEnumValueByLabel($enum, $key, $toLower = true): string|null
     {
         if ($toLower) {
             $key = str($key)->lower()->value;

@@ -62,6 +62,7 @@ class ImportCommand extends Command
      */
     public function handle()
     {
+        $start = now();
         $modelOptions = $this->modelOptions;
 
         $choiced = $this->choice(
@@ -87,6 +88,9 @@ class ImportCommand extends Command
                 }
             }
         }
+
+        $this->newLine();
+        $this->comment("Processed in {$start->shortAbsoluteDiffForHumans(now(), 1)}");
 
         return self::SUCCESS;
     }
