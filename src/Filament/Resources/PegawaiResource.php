@@ -365,7 +365,6 @@ class PegawaiResource extends Resource
                     ->sortable()
                     ->label('Status'),
                 Tables\Columns\TextColumn::make('golongan_kode')
-                    ->wrap()
                     ->sortable()
                     ->label('Gol'),
                 Tables\Columns\TextColumn::make('mataPelajaran.nama')
@@ -388,26 +387,31 @@ class PegawaiResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('gender_kode')
                     ->options(GenderEnum::class)
+                    ->multiple()
                     ->searchable()
                     ->preload()
                     ->label('Gender'),
                 Tables\Filters\SelectFilter::make('jenjang_pendidikan_kode')
                     ->options(JenjangPendidikanEnum::class)
+                    ->multiple()
                     ->searchable()
                     ->preload()
                     ->label('Jenjang Pendidikan'),
                 Tables\Filters\SelectFilter::make('status_kepegawaian_kode')
                     ->options(StatusKepegawaianEnum::class)
+                    ->multiple()
                     ->searchable()
                     ->preload()
                     ->label('Status Kepegawaian'),
                 Tables\Filters\SelectFilter::make('golongan_kode')
                     ->options(GolonganAsnEnum::class)
+                    ->multiple()
                     ->searchable()
                     ->preload()
                     ->label('Golongan'),
                 Tables\Filters\SelectFilter::make('status_tugas_kode')
                     ->options(StatusTugasEnum::class)
+                    ->multiple()
                     ->searchable()
                     ->preload()
                     ->label('Status Tugas'),

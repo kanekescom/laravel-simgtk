@@ -22,7 +22,7 @@ class ListPensiun extends ListRecords
                 ->exports([
                     ExcelExport::make()
                         ->fromTable()
-                        ->withFilename(fn ($resource) => $resource::getSlug().'-'.now()->format('Y-m-d'))
+                        ->withFilename(fn ($resource) => $resource::getSlug() . '-' . now()->format('Y-m-d'))
                         ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
                         ->withColumns([
                             Column::make('nama_gelar')->heading('Nama'),
@@ -39,7 +39,7 @@ class ListPensiun extends ListRecords
                             Column::make('is_kepsek')->heading('Kepsek'),
                         ])
                         ->ignoreFormatting(),
-                ]),
+                ])->icon(false),
         ];
     }
 
@@ -53,13 +53,27 @@ class ListPensiun extends ListRecords
                 })
                 ->badge($this->getModel()::query()->pensiun()->count())
                 ->label('Pensiun'),
-            'akan-pensiun' => Tab::make('akan-pensiun')
+            'masuk-pensiun' => Tab::make('masuk-pensiun')
                 ->modifyQueryUsing(function ($query) {
                     return $query
-                        ->akanPensiun();
+                        ->masukPensiun();
                 })
-                ->badge($this->getModel()::query()->akanPensiun()->count())
-                ->label('Akan Pensiun'),
+                ->badge($this->getModel()::query()->masukPensiun()->count())
+                ->label('Masuk Pensiun'),
+            'pensiun-tahun-ini' => Tab::make('pensiun-tahun-ini')
+                ->modifyQueryUsing(function ($query) {
+                    return $query
+                        ->pensiunTahunIni();
+                })
+                ->badge($this->getModel()::query()->pensiunTahunIni()->count())
+                ->label('Tahun Ini'),
+            'pensiun-tahun-depan' => Tab::make('pensiun-tahun-depan')
+                ->modifyQueryUsing(function ($query) {
+                    return $query
+                        ->pensiunTahunDepan();
+                })
+                ->badge($this->getModel()::query()->pensiunTahunDepan()->count())
+                ->label('Tahun Depan'),
         ];
     }
 }

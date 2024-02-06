@@ -108,7 +108,8 @@ class Pegawai extends Model
     {
         return $query
             ->whereNull('tanggal_sk_pensiun')
-            ->whereNull('nomor_sk_pensiun');
+            ->whereNull('nomor_sk_pensiun')
+            ->whereDate('tmt_pensiun', '>=', now()->addMonth());
     }
 
     public function scopePensiun($query)
@@ -118,13 +119,29 @@ class Pegawai extends Model
             ->orWhereNotNull('nomor_sk_pensiun');
     }
 
-    public function scopeAkanPensiun($query)
+    public function scopeMasukPensiun($query)
     {
-        $tanggal_pensiun = now()->subYears(60)->subYears(1)->toDateString();
+        return $query
+            ->whereNull('tanggal_sk_pensiun')
+            ->whereNull('nomor_sk_pensiun')
+            ->whereDate('tmt_pensiun', '<', now())
+            ->orderBy('tmt_pensiun');
+    }
 
+    public function scopePensiunTahunIni($query)
+    {
         return $query
             ->aktif()
-            ->whereDate('tanggal_lahir', '<=', $tanggal_pensiun);
+            ->whereYear('tmt_pensiun', '=', now()->year)
+            ->orderBy('tmt_pensiun');
+    }
+
+    public function scopePensiunTahunDepan($query)
+    {
+        return $query
+            ->aktif()
+            ->whereYear('tmt_pensiun', '=', now()->addYear()->year)
+            ->orderBy('tmt_pensiun');
     }
 
     public function scopeCountGroupByGender($query, $jenjang_sekolah_id = null)
