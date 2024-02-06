@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('gelar_belakang')->nullable();
             $table->string('nomor_hp')->nullable();
             $table->string('email')->nullable();
-            $table->string('jenjang_pendidikan_kode')->index();
+            $table->string('jenjang_pendidikan_kode')->nullable()->index();
 
             $table->string('status_kepegawaian_kode');
             $table->unsignedTinyInteger('masa_kerja_tahun')->nullable();
@@ -53,7 +53,7 @@ return new class extends Migration
             $table->foreignUlid('bidang_studi_pendidikan_id')->index()->nullable();
             $table->foreignUlid('bidang_studi_sertifikasi_id')->index()->nullable();
             $table->foreignUlid('mata_pelajaran_id')->index()->nullable();
-            $table->double('jam_mengajar_perminggu', 3, 1)->nullable();
+            $table->unsignedTinyInteger('jam_mengajar_perminggu')->nullable();
             $table->boolean('is_kepsek')->default(false)->index();
             $table->boolean('is_plt_kepsek')->default(false)->index();
 

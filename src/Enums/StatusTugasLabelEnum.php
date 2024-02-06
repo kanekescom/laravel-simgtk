@@ -4,10 +4,10 @@ namespace Kanekescom\Simgtk\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 
-enum StatusTugasEnum: string implements HasLabel
+enum StatusTugasLabelEnum: string implements HasLabel
 {
-    case INDUK = 'induk';
-    case NONINDUK = 'noninduk';
+    case INDUK = 'Induk';
+    case NONINDUK = 'Non Induk';
 
     public function getLabel(): ?string
     {

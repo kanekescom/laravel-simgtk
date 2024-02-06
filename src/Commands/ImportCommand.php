@@ -32,6 +32,7 @@ class ImportCommand extends Command
         'wilayah' => Models\Wilayah::class,
         'sekolah' => Models\Sekolah::class,
         'pegawai' => Models\Pegawai::class,
+        'pegawai-dapodik' => Models\Pegawai::class,
         'rencana-bezetting' => Models\RencanaBezetting::class,
         'rencana-mutasi' => Models\RencanaMutasi::class,
         'usul-mutasi' => Models\UsulMutasi::class,
@@ -47,7 +48,8 @@ class ImportCommand extends Command
         'mata-pelajaran' => Imports\MataPelajaranImport::class,
         'wilayah' => Imports\WilayahImport::class,
         'sekolah' => Imports\SekolahImport::class,
-        // 'pegawai' => Imports\Pegawai::class,
+        'pegawai' => Imports\PegawaiImport::class,
+        'pegawai-dapodik' => Imports\PegawaiDapodikImport::class,
         'rencana-bezetting' => Imports\RencanaBezettingImport::class,
         'rencana-mutasi' => Imports\RencanaMutasiImport::class,
         'usul-mutasi' => Imports\UsulMutasiImport::class,
@@ -65,7 +67,7 @@ class ImportCommand extends Command
         $choiced = $this->choice(
             'What do you want to import?',
             collect($modelOptions)->keys()->toArray(),
-            0,
+            null,
             null,
             true,
         );

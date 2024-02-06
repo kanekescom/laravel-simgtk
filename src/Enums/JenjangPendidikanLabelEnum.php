@@ -4,22 +4,22 @@ namespace Kanekescom\Simgtk\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 
-enum JenjangPendidikanEnum: string implements HasLabel
+enum JenjangPendidikanLabelEnum: string implements HasLabel
 {
-    case SD = 'sd';
-    case PAKETA = 'paketa';
-    case SMP = 'smp';
-    case PAKETB = 'paketb';
-    case SMA = 'sma';
-    case PAKETC = 'paketc';
-    case D1 = 'd1';
-    case D2 = 'd2';
-    case D3 = 'd3';
-    case D4 = 'd4';
-    case S1 = 's1';
-    case S2 = 's2';
-    case S3 = 's3';
-    case PROFESI = 'profesi';
+    case SD = 'SD / sederajat';
+    case PAKETA = 'Paket A';
+    case SMP = 'SMP / sederajat';
+    case PAKETB = 'Paket B';
+    case SMA = 'SMA / sederajat';
+    case PAKETC = 'Paket C';
+    case D1 = 'D1';
+    case D2 = 'D2';
+    case D3 = 'D3';
+    case D4 = 'D4';
+    case S1 = 'S1';
+    case S2 = 'S2';
+    case S3 = 'S3';
+    case PROFESI = 'Profesi';
 
     public function getLabel(): ?string
     {
