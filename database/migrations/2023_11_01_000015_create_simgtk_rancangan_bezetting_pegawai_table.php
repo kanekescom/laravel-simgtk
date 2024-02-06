@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('gelar_belakang')->nullable();
             $table->string('nomor_hp')->nullable();
             $table->string('email')->nullable();
-            $table->string('jenjang_pendidikan_kode')->index();
+            $table->string('jenjang_pendidikan_kode')->nullable()->index();
 
             $table->string('status_kepegawaian_kode');
             $table->unsignedTinyInteger('masa_kerja_tahun')->nullable();
