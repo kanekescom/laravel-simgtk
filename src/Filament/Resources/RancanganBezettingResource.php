@@ -5,6 +5,7 @@ namespace Kanekescom\Simgtk\Filament\Resources;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
+use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -30,24 +31,24 @@ class RancanganBezettingResource extends Resource
 
     protected static array $jenjangMapelHeaders = [
         'sd' => [
-            'kelas' => 'KLS',
-            'penjaskes' => 'PJK',
-            'agama' => 'AGM',
-            'agama_noni' => 'AGM NI',
+            'kelas' => 'KELAS',
+            'penjaskes' => 'PENJASKES',
+            'agama' => 'AGAMA',
+            'agama_noni' => 'AGAMA NONI',
         ],
         'smp' => [
             'pai' => 'PAI',
             'pjok' => 'PJOK',
-            'b_indonesia' => 'BIND',
-            'b_inggris' => 'BING',
+            'b_indonesia' => 'B. INDONESIA',
+            'b_inggris' => 'B. INGGRIS',
             'bk' => 'BK',
             'ipa' => 'IPA',
             'ips' => 'IPS',
-            'matematika' => 'MTK',
+            'matematika' => 'MATEMATIKA',
             'ppkn' => 'PPKN',
-            'prakarya' => 'PKY',
-            'seni_budaya' => 'SEBUD',
-            'b_sunda' => 'BSUN',
+            'prakarya' => 'PRAKARYA',
+            'seni_budaya' => 'SENI BUDAYA',
+            'b_sunda' => 'B. SUNDA',
             'tik' => 'TIK',
         ],
     ];
@@ -111,91 +112,104 @@ class RancanganBezettingResource extends Resource
             ->sortable()
             ->label('Sekolah');
 
-        $columns[] = Tables\Columns\TextColumn::make('jumlah_kelas')
-            ->alignment(Alignment::End)
-            ->sortable()
-            ->label('Kelas');
-        $columns[] = Tables\Columns\TextColumn::make('jumlah_rombel')
-            ->alignment(Alignment::End)
-            ->sortable()
-            ->label('Rombel');
-        $columns[] = Tables\Columns\TextColumn::make('jumlah_siswa')
-            ->alignment(Alignment::End)
-            ->searchable()
-            ->sortable()
-            ->label('Siswa');
+        $columns[] = ColumnGroup::make('group_data')
+            ->columns([
+                Tables\Columns\TextColumn::make('jumlah_kelas')
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->label('Kelas'),
+                Tables\Columns\TextColumn::make('jumlah_rombel')
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->label('Rombel'),
+                Tables\Columns\TextColumn::make('jumlah_siswa')
+                    ->alignment(Alignment::End)
+                    ->searchable()
+                    ->sortable()
+                    ->label('Siswa'),
+            ])
+            ->alignment(Alignment::Center)
+            ->label('Data');
 
-        $columns[] = Tables\Columns\TextColumn::make('kepsek')
-            ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-            ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
-            ->alignment(Alignment::End)
-            ->sortable()
-            ->label('Kepsek');
-
-        $columns[] = Tables\Columns\TextColumn::make('plt_kepsek')
-            ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-            ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
-            ->alignment(Alignment::End)
-            ->sortable()
-            ->label('Plt Kepsek');
-
-        $columns[] = Tables\Columns\TextColumn::make('jabatan_kepsek')
-            ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-            ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
-            ->alignment(Alignment::End)
-            ->sortable()
-            ->label('Jabatan Kepsek');
+        $columns[] = ColumnGroup::make('group_kepsek')
+            ->columns([
+                Tables\Columns\TextColumn::make('kepsek')
+                    ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                    ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->label('Def'),
+                Tables\Columns\TextColumn::make('plt_kepsek')
+                    ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                    ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->label('Plt'),
+                Tables\Columns\TextColumn::make('jabatan_kepsek')
+                    ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                    ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
+                    ->alignment(Alignment::End)
+                    ->sortable()
+                    ->label('Ket'),
+            ])
+            ->alignment(Alignment::Center)
+            ->label('Kepala Sekolah');
 
         foreach (self::$jenjangMapels as $jenjang_sekolah => $mapels) {
-            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_pns")
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->alignment(Alignment::End)
-                ->label('PNS');
-            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_pppk")
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->alignment(Alignment::End)
-                ->label('PPPK');
-            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_gtt")
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->alignment(Alignment::End)
-                ->label('GTT');
-            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_total")
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->alignment(Alignment::End)
-                ->label('JML');
+            $columns[] = ColumnGroup::make("group_{$jenjang_sekolah}_formasi_existing")
+                ->columns([
+                    Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_pns")
+                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                        ->alignment(Alignment::End)
+                        ->label('PNS'),
+                    Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_pppk")
+                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                        ->alignment(Alignment::End)
+                        ->label('PPPK'),
+                    Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_gtt")
+                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                        ->alignment(Alignment::End)
+                        ->label('GTT'),
+                    Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_total")
+                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                        ->alignment(Alignment::End)
+                        ->label('JML'),
+                ])
+                ->alignment(Alignment::Center)
+                ->label('Existing');
 
             foreach ($mapels as $mapel) {
-                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_abk")
-                    ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->alignment(Alignment::End)
-                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' ABK');
-
-                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_pns")
-                    ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->alignment(Alignment::End)
-                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' PNS');
-
-                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_pppk")
-                    ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->alignment(Alignment::End)
-                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' PPPK');
-
-                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_gtt")
-                    ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->alignment(Alignment::End)
-                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' GTT');
-
-                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_total")
-                    ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->alignment(Alignment::End)
-                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' Total');
-
-                $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_selisih")
-                    ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                    ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-                    ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
-                    ->alignment(Alignment::End)
-                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' +/-');
+                $columns[] = ColumnGroup::make("group_{$jenjang_sekolah}_{$mapel}")
+                    ->columns([
+                        Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_abk")
+                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                            ->alignment(Alignment::End)
+                            ->label('ABK'),
+                        Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_pns")
+                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                            ->alignment(Alignment::End)
+                            ->label('PNS'),
+                        Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_pppk")
+                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                            ->alignment(Alignment::End)
+                            ->label('PPPK'),
+                        Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_gtt")
+                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                            ->alignment(Alignment::End)
+                            ->label('GTT'),
+                        Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_total")
+                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                            ->alignment(Alignment::End)
+                            ->label('Total'),
+                        Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_selisih")
+                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                            ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                            ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
+                            ->alignment(Alignment::End)
+                            ->label('+/-'),
+                    ])
+                    ->alignment(Alignment::Center)
+                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel]);
             }
 
             $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_abk")

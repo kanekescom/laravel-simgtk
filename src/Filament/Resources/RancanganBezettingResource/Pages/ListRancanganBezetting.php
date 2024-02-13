@@ -219,15 +219,15 @@ class ListRancanganBezetting extends ListRecords
                 ->badge(
                     $this->getModel()::query()
                         ->aktif()
-                        ->defaultOrder()
                         ->where('jenjang_sekolah_id', $jenjangSekolah->id)
+                        ->defaultOrder()
                         ->count()
                 )
                 ->modifyQueryUsing(function ($query) use ($jenjangSekolah) {
                     return $query
                         ->aktif()
-                        ->defaultOrder()
-                        ->where('jenjang_sekolah_id', $jenjangSekolah->id);
+                        ->where('jenjang_sekolah_id', $jenjangSekolah->id)
+                        ->defaultOrder();
                 })
                 ->label($jenjangSekolah->nama);
         }
