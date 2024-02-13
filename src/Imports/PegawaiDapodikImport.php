@@ -86,7 +86,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow
             'jenis_ptk_id' => self::getJenisPtk($row[self::getField('Jenis PTK')])?->id,
             'bidang_studi_pendidikan_id' => self::getBidangStudiPendidikan($row[self::getField('Bidang Studi Pendidikan')])?->id,
             'bidang_studi_sertifikasi_id' => self::getBidangStudiSertifikasi($row[self::getField('Bidang Studi Sertifikasi')])?->id,
-            'mata_pelajaran_id' => self::getMataPelajaran($row[self::getField('Mata Pelajaran Diajarkan')])?->id,
+            'mata_pelajaran_id' => self::getMataPelajaran($row[self::getField('Bidang Studi Sertifikasi')])?->id,
             'jam_mengajar_perminggu' => $row[self::getField('Jam Mengajar Perminggu')],
             'is_kepsek' => $row[self::getField('Jabatan Kepsek')] == 'Ya',
             // 'is_plt_kepsek' => $row[self::getField('is_plt_kepsek')] == 'Ya',
@@ -105,7 +105,11 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow
 
     protected static function getMataPelajaran($nama): Model|null
     {
-        return MataPelajaran::where('nama', $nama)->first();
+        if ($nama) {
+            return MataPelajaran::updateOrCreate(['nama' => $nama], ['nama' => $nama]);
+        }
+
+        return null;
     }
 
     protected static function getBidangStudiPendidikan($nama): Model|null
