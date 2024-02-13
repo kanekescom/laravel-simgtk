@@ -69,6 +69,7 @@ class SekolahResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->wrap()
+                    ->grow()
                     ->searchable()
                     ->sortable('nama')
                     ->label('Nama'),

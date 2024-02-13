@@ -47,12 +47,13 @@ class BidangStudiSertifikasiResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->wrap()
+                    ->grow()
                     ->searchable()
                     ->sortable()
                     ->label('Nama'),
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
-                ->alignment(Alignment::End)
+                    ->alignment(Alignment::End)
                     ->label('Pegawai'),
             ])
             ->filters([

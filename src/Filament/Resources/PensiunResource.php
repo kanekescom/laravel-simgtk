@@ -404,6 +404,7 @@ class PensiunResource extends Resource
                 Tables\Columns\TextColumn::make('mataPelajaran.nama')
                     ->description(fn (Model $record): string => $record->sekolah?->nama ?? '')
                     ->wrap()
+                    ->grow()
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {

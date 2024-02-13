@@ -33,6 +33,7 @@ class AbkSekolahResource extends Resource
         $columns = [];
         $columns[] = Tables\Columns\TextColumn::make('nama')
             ->wrap()
+            ->grow()
             ->searchable(['nama', 'npsn'])
             ->sortable('nama')
             ->label('Nama');

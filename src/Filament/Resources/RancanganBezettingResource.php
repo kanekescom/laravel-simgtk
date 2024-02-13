@@ -108,6 +108,7 @@ class RancanganBezettingResource extends Resource
         $columns = [];
         $columns[] = Tables\Columns\TextColumn::make('sekolah.nama')
             ->wrap()
+            ->grow()
             ->searchable()
             ->sortable()
             ->label('Sekolah');

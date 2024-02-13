@@ -110,12 +110,14 @@ class UsulMutasiResource extends Resource
                 Tables\Columns\TextColumn::make('asalSekolah.nama')
                     ->description(fn (Model $record): string => "{$record->asalMataPelajaran?->nama}")
                     ->wrap()
+                    ->grow()
                     ->searchable()
                     ->sortable()
                     ->label('Sekolah Asal'),
                 Tables\Columns\TextColumn::make('tujuanSekolah.nama')
                     ->description(fn (Model $record): string => "{$record->tujuanMataPelajaran?->nama}")
                     ->wrap()
+                ->grow()
                     ->searchable()
                     ->sortable()
                     ->label('Sekolah Tujuan'),

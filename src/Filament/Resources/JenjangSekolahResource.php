@@ -52,6 +52,7 @@ class JenjangSekolahResource extends Resource
                 Tables\Columns\TextColumn::make('nama')
                     ->description(fn (Model $record): string => "{$record->kode}")
                     ->wrap()
+                    ->grow()
                     ->searchable()
                     ->sortable()
                     ->label('Nama'),
