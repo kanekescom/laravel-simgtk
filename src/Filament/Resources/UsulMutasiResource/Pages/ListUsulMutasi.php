@@ -29,38 +29,38 @@ class ListUsulMutasi extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            ImportAction::make()
-                ->fields([
-                    ImportField::make('id')->label('ID'),
-                    ImportField::make('rencana.nama')->label('Rencana'),
-                    ImportField::make('pegawai.nama')->label('Nama'),
-                    ImportField::make('pegawai.nik')->label('NIK'),
-                    ImportField::make('pegawai.nuptk')->label('NUPTK'),
-                    ImportField::make('pegawai.nip')->label('NIP'),
-                    ImportField::make('asalSekolah.nama')->label('Asal Sekolah'),
-                    ImportField::make('asalMataPelajaran.nama')->label('Asal Mapel'),
-                    ImportField::make('tujuanSekolah.nama')->label('Tujuan Sekolah'),
-                    ImportField::make('tujuanMataPelajaran.nama')->label('Tujuan Mapel'),
-                ]),
-            ExportAction::make()
-                ->exports([
-                    ExcelExport::make()
-                        ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d'))
-                        ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
-                        ->withColumns([
-                            Column::make('id')->heading('ID'),
-                            Column::make('rencana.nama')->heading('Rencana'),
-                            Column::make('pegawai.nama')->heading('Nama'),
-                            Column::make('pegawai.nik')->heading('NIK'),
-                            Column::make('pegawai.nuptk')->heading('NUPTK'),
-                            Column::make('pegawai.nip')->heading('NIP'),
-                            Column::make('asalSekolah.nama')->heading('Asal Sekolah'),
-                            Column::make('asalMataPelajaran.nama')->heading('Asal Mapel'),
-                            Column::make('tujuanSekolah.nama')->heading('Tujuan Sekolah'),
-                            Column::make('tujuanMataPelajaran.nama')->heading('Tujuan Mapel'),
-                        ])
-                        ->ignoreFormatting(),
-                ])->icon(false),
+            // ImportAction::make()
+            //     ->fields([
+            //         ImportField::make('id')->label('ID'),
+            //         ImportField::make('rencana.nama')->label('Rencana'),
+            //         ImportField::make('pegawai.nama')->label('Nama'),
+            //         ImportField::make('pegawai.nik')->label('NIK'),
+            //         ImportField::make('pegawai.nuptk')->label('NUPTK'),
+            //         ImportField::make('pegawai.nip')->label('NIP'),
+            //         ImportField::make('asalSekolah.nama')->label('Asal Sekolah'),
+            //         ImportField::make('asalMataPelajaran.nama')->label('Asal Mapel'),
+            //         ImportField::make('tujuanSekolah.nama')->label('Tujuan Sekolah'),
+            //         ImportField::make('tujuanMataPelajaran.nama')->label('Tujuan Mapel'),
+            //     ]),
+            // ExportAction::make()
+            //     ->exports([
+            //         ExcelExport::make()
+            //             ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d'))
+            //             ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
+            //             ->withColumns([
+            //                 Column::make('id')->heading('ID'),
+            //                 Column::make('rencana.nama')->heading('Rencana'),
+            //                 Column::make('pegawai.nama')->heading('Nama'),
+            //                 Column::make('pegawai.nik')->heading('NIK'),
+            //                 Column::make('pegawai.nuptk')->heading('NUPTK'),
+            //                 Column::make('pegawai.nip')->heading('NIP'),
+            //                 Column::make('asalSekolah.nama')->heading('Asal Sekolah'),
+            //                 Column::make('asalMataPelajaran.nama')->heading('Asal Mapel'),
+            //                 Column::make('tujuanSekolah.nama')->heading('Tujuan Sekolah'),
+            //                 Column::make('tujuanMataPelajaran.nama')->heading('Tujuan Mapel'),
+            //             ])
+            //             ->ignoreFormatting(),
+            //     ])->icon(false),
             Actions\CreateAction::make(),
         ];
     }

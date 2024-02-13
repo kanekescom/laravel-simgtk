@@ -170,41 +170,41 @@ class ListRancanganBezetting extends ListRecords
         }
 
         return [
-            ImportAction::make()
-                ->fields([
-                    ImportField::make('id')
-                        ->rules('required|max:255')
-                        ->label('ID'),
-                    ImportField::make('rencana.nama')
-                        ->rules('required|max:255')
-                        ->label('Nama'),
-                    ImportField::make('sekolah.nama')
-                        ->rules('required|max:255')
-                        ->label('Sekolah'),
-                    ImportField::make('jenjangSekolah.nama')
-                        ->rules('required|max:255')
-                        ->label('Jenjang Sekolah'),
-                    ImportField::make('wilayah.nama')
-                        ->rules('required|max:255')
-                        ->label('Wilayah'),
-                    ImportField::make('jumlah_kelas')
-                        ->rules('required|max:255')
-                        ->label('Jumlah Kelas'),
-                    ImportField::make('jumlah_rombel')
-                        ->rules('required|max:255')
-                        ->label('Jumlah Rombel'),
-                    ImportField::make('jumlah_siswa')
-                        ->rules('required|max:255')
-                        ->label('Jumlah Siswa'),
-                ]),
-            ExportAction::make()
-                ->exports([
-                    ExcelExport::make()
-                        ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d'))
-                        ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
-                        ->withColumns($exportColumns)
-                        ->ignoreFormatting(),
-                ])->icon(false),
+            // ImportAction::make()
+            //     ->fields([
+            //         ImportField::make('id')
+            //             ->rules('required|max:255')
+            //             ->label('ID'),
+            //         ImportField::make('rencana.nama')
+            //             ->rules('required|max:255')
+            //             ->label('Nama'),
+            //         ImportField::make('sekolah.nama')
+            //             ->rules('required|max:255')
+            //             ->label('Sekolah'),
+            //         ImportField::make('jenjangSekolah.nama')
+            //             ->rules('required|max:255')
+            //             ->label('Jenjang Sekolah'),
+            //         ImportField::make('wilayah.nama')
+            //             ->rules('required|max:255')
+            //             ->label('Wilayah'),
+            //         ImportField::make('jumlah_kelas')
+            //             ->rules('required|max:255')
+            //             ->label('Jumlah Kelas'),
+            //         ImportField::make('jumlah_rombel')
+            //             ->rules('required|max:255')
+            //             ->label('Jumlah Rombel'),
+            //         ImportField::make('jumlah_siswa')
+            //             ->rules('required|max:255')
+            //             ->label('Jumlah Siswa'),
+            //     ]),
+            // ExportAction::make()
+            //     ->exports([
+            //         ExcelExport::make()
+            //             ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d'))
+            //             ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
+            //             ->withColumns($exportColumns)
+            //             ->ignoreFormatting(),
+            //     ])->icon(false),
         ];
     }
 
