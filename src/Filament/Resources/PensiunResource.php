@@ -416,8 +416,9 @@ class PensiunResource extends Resource
                     ->sortable()
                     ->label('Jabatan'),
                 Tables\Columns\TextColumn::make('tanggal_lahir')
+                    ->description(fn (Model $record): string => $record->tempat_lahir ?? '')
                     ->sortable()
-                    ->label('TL'),
+                    ->label('Lahir'),
                 Tables\Columns\TextColumn::make('jadwal_tmt_pensiun')
                     ->description(fn (Model $record): string => $record->nomor_sk_pensiun ?? '')
                     ->searchable(['tmt_pensiun', 'nomor_sk_pensiun', 'tanggal_sk_pensiun'])
