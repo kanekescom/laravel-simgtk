@@ -5,6 +5,7 @@ namespace Kanekescom\Simgtk\Filament\Resources;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -63,24 +64,24 @@ class SekolahResource extends Resource
 
     public static function table(Table $table): Table
     {
-        $columns = [];
-        $columns[] = Tables\Columns\TextColumn::make('nama')
-            ->wrap()
-            ->searchable()
-            ->sortable('nama')
-            ->label('Nama');
-        $columns[] = Tables\Columns\TextColumn::make('npsn')
-            ->wrap()
-            ->searchable()
-            ->sortable()
-            ->label('NPSN');
-        $columns[] = Tables\Columns\TextColumn::make('pegawai_aktif_count')
-            ->counts('pegawaiAktif')
-            ->label('Pegawai');
-
         return $table
             ->defaultGroup('wilayah.nama')
-            ->columns($columns)
+            ->columns([
+                Tables\Columns\TextColumn::make('nama')
+                    ->wrap()
+                    ->searchable()
+                    ->sortable('nama')
+                    ->label('Nama'),
+                Tables\Columns\TextColumn::make('npsn')
+                    ->wrap()
+                    ->searchable()
+                    ->sortable()
+                    ->label('NPSN'),
+                Tables\Columns\TextColumn::make('pegawai_aktif_count')
+                    ->counts('pegawaiAktif')
+                    ->alignment(Alignment::End)
+                    ->label('Pegawai'),
+            ])
             ->filters([
                 Tables\Filters\SelectFilter::make('jenjang_sekolah')
                     ->relationship('jenjangSekolah', 'nama')

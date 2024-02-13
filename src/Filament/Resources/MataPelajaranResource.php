@@ -5,6 +5,7 @@ namespace Kanekescom\Simgtk\Filament\Resources;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -79,6 +80,7 @@ class MataPelajaranResource extends Resource
                     ->label('Singkatan'),
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
+                    ->alignment(Alignment::End)
                     ->label('Pegawai'),
             ])
             ->filters([

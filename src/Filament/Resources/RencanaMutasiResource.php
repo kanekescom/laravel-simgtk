@@ -5,6 +5,7 @@ namespace Kanekescom\Simgtk\Filament\Resources;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -73,9 +74,11 @@ class RencanaMutasiResource extends Resource
                     ->label('Aktif'),
                 Tables\Columns\TextColumn::make('usul_count')
                     ->counts('usul')
+                    ->alignment(Alignment::End)
                     ->label('Usulan'),
                 Tables\Columns\TextColumn::make('pegawai_count')
                     ->counts('pegawai')
+                    ->alignment(Alignment::End)
                     ->label('Pegawai'),
             ])
             ->filters([
