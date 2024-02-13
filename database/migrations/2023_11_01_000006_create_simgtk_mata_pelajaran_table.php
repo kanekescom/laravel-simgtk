@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create(config('simgtk.table_prefix') . 'mata_pelajaran', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignUlid('jenjang_sekolah_id')->nullable()->index();
-            $table->string('kode')->index();
+            $table->string('kode')->nullable()->index();
             $table->string('nama');
-            $table->string('singkatan');
+            $table->string('singkatan')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
