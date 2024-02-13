@@ -390,19 +390,19 @@ class PensiunResource extends Resource
             ->filtersFormColumns(3)
             ->columns([
                 Tables\Columns\TextColumn::make('nama_gelar')
-                    ->description(fn (Pegawai $record): string => $record->nama_id ?? '')
+                    ->description(fn (Model $record): string => $record->nama_id ?? '')
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])
                     ->sortable(['nama'])
                     ->label('Nama'),
                 Tables\Columns\TextColumn::make('status_kepegawaian_kode')
-                    ->description(fn (Pegawai $record): string => $record->gender_kode->getLabel() ?? '')
+                    ->description(fn (Model $record): string => $record->gender_kode->getLabel() ?? '')
                     ->sortable()
                     ->label('Status'),
                 Tables\Columns\TextColumn::make('golongan_kode')
                     ->sortable()
                     ->label('Gol'),
                 Tables\Columns\TextColumn::make('mataPelajaran.nama')
-                    ->description(fn (Pegawai $record): string => $record->sekolah?->nama ?? '')
+                    ->description(fn (Model $record): string => $record->sekolah?->nama ?? '')
                     ->wrap()
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
@@ -419,7 +419,7 @@ class PensiunResource extends Resource
                     ->sortable()
                     ->label('TL'),
                 Tables\Columns\TextColumn::make('jadwal_tmt_pensiun')
-                    ->description(fn (Pegawai $record): string => $record->nomor_sk_pensiun ?? '')
+                    ->description(fn (Model $record): string => $record->nomor_sk_pensiun ?? '')
                     ->searchable(['tmt_pensiun', 'nomor_sk_pensiun', 'tanggal_sk_pensiun'])
                     ->sortable(['tmt_pensiun'])
                     ->label('Pensiun'),
