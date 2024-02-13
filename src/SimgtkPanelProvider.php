@@ -31,6 +31,8 @@ class SimgtkPanelProvider extends PanelProvider
             ->id('simgtk')
             ->path('simgtk')
             ->login()
+            ->brandLogo(asset('storage/images/logo.png'))
+            ->favicon(asset('storage/images/favicon.png'))
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -44,8 +46,8 @@ class SimgtkPanelProvider extends PanelProvider
                 JumlahPegawaiChartByStatusKepegawaian::class,
                 JumlahPegawaiChartByGender::class,
                 JumlahPegawaiChartByWilayah::class,
-                JumlahSekolahChartByJenjangSekolah::class,
                 JumlahSekolahChartByWilayah::class,
+                JumlahSekolahChartByJenjangSekolah::class,
             ])
             ->middleware([
                 EncryptCookies::class,
