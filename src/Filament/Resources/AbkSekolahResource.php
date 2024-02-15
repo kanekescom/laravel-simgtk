@@ -5,6 +5,7 @@ namespace Kanekescom\Simgtk\Filament\Resources;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
+use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -31,6 +32,16 @@ class AbkSekolahResource extends Resource
     public static function table(Table $table): Table
     {
         $columns = [];
+        $columns[] = Tables\Columns\TextColumn::make('#')->state(
+            static function (HasTable $livewire, $rowLoop): string {
+                return (string) (
+                    $rowLoop->iteration +
+                    ($livewire->getTableRecordsPerPage() * (
+                        $livewire->getTablePage() - 1
+                    ))
+                );
+            }
+        );
         $columns[] = Tables\Columns\TextColumn::make('nama')
             ->wrap()
             ->grow()

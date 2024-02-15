@@ -6,6 +6,7 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Columns\ColumnGroup;
+use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -106,6 +107,16 @@ class RancanganBezettingResource extends Resource
     public static function getTableColumns(): array
     {
         $columns = [];
+        $columns[] = Tables\Columns\TextColumn::make('#')->state(
+            static function (HasTable $livewire, $rowLoop): string {
+                return (string) (
+                    $rowLoop->iteration +
+                    ($livewire->getTableRecordsPerPage() * (
+                        $livewire->getTablePage() - 1
+                    ))
+                );
+            }
+        );
         $columns[] = Tables\Columns\TextColumn::make('sekolah.nama')
             ->wrap()
             ->grow()
