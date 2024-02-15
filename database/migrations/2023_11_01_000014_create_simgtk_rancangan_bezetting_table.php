@@ -20,13 +20,13 @@ return new class extends Migration
             $table->foreignUlid('jenjang_sekolah_id')->nullable()->index();
             $table->foreignUlid('wilayah_id')->nullable()->index();
 
-            $table->unsignedTinyInteger('jumlah_kelas')->nullable();
-            $table->unsignedTinyInteger('jumlah_rombel')->nullable();
-            $table->unsignedSmallInteger('jumlah_siswa')->nullable();
+            $table->unsignedTinyInteger('jumlah_kelas')->default(0);
+            $table->unsignedTinyInteger('jumlah_rombel')->default(0);
+            $table->unsignedSmallInteger('jumlah_siswa')->default(0);
 
-            $table->unsignedSmallInteger('kepsek')->nullable();
-            $table->unsignedSmallInteger('plt_kepsek')->nullable();
-            $table->smallInteger('jabatan_kepsek')->nullable();
+            $table->unsignedSmallInteger('kepsek')->default(0);
+            $table->unsignedSmallInteger('plt_kepsek')->default(0);
+            $table->smallInteger('jabatan_kepsek')->default(0);
 
             $jenjang_mapels = [
                 'sd' => [
@@ -54,32 +54,32 @@ return new class extends Migration
 
             foreach ($jenjang_mapels as $jenjang_sekolah => $mapels) {
                 foreach ($mapels as $mapel) {
-                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_abk")->nullable();
-                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_pns")->nullable();
-                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_pppk")->nullable();
-                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_gtt")->nullable();
-                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_total")->nullable();
-                    $table->smallInteger("{$jenjang_sekolah}_{$mapel}_selisih")->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_abk")->default(0);
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_pns")->default(0);
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_pppk")->default(0);
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_gtt")->default(0);
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_total")->default(0);
+                    $table->smallInteger("{$jenjang_sekolah}_{$mapel}_selisih")->default(0);
 
-                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_pns")->nullable();
-                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_pppk")->nullable();
-                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_gtt")->nullable();
-                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_total")->nullable();
-                    $table->smallInteger("{$jenjang_sekolah}_{$mapel}_existing_selisih")->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_pns")->default(0);
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_pppk")->default(0);
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_gtt")->default(0);
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_existing_total")->default(0);
+                    $table->smallInteger("{$jenjang_sekolah}_{$mapel}_existing_selisih")->default(0);
                 }
 
-                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_abk")->nullable();
-                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_pns")->nullable();
-                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_pppk")->nullable();
-                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_gtt")->nullable();
-                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_total")->nullable();
-                $table->smallInteger("{$jenjang_sekolah}_formasi_selisih")->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_abk")->default(0);
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_pns")->default(0);
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_pppk")->default(0);
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_gtt")->default(0);
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_total")->default(0);
+                $table->smallInteger("{$jenjang_sekolah}_formasi_selisih")->default(0);
 
-                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_pns")->nullable();
-                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_pppk")->nullable();
-                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_gtt")->nullable();
-                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_total")->nullable();
-                $table->smallInteger("{$jenjang_sekolah}_formasi_existing_selisih")->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_pns")->default(0);
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_pppk")->default(0);
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_gtt")->default(0);
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_existing_total")->default(0);
+                $table->smallInteger("{$jenjang_sekolah}_formasi_existing_selisih")->default(0);
             }
 
             $table->timestamps();

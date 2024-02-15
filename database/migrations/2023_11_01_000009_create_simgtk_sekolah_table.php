@@ -18,9 +18,9 @@ return new class extends Migration
             $table->foreignUlid('jenjang_sekolah_id')->nullable()->index();
             $table->foreignUlid('wilayah_id')->nullable()->index();
 
-            $table->unsignedTinyInteger('jumlah_kelas')->nullable();
-            $table->unsignedTinyInteger('jumlah_rombel')->nullable();
-            $table->unsignedSmallInteger('jumlah_siswa')->nullable();
+            $table->unsignedTinyInteger('jumlah_kelas')->default(0);
+            $table->unsignedTinyInteger('jumlah_rombel')->default(0);
+            $table->unsignedSmallInteger('jumlah_siswa')->default(0);
 
             $jenjang_mapels = [
                 'sd' => [
@@ -48,10 +48,10 @@ return new class extends Migration
 
             foreach ($jenjang_mapels as $jenjang_sekolah => $mapels) {
                 foreach ($mapels as $mapel) {
-                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_abk")->nullable();
+                    $table->unsignedSmallInteger("{$jenjang_sekolah}_{$mapel}_abk")->default(0);
                 }
 
-                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_abk")->nullable();
+                $table->unsignedSmallInteger("{$jenjang_sekolah}_formasi_abk")->default(0);
             }
 
             $table->timestamps();
