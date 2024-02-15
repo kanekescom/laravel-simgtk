@@ -31,8 +31,8 @@ class SimgtkPanelProvider extends PanelProvider
             ->id('simgtk')
             ->path('simgtk')
             ->login()
-            ->brandLogo(asset('storage/images/logo.png'))
-            ->favicon(asset('storage/images/favicon.png'))
+            ->brandLogo(asset('storage/images/logo.png') ?? null)
+            ->favicon(asset('storage/images/favicon.png') ?? null)
             ->colors([
                 'primary' => Color::Amber,
             ])
