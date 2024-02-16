@@ -470,7 +470,6 @@ class PegawaiResource extends Resource
                     ->label('Jabatan Kepsek'),
                 Tables\Filters\TrashedFilter::make(),
             ])
-
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),

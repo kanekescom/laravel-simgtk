@@ -101,7 +101,6 @@ class SekolahResource extends Resource
                     ->label('Wilayah'),
                 Tables\Filters\TrashedFilter::make(),
             ])
-
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),

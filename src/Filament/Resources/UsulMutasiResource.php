@@ -159,7 +159,6 @@ class UsulMutasiResource extends Resource
                     ->label('Tujuan Mapel'),
                 Tables\Filters\TrashedFilter::make(),
             ])
-
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
