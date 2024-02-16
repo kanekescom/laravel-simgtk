@@ -32,6 +32,7 @@ class SimgtkServiceProvider extends PackageServiceProvider
             ->runsMigrations()
             ->hasCommand(Commands\DemoSeedCommand::class)
             ->hasCommand(Commands\UserDemoSeedCommand::class)
-            ->hasCommand(Commands\ImportCommand::class);
+            ->hasCommand(Commands\ImportCommand::class)
+            ->hasCommand(Commands\TruncateCommand::class);
     }
 }

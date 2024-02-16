@@ -5,8 +5,6 @@ namespace Kanekescom\Simgtk\Imports;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnLabelEnum;
@@ -23,15 +21,16 @@ use Kanekescom\Simgtk\Models\MataPelajaran;
 use Kanekescom\Simgtk\Models\Pegawai;
 use Kanekescom\Simgtk\Models\Sekolah;
 use Kanekescom\Simgtk\Models\Wilayah;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithProgressBar;
 use Spatie\LaravelOptions\Options;
 
-class PegawaiDapodikImport implements ToModel, WithHeadingRow
+class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
 {
-    /**
-     * @param array $row
-     *
-     * @return \Illuminate\Database\Eloquent\Model|null
-     */
+    use Importable;
+
     public function model(array $row)
     {
         $row = Arr::map($row, function ($value) {
@@ -86,7 +85,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow
             'jenis_ptk_id' => self::getJenisPtk($row[self::getField('Jenis PTK')])?->id,
             'bidang_studi_pendidikan_id' => self::getBidangStudiPendidikan($row[self::getField('Bidang Studi Pendidikan')])?->id,
             'bidang_studi_sertifikasi_id' => self::getBidangStudiSertifikasi($row[self::getField('Bidang Studi Sertifikasi')])?->id,
-            'mata_pelajaran_id' => self::getMataPelajaran($row[self::getField('Bidang Studi Sertifikasi')])?->id,
+            'mata_pelajaran_id' => self::getMataPelajaran($row)?->id,
             'jam_mengajar_perminggu' => $row[self::getField('Jam Mengajar Perminggu')],
             'is_kepsek' => $row[self::getField('Jabatan Kepsek')] == 'Ya',
             // 'is_plt_kepsek' => $row[self::getField('is_plt_kepsek')] == 'Ya',
@@ -103,10 +102,19 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow
         return self::getEnumValueByLabel(StatusKepegawaianEnum::class, $nama == 'CPNS' ? 'PNS' : $nama) ?? (StatusKepegawaianEnum::NONASN)->value;
     }
 
-    protected static function getMataPelajaran($nama): Model|null
+    protected static function getMataPelajaran($row): Model|null
     {
+        $jenjang_sekolah_id = $row[self::getField('Tempat Tugas')];
+        $nama = self::getField('mata Pelajaran Diajarkan');
+
         if ($nama) {
-            return MataPelajaran::updateOrCreate(['nama' => $nama], ['nama' => $nama]);
+            return MataPelajaran::updateOrCreate([
+                'jenjang_sekolah_id' => self::getJenjangSekolah($jenjang_sekolah_id)?->id,
+                'nama' => $nama,
+            ], [
+                'jenjang_sekolah_id' => self::getJenjangSekolah($jenjang_sekolah_id)?->id,
+                'nama' => $nama,
+            ]);
         }
 
         return null;
