@@ -59,28 +59,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_penjaskes');
+                $query->whereIn('kode', ['sd_kelas']);
             });
     }
     public function pegawaiSdKelasStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_kelas');
+                $query->whereIn('kode', ['sd_kelas']);
             });
     }
     public function pegawaiSdKelasStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_kelas');
+                $query->whereIn('kode', ['sd_kelas']);
             });
     }
     public function pegawaiSdKelasStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_kelas');
+                $query->whereIn('kode', ['sd_kelas']);
             });
     }
 
@@ -88,28 +88,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_penjaskes');
+                $query->whereIn('kode', ['sd_penjaskes']);
             });
     }
     public function pegawaiSdPenjaskesStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_penjaskes');
+                $query->whereIn('kode', ['sd_penjaskes']);
             });
     }
     public function pegawaiSdPenjaskesStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_penjaskes');
+                $query->whereIn('kode', ['sd_penjaskes']);
             });
     }
     public function pegawaiSdPenjaskesStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_penjaskes');
+                $query->whereIn('kode', ['sd_penjaskes']);
             });
     }
 
@@ -117,28 +117,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_agama');
+                $query->whereIn('kode', ['sd_agama']);
             });
     }
     public function pegawaiSdAgamaStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_agama');
+                $query->whereIn('kode', ['sd_agama']);
             });
     }
     public function pegawaiSdAgamaStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_agama');
+                $query->whereIn('kode', ['sd_agama']);
             });
     }
     public function pegawaiSdAgamaStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_agama');
+                $query->whereIn('kode', ['sd_agama']);
             });
     }
 
@@ -146,28 +146,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_agama_noni');
+                $query->whereIn('kode', ['sd_agama_noni']);
             });
     }
     public function pegawaiSdAgamaNoniStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_agama_noni');
+                $query->whereIn('kode', ['sd_agama_noni']);
             });
     }
     public function pegawaiSdAgamaNoniStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_agama_noni');
+                $query->whereIn('kode', ['sd_agama_noni']);
             });
     }
     public function pegawaiSdAgamaNoniStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'sd_agama_noni');
+                $query->whereIn('kode', ['sd_agama_noni']);
             });
     }
 
@@ -213,28 +213,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_pai');
+                $query->whereIn('kode', ['smp_pai']);
             });
     }
     public function pegawaiSmpPaiStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_pai');
+                $query->whereIn('kode', ['smp_pai']);
             });
     }
     public function pegawaiSmpPaiStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_pai');
+                $query->whereIn('kode', ['smp_pai']);
             });
     }
     public function pegawaiSmpPaiStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_pai');
+                $query->whereIn('kode', ['smp_pai']);
             });
     }
 
@@ -242,28 +242,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_pjok');
+                $query->whereIn('kode', ['smp_pjok']);
             });
     }
     public function pegawaiSmpPjokStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_pjok');
+                $query->whereIn('kode', ['smp_pjok']);
             });
     }
     public function pegawaiSmpPjokStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_pjok');
+                $query->whereIn('kode', ['smp_pjok']);
             });
     }
     public function pegawaiSmpPjokStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_pjok');
+                $query->whereIn('kode', ['smp_pjok']);
             });
     }
 
@@ -271,28 +271,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_indonesia');
+                $query->whereIn('kode', ['smp_b_indonesia']);
             });
     }
     public function pegawaiSmpBIndonesiaStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_indonesia');
+                $query->whereIn('kode', ['smp_b_indonesia']);
             });
     }
     public function pegawaiSmpBIndonesiaStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_indonesia');
+                $query->whereIn('kode', ['smp_b_indonesia']);
             });
     }
     public function pegawaiSmpBIndonesiaStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_indonesia');
+                $query->whereIn('kode', ['smp_b_indonesia']);
             });
     }
 
@@ -300,28 +300,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_inggris');
+                $query->whereIn('kode', ['smp_b_inggris']);
             });
     }
     public function pegawaiSmpBInggrisStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_inggris');
+                $query->whereIn('kode', ['smp_b_inggris']);
             });
     }
     public function pegawaiSmpBInggrisStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_inggris');
+                $query->whereIn('kode', ['smp_b_inggris']);
             });
     }
     public function pegawaiSmpBInggrisStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_inggris');
+                $query->whereIn('kode', ['smp_b_inggris']);
             });
     }
 
@@ -329,28 +329,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_bk');
+                $query->whereIn('kode', ['smp_bk']);
             });
     }
     public function pegawaiSmpBkStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_bk');
+                $query->whereIn('kode', ['smp_bk']);
             });
     }
     public function pegawaiSmpBkStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_bk');
+                $query->whereIn('kode', ['smp_bk']);
             });
     }
     public function pegawaiSmpBkStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_bk');
+                $query->whereIn('kode', ['smp_bk']);
             });
     }
 
@@ -358,28 +358,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ipa');
+                $query->whereIn('kode', ['smp_ipa']);
             });
     }
     public function pegawaiSmpIpaStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ipa');
+                $query->whereIn('kode', ['smp_ipa']);
             });
     }
     public function pegawaiSmpIpaStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ipa');
+                $query->whereIn('kode', ['smp_ipa']);
             });
     }
     public function pegawaiSmpIpaStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ipa');
+                $query->whereIn('kode', ['smp_ipa']);
             });
     }
 
@@ -387,28 +387,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ips');
+                $query->whereIn('kode', ['smp_ips']);
             });
     }
     public function pegawaiSmpIpsStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ips');
+                $query->whereIn('kode', ['smp_ips']);
             });
     }
     public function pegawaiSmpIpsStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ips');
+                $query->whereIn('kode', ['smp_ips']);
             });
     }
     public function pegawaiSmpIpsStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ips');
+                $query->whereIn('kode', ['smp_ips']);
             });
     }
 
@@ -416,28 +416,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_matematika');
+                $query->whereIn('kode', ['smp_matematika']);
             });
     }
     public function pegawaiSmpMatematikaStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_matematika');
+                $query->whereIn('kode', ['smp_matematika']);
             });
     }
     public function pegawaiSmpMatematikaStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_matematika');
+                $query->whereIn('kode', ['smp_matematika']);
             });
     }
     public function pegawaiSmpMatematikaStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_matematika');
+                $query->whereIn('kode', ['smp_matematika']);
             });
     }
 
@@ -445,28 +445,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ppkn');
+                $query->whereIn('kode', ['smp_ppkn']);
             });
     }
     public function pegawaiSmpPpknStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ppkn');
+                $query->whereIn('kode', ['smp_ppkn']);
             });
     }
     public function pegawaiSmpPpknStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ppkn');
+                $query->whereIn('kode', ['smp_ppkn']);
             });
     }
     public function pegawaiSmpPpknStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_ppkn');
+                $query->whereIn('kode', ['smp_ppkn']);
             });
     }
 
@@ -474,28 +474,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_prakarya');
+                $query->whereIn('kode', ['smp_prakarya']);
             });
     }
     public function pegawaiSmpPrakaryaStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_prakarya');
+                $query->whereIn('kode', ['smp_prakarya']);
             });
     }
     public function pegawaiSmpPrakaryaStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_prakarya');
+                $query->whereIn('kode', ['smp_prakarya']);
             });
     }
     public function pegawaiSmpPrakaryaStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_prakarya');
+                $query->whereIn('kode', ['smp_prakarya']);
             });
     }
 
@@ -503,28 +503,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_seni_budaya');
+                $query->whereIn('kode', ['smp_seni_budaya']);
             });
     }
     public function pegawaiSmpSeniBudayaStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_seni_budaya');
+                $query->whereIn('kode', ['smp_seni_budaya']);
             });
     }
     public function pegawaiSmpSeniBudayaStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_seni_budaya');
+                $query->whereIn('kode', ['smp_seni_budaya']);
             });
     }
     public function pegawaiSmpSeniBudayaStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_seni_budaya');
+                $query->whereIn('kode', ['smp_seni_budaya']);
             });
     }
 
@@ -532,28 +532,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_sunda');
+                $query->whereIn('kode', ['smp_b_sunda']);
             });
     }
     public function pegawaiSmpBSundaStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_sunda');
+                $query->whereIn('kode', ['smp_b_sunda']);
             });
     }
     public function pegawaiSmpBSundaStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_sunda');
+                $query->whereIn('kode', ['smp_b_sunda']);
             });
     }
     public function pegawaiSmpBSundaStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_b_sunda');
+                $query->whereIn('kode', ['smp_b_sunda']);
             });
     }
 
@@ -561,28 +561,28 @@ trait SekolahPegawaiRelationship
     {
         return $this->pegawaiAktif()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_tik');
+                $query->whereIn('kode', ['smp_tik']);
             });
     }
     public function pegawaiSmpTikStatusKepegawaianPns(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPns()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_tik');
+                $query->whereIn('kode', ['smp_tik']);
             });
     }
     public function pegawaiSmpTikStatusKepegawaianPppk(): HasMany
     {
         return $this->pegawaiStatusKepegawaianPppk()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_tik');
+                $query->whereIn('kode', ['smp_tik']);
             });
     }
     public function pegawaiSmpTikStatusKepegawaianGtt(): HasMany
     {
         return $this->pegawaiStatusKepegawaianGtt()
             ->whereHas('mataPelajaran', function ($query) {
-                $query->where('kode', 'smp_tik');
+                $query->whereIn('kode', ['smp_tik']);
             });
     }
 
