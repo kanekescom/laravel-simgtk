@@ -15,7 +15,7 @@ class ListRencanaBezetting extends ListRecords
 {
     protected static string $resource = RencanaBezettingResource::class;
 
-    protected static ?string $title = 'Rencana Bezetting';
+    protected static ?string $title = 'History Bezetting';
 
     protected function getHeaderActions(): array
     {

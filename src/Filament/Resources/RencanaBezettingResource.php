@@ -16,9 +16,9 @@ use Kanekescom\Simgtk\Models\RencanaBezetting;
 
 class RencanaBezettingResource extends Resource
 {
-    protected static ?string $slug = 'referensi/bezetting/rencana-bezetting';
+    protected static ?string $slug = 'referensi/bezetting/history-bezetting';
 
-    protected static ?string $pluralLabel = 'Rencana Bezetting';
+    protected static ?string $pluralLabel = 'History Bezetting';
 
     protected static ?string $model = RencanaBezetting::class;
 
@@ -26,7 +26,7 @@ class RencanaBezettingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Rencana';
+    protected static ?string $navigationLabel = 'History';
 
     protected static ?string $navigationGroup = 'Referensi Bezetting';
 
