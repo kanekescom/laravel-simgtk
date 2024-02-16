@@ -2,9 +2,11 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\RancanganBezettingResource\Pages;
 
+use Filament\Pages\Actions\Action;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Contracts\Support\Htmlable;
+use Kanekescom\Simgtk\Filament\Resources\LiveBezettingResource;
 use Kanekescom\Simgtk\Filament\Resources\RancanganBezettingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\RencanaBezetting;
@@ -205,6 +207,9 @@ class ListRancanganBezetting extends ListRecords
             //             ->withColumns($exportColumns)
             //             ->ignoreFormatting(),
             //     ])->icon(false),
+            Action::make('live-bezetting')
+                ->label('Live')
+                ->url(LiveBezettingResource::getSlug()),
         ];
     }
 
