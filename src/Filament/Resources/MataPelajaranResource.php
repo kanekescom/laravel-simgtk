@@ -64,7 +64,7 @@ class MataPelajaranResource extends Resource
                 Tables\Columns\TextColumn::make('#')
                     ->rowIndex(),
                 Tables\Columns\TextColumn::make('jenjangSekolah.nama')
-                    ->visible(fn ($livewire) => $livewire->activeTab === '')
+                    ->visible(fn ($livewire) => blank($livewire->activeTab))
                     ->wrap()
                     ->searchable()
                     ->sortable()
