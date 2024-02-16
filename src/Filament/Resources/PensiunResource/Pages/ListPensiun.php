@@ -45,35 +45,43 @@ class ListPensiun extends ListRecords
 
     public function getTabs(): array
     {
-        return [
-            'pensiun' => Tab::make('pensiun')
-                ->modifyQueryUsing(function ($query) {
-                    return $query
-                        ->pensiun();
+        $years = $this->getAddYearToListFromCurrentTo(5);
+        $tabs = [];
+
+        $tabs['pensiun'] = Tab::make('pensiun')
+            ->modifyQueryUsing(function ($query) {
+                return $query->pensiun();
+            })
+            ->badge($this->getModel()::query()->pensiun()->count())
+            ->label('Pensiun');
+
+        $tabs['masuk-pensiun'] = Tab::make('masuk-pensiun')
+            ->modifyQueryUsing(function ($query) {
+                return $query->masukPensiun();
+            })
+            ->badge($this->getModel()::query()->masukPensiun()->count())
+            ->label('Masuk Pensiun');
+
+        foreach ($years as $year) {
+            $tabs[$year] = Tab::make($year)
+                ->modifyQueryUsing(function ($query) use ($year) {
+                    return $query->pensiunTahun($year);
                 })
-                ->badge($this->getModel()::query()->pensiun()->count())
-                ->label('Pensiun'),
-            'masuk-pensiun' => Tab::make('masuk-pensiun')
-                ->modifyQueryUsing(function ($query) {
-                    return $query
-                        ->masukPensiun();
-                })
-                ->badge($this->getModel()::query()->masukPensiun()->count())
-                ->label('Masuk Pensiun'),
-            'pensiun-tahun-ini' => Tab::make('pensiun-tahun-ini')
-                ->modifyQueryUsing(function ($query) {
-                    return $query
-                        ->pensiunTahunIni();
-                })
-                ->badge($this->getModel()::query()->pensiunTahunIni()->count())
-                ->label('Tahun Ini'),
-            'pensiun-tahun-depan' => Tab::make('pensiun-tahun-depan')
-                ->modifyQueryUsing(function ($query) {
-                    return $query
-                        ->pensiunTahunDepan();
-                })
-                ->badge($this->getModel()::query()->pensiunTahunDepan()->count())
-                ->label('Tahun Depan'),
-        ];
+                ->badge($this->getModel()::query()->pensiunTahun($year)->count())
+                ->label($year);
+        }
+
+        return $tabs;
+    }
+
+    public function getAddYearToListFromCurrentTo($addYear): array
+    {
+        $currentYear = now()->year;
+
+        for ($i = 0; $i <= $addYear; $i++) {
+            $years[] = $currentYear + $i;
+        }
+
+        return $years ?? [];
     }
 }

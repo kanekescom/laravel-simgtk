@@ -128,6 +128,14 @@ class Pegawai extends Model
             ->orderBy('tmt_pensiun');
     }
 
+    public function scopePensiunTahun($query, $tahun)
+    {
+        return $query
+            ->aktif()
+            ->whereYear('tmt_pensiun', '=', $tahun)
+            ->orderBy('tmt_pensiun');
+    }
+
     public function scopePensiunTahunIni($query)
     {
         return $query
