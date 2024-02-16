@@ -11,6 +11,7 @@ class SimgtkServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-simgtk')
+            ->hasConfigFile()
             ->hasMigrations([
                 '2023_11_01_000001_create_simgtk_bidang_studi_pendidikan_table',
                 '2023_11_01_000002_create_simgtk_bidang_studi_sertifikasi_table',
