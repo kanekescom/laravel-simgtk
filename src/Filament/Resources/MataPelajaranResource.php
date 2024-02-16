@@ -51,7 +51,6 @@ class MataPelajaranResource extends Resource
                     ->maxLength(255)
                     ->label('Nama'),
                 Forms\Components\TextInput::make('singkatan')
-                    ->required()
                     ->maxLength(255)
                     ->label('Singkatan'),
             ]);
