@@ -67,6 +67,7 @@ class SekolahResource extends Resource
     {
         return $table
             ->defaultGroup('wilayah.nama')
+            ->defaultSort('nama', 'asc')
             ->columns([
                 Tables\Columns\TextColumn::make('#')
                     ->rowIndex(),
@@ -84,6 +85,7 @@ class SekolahResource extends Resource
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Pegawai'),
             ])
             ->filters([

@@ -354,7 +354,7 @@ class PegawaiResource extends Resource
     {
         return $table
             ->modifyQueryUsing(fn (Builder $query) => $query->aktif())
-            ->filtersFormColumns(3)
+            ->defaultSort('golongan_kode', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('#')
                     ->rowIndex(),
@@ -388,6 +388,7 @@ class PegawaiResource extends Resource
                     ->sortable()
                     ->label('Jabatan'),
             ])
+            ->filtersFormColumns(3)
             ->filters([
                 Tables\Filters\SelectFilter::make('gender_kode')
                     ->options(GenderEnum::class)

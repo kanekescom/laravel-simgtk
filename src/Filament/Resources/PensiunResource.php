@@ -388,7 +388,7 @@ class PensiunResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->filtersFormColumns(3)
+            ->defaultSort('tmt_pensiun', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('#')
                     ->rowIndex(),
@@ -429,6 +429,7 @@ class PensiunResource extends Resource
                     ->sortable(['tmt_pensiun'])
                     ->label('Pensiun'),
             ])
+            ->filtersFormColumns(3)
             ->filters([
                 Tables\Filters\SelectFilter::make('gender_kode')
                     ->options(GenderEnum::class)

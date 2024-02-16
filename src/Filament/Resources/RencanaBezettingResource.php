@@ -56,6 +56,7 @@ class RencanaBezettingResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('nama', 'asc')
             ->columns([
                 Tables\Columns\TextColumn::make('#')
                     ->rowIndex(),
@@ -79,10 +80,12 @@ class RencanaBezettingResource extends Resource
                 Tables\Columns\TextColumn::make('sekolah_count')
                     ->counts('sekolah')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Sekolah'),
                 Tables\Columns\TextColumn::make('pegawai_count')
                     ->counts('pegawai')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Pegawai'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->date()

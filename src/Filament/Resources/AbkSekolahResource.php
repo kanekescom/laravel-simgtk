@@ -124,6 +124,7 @@ class AbkSekolahResource extends Resource
 
         return $table
             ->defaultGroup('wilayah.nama')
+            ->defaultSort('nama', 'asc')
             ->columns($columns)
             ->filters([
                 Tables\Filters\SelectFilter::make('jenjang_sekolah')

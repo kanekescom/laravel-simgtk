@@ -45,6 +45,7 @@ class WilayahResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('nama', 'asc')
             ->columns([
                 Tables\Columns\TextColumn::make('#')
                     ->rowIndex(),
@@ -57,16 +58,17 @@ class WilayahResource extends Resource
                 Tables\Columns\TextColumn::make('sekolah_count')
                     ->counts('sekolah')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Sekolah'),
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Pegawai'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
-
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),

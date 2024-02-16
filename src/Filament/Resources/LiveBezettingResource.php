@@ -162,21 +162,25 @@ class LiveBezettingResource extends Resource
                         ->counts("pegawai{$jenjang_sekolah_studly}StatusKepegawaianPns")
                         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->alignment(Alignment::End)
+                        ->sortable()
                         ->label('PNS'),
                     Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_pppk_count")
                         ->counts("pegawai{$jenjang_sekolah_studly}StatusKepegawaianPppk")
                         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->alignment(Alignment::End)
+                        ->sortable()
                         ->label('PPPK'),
                     Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_gtt_count")
                         ->counts("pegawai{$jenjang_sekolah_studly}StatusKepegawaianGtt")
                         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->alignment(Alignment::End)
+                        ->sortable()
                         ->label('GTT'),
                     Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_count")
                         ->counts("pegawai{$jenjang_sekolah_studly}")
                         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->alignment(Alignment::End)
+                        ->sortable()
                         ->label('JML'),
                 ])
                 ->alignment(Alignment::Center)
@@ -192,21 +196,26 @@ class LiveBezettingResource extends Resource
                             ->alignment(Alignment::End)
                             ->badge()
                             ->color('info')
+                            ->sortable()
                             ->label('ABK'),
                         Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_{$mapel}_status_kepegawaian_pns_count")
                             ->counts("pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianPns")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->alignment(Alignment::End)
+                            ->sortable()
+                            ->sortable()
                             ->label('PNS'),
                         Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_{$mapel}_status_kepegawaian_pppk_count")
                             ->counts("pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianPppk")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->alignment(Alignment::End)
+                            ->sortable()
                             ->label('PPPK'),
                         Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_{$mapel}_status_kepegawaian_gtt_count")
                             ->counts("pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianGtt")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->alignment(Alignment::End)
+                            ->sortable()
                             ->label('GTT'),
                         Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_{$mapel}_count")
                             ->counts("pegawai{$jenjang_sekolah_studly}{$mapel_studly}")
@@ -214,12 +223,14 @@ class LiveBezettingResource extends Resource
                             ->alignment(Alignment::End)
                             ->badge()
                             ->color('warning')
+                            ->sortable()
                             ->label('Total'),
                         Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_{$mapel}_selisih")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                             ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                             ->alignment(Alignment::End)
+                            ->sortable()
                             ->label('+/-'),
                     ])
                     ->alignment(Alignment::Center)
@@ -231,12 +242,14 @@ class LiveBezettingResource extends Resource
                 ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                 ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                 ->alignment(Alignment::End)
+                ->sortable()
                 ->label("JML ABK");
             $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_selisih")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                 ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                 ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                 ->alignment(Alignment::End)
+                ->sortable()
                 ->label("JML +/-");
         }
 

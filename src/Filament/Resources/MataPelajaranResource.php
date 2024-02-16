@@ -61,6 +61,7 @@ class MataPelajaranResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('nama', 'asc')
             ->columns([
                 Tables\Columns\TextColumn::make('#')
                     ->rowIndex(),
@@ -85,6 +86,7 @@ class MataPelajaranResource extends Resource
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Pegawai'),
             ])
             ->filters([

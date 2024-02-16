@@ -49,6 +49,7 @@ class JenjangSekolahResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('nama', 'asc')
             ->columns([
                 Tables\Columns\TextColumn::make('#')
                     ->rowIndex(),
@@ -62,14 +63,17 @@ class JenjangSekolahResource extends Resource
                 Tables\Columns\TextColumn::make('sekolah_count')
                     ->counts('sekolah')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Sekolah'),
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Pegawai'),
                 Tables\Columns\TextColumn::make('mata_pelajaran_count')
                     ->counts('mataPelajaran')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Mapel'),
             ])
             ->filters([

@@ -56,6 +56,7 @@ class RencanaMutasiResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('nama', 'asc')
             ->columns([
                 Tables\Columns\TextColumn::make('#')
                     ->rowIndex(),
@@ -79,10 +80,12 @@ class RencanaMutasiResource extends Resource
                 Tables\Columns\TextColumn::make('usul_count')
                     ->counts('usul')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Usulan'),
                 Tables\Columns\TextColumn::make('pegawai_count')
                     ->counts('pegawai')
                     ->alignment(Alignment::End)
+                    ->sortable()
                     ->label('Pegawai'),
             ])
             ->filters([

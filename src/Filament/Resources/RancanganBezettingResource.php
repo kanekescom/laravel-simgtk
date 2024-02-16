@@ -92,6 +92,7 @@ class RancanganBezettingResource extends Resource
     {
         return $table
             ->defaultGroup('wilayah.nama')
+            ->defaultSort('nama', 'asc')
             ->columns(self::getTableColumns())
             ->filtersFormColumns(4)
             ->filters(self::getTableFilters());
@@ -109,7 +110,7 @@ class RancanganBezettingResource extends Resource
         $columns = [];
         $columns[] = Tables\Columns\TextColumn::make('#')
             ->rowIndex();
-        $columns[] = Tables\Columns\TextColumn::make('sekolah.nama')
+        $columns[] = Tables\Columns\TextColumn::make('nama')
             ->wrap()
             ->grow()
             ->searchable()
