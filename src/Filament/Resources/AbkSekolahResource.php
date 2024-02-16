@@ -32,16 +32,8 @@ class AbkSekolahResource extends Resource
     public static function table(Table $table): Table
     {
         $columns = [];
-        $columns[] = Tables\Columns\TextColumn::make('#')->state(
-            static function (HasTable $livewire, $rowLoop): string {
-                return (string) (
-                    $rowLoop->iteration +
-                    ($livewire->getTableRecordsPerPage() * (
-                        $livewire->getTablePage() - 1
-                    ))
-                );
-            }
-        );
+        $columns[] = Tables\Columns\TextColumn::make('#')
+            ->rowIndex();
         $columns[] = Tables\Columns\TextColumn::make('nama')
             ->wrap()
             ->grow()

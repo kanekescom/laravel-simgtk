@@ -390,16 +390,8 @@ class PensiunResource extends Resource
         return $table
             ->filtersFormColumns(3)
             ->columns([
-                Tables\Columns\TextColumn::make('#')->state(
-                    static function (HasTable $livewire, $rowLoop): string {
-                        return (string) (
-                            $rowLoop->iteration +
-                            ($livewire->getTableRecordsPerPage() * (
-                                $livewire->getTablePage() - 1
-                            ))
-                        );
-                    }
-                ),
+                Tables\Columns\TextColumn::make('#')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('nama_gelar')
                     ->description(fn (Model $record): string => $record->nama_id ?? '')
                     ->searchable(['nama', 'nip', 'nik', 'nuptk'])

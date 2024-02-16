@@ -107,16 +107,8 @@ class RancanganBezettingResource extends Resource
     public static function getTableColumns(): array
     {
         $columns = [];
-        $columns[] = Tables\Columns\TextColumn::make('#')->state(
-            static function (HasTable $livewire, $rowLoop): string {
-                return (string) (
-                    $rowLoop->iteration +
-                    ($livewire->getTableRecordsPerPage() * (
-                        $livewire->getTablePage() - 1
-                    ))
-                );
-            }
-        );
+        $columns[] = Tables\Columns\TextColumn::make('#')
+            ->rowIndex();
         $columns[] = Tables\Columns\TextColumn::make('sekolah.nama')
             ->wrap()
             ->grow()

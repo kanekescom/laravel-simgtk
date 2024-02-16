@@ -57,16 +57,8 @@ class RencanaMutasiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('#')->state(
-                    static function (HasTable $livewire, $rowLoop): string {
-                        return (string) (
-                            $rowLoop->iteration +
-                            ($livewire->getTableRecordsPerPage() * (
-                                $livewire->getTablePage() - 1
-                            ))
-                        );
-                    }
-                ),
+                Tables\Columns\TextColumn::make('#')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('nama')
                     ->wrap()
                     ->grow()

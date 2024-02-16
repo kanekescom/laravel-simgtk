@@ -102,16 +102,8 @@ class UsulMutasiResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('#')->state(
-                    static function (HasTable $livewire, $rowLoop): string {
-                        return (string) (
-                            $rowLoop->iteration +
-                            ($livewire->getTableRecordsPerPage() * (
-                                $livewire->getTablePage() - 1
-                            ))
-                        );
-                    }
-                ),
+                Tables\Columns\TextColumn::make('#')
+                    ->rowIndex(),
                 Tables\Columns\TextColumn::make('pegawai.nama_gelar')
                     ->description(fn (Model $record): string => $record->pegawai?->nama_id ?? '')
                     ->wrap()
@@ -128,7 +120,7 @@ class UsulMutasiResource extends Resource
                 Tables\Columns\TextColumn::make('tujuanSekolah.nama')
                     ->description(fn (Model $record): string => "{$record->tujuanMataPelajaran?->nama}")
                     ->wrap()
-                ->grow()
+                    ->grow()
                     ->searchable()
                     ->sortable()
                     ->label('Sekolah Tujuan'),
