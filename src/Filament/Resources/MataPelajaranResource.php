@@ -44,7 +44,6 @@ class MataPelajaranResource extends Resource
                     ->required()
                     ->label('Jenjang Sekolah'),
                 Forms\Components\TextInput::make('kode')
-                    ->unique(ignoreRecord: true)
                     ->required()
                     ->label('Kode'),
                 Forms\Components\TextInput::make('nama')
