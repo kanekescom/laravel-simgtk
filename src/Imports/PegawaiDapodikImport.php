@@ -105,7 +105,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
     protected static function getMataPelajaran($row): Model|null
     {
         $jenjang_sekolah_id = $row[self::getField('Tempat Tugas')];
-        $nama = self::getField('mata Pelajaran Diajarkan');
+        $nama = $row[self::getField('mata Pelajaran Diajarkan')];
 
         if ($nama) {
             return MataPelajaran::updateOrCreate([
