@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nama');
             $table->date('tanggal_mulai')->nullable();
             $table->date('tanggal_berakhir')->nullable();
-            $table->boolean('is_aktif')->index();
+            $table->boolean('is_aktif')->index('13_is_aktif');
             $table->timestamps();
             $table->softDeletes();
         });

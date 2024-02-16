@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create(config('simgtk.table_prefix') . 'rancangan_bezetting', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignUlid('rencana_bezetting_id')->index();
-            $table->foreignUlid('sekolah_id')->index();
+            $table->foreignUlid('rencana_bezetting_id')->index('14_rencana_bezetting_id');
+            $table->foreignUlid('sekolah_id')->index('14_sekolah_id');
             $table->string('nama');
-            $table->string('npsn')->nullable()->index();
-            $table->foreignUlid('jenjang_sekolah_id')->nullable()->index();
-            $table->foreignUlid('wilayah_id')->nullable()->index();
+            $table->string('npsn')->index('14_npsn')->nullable();
+            $table->foreignUlid('jenjang_sekolah_id')->index('14_jenjang_sekolah_id')->nullable();
+            $table->foreignUlid('wilayah_id')->index('14_wilayah_id')->nullable();
 
             $table->unsignedTinyInteger('jumlah_kelas')->default(0);
             $table->unsignedTinyInteger('jumlah_rombel')->default(0);
