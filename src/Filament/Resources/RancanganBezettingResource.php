@@ -189,6 +189,8 @@ class RancanganBezettingResource extends Resource
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_abk")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->alignEnd()
+                            ->badge()
+                            ->color('info')
                             ->label('ABK'),
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_pns")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
@@ -205,6 +207,8 @@ class RancanganBezettingResource extends Resource
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_total")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->alignEnd()
+                            ->alignEnd()
+                            ->badge()
                             ->label('Total'),
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_selisih")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
@@ -217,18 +221,23 @@ class RancanganBezettingResource extends Resource
                     ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel]);
             }
 
-            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_abk")
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-                ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
-                ->alignEnd()
-                ->label("JML ABK");
-            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_selisih")
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-                ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
-                ->alignEnd()
-                ->label("JML +/-");
+            $columns[] = ColumnGroup::make("group_{$jenjang_sekolah}_jumlah")
+                ->columns([
+                    Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_abk")
+                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                        ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                        ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
+                        ->alignEnd()
+                        ->label("ABK"),
+                    Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_selisih")
+                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                        ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                        ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
+                        ->alignEnd()
+                        ->label("+/-"),
+                ])
+                ->alignment(Alignment::Center)
+                ->label('Jumlah');
         }
 
         return $columns;

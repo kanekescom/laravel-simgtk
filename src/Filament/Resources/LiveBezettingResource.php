@@ -226,6 +226,11 @@ class LiveBezettingResource extends Resource
                             ->sortable()
                             ->label('Total'),
                         Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_{$mapel}_selisih")
+                            ->state(
+                                static function (Model $record) use ($jenjang_sekolah, $mapel): int {
+                                    return (int) ($record->{"pegawai_{$jenjang_sekolah}_{$mapel}_count"} - $record->{"{$jenjang_sekolah}_{$mapel}_abk"});
+                                }
+                            )
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                             ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
@@ -237,20 +242,30 @@ class LiveBezettingResource extends Resource
                     ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel]);
             }
 
-            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_abk")
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-                ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
-                ->alignEnd()
-                ->sortable()
-                ->label("JML ABK");
-            $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_selisih")
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
-                ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
-                ->alignEnd()
-                ->sortable()
-                ->label("JML +/-");
+            $columns[] = ColumnGroup::make("group_{$jenjang_sekolah}_jumlah")
+                ->columns([
+                    Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_abk")
+                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                        ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                        ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
+                        ->alignEnd()
+                        ->sortable()
+                        ->label("ABK"),
+                    Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_selisih")
+                        ->state(
+                            static function (Model $record) use ($jenjang_sekolah): int {
+                                return (int) ($record->{"pegawai_{$jenjang_sekolah}_count"} - $record->{"{$jenjang_sekolah}_formasi_abk"});
+                            }
+                        )
+                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
+                        ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
+                        ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
+                        ->alignEnd()
+                        ->sortable()
+                        ->label("+/-"),
+                ])
+                ->alignment(Alignment::Center)
+                ->label('Jumlah');
         }
 
         return $columns;
