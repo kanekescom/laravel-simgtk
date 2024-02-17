@@ -49,9 +49,9 @@ class MataPelajaranResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->label('Nama'),
-                Forms\Components\TextInput::make('singkatan')
-                    ->maxLength(255)
-                    ->label('Singkatan'),
+                // Forms\Components\TextInput::make('singkatan')
+                //     ->maxLength(255)
+                //     ->label('Singkatan'),
             ]);
     }
 
@@ -75,11 +75,11 @@ class MataPelajaranResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('Nama'),
-                Tables\Columns\TextColumn::make('singkatan')
-                    ->wrap()
-                    ->searchable()
-                    ->sortable()
-                    ->label('Singkatan'),
+                // Tables\Columns\TextColumn::make('singkatan')
+                //     ->wrap()
+                //     ->searchable()
+                //     ->sortable()
+                //     ->label('Singkatan'),
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
                     ->alignEnd()
