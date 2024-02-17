@@ -90,7 +90,7 @@ class LiveBezettingResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListLiveBezetting::route('/'),
+            'index' => Pages\ListLiveBezettingBezetting::route('/'),
         ];
     }
 

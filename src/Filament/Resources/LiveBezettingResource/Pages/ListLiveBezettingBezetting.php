@@ -7,7 +7,7 @@ use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\LiveBezettingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 
-class ListLiveBezetting extends ListRecords
+class ListLiveBezettingBezetting extends ListRecords
 {
     protected static string $resource = LiveBezettingResource::class;
 
