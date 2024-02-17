@@ -370,8 +370,8 @@ class PegawaiResource extends Resource
                 Tables\Columns\TextColumn::make('golongan_kode')
                     ->sortable()
                     ->label('Gol'),
-                Tables\Columns\TextColumn::make('mataPelajaran.nama')
-                    ->description(fn (Model $record): string => $record->sekolah?->nama_wilayah ?? '')
+                Tables\Columns\TextColumn::make('sekolah.nama')
+                    ->description(fn (Model $record): string => $record->mataPelajaran?->nama ?? '')
                     ->wrap()
                     ->grow()
                     ->searchable(query: function (Builder $query, string $search): Builder {
