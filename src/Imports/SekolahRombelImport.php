@@ -30,7 +30,8 @@ class SekolahRombelImport implements ToModel, WithHeadingRow, WithProgressBar
         $model->update([
             'jumlah_kelas' => $row[self::getField('R. Kelas')],
             'jumlah_rombel' => $row[self::getField('Rombel')],
-            'jumlah_siswa' => $row[self::getField('PD')]
+            'jumlah_siswa' => $row[self::getField('PD')],
+            'sd_kelas_abk' => $row[self::getField('R. Kelas')],
         ]);
 
         return $model->first();
