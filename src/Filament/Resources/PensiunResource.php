@@ -9,7 +9,6 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -368,7 +367,7 @@ class PensiunResource extends Resource
                             ->columns(3)
                             ->schema([
                                 Forms\Components\DatePicker::make('tmt_pensiun')
-                                    ->helperText(fn (Get $get) => 'TMT Umur 60 pada ' . ($get('tanggal_lahir') ? now()->parse($get('tanggal_lahir'))->addYear(60)->addMonth(1)->firstOfMonth()->toDateString() : ''))
+                                    ->helperText(fn (Get $get) => 'TMT Umur 60 pada '.($get('tanggal_lahir') ? now()->parse($get('tanggal_lahir'))->addYear(60)->addMonth(1)->firstOfMonth()->toDateString() : ''))
                                     ->date()
                                     ->required()
                                     ->label('TMT Pensiun'),
@@ -411,10 +410,10 @@ class PensiunResource extends Resource
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             })
                             ->orWhereHas('sekolah', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             });
                     })
                     ->sortable()

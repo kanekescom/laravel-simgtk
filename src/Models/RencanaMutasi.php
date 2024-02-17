@@ -19,7 +19,7 @@ class RencanaMutasi extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'rencana_mutasi';
+        return config('simgtk.table_prefix').'rencana_mutasi';
     }
 
     protected static function boot()

@@ -9,7 +9,6 @@ use Filament\Forms\Get;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -333,7 +332,7 @@ class PegawaiResource extends Resource
                             ->columns(3)
                             ->schema([
                                 Forms\Components\DatePicker::make('tmt_pensiun')
-                                    ->helperText(fn (Get $get) => 'TMT Umur 60 pada ' . ($get('tanggal_lahir') ? now()->parse($get('tanggal_lahir'))->addYear(60)->addMonth(1)->firstOfMonth()->toDateString() : ''))
+                                    ->helperText(fn (Get $get) => 'TMT Umur 60 pada '.($get('tanggal_lahir') ? now()->parse($get('tanggal_lahir'))->addYear(60)->addMonth(1)->firstOfMonth()->toDateString() : ''))
                                     ->date()
                                     ->required()
                                     ->label('TMT Pensiun'),
@@ -377,13 +376,13 @@ class PegawaiResource extends Resource
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             })
                             ->orWhereHas('sekolah', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             });
                     })
-                    ->icon(fn (Model $record): string => $record->is_kepsek || $record->is_plt_kepsek  ? 'heroicon-o-academic-cap' : '')
+                    ->icon(fn (Model $record): string => $record->is_kepsek || $record->is_plt_kepsek ? 'heroicon-o-academic-cap' : '')
                     ->color(fn (Model $record): string => $record->is_kepsek ? 'success' : ($record->is_plt_kepsek ? 'warning' : ''))
                     ->sortable()
                     ->label('Jabatan'),

@@ -6,11 +6,6 @@ use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\AbkSekolahResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
-use Konnco\FilamentImport\Actions\ImportAction;
-use Konnco\FilamentImport\Actions\ImportField;
-use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
-use pxlrbt\FilamentExcel\Columns\Column;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ListAbkSekolah extends ListRecords
 {
@@ -46,7 +41,7 @@ class ListAbkSekolah extends ListRecords
         return $tabs;
     }
 
-    public function getDefaultActiveTab(): string | int | null
+    public function getDefaultActiveTab(): string|int|null
     {
         return JenjangSekolah::first()->kode;
     }

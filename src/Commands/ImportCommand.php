@@ -5,7 +5,6 @@ namespace Kanekescom\Simgtk\Commands;
 use Illuminate\Console\Command;
 use Kanekescom\Simgtk\Imports;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
-use Maatwebsite\Excel\Facades\Excel;
 
 class ImportCommand extends Command
 {

@@ -2,7 +2,6 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\PensiunResource\Pages;
 
-use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Kanekescom\Simgtk\Filament\Resources\PensiunResource;
 

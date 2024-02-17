@@ -15,14 +15,14 @@ class Sekolah extends Model
 {
     use HasFactory;
     use HasUlids;
-    use SoftDeletes;
     use SekolahPegawaiRelationship;
+    use SoftDeletes;
 
     protected $guarded = [];
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'sekolah';
+        return config('simgtk.table_prefix').'sekolah';
     }
 
     protected static function boot()

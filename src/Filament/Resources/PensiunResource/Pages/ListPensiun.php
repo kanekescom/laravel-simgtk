@@ -5,9 +5,6 @@ namespace Kanekescom\Simgtk\Filament\Resources\PensiunResource\Pages;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\PensiunResource;
-use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
-use pxlrbt\FilamentExcel\Columns\Column;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ListPensiun extends ListRecords
 {
@@ -17,28 +14,26 @@ class ListPensiun extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-        ];
+        return [];
     }
 
     public function getTabs(): array
     {
-        $years = $this->getAddYearToListFromCurrentTo(5);
         $tabs = [];
-
         $tabs['pensiun'] = Tab::make('pensiun')
             ->modifyQueryUsing(function ($query) {
                 return $query->pensiun();
             })
             ->badge($this->getModel()::query()->pensiun()->count())
             ->label('Pensiun');
-
         $tabs['masuk-pensiun'] = Tab::make('masuk-pensiun')
             ->modifyQueryUsing(function ($query) {
                 return $query->masukPensiun();
             })
             ->badge($this->getModel()::query()->masukPensiun()->count())
             ->label('Masuk Pensiun');
+
+        $years = $this->getAddYearToListFromCurrentTo(5);
 
         foreach ($years as $year) {
             $tabs[$year] = Tab::make($year)

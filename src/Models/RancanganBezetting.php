@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 
 class RancanganBezetting extends Model
 {
@@ -20,7 +19,7 @@ class RancanganBezetting extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'rancangan_bezetting';
+        return config('simgtk.table_prefix').'rancangan_bezetting';
     }
 
     protected static function boot()

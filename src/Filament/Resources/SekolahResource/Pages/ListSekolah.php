@@ -31,7 +31,6 @@ class ListSekolah extends ListRecords
     public function getTabs(): array
     {
         $tabs = [];
-
         $tabs[''] = Tab::make('All')
             ->badge(
                 $this->getModel()::query()

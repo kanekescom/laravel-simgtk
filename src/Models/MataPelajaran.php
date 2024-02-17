@@ -19,7 +19,7 @@ class MataPelajaran extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'mata_pelajaran';
+        return config('simgtk.table_prefix').'mata_pelajaran';
     }
 
     public function getNamaJenjangSekolahAttribute()

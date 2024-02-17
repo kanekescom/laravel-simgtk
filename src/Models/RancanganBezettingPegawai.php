@@ -6,6 +6,6 @@ class RancanganBezettingPegawai extends Pegawai
 {
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'rancangan_bezetting_pegawai';
+        return config('simgtk.table_prefix').'rancangan_bezetting_pegawai';
     }
 }

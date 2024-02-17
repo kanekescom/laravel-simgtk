@@ -37,7 +37,7 @@ class SekolahRombelImport implements ToModel, WithHeadingRow, WithProgressBar
         return $model->first();
     }
 
-    protected static function getField($var): string|null
+    protected static function getField($var): ?string
     {
         return str($var)->slug('_');
     }

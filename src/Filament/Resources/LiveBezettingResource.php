@@ -6,9 +6,7 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Columns\ColumnGroup;
-use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Kanekescom\Simgtk\Filament\Resources\LiveBezettingResource\Pages;
 use Kanekescom\Simgtk\Models\Sekolah;
@@ -250,7 +248,7 @@ class LiveBezettingResource extends Resource
                         ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                         ->alignEnd()
                         ->sortable()
-                        ->label("ABK"),
+                        ->label('ABK'),
                     Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_selisih")
                         ->state(
                             static function (Model $record) use ($jenjang_sekolah): int {
@@ -262,7 +260,7 @@ class LiveBezettingResource extends Resource
                         ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                         ->alignEnd()
                         ->sortable()
-                        ->label("+/-"),
+                        ->label('+/-'),
                 ])
                 ->alignment(Alignment::Center)
                 ->label('Jumlah');

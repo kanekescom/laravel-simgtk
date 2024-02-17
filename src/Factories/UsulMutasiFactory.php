@@ -4,10 +4,10 @@ namespace Kanekescom\Simgtk\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Kanekescom\Simgtk\Models\MataPelajaran;
-use Kanekescom\Simgtk\Models\UsulMutasi;
 use Kanekescom\Simgtk\Models\Pegawai;
 use Kanekescom\Simgtk\Models\RencanaMutasi;
 use Kanekescom\Simgtk\Models\Sekolah;
+use Kanekescom\Simgtk\Models\UsulMutasi;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Kanekescom\Simgtk\Models\UsulMutasi>

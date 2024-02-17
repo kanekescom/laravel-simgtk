@@ -7,11 +7,6 @@ use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\MataPelajaranResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
-use Konnco\FilamentImport\Actions\ImportAction;
-use Konnco\FilamentImport\Actions\ImportField;
-use pxlrbt\FilamentExcel\Actions\Pages\ExportAction;
-use pxlrbt\FilamentExcel\Columns\Column;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class ListMataPelajaran extends ListRecords
 {
@@ -29,7 +24,6 @@ class ListMataPelajaran extends ListRecords
     public function getTabs(): array
     {
         $tabs = [];
-
         $tabs[''] = Tab::make('All')
             ->badge(
                 $this->getModel()::query()

@@ -4,9 +4,9 @@ namespace Kanekescom\Simgtk\Filament\Widgets;
 
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Kanekescom\Simgtk\Models\UsulMutasi;
 use Kanekescom\Simgtk\Models\Pegawai;
 use Kanekescom\Simgtk\Models\Sekolah;
+use Kanekescom\Simgtk\Models\UsulMutasi;
 
 class StatsOverview extends BaseWidget
 {

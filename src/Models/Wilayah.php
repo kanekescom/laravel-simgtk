@@ -19,7 +19,7 @@ class Wilayah extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'wilayah';
+        return config('simgtk.table_prefix').'wilayah';
     }
 
     public function sekolah(): HasMany

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('simgtk.table_prefix') . 'pegawai', function (Blueprint $table) {
+        Schema::create(config('simgtk.table_prefix').'pegawai', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('nama');
             $table->string('nik')->index('7_nik');
@@ -67,6 +67,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('simgtk.table_prefix') . 'pegawai');
+        Schema::dropIfExists(config('simgtk.table_prefix').'pegawai');
     }
 };

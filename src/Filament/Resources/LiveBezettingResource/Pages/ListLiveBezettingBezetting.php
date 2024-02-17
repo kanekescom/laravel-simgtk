@@ -41,7 +41,7 @@ class ListLiveBezettingBezetting extends ListRecords
         return $tabs;
     }
 
-    public function getDefaultActiveTab(): string | int | null
+    public function getDefaultActiveTab(): string|int|null
     {
         return JenjangSekolah::first()->kode;
     }

@@ -51,7 +51,6 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
         }
 
         return Pegawai::updateOrCreate(['nik' => $row[self::getField('NIK')]], [
-            // 'id' => $row[self::getField('id')],
             'nama' => str($row[self::getField('Nama')])->upper()->value,
             'nik' => $row[self::getField('NIK')],
             'nuptk' => $row[self::getField('NUPTK')],
@@ -92,17 +91,17 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
         ]);
     }
 
-    protected static function getField($var): string|null
+    protected static function getField($var): ?string
     {
         return str($var)->slug('_');
     }
 
-    protected static function getEnumStatusKepegawaianGetValue($nama): string|null
+    protected static function getEnumStatusKepegawaianGetValue($nama): ?string
     {
         return self::getEnumValueByLabel(StatusKepegawaianEnum::class, $nama == 'CPNS' ? 'PNS' : $nama) ?? (StatusKepegawaianEnum::NONASN)->value;
     }
 
-    protected static function getMataPelajaran($row): Model|null
+    protected static function getMataPelajaran($row): ?Model
     {
         $jenjang_sekolah_id = $row[self::getField('Tempat Tugas')];
         $nama = $row[self::getField('mata Pelajaran Diajarkan')];
@@ -120,7 +119,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
         return null;
     }
 
-    protected static function getBidangStudiPendidikan($nama): Model|null
+    protected static function getBidangStudiPendidikan($nama): ?Model
     {
         if ($nama) {
             return BidangStudiPendidikan::updateOrCreate(['nama' => $nama], ['nama' => $nama]);
@@ -129,7 +128,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
         return null;
     }
 
-    protected static function getBidangStudiSertifikasi($nama): Model|null
+    protected static function getBidangStudiSertifikasi($nama): ?Model
     {
         if ($nama) {
             return BidangStudiSertifikasi::updateOrCreate(['nama' => $nama], ['nama' => $nama]);
@@ -138,7 +137,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
         return null;
     }
 
-    protected static function getJenisPtk($nama): Model|null
+    protected static function getJenisPtk($nama): ?Model
     {
         if ($nama) {
             return JenisPtk::updateOrCreate(['nama' => $nama], ['nama' => $nama]);
@@ -147,7 +146,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
         return null;
     }
 
-    protected static function getJenjangSekolah($nama): Model|null
+    protected static function getJenjangSekolah($nama): ?Model
     {
         $sd = str($nama)->startsWith(['SDN ']);
         $smp = str($nama)->startsWith(['SMPN ']);
@@ -163,7 +162,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
         return null;
     }
 
-    protected static function getWilayah($nama): Model|null
+    protected static function getWilayah($nama): ?Model
     {
         if ($nama) {
             return Wilayah::updateOrCreate(['nama' => $nama], ['nama' => $nama]);
@@ -191,7 +190,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
         return collect(Options::forEnum($enum)->toArray())->pluck('label', 'value');
     }
 
-    protected static function getEnumValueByLabel($enum, $key, $toLower = true): string|null
+    protected static function getEnumValueByLabel($enum, $key, $toLower = true): ?string
     {
         if ($toLower) {
             $key = str($key)->lower()->value;
@@ -202,21 +201,21 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
         );
     }
 
-    protected static function getEnumGolonganAsnGetValue($key): string|null
+    protected static function getEnumGolonganAsnGetValue($key): ?string
     {
         return self::getEnumLabelValue(GolonganAsnEnum::class)->get(
             collect(Options::forEnum(GolonganAsnLabelEnum::class)->toArray())->pluck('label', 'value')->get($key)
         );
     }
 
-    protected static function getEnumJenjangPendidikanGetValue($key): string|null
+    protected static function getEnumJenjangPendidikanGetValue($key): ?string
     {
         return self::getEnumLabelValue(JenjangPendidikanEnum::class)->get(
             collect(Options::forEnum(JenjangPendidikanLabelEnum::class)->toArray())->pluck('label', 'value')->get($key)
         );
     }
 
-    protected static function getEnumStatusTugasGetValue($key): string|null
+    protected static function getEnumStatusTugasGetValue($key): ?string
     {
         return self::getEnumLabelValue(StatusTugasEnum::class)->get(
             collect(Options::forEnum(StatusTugasLabelEnum::class)->toArray())->pluck('label', 'value')->get($key)

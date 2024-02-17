@@ -4,10 +4,8 @@ namespace Kanekescom\Simgtk\Filament\Resources;
 
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\AbkSekolahResource\Pages;
 use Kanekescom\Simgtk\Models\Sekolah;

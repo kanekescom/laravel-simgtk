@@ -6,7 +6,6 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Columns\ColumnGroup;
-use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -228,13 +227,13 @@ class RancanganBezettingResource extends Resource
                         ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                         ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                         ->alignEnd()
-                        ->label("ABK"),
+                        ->label('ABK'),
                     Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_selisih")
                         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                         ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                         ->alignEnd()
-                        ->label("+/-"),
+                        ->label('+/-'),
                 ])
                 ->alignment(Alignment::Center)
                 ->label('Jumlah');
@@ -306,7 +305,7 @@ class RancanganBezettingResource extends Resource
                     ->falseLabel('Kurang/Lebih')
                     ->placeholder('All')
                     ->native(false)
-                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' Terpenuhi');
+                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel].' Terpenuhi');
 
                 $filters[] = Tables\Filters\TernaryFilter::make("{$jenjang_sekolah}_{$mapel}_existing_lebih_kurang")
                     ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
@@ -323,16 +322,16 @@ class RancanganBezettingResource extends Resource
                     ->falseLabel('Lebih')
                     ->placeholder('All')
                     ->native(false)
-                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' +/-');
+                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel].' +/-');
             }
 
             $filters[] = Tables\Filters\TernaryFilter::make("{$jenjang_sekolah}_existing_terpenuhi")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                 ->queries(
-                    true: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah, $mapel) {
+                    true: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah) {
                         return $query->where("{$jenjang_sekolah}_formasi_existing_selisih", 0);
                     }),
-                    false: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah, $mapel) {
+                    false: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah) {
                         return $query->where("{$jenjang_sekolah}_formasi_existing_selisih", '<>', 0);
                     }),
                     blank: fn (Builder $query) => $query,
@@ -341,15 +340,15 @@ class RancanganBezettingResource extends Resource
                 ->falseLabel('Kurang/Lebih')
                 ->placeholder('All')
                 ->native(false)
-                ->label("JML Terpenuhi");
+                ->label('JML Terpenuhi');
 
             $filters[] = Tables\Filters\TernaryFilter::make("{$jenjang_sekolah}_existing_lebih_kurang")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                 ->queries(
-                    true: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah, $mapel) {
+                    true: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah) {
                         return $query->where("{$jenjang_sekolah}_formasi_existing_selisih", '<', 0);
                     }),
-                    false: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah, $mapel) {
+                    false: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah) {
                         return $query->where("{$jenjang_sekolah}_formasi_existing_selisih", '>', 0);
                     }),
                     blank: fn (Builder $query) => $query,
@@ -358,7 +357,7 @@ class RancanganBezettingResource extends Resource
                 ->falseLabel('Lebih')
                 ->placeholder('All')
                 ->native(false)
-                ->label("JML +/-");
+                ->label('JML +/-');
         }
 
         return $filters;

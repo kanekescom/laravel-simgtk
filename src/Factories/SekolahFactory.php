@@ -22,7 +22,7 @@ class SekolahFactory extends Factory
     public function definition(): array
     {
         return [
-            'nama' => ($jenjang_sekolah = JenjangSekolah::inRandomOrder()->first() ?? JenjangSekolahFactory::new()->create())->nama . ' ' . fake()->unique()->company(),
+            'nama' => ($jenjang_sekolah = JenjangSekolah::inRandomOrder()->first() ?? JenjangSekolahFactory::new()->create())->nama.' '.fake()->unique()->company(),
             'npsn' => fake()->unique()->numerify('########'),
             'jenjang_sekolah_id' => $jenjang_sekolah->id,
             'wilayah_id' => Wilayah::inRandomOrder()->first() ?? WilayahFactory::new()->create(),
