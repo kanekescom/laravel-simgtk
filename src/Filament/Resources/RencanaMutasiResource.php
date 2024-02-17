@@ -81,11 +81,16 @@ class RencanaMutasiResource extends Resource
                     ->alignEnd()
                     ->sortable()
                     ->label('Usulan'),
-                Tables\Columns\TextColumn::make('pegawai_count')
-                    ->counts('pegawai')
+                Tables\Columns\TextColumn::make('pegawai_aktif_count')
+                    ->counts('pegawaiAktif')
                     ->alignEnd()
                     ->sortable()
                     ->label('Pegawai'),
+                Tables\Columns\TextColumn::make('guru_aktif_count')
+                    ->counts('guruAktif')
+                    ->alignEnd()
+                    ->sortable()
+                    ->label('Guru'),
             ])
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_aktif')

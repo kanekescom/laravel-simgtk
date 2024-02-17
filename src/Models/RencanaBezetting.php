@@ -137,6 +137,21 @@ class RencanaBezetting extends Model
         return $this->hasMany(RancanganBezettingPegawai::class);
     }
 
+    public function pegawaiAktif(): HasMany
+    {
+        return $this->pegawai()->aktif();
+    }
+
+    public function guru(): HasMany
+    {
+        return $this->pegawai()->guru();
+    }
+
+    public function guruAktif(): HasMany
+    {
+        return $this->pegawaiAktif()->guru();
+    }
+
     public function sekolah(): HasManyThrough
     {
         return $this->hasManyThrough(

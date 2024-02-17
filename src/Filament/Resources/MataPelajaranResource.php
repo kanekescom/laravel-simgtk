@@ -80,11 +80,16 @@ class MataPelajaranResource extends Resource
                 //     ->searchable()
                 //     ->sortable()
                 //     ->label('Singkatan'),
-                Tables\Columns\TextColumn::make('pegawai_aktif_count')
-                    ->counts('pegawaiAktif')
+                // Tables\Columns\TextColumn::make('pegawai_aktif_count')
+                //     ->counts('pegawaiAktif')
+                //     ->alignEnd()
+                //     ->sortable()
+                //     ->label('Pegawai'),
+                Tables\Columns\TextColumn::make('guru_aktif_count')
+                    ->counts('guruAktif')
                     ->alignEnd()
                     ->sortable()
-                    ->label('Pegawai'),
+                    ->label('Guru'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

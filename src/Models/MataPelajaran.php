@@ -39,7 +39,17 @@ class MataPelajaran extends Model
 
     public function pegawaiAktif(): HasMany
     {
-        return $this->hasMany(Pegawai::class)->aktif();
+        return $this->pegawai()->aktif();
+    }
+
+    public function guru(): HasMany
+    {
+        return $this->pegawai()->guru();
+    }
+
+    public function guruAktif(): HasMany
+    {
+        return $this->pegawaiAktif()->guru();
     }
 
     public function scopeJenjangSekolahBy($query, $jenjang_sekolah_id = null)

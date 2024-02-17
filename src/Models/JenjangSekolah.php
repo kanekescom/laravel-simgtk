@@ -34,7 +34,17 @@ class JenjangSekolah extends Model
 
     public function pegawaiAktif(): HasManyThrough
     {
-        return $this->hasManyThrough(Pegawai::class, Sekolah::class)->aktif();
+        return $this->pegawai()->aktif();
+    }
+
+    public function guru(): HasManyThrough
+    {
+        return $this->pegawai()->guru();
+    }
+
+    public function guruAktif(): HasManyThrough
+    {
+        return $this->pegawaiAktif()->guru();
     }
 
     public function mataPelajaran(): HasMany

@@ -64,16 +64,21 @@ class JenjangSekolahResource extends Resource
                     ->alignEnd()
                     ->sortable()
                     ->label('Sekolah'),
-                Tables\Columns\TextColumn::make('pegawai_aktif_count')
-                    ->counts('pegawaiAktif')
-                    ->alignEnd()
-                    ->sortable()
-                    ->label('Pegawai'),
                 Tables\Columns\TextColumn::make('mata_pelajaran_count')
                     ->counts('mataPelajaran')
                     ->alignEnd()
                     ->sortable()
                     ->label('Mapel'),
+                Tables\Columns\TextColumn::make('pegawai_aktif_count')
+                    ->counts('pegawaiAktif')
+                    ->alignEnd()
+                    ->sortable()
+                    ->label('Pegawai'),
+                Tables\Columns\TextColumn::make('guru_aktif_count')
+                    ->counts('guruAktif')
+                    ->alignEnd()
+                    ->sortable()
+                    ->label('Guru'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

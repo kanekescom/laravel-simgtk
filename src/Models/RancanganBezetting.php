@@ -108,13 +108,28 @@ class RancanganBezetting extends Model
     public function pegawai(): HasManyThrough
     {
         return $this->hasManyThrough(
-            Pegawai::class,
+            RancanganBezettingPegawai::class,
             Sekolah::class,
             'id',
             'sekolah_id',
             'sekolah_id',
             'id',
         );
+    }
+
+    public function pegawaiAktif(): HasManyThrough
+    {
+        return $this->pegawai()->aktif();
+    }
+
+    public function guru(): HasManyThrough
+    {
+        return $this->pegawai()->guru();
+    }
+
+    public function guruAktif(): HasManyThrough
+    {
+        return $this->pegawaiAktif()->guru();
     }
 
     public function scopeAktif($query)

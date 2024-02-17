@@ -78,6 +78,21 @@ class RencanaMutasi extends Model
         );
     }
 
+    public function pegawaiAktif(): HasManyThrough
+    {
+        return $this->pegawai()->aktif();
+    }
+
+    public function guru(): HasManyThrough
+    {
+        return $this->pegawai()->guru();
+    }
+
+    public function guruAktif(): HasManyThrough
+    {
+        return $this->pegawaiAktif()->guru();
+    }
+
     public function usul(): HasMany
     {
         return $this->hasMany(UsulMutasi::class, 'rencana_mutasi_id');

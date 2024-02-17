@@ -59,6 +59,11 @@ class BidangStudiPendidikanResource extends Resource
                     ->alignEnd()
                     ->sortable()
                     ->label('Pegawai'),
+                Tables\Columns\TextColumn::make('guru_aktif_count')
+                    ->counts('guruAktif')
+                    ->alignEnd()
+                    ->sortable()
+                    ->label('Guru'),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

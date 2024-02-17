@@ -58,7 +58,7 @@ class Sekolah extends Model
                 foreach ($mapels as $mapel) {
                     $field_jenjang_sekolah_mapel_abk = "{$jenjang_sekolah}_{$mapel}_abk";
 
-                    $field_jenjang_sekolah_mapel_abk_sum[] = $model->$field_jenjang_sekolah_mapel_abk;
+                    $field_jenjang_sekolah_mapel_abk_sum[] = $model->$field_jenjang_sekolah_mapel_abk = $model->$field_jenjang_sekolah_mapel_abk;
                 }
 
                 $field_jenjang_sekolah_formasi_abk = "{$jenjang_sekolah}_formasi_abk";
@@ -85,7 +85,17 @@ class Sekolah extends Model
 
     public function pegawaiAktif(): HasMany
     {
-        return $this->hasMany(Pegawai::class)->aktif();
+        return $this->pegawai()->aktif();
+    }
+
+    public function guru(): HasMany
+    {
+        return $this->pegawai()->guru();
+    }
+
+    public function guruAktif(): HasMany
+    {
+        return $this->pegawaiAktif()->guru();
     }
 
     public function wilayah(): BelongsTo

@@ -112,6 +112,12 @@ class Pegawai extends Model
             ->whereDate('tmt_pensiun', '>=', now()->addMonth());
     }
 
+    public function scopeGuru($query)
+    {
+        return $query
+            ->whereNotNull('mata_pelajaran_id');
+    }
+
     public function scopePensiun($query)
     {
         return $query
