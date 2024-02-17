@@ -2,9 +2,11 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\AbkSekolahResource\Pages;
 
+use EightyNine\ExcelImport\ExcelImportAction;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
 use Kanekescom\Simgtk\Filament\Resources\AbkSekolahResource;
+use Kanekescom\Simgtk\Imports\SekolahRombelImport;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 
 class ListAbkSekolah extends ListRecords
@@ -15,7 +17,13 @@ class ListAbkSekolah extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [];
+        return [
+            ExcelImportAction::make()
+                ->use(SekolahRombelImport::class)
+                ->slideOver()
+                ->icon(false)
+                ->label('Import Rombel'),
+        ];
     }
 
     public function getTabs(): array
