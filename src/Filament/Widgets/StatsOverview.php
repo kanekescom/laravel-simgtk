@@ -6,7 +6,6 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use Kanekescom\Simgtk\Models\Pegawai;
 use Kanekescom\Simgtk\Models\Sekolah;
-use Kanekescom\Simgtk\Models\UsulMutasi;
 
 class StatsOverview extends BaseWidget
 {
@@ -20,8 +19,8 @@ class StatsOverview extends BaseWidget
     {
         return [
             Stat::make('Jumlah Pegawai', Pegawai::aktif()->count()),
+            Stat::make('Jumlah Guru', Pegawai::guruAktif()->count()),
             Stat::make('Jumlah Sekolah', Sekolah::count()),
-            Stat::make('Jumlah Usul Mutasi', UsulMutasi::aktif()->count()),
         ];
     }
 }
