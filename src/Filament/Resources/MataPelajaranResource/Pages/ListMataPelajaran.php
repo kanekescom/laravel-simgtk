@@ -22,39 +22,6 @@ class ListMataPelajaran extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            // ImportAction::make()
-            //     ->fields([
-            //         ImportField::make('id')
-            //             ->rules('required|max:255')
-            //             ->label('ID'),
-            //         ImportField::make('jenjangSekolah.nama')
-            //             ->rules('required|max:255')
-            //             ->label('Jenjang Sekolah'),
-            //         ImportField::make('kode')
-            //             ->rules('required|max:255')
-            //             ->label('Kode'),
-            //         ImportField::make('nama')
-            //             ->rules('required|max:255')
-            //             ->label('Nama'),
-            //         ImportField::make('singkatan')
-            //             ->rules('required|max:255')
-            //             ->label('Singkatan'),
-            //     ]),
-            // ExportAction::make()
-            //     ->exports([
-            //         ExcelExport::make()
-            //             ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d'))
-            //             ->withWriterType(\Maatwebsite\Excel\Excel::XLSX)
-            //             ->withColumns([
-            //                 Column::make('id')->heading('ID'),
-            //                 Column::make('jenjangSekolah.nama')->heading('Jenjang Sekolah'),
-            //                 Column::make('kode')->heading('Kode'),
-            //                 Column::make('nama')->heading('Nama'),
-            //                 Column::make('singkatan')->heading('Singkatan'),
-            //                 Column::make('pegawai_aktif_count')->getStateUsing(fn ($record) => $record->pegawaiAktif()->count())->heading('Jumlah Pegawai'),
-            //             ])
-            //             ->ignoreFormatting(),
-            //     ])->icon(false),
             Actions\CreateAction::make()->label('Create'),
         ];
     }
