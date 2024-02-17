@@ -94,7 +94,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
 
     protected static function getField($var): string|null
     {
-        return str($var)->lower()->remove('/')->snake();
+        return str($var)->slug('_');
     }
 
     protected static function getEnumStatusKepegawaianGetValue($nama): string|null
