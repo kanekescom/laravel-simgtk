@@ -25,6 +25,7 @@ class ImportCommand extends Command
 
     protected $importOptions = [
         'pegawai-dapodik' => Imports\PegawaiDapodikImport::class,
+        'sekolah-rombel' => Imports\SekolahRombelImport::class,
     ];
 
     /**
