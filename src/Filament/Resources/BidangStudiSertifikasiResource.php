@@ -5,7 +5,6 @@ namespace Kanekescom\Simgtk\Filament\Resources;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -57,7 +56,7 @@ class BidangStudiSertifikasiResource extends Resource
                     ->label('Nama'),
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
-                    ->alignment(Alignment::End)
+                    ->alignEnd()
                     ->sortable()
                     ->label('Pegawai'),
             ])

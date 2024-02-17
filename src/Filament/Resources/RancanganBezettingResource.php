@@ -120,15 +120,15 @@ class RancanganBezettingResource extends Resource
         $columns[] = ColumnGroup::make('group_data')
             ->columns([
                 Tables\Columns\TextColumn::make('jumlah_kelas')
-                    ->alignment(Alignment::End)
+                    ->alignEnd()
                     ->sortable()
                     ->label('Kelas'),
                 Tables\Columns\TextColumn::make('jumlah_rombel')
-                    ->alignment(Alignment::End)
+                    ->alignEnd()
                     ->sortable()
                     ->label('Rombel'),
                 Tables\Columns\TextColumn::make('jumlah_siswa')
-                    ->alignment(Alignment::End)
+                    ->alignEnd()
                     ->searchable()
                     ->sortable()
                     ->label('Siswa'),
@@ -141,19 +141,19 @@ class RancanganBezettingResource extends Resource
                 Tables\Columns\TextColumn::make('kepsek')
                     ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                     ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
-                    ->alignment(Alignment::End)
+                    ->alignEnd()
                     ->sortable()
                     ->label('Def'),
                 Tables\Columns\TextColumn::make('plt_kepsek')
                     ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                     ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
-                    ->alignment(Alignment::End)
+                    ->alignEnd()
                     ->sortable()
                     ->label('Plt'),
                 Tables\Columns\TextColumn::make('jabatan_kepsek')
                     ->icon(fn (string $state): string => $state == 1 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                     ->color(fn (string $state): string => $state == 1 ? 'success' : 'danger')
-                    ->alignment(Alignment::End)
+                    ->alignEnd()
                     ->sortable()
                     ->label('Ket'),
             ])
@@ -165,19 +165,19 @@ class RancanganBezettingResource extends Resource
                 ->columns([
                     Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_pns")
                         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                        ->alignment(Alignment::End)
+                        ->alignEnd()
                         ->label('PNS'),
                     Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_pppk")
                         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                        ->alignment(Alignment::End)
+                        ->alignEnd()
                         ->label('PPPK'),
                     Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_gtt")
                         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                        ->alignment(Alignment::End)
+                        ->alignEnd()
                         ->label('GTT'),
                     Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_total")
                         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                        ->alignment(Alignment::End)
+                        ->alignEnd()
                         ->label('JML'),
                 ])
                 ->alignment(Alignment::Center)
@@ -188,29 +188,29 @@ class RancanganBezettingResource extends Resource
                     ->columns([
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_abk")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                            ->alignment(Alignment::End)
+                            ->alignEnd()
                             ->label('ABK'),
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_pns")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                            ->alignment(Alignment::End)
+                            ->alignEnd()
                             ->label('PNS'),
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_pppk")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                            ->alignment(Alignment::End)
+                            ->alignEnd()
                             ->label('PPPK'),
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_gtt")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                            ->alignment(Alignment::End)
+                            ->alignEnd()
                             ->label('GTT'),
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_total")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                            ->alignment(Alignment::End)
+                            ->alignEnd()
                             ->label('Total'),
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_existing_selisih")
                             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                             ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
-                            ->alignment(Alignment::End)
+                            ->alignEnd()
                             ->label('+/-'),
                     ])
                     ->alignment(Alignment::Center)
@@ -221,13 +221,13 @@ class RancanganBezettingResource extends Resource
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                 ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                 ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
-                ->alignment(Alignment::End)
+                ->alignEnd()
                 ->label("JML ABK");
             $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_existing_selisih")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                 ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                 ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
-                ->alignment(Alignment::End)
+                ->alignEnd()
                 ->label("JML +/-");
         }
 

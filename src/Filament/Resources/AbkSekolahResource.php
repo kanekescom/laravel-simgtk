@@ -3,7 +3,6 @@
 namespace Kanekescom\Simgtk\Filament\Resources;
 
 use Filament\Resources\Resource;
-use Filament\Support\Enums\Alignment;
 use Filament\Tables;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -116,7 +115,7 @@ class AbkSekolahResource extends Resource
 
             $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_abk")
                 ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
-                ->alignment(Alignment::End)
+                ->alignEnd()
                 ->searchable()
                 ->sortable()
                 ->label('JML');
