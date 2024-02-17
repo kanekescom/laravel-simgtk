@@ -23,7 +23,7 @@ class ListSekolah extends ListRecords
                 ->use(SekolahRombelImport::class)
                 ->slideOver()
                 ->icon(false)
-                ->label('Update Rombel'),
+                ->label('Import Rombel'),
             Actions\CreateAction::make()->label('Create'),
         ];
     }
