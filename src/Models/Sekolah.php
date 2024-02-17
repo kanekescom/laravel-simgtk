@@ -22,7 +22,7 @@ class Sekolah extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix').'sekolah';
+        return config('simgtk.table_prefix') . 'sekolah';
     }
 
     protected static function boot()
@@ -58,12 +58,12 @@ class Sekolah extends Model
                 foreach ($mapels as $mapel) {
                     $field_jenjang_sekolah_mapel_abk = "{$jenjang_sekolah}_{$mapel}_abk";
 
-                    $field_jenjang_sekolah_mapel_abk_sum[] = $model->$field_jenjang_sekolah_mapel_abk = $model->$field_jenjang_sekolah_mapel_abk;
+                    $field_jenjang_sekolah_sum[$jenjang_sekolah][] = $model->$field_jenjang_sekolah_mapel_abk = $model->$field_jenjang_sekolah_mapel_abk;
                 }
 
                 $field_jenjang_sekolah_formasi_abk = "{$jenjang_sekolah}_formasi_abk";
 
-                $model->$field_jenjang_sekolah_formasi_abk = array_sum($field_jenjang_sekolah_mapel_abk_sum);
+                $model->$field_jenjang_sekolah_formasi_abk = array_sum($field_jenjang_sekolah_sum[$jenjang_sekolah]);
             }
         });
     }
