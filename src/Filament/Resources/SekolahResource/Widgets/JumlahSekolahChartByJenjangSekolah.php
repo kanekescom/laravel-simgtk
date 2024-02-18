@@ -23,6 +23,8 @@ class JumlahSekolahChartByJenjangSekolah extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'Jumlah Sekolah',
+                    'backgroundColor' => '#FFA500',
+                    'borderColor' => '#FFD700',
                     'data' => $data->map(fn ($value) => $value->count),
                 ],
             ],

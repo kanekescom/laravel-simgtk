@@ -17,18 +17,32 @@ class JumlahPegawaiChartByStatusKepegawaian extends ChartWidget
 
     protected function getData(): array
     {
-        $data = Pegawai::query()
-            ->countGroupByStatusKepegawaian($this->filter)
-            ->get();
+        $data = Pegawai::query();
 
         return [
             'datasets' => [
                 [
                     'label' => 'Jumlah Pegawai',
-                    'data' => $data->map(fn ($value) => $value->count),
+                    'backgroundColor' => '#36A2EB',
+                    'borderColor' => '#9BD0F5',
+                    'data' => $data->aktif()
+                        ->countGroupByStatusKepegawaian($this->filter)
+                        ->get()
+                        ->map(fn ($value) => $value->count),
+                ],
+                [
+                    'label' => 'Jumlah Guru',
+                    'backgroundColor' => '#FF0000',
+                    'borderColor' => '#FFA07A',
+                    'data' => $data->guruAktif()
+                        ->countGroupByStatusKepegawaian($this->filter)
+                        ->get()
+                        ->map(fn ($value) => $value->count),
                 ],
             ],
-            'labels' => $data->map(fn ($value) => $value->status_kepegawaian_kode->getLabel()),
+            'labels' => $data->aktif()
+                ->get()
+                ->map(fn ($value) => $value->status_kepegawaian_kode->getLabel()),
         ];
     }
 

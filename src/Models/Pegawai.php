@@ -104,6 +104,18 @@ class Pegawai extends Model
         );
     }
 
+    public function scopeGenderLakiLaki($query)
+    {
+        return $query
+            ->where('gender_kode', GenderEnum::LAKILAKI);
+    }
+
+    public function scopeGenderPerempuan($query)
+    {
+        return $query
+            ->where('gender_kode', GenderEnum::PEREMPUAN);
+    }
+
     public function scopeAktif($query)
     {
         return $query

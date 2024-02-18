@@ -38,6 +38,8 @@ class JumlahPegawaiChartByWilayah extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'Jumlah Pegawai',
+                    'backgroundColor' => '#36A2EB',
+                    'borderColor' => '#9BD0F5',
                     'data' => $data->pluck('count'),
                 ],
             ],

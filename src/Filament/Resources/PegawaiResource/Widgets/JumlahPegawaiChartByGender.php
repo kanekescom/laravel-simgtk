@@ -17,18 +17,32 @@ class JumlahPegawaiChartByGender extends ChartWidget
 
     protected function getData(): array
     {
-        $data = Pegawai::query()
-            ->countGroupByGender($this->filter)
-            ->get();
+        $data = Pegawai::query();
 
         return [
             'datasets' => [
                 [
                     'label' => 'Jumlah Pegawai',
-                    'data' => $data->map(fn ($value) => $value->count),
+                    'backgroundColor' => '#36A2EB',
+                    'borderColor' => '#9BD0F5',
+                    'data' => $data->aktif()
+                        ->countGroupByGender($this->filter)
+                        ->get()
+                        ->map(fn ($value) => $value->count),
+                ],
+                [
+                    'label' => 'Jumlah Guru',
+                    'backgroundColor' => '#FF0000',
+                    'borderColor' => '#FFA07A',
+                    'data' => $data->guruAktif()
+                        ->countGroupByGender($this->filter)
+                        ->get()
+                        ->map(fn ($value) => $value->count),
                 ],
             ],
-            'labels' => $data->map(fn ($value) => $value->gender_kode->getLabel()),
+            'labels' => $data->aktif()
+                ->get()
+                ->map(fn ($value) => $value->gender_kode->getLabel()),
         ];
     }
 

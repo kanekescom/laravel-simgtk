@@ -25,6 +25,8 @@ class JumlahSekolahChartByWilayah extends ChartWidget
             'datasets' => [
                 [
                     'label' => 'Jumlah Sekolah',
+                    'backgroundColor' => '#36A2EB',
+                    'borderColor' => '#9BD0F5',
                     'data' => $data->map(fn ($value) => $value->count),
                 ],
             ],
