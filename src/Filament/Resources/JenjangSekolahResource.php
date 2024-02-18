@@ -21,13 +21,68 @@ class JenjangSekolahResource extends Resource
 
     protected static ?string $model = JenjangSekolah::class;
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static bool $shouldRegisterNavigation = true;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationLabel = 'Jenjang Sekolah';
 
     protected static ?string $navigationGroup = 'Referensi Kependidikan';
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
+    }
+
+    public static function canForceDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canForceDeleteAny(): bool
+    {
+        return false;
+    }
+
+    public static function canReorder(): bool
+    {
+        return false;
+    }
+
+    public static function canReplicate(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canRestore(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canRestoreAny(): bool
+    {
+        return false;
+    }
+
+    public static function canView(Model $record): bool
+    {
+        return false;
+    }
 
     public static function form(Form $form): Form
     {

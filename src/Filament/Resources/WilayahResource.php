@@ -8,6 +8,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\WilayahResource\Pages;
 use Kanekescom\Simgtk\Models\Wilayah;
@@ -27,6 +28,61 @@ class WilayahResource extends Resource
     protected static ?string $navigationLabel = 'Wilayah';
 
     protected static ?string $navigationGroup = 'Referensi Wilayah';
+
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
+    }
+
+    public static function canForceDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canForceDeleteAny(): bool
+    {
+        return false;
+    }
+
+    public static function canReorder(): bool
+    {
+        return false;
+    }
+
+    public static function canReplicate(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canRestore(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canRestoreAny(): bool
+    {
+        return false;
+    }
+
+    public static function canView(Model $record): bool
+    {
+        return false;
+    }
 
     public static function form(Form $form): Form
     {

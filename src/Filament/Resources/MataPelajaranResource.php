@@ -30,6 +30,56 @@ class MataPelajaranResource extends Resource
 
     protected static ?string $navigationGroup = 'Referensi Kependidikan';
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
+    }
+
+    public static function canForceDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canForceDeleteAny(): bool
+    {
+        return false;
+    }
+
+    public static function canReorder(): bool
+    {
+        return false;
+    }
+
+    public static function canReplicate(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canRestore(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canRestoreAny(): bool
+    {
+        return false;
+    }
+
+    public static function canView(Model $record): bool
+    {
+        return false;
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -37,6 +87,7 @@ class MataPelajaranResource extends Resource
                 Forms\Components\Select::make('jenjang_sekolah_id')
                     ->relationship('jenjangSekolah', 'nama')
                     ->exists(table: JenjangSekolah::class, column: 'id')
+                    ->disabled()
                     ->searchable()
                     ->preload()
                     ->required()
@@ -45,10 +96,12 @@ class MataPelajaranResource extends Resource
                     ->required()
                     ->label('Kode'),
                 Forms\Components\TextInput::make('nama')
+                    ->disabled()
                     ->required()
                     ->maxLength(255)
                     ->label('Nama'),
                 // Forms\Components\TextInput::make('singkatan')
+                //     ->disabled()
                 //     ->maxLength(255)
                 //     ->label('Singkatan'),
             ]);
