@@ -9,7 +9,11 @@ use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Kanekescom\Simgtk\Filament\Resources\LiveBezettingResource\Pages;
+use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Sekolah;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class LiveBezettingResource extends Resource
 {
@@ -78,6 +82,12 @@ class LiveBezettingResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->bulkActions([
+                ExportBulkAction::make()->exports([
+                    ExcelExport::make()->withColumns(self::getExportTableColumns())
+                        ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d')),
+                ])
+            ])
             ->defaultGroup('wilayah.nama')
             ->defaultSort('nama', 'asc')
             ->columns(self::getTableColumns())
@@ -388,5 +398,83 @@ class LiveBezettingResource extends Resource
         // }
 
         return $filters;
+    }
+
+    public static function getExportTableColumns(): array
+    {
+        $activeTab = request()->query('activeTab') ?? JenjangSekolah::first()->kode;
+
+        $columns = [];
+        $columns[] = Column::make('nama')
+            ->heading('Sekolah');
+
+        $columns[] = Column::make('jumlah_kelas')
+            ->heading('Kelas');
+        $columns[] = Column::make('jumlah_rombel')
+            ->heading('Rombel');
+        $columns[] = Column::make('jumlah_siswa')
+            ->heading('Siswa');
+
+        $columns[] = Column::make('pegawai_kepsek_count')
+            ->getStateUsing(fn ($record) => $record->pegawaiKepsek()->count())
+            ->heading('Def');
+        $columns[] = Column::make('pegawai_plt_kepsek_count')
+            ->getStateUsing(fn ($record) => $record->pegawaiPltKepsek()->count())
+            ->heading('Plt');
+        $columns[] = Column::make('pegawai_jabatan_kepsek_count')
+            ->getStateUsing(fn ($record) => $record->pegawaiJabatanKepsek()->count())
+            ->heading('Ket');
+
+        foreach (self::$jenjangMapels as $jenjang_sekolah => $mapels) {
+            $jenjang_sekolah_studly = str($jenjang_sekolah)->studly();
+
+            $columns[] = Column::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_pns_count")
+                ->getStateUsing(fn ($record) => $record->{"pegawai{$jenjang_sekolah_studly}StatusKepegawaianPns"}()->count())
+                ->heading('PNS Existing');
+            $columns[] = Column::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_pppk_count")
+                ->getStateUsing(fn ($record) => $record->{"pegawai{$jenjang_sekolah_studly}StatusKepegawaianPppk"}()->count())
+                ->heading('PPPK Existing');
+            $columns[] = Column::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_gtt_count")
+                ->getStateUsing(fn ($record) => $record->{"pegawai{$jenjang_sekolah_studly}StatusKepegawaianGtt"}()->count())
+                ->heading('GTT Existing');
+            $columns[] = Column::make("pegawai_{$jenjang_sekolah}_count")
+                ->getStateUsing(fn ($record) => $record->{"pegawai{$jenjang_sekolah_studly}"}()->count())
+                ->heading('JML Existing');
+
+            foreach ($mapels as $mapel) {
+                if ($activeTab != $jenjang_sekolah) {
+                    continue;
+                }
+
+                $mapel_studly = str($mapel)->studly();
+                $mapel_heading = self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel];
+
+                $columns[] = Column::make("{$jenjang_sekolah}_{$mapel}_abk")
+                    ->heading("{$mapel_heading} ABK");
+                $columns[] = Column::make("pegawai_{$jenjang_sekolah}_{$mapel}_status_kepegawaian_pns_count")
+                    ->getStateUsing(fn ($record) => $record->{"pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianPns"}()->count())
+                    ->heading("{$mapel_heading} PNS");
+                $columns[] = Column::make("pegawai_{$jenjang_sekolah}_{$mapel}_status_kepegawaian_pppk_count")
+                    ->getStateUsing(fn ($record) => $record->{"pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianPppk"}()->count())
+                    ->heading("{$mapel_heading} PPPK");
+                $columns[] = Column::make("pegawai_{$jenjang_sekolah}_{$mapel}_status_kepegawaian_gtt_count")
+                    ->getStateUsing(fn ($record) => $record->{"pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianGtt"}()->count())
+                    ->heading("{$mapel_heading} GTT");
+                $columns[] = Column::make("pegawai_{$jenjang_sekolah}_{$mapel}_count")
+                    ->getStateUsing(fn ($record) => $record->{"pegawai{$jenjang_sekolah_studly}{$mapel_studly}"}()->count())
+                    ->heading("{$mapel_heading} Total");
+                $columns[] = Column::make("pegawai_{$jenjang_sekolah}_{$mapel}_selisih")
+                    ->getStateUsing(fn ($record) => $record->{"pegawai{$jenjang_sekolah_studly}{$mapel_studly}"}()->count() - $record->{"{$jenjang_sekolah}_{$mapel}_abk"})
+                    ->heading("{$mapel_heading} +/-");
+            }
+
+            $columns[] = Column::make("{$jenjang_sekolah}_formasi_abk")
+                ->heading('Total ABK');
+            $columns[] = Column::make("{$jenjang_sekolah}_formasi_existing_selisih")
+                ->getStateUsing(fn ($record) => $record->{"pegawai{$jenjang_sekolah_studly}"}()->count() - $record->{"{$jenjang_sekolah}_formasi_abk"})
+                ->heading('Total +/-');
+        }
+
+        return $columns;
     }
 }
