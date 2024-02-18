@@ -1,84 +1,19 @@
 <?php
 
-namespace Kanekescom\Simgtk\Filament\Resources;
+namespace Kanekescom\Simgtk\Traits;
 
-use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
-use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\ColumnGroup;
 use Illuminate\Database\Eloquent\Model;
-use Kanekescom\Simgtk\Filament\Resources\LiveBezettingResource\Pages;
-use Kanekescom\Simgtk\Models\Sekolah;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class LiveBezettingResource extends Resource
+trait HasLiveBezettingResource
 {
-    protected static ?string $slug = 'live-bezetting';
-
-    protected static ?string $pluralLabel = 'Live Bezetting';
-
-    protected static ?string $model = Sekolah::class;
-
-    protected static bool $shouldRegisterNavigation = false;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    protected static ?string $navigationLabel = 'Live Bezetting';
-
-    protected static ?string $navigationGroup = null;
-
-    protected static array $jenjangMapelHeaders = [
-        'sd' => [
-            'kelas' => 'KELAS',
-            'penjaskes' => 'PENJASKES',
-            'agama' => 'AGAMA',
-            'agama_noni' => 'AGAMA NONI',
-        ],
-        'smp' => [
-            'pai' => 'PAI',
-            'pjok' => 'PJOK',
-            'b_indonesia' => 'B. INDONESIA',
-            'b_inggris' => 'B. INGGRIS',
-            'bk' => 'BK',
-            'ipa' => 'IPA',
-            'ips' => 'IPS',
-            'matematika' => 'MATEMATIKA',
-            'ppkn' => 'PPKN',
-            'prakarya' => 'PRAKARYA',
-            'seni_budaya' => 'SENI BUDAYA',
-            'b_sunda' => 'B. SUNDA',
-            'tik' => 'TIK',
-        ],
-    ];
-
-    protected static array $jenjangMapels = [
-        'sd' => [
-            'kelas',
-            'penjaskes',
-            'agama',
-            'agama_noni',
-        ],
-        'smp' => [
-            'pai',
-            'pjok',
-            'b_indonesia',
-            'b_inggris',
-            'bk',
-            'ipa',
-            'ips',
-            'matematika',
-            'ppkn',
-            'prakarya',
-            'seni_budaya',
-            'b_sunda',
-            'tik',
-        ],
-    ];
-
-    public static function table(Table $table): Table
+    public static function defaultTable(Table $table): Table
     {
         return $table
             ->bulkActions([
@@ -92,13 +27,6 @@ class LiveBezettingResource extends Resource
             ->columns(self::getTableColumns())
             ->filtersFormColumns(4)
             ->filters(self::getTableFilters());
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListLiveBezetting::route('/'),
-        ];
     }
 
     public static function getTableColumns(): array
@@ -167,25 +95,21 @@ class LiveBezettingResource extends Resource
                 ->columns([
                     Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_pns_count")
                         ->counts("pegawai{$jenjang_sekolah_studly}StatusKepegawaianPns")
-                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->alignEnd()
                         ->sortable()
                         ->label('PNS'),
                     Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_pppk_count")
                         ->counts("pegawai{$jenjang_sekolah_studly}StatusKepegawaianPppk")
-                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->alignEnd()
                         ->sortable()
                         ->label('PPPK'),
                     Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_status_kepegawaian_gtt_count")
                         ->counts("pegawai{$jenjang_sekolah_studly}StatusKepegawaianGtt")
-                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->alignEnd()
                         ->sortable()
                         ->label('GTT'),
                     Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_count")
                         ->counts("pegawai{$jenjang_sekolah_studly}")
-                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->alignEnd()
                         ->sortable()
                         ->label('JML'),
@@ -199,7 +123,6 @@ class LiveBezettingResource extends Resource
                 $columns[] = ColumnGroup::make("group_{$jenjang_sekolah}_{$mapel}")
                     ->columns([
                         Tables\Columns\TextColumn::make("{$jenjang_sekolah}_{$mapel}_abk")
-                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->alignEnd()
                             ->badge()
                             ->color('info')
@@ -207,26 +130,22 @@ class LiveBezettingResource extends Resource
                             ->label('ABK'),
                         Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_{$mapel}_status_kepegawaian_pns_count")
                             ->counts("pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianPns")
-                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->alignEnd()
                             ->sortable()
                             ->sortable()
                             ->label('PNS'),
                         Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_{$mapel}_status_kepegawaian_pppk_count")
                             ->counts("pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianPppk")
-                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->alignEnd()
                             ->sortable()
                             ->label('PPPK'),
                         Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_{$mapel}_status_kepegawaian_gtt_count")
                             ->counts("pegawai{$jenjang_sekolah_studly}{$mapel_studly}StatusKepegawaianGtt")
-                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->alignEnd()
                             ->sortable()
                             ->label('GTT'),
                         Tables\Columns\TextColumn::make("pegawai_{$jenjang_sekolah}_{$mapel}_count")
                             ->counts("pegawai{$jenjang_sekolah_studly}{$mapel_studly}")
-                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->alignEnd()
                             ->badge()
                             ->color('warning')
@@ -238,7 +157,6 @@ class LiveBezettingResource extends Resource
                                     return (int) ($record->{"pegawai_{$jenjang_sekolah}_{$mapel}_count"} - $record->{"{$jenjang_sekolah}_{$mapel}_abk"});
                                 }
                             )
-                            ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                             ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                             ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                             ->alignEnd()
@@ -252,7 +170,6 @@ class LiveBezettingResource extends Resource
             $columns[] = ColumnGroup::make("group_{$jenjang_sekolah}_jumlah")
                 ->columns([
                     Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_abk")
-                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                         ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                         ->alignEnd()
@@ -264,7 +181,6 @@ class LiveBezettingResource extends Resource
                                 return (int) ($record->{"pegawai_{$jenjang_sekolah}_count"} - $record->{"{$jenjang_sekolah}_formasi_abk"});
                             }
                         )
-                        ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                         ->icon(fn (string $state): string => $state == 0 ? 'heroicon-o-check' : 'heroicon-o-x-mark')
                         ->color(fn (string $state): string => $state == 0 ? 'success' : 'danger')
                         ->alignEnd()
@@ -327,7 +243,6 @@ class LiveBezettingResource extends Resource
         // foreach (self::$jenjangMapels as $jenjang_sekolah => $mapels) {
         //     foreach ($mapels as $mapel) {
         //         $filters[] = Tables\Filters\TernaryFilter::make("{$jenjang_sekolah}_{$mapel}_existing_terpenuhi")
-        //             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
         //             ->queries(
         //                 true: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah, $mapel) {
         //                     return $query->where("{$jenjang_sekolah}_{$mapel}_existing_selisih", 0);
@@ -344,7 +259,6 @@ class LiveBezettingResource extends Resource
         //             ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' Terpenuhi');
 
         //         $filters[] = Tables\Filters\TernaryFilter::make("{$jenjang_sekolah}_{$mapel}_existing_lebih_kurang")
-        //             ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
         //             ->queries(
         //                 true: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah, $mapel) {
         //                     return $query->where("{$jenjang_sekolah}_{$mapel}_existing_selisih", '<', 0);
@@ -362,7 +276,6 @@ class LiveBezettingResource extends Resource
         //     }
 
         //     $filters[] = Tables\Filters\TernaryFilter::make("{$jenjang_sekolah}_existing_terpenuhi")
-        //         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
         //         ->queries(
         //             true: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah, $mapel) {
         //                 return $query->where("{$jenjang_sekolah}_formasi_existing_selisih", 0);
@@ -379,7 +292,6 @@ class LiveBezettingResource extends Resource
         //         ->label("JML Terpenuhi");
 
         //     $filters[] = Tables\Filters\TernaryFilter::make("{$jenjang_sekolah}_existing_lebih_kurang")
-        //         ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
         //         ->queries(
         //             true: fn (Builder $query) => $query->where(function (Builder $query) use ($jenjang_sekolah, $mapel) {
         //                 return $query->where("{$jenjang_sekolah}_formasi_existing_selisih", '<', 0);
