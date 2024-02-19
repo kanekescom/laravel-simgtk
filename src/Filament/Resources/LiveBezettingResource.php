@@ -84,8 +84,8 @@ class LiveBezettingResource extends Resource
             ->bulkActions([
                 ExportBulkAction::make()->exports([
                     ExcelExport::make()->withColumns(self::getExportTableColumns())
-                        ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d')),
-                ])
+                        ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
+                ]),
             ])
             ->defaultGroup('wilayah.nama')
             ->defaultSort('nama', 'asc')

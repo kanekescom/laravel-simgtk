@@ -19,7 +19,7 @@ class RencanaBezetting extends Model
 
     public function getTable()
     {
-        return config('simgtk.table_prefix') . 'rencana_bezetting';
+        return config('simgtk.table_prefix').'rencana_bezetting';
     }
 
     protected static function boot()

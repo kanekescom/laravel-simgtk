@@ -39,7 +39,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
             return $cleanedString === 'null' ? null : $cleanedString;
         });
 
-        if (!str($row[self::getField('Tempat Tugas')])->startsWith(['SDN ', 'SMPN '])) {
+        if (! str($row[self::getField('Tempat Tugas')])->startsWith(['SDN ', 'SMPN '])) {
             return null;
         }
 

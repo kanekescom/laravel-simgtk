@@ -4,11 +4,11 @@ namespace Kanekescom\Simgtk\Traits;
 
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Tables\Columns\ColumnGroup;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 trait HasLiveBezettingResource
@@ -19,8 +19,8 @@ trait HasLiveBezettingResource
             ->bulkActions([
                 ExportBulkAction::make()->exports([
                     ExcelExport::make()->withColumns(self::getExportTableColumns())
-                        ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d')),
-                ])
+                        ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
+                ]),
             ])
             ->defaultGroup('wilayah.nama')
             ->defaultSort('nama', 'asc')

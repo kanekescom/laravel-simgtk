@@ -305,7 +305,7 @@ class RancanganBezettingResource extends Resource
                     ->falseLabel('Kurang/Lebih')
                     ->placeholder('All')
                     ->native(false)
-                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' Terpenuhi');
+                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel].' Terpenuhi');
 
                 $filters[] = Tables\Filters\TernaryFilter::make("{$jenjang_sekolah}_{$mapel}_existing_lebih_kurang")
                     ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
@@ -322,7 +322,7 @@ class RancanganBezettingResource extends Resource
                     ->falseLabel('Lebih')
                     ->placeholder('All')
                     ->native(false)
-                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel] . ' +/-');
+                    ->label(self::$jenjangMapelHeaders[$jenjang_sekolah][$mapel].' +/-');
             }
 
             $filters[] = Tables\Filters\TernaryFilter::make("{$jenjang_sekolah}_existing_terpenuhi")
