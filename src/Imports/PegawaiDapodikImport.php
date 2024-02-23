@@ -11,6 +11,7 @@ use Kanekescom\Simgtk\Enums\GolonganAsnLabelEnum;
 use Kanekescom\Simgtk\Enums\JenjangPendidikanEnum;
 use Kanekescom\Simgtk\Enums\JenjangPendidikanLabelEnum;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
+use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 use Kanekescom\Simgtk\Enums\StatusTugasEnum;
 use Kanekescom\Simgtk\Enums\StatusTugasLabelEnum;
 use Kanekescom\Simgtk\Models\BidangStudiPendidikan;
@@ -39,7 +40,17 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
             return $cleanedString === 'null' ? null : $cleanedString;
         });
 
-        if (! str($row[self::getField('Tempat Tugas')])->startsWith(['SDN ', 'SMPN '])) {
+        if (! str($row[self::getField('Tempat Tugas')])->startsWith([
+            'SD ',
+            'SDIT ',
+            'SDN ',
+            'SMP ',
+            'SMPI ',
+            'SMPIT ',
+            'SMPN ',
+            'SMPS ',
+            'SMPT ',
+        ])) {
             return null;
         }
 
@@ -47,7 +58,9 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
         $pegawai_status_tugas_kode = self::getEnumStatusTugasGetValue($row[self::getField('Status Tugas')]);
 
         if ($pegawai?->status_tugas_kode == (StatusTugasEnum::INDUK)->value) {
-            return null;
+            if (self::getStatusSekolah('Tempat Tugas') == (StatusSekolahEnum::NEGERI)->value) {
+                return null;
+            }
         }
 
         return Pegawai::updateOrCreate(['nik' => $row[self::getField('NIK')]], [
@@ -148,8 +161,19 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
 
     protected static function getJenjangSekolah($nama): ?Model
     {
-        $sd = str($nama)->startsWith(['SDN ']);
-        $smp = str($nama)->startsWith(['SMPN ']);
+        $sd = str($nama)->startsWith([
+            'SD ',
+            'SDIT ',
+            'SDN ',
+        ]);
+        $smp = str($nama)->startsWith([
+            'SMP ',
+            'SMPI ',
+            'SMPIT ',
+            'SMPN ',
+            'SMPS ',
+            'SMPT ',
+        ]);
 
         if ($sd) {
             return JenjangSekolah::where('nama', 'SD')->first();
@@ -175,9 +199,24 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
     {
         return Sekolah::updateOrCreate(['npsn' => $row[self::getField('NPSN')]], [
             'nama' => $row[self::getField('Tempat Tugas')],
+            'status_kode' => self::getStatusSekolah($row[self::getField('Tempat Tugas')])->value,
             'jenjang_sekolah_id' => self::getJenjangSekolah($row[self::getField('Tempat Tugas')])?->id,
             'wilayah_id' => self::getWilayah($row[self::getField('Kecamatan')])?->id,
         ]);
+    }
+
+    protected static function getStatusSekolah($nama): StatusSekolahEnum
+    {
+        $negeri = str($nama)->startsWith([
+            'SDN ',
+            'SMPN ',
+        ]);
+
+        if ($negeri) {
+            return StatusSekolahEnum::NEGERI;
+        }
+
+        return StatusSekolahEnum::SWASTA;
     }
 
     protected static function getEnumLabelValue($enum): Collection

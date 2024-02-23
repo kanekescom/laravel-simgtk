@@ -9,9 +9,11 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Pages;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Sekolah;
+use Spatie\LaravelOptions\Options;
 
 class SekolahResource extends Resource
 {
@@ -36,7 +38,7 @@ class SekolahResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->maxLength(255)
                     ->required()
-                    ->columnSpanFull()
+                    ->columnSpan(2)
                     ->label('Nama'),
                 Forms\Components\TextInput::make('npsn')
                     ->numeric()
@@ -44,6 +46,16 @@ class SekolahResource extends Resource
                     ->unique(ignoreRecord: true)
                     ->required()
                     ->label('NPSN'),
+                Forms\Components\Select::make('status_kode')
+                    ->options(StatusSekolahEnum::class)
+                    ->in(
+                        collect(Options::forEnum(StatusSekolahEnum::class)->toArray())
+                            ->pluck('value')
+                    )
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->label('Status'),
                 Forms\Components\Select::make('jenjang_sekolah_id')
                     ->relationship('jenjangSekolah', 'nama')
                     ->exists(table: JenjangSekolah::class, column: 'id')
@@ -80,6 +92,9 @@ class SekolahResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('NPSN'),
+                Tables\Columns\TextColumn::make('status_kode')
+                    ->sortable()
+                    ->label('Status'),
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
                     ->alignEnd()
@@ -92,6 +107,12 @@ class SekolahResource extends Resource
                     ->label('Guru'),
             ])
             ->filters([
+                Tables\Filters\SelectFilter::make('status_kode')
+                    ->options(StatusSekolahEnum::class)
+                    ->multiple()
+                    ->searchable()
+                    ->preload()
+                    ->label('Status Kepegawaian'),
                 Tables\Filters\SelectFilter::make('jenjang_sekolah')
                     ->relationship('jenjangSekolah', 'nama')
                     ->searchable()

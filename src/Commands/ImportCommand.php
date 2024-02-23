@@ -13,7 +13,8 @@ class ImportCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'simgtk:import';
+    protected $signature = 'simgtk:import
+                            {pathFile? : File path}';
 
     /**
      * The console command description.
@@ -48,10 +49,10 @@ class ImportCommand extends Command
         }
 
         foreach ($choiced as $choice) {
-            $path_file = $this->ask('Path to XLSX file');
+            $pathFile = $this->argument('pathFile') ?? $this->ask('Path to XLSX file');
 
             if ($this->confirm('Do you wish to import data?', true)) {
-                (new $this->importOptions[$choice])->withOutput($this->output)->import($path_file);
+                (new $this->importOptions[$choice])->withOutput($this->output)->import($pathFile);
             }
         }
 

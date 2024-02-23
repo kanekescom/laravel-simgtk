@@ -15,6 +15,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->string('nama');
             $table->string('npsn')->nullable()->index('9_npsn');
+            $table->string('status_kode')->nullable()->index('9_status_kode');
             $table->foreignUlid('jenjang_sekolah_id')->nullable()->index('9_jenjang_sekolah_id');
             $table->foreignUlid('wilayah_id')->nullable()->index('9_wilayah_id');
 
