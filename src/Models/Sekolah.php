@@ -108,6 +108,18 @@ class Sekolah extends Model
         return $this->belongsTo(Wilayah::class);
     }
 
+    public function scopeCountGroupByStatus($query, $jenjang_sekolah_id = null)
+    {
+        return $query
+            ->select('status_kode', \DB::raw('COUNT(*) as count'))
+            ->where('jenjang_sekolah_id', function (Builder $query) use ($jenjang_sekolah_id) {
+                if (filled($jenjang_sekolah_id)) {
+                    $query->where('jenjang_sekolah_id', $jenjang_sekolah_id);
+                }
+            })
+            ->groupBy('status_kode');
+    }
+
     public function scopeCountGroupByJenjangSekolah($query)
     {
         return $query
