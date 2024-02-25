@@ -112,7 +112,7 @@ class SekolahResource extends Resource
                     ->multiple()
                     ->searchable()
                     ->preload()
-                    ->label('Status Kepegawaian'),
+                    ->label('Status'),
                 Tables\Filters\SelectFilter::make('jenjang_sekolah')
                     ->relationship('jenjangSekolah', 'nama')
                     ->searchable()
