@@ -30,6 +30,7 @@ class Pegawai extends Model
         'golongan_kode' => GolonganAsnEnum::class,
         'status_tugas_kode' => StatusTugasEnum::class,
         'is_kepsek' => 'boolean',
+        'is_plt_kepsek' => 'boolean',
     ];
 
     public function getTable()
