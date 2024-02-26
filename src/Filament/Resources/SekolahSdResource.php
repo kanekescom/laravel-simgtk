@@ -2,79 +2,31 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
-use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Pages;
-use Kanekescom\Simgtk\Models\JenjangSekolah;
+use Kanekescom\Simgtk\Filament\Resources\SekolahSdResource\Pages;
 use Kanekescom\Simgtk\Models\Sekolah;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
-use Spatie\LaravelOptions\Options;
 
-class SekolahResource extends Resource
+class SekolahSdResource extends SekolahResource
 {
-    protected static ?string $slug = 'sekolah';
+    protected static ?string $slug = 'sekolah-sd';
 
-    protected static ?string $pluralLabel = 'Sekolah';
+    protected static ?string $pluralLabel = 'Sekolah SD';
 
     protected static ?string $model = Sekolah::class;
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static bool $shouldRegisterNavigation = true;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Sekolah';
+    protected static ?string $navigationLabel = 'SD';
 
-    protected static ?string $navigationGroup = null;
-
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('nama')
-                    ->maxLength(255)
-                    ->required()
-                    ->columnSpan(2)
-                    ->label('Nama'),
-                Forms\Components\TextInput::make('npsn')
-                    ->numeric()
-                    ->length(8)
-                    ->unique(ignoreRecord: true)
-                    ->required()
-                    ->label('NPSN'),
-                Forms\Components\Select::make('status_kode')
-                    ->options(StatusSekolahEnum::class)
-                    ->in(
-                        collect(Options::forEnum(StatusSekolahEnum::class)->toArray())
-                            ->pluck('value')
-                    )
-                    ->searchable()
-                    ->preload()
-                    ->required()
-                    ->label('Status'),
-                Forms\Components\Select::make('jenjang_sekolah_id')
-                    ->relationship('jenjangSekolah', 'nama')
-                    ->exists(table: JenjangSekolah::class, column: 'id')
-                    ->searchable()
-                    ->preload()
-                    ->required()
-                    ->label('Jenjang Sekolah'),
-                Forms\Components\Select::make('wilayah_id')
-                    ->relationship('wilayah', 'nama')
-                    ->exists()
-                    ->searchable()
-                    ->preload()
-                    ->required()
-                    ->label('Wilayah'),
-            ])->columns(3);
-    }
+    protected static ?string $navigationGroup = 'Sekolah';
 
     public static function table(Table $table): Table
     {
@@ -95,9 +47,6 @@ class SekolahResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->label('NPSN'),
-                Tables\Columns\TextColumn::make('status_kode')
-                    ->sortable()
-                    ->label('Status'),
                 Tables\Columns\TextColumn::make('pegawai_aktif_count')
                     ->counts('pegawaiAktif')
                     ->alignEnd()
@@ -110,17 +59,6 @@ class SekolahResource extends Resource
                     ->label('Guru'),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('status_kode')
-                    ->options(StatusSekolahEnum::class)
-                    ->multiple()
-                    ->searchable()
-                    ->preload()
-                    ->label('Status'),
-                Tables\Filters\SelectFilter::make('jenjang_sekolah')
-                    ->relationship('jenjangSekolah', 'nama')
-                    ->searchable()
-                    ->preload()
-                    ->label('Jenjang Sekolah'),
                 Tables\Filters\SelectFilter::make('wilayah_id')
                     ->relationship('wilayah', 'nama')
                     ->searchable()
@@ -175,9 +113,9 @@ class SekolahResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSekolah::route('/'),
-            'create' => Pages\CreateSekolah::route('/create'),
-            'edit' => Pages\EditSekolah::route('/{record}/edit'),
+            'index' => Pages\ListSekolahSd::route('/'),
+            'create' => Pages\CreateSekolahSd::route('/create'),
+            'edit' => Pages\EditSekolahSd::route('/{record}/edit'),
         ];
     }
 }

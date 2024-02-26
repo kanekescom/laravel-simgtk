@@ -51,6 +51,7 @@ class SimgtkPanelProvider extends PanelProvider
                 JumlahSekolahChartByJenjangSekolah::class,
             ])
             ->navigationGroups([
+                'Sekolah',
                 'Bezetting',
             ])
             ->middleware([
