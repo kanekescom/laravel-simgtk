@@ -1,136 +1,30 @@
 <?php
 
-namespace Kanekescom\Simgtk\Filament\Resources;
+namespace Kanekescom\Simgtk\Traits;
 
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
-use Kanekescom\Simgtk\Filament\Resources\AbkSekolahResource\Pages;
-use Kanekescom\Simgtk\Models\Sekolah;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class AbkSekolahResource extends Resource
+trait HasAbkSekolahResource
 {
-    protected static ?string $slug = 'referensi/bezetting/abk-sekolah';
-
-    protected static ?string $pluralLabel = 'ABK Sekolah';
-
-    protected static ?string $model = Sekolah::class;
-
-    protected static bool $shouldRegisterNavigation = false;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
-    protected static ?string $navigationLabel = 'ABK';
-
-    protected static ?string $navigationGroup = 'Referensi Bezetting';
-
-    protected static array $jenjangMapelHeaders = [
-        'sd' => [
-            'kelas' => 'KELAS',
-            'penjaskes' => 'PENJASKES',
-            'agama' => 'AGAMA',
-            'agama_noni' => 'AGAMA NONI',
-        ],
-        'smp' => [
-            'pai' => 'PAI',
-            'pjok' => 'PJOK',
-            'b_indonesia' => 'B. INDONESIA',
-            'b_inggris' => 'B. INGGRIS',
-            'bk' => 'BK',
-            'ipa' => 'IPA',
-            'ips' => 'IPS',
-            'matematika' => 'MATEMATIKA',
-            'ppkn' => 'PPKN',
-            'prakarya' => 'PRAKARYA',
-            'seni_budaya' => 'SENI BUDAYA',
-            'b_sunda' => 'B. SUNDA',
-            'tik' => 'TIK',
-        ],
-    ];
-
-    protected static array $jenjangMapels = [
-        'sd' => [
-            'kelas',
-            'penjaskes',
-            'agama',
-            'agama_noni',
-        ],
-        'smp' => [
-            'pai',
-            'pjok',
-            'b_indonesia',
-            'b_inggris',
-            'bk',
-            'ipa',
-            'ips',
-            'matematika',
-            'ppkn',
-            'prakarya',
-            'seni_budaya',
-            'b_sunda',
-            'tik',
-        ],
-    ];
-
-    public static function table(Table $table): Table
+    public static function defaultTable(Table $table): Table
     {
         return $table
             ->defaultGroup('wilayah.nama')
             ->defaultSort('nama', 'asc')
             ->columns(self::getTableColumns())
+            ->filtersFormColumns(4)
             ->filters(self::getTableFilters())
-            ->filters([
-                Tables\Filters\SelectFilter::make('status_kode')
-                    ->options(StatusSekolahEnum::class)
-                    ->multiple()
-                    ->searchable()
-                    ->preload()
-                    ->label('Status'),
-                Tables\Filters\SelectFilter::make('jenjang_sekolah')
-                    ->relationship('jenjangSekolah', 'nama')
-                    ->searchable()
-                    ->preload()
-                    ->label('Jenjang Sekolah'),
-                Tables\Filters\SelectFilter::make('wilayah_id')
-                    ->relationship('wilayah', 'nama')
-                    ->searchable()
-                    ->preload()
-                    ->label('Wilayah'),
-                Tables\Filters\TrashedFilter::make(),
-            ])
-            ->actions([
-                //
-            ])
             ->bulkActions([
                 ExportBulkAction::make()->exports([
-                    ExcelExport::make()->withColumns(self::getExportColumns())
+                    ExcelExport::make()->withColumns(self::getExportTableColumns())
                         ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
                 ]),
-            ])
-            ->emptyStateActions([
-                //
             ]);
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListAbkSekolah::route('/'),
-        ];
     }
 
     public static function getTableColumns(): array
@@ -166,7 +60,6 @@ class AbkSekolahResource extends Resource
         foreach (self::$jenjangMapels as $jenjang_sekolah => $mapels) {
             foreach ($mapels as $mapel) {
                 $columns[] = Tables\Columns\TextInputColumn::make("{$jenjang_sekolah}_{$mapel}_abk")
-                    ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                     ->rules(['required', 'digits_between:0,10000'])
                     ->searchable()
                     ->sortable()
@@ -174,7 +67,6 @@ class AbkSekolahResource extends Resource
             }
 
             $columns[] = Tables\Columns\TextColumn::make("{$jenjang_sekolah}_formasi_abk")
-                ->visible(fn ($livewire) => $livewire->activeTab === $jenjang_sekolah)
                 ->alignEnd()
                 ->searchable()
                 ->sortable()
@@ -193,11 +85,6 @@ class AbkSekolahResource extends Resource
             ->searchable()
             ->preload()
             ->label('Status');
-        $filters[] = Tables\Filters\SelectFilter::make('jenjang_sekolah')
-            ->relationship('jenjangSekolah', 'nama')
-            ->searchable()
-            ->preload()
-            ->label('Jenjang Sekolah');
         $filters[] = Tables\Filters\SelectFilter::make('wilayah_id')
             ->relationship('wilayah', 'nama')
             ->searchable()
@@ -208,7 +95,7 @@ class AbkSekolahResource extends Resource
         return $filters;
     }
 
-    public static function getExportColumns(): array
+    public static function getExportTableColumns(): array
     {
         $columns = [];
         $columns[] = Column::make('nama')
