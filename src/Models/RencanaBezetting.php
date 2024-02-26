@@ -17,6 +17,10 @@ class RencanaBezetting extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'is_aktif' => 'boolean',
+    ];
+
     public function getTable()
     {
         return config('simgtk.table_prefix').'rencana_bezetting';
