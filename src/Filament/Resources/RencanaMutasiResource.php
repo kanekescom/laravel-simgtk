@@ -29,7 +29,7 @@ class RencanaMutasiResource extends Resource
 
     protected static ?string $navigationLabel = 'Rencana';
 
-    protected static ?string $navigationGroup = 'Referensi Mutasi';
+    protected static ?string $navigationGroup = 'Mutasi';
 
     public static function form(Form $form): Form
     {

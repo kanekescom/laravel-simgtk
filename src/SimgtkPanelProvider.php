@@ -53,6 +53,7 @@ class SimgtkPanelProvider extends PanelProvider
             ->navigationGroups([
                 'Sekolah',
                 'Bezetting',
+                'Mutasi',
             ])
             ->middleware([
                 EncryptCookies::class,

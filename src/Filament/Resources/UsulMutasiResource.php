@@ -31,9 +31,9 @@ class UsulMutasiResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Usul Mutasi';
+    protected static ?string $navigationLabel = 'Usul';
 
-    protected static ?string $navigationGroup = null;
+    protected static ?string $navigationGroup = 'Mutasi';
 
     public static function canCreate(): bool
     {
