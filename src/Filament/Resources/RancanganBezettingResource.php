@@ -9,9 +9,13 @@ use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 use Kanekescom\Simgtk\Filament\Resources\RancanganBezettingResource\Pages;
 use Kanekescom\Simgtk\Models\RancanganBezetting;
 use Kanekescom\Simgtk\Models\RencanaBezetting;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class RancanganBezettingResource extends Resource
 {
@@ -94,7 +98,13 @@ class RancanganBezettingResource extends Resource
             ->defaultSort('nama', 'asc')
             ->columns(self::getTableColumns())
             ->filtersFormColumns(4)
-            ->filters(self::getTableFilters());
+            ->filters(self::getTableFilters())
+            ->bulkActions([
+                ExportBulkAction::make()->exports([
+                    ExcelExport::make()->withColumns(self::getExportColumns())
+                        ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
+                ]),
+            ]);
     }
 
     public static function getPages(): array
@@ -115,6 +125,9 @@ class RancanganBezettingResource extends Resource
             ->searchable()
             ->sortable()
             ->label('Sekolah');
+        $columns[] = Tables\Columns\TextColumn::make('status_kode')
+            ->sortable()
+            ->label('Status');
 
         $columns[] = ColumnGroup::make('group_data')
             ->columns([
@@ -245,6 +258,12 @@ class RancanganBezettingResource extends Resource
     public static function getTableFilters(): array
     {
         $filters = [];
+        $filters[] = Tables\Filters\SelectFilter::make('status_kode')
+            ->options(StatusSekolahEnum::class)
+            ->multiple()
+            ->searchable()
+            ->preload()
+            ->label('Status');
         $filters[] = Tables\Filters\SelectFilter::make('wilayah_id')
             ->relationship('wilayah', 'nama')
             ->searchable()
@@ -361,5 +380,59 @@ class RancanganBezettingResource extends Resource
         }
 
         return $filters;
+    }
+
+    public static function getExportColumns(): array
+    {
+        $columns = [];
+        $columns[] = Column::make('nama')
+            ->heading('Sekolah');
+        $columns[] = Column::make('status_kode')
+            ->heading('Status');
+        $columns[] = Column::make('jumlah_kelas')
+            ->heading('Kelas');
+        $columns[] = Column::make('jumlah_rombel')
+            ->heading('Rombel');
+        $columns[] = Column::make('jumlah_siswa')
+            ->heading('Siswa');
+        $columns[] = Column::make('kepsek')
+            ->heading('Def');
+        $columns[] = Column::make('plt_kepsek')
+            ->heading('Plt');
+        $columns[] = Column::make('jabatan_kepsek')
+            ->heading('Ket');
+
+        foreach (self::$jenjangMapels as $jenjang_sekolah => $mapels) {
+            $columns[] = Column::make("{$jenjang_sekolah}_formasi_existing_pns")
+                ->heading('PNS');
+            $columns[] = Column::make("{$jenjang_sekolah}_formasi_existing_pppk")
+                ->heading('PPPK');
+            $columns[] = Column::make("{$jenjang_sekolah}_formasi_existing_gtt")
+                ->heading('GTT');
+            $columns[] = Column::make("{$jenjang_sekolah}_formasi_existing_total")
+                ->heading('JML');
+
+            foreach ($mapels as $mapel) {
+                $columns[] = Column::make("{$jenjang_sekolah}_{$mapel}_abk")
+                    ->heading('ABK');
+                $columns[] = Column::make("{$jenjang_sekolah}_{$mapel}_existing_pns")
+                    ->heading('PNS');
+                $columns[] = Column::make("{$jenjang_sekolah}_{$mapel}_existing_pppk")
+                    ->heading('PPPK');
+                $columns[] = Column::make("{$jenjang_sekolah}_{$mapel}_existing_gtt")
+                    ->heading('GTT');
+                $columns[] = Column::make("{$jenjang_sekolah}_{$mapel}_existing_total")
+                    ->heading('Total');
+                $columns[] = Column::make("{$jenjang_sekolah}_{$mapel}_existing_selisih")
+                    ->heading('+/-');
+            }
+
+            $columns[] = Column::make("{$jenjang_sekolah}_formasi_abk")
+                ->heading('ABK');
+            $columns[] = Column::make("{$jenjang_sekolah}_formasi_existing_selisih")
+                ->heading('+/-');
+        }
+
+        return $columns;
     }
 }

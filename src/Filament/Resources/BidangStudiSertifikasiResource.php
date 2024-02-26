@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\BidangStudiSertifikasiResource\Pages;
 use Kanekescom\Simgtk\Models\BidangStudiSertifikasi;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class BidangStudiSertifikasiResource extends Resource
 {
@@ -136,6 +139,18 @@ class BidangStudiSertifikasiResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
+                ]),
+                ExportBulkAction::make()->exports([
+                    ExcelExport::make()->withColumns([
+                        Column::make('nama')
+                            ->heading('Nama'),
+                        Column::make('pegawai_aktif_count')
+                            ->getStateUsing(fn ($record) => $record->pegawaiAktif()->count())
+                            ->heading('Pegawai'),
+                        Column::make('guru_aktif_count')
+                            ->getStateUsing(fn ($record) => $record->guruAktif()->count())
+                            ->heading('Guru'),
+                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
                 ]),
             ])
             ->emptyStateActions([

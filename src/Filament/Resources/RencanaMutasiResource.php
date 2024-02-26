@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\RencanaMutasiResource\Pages;
 use Kanekescom\Simgtk\Models\RencanaMutasi;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class RencanaMutasiResource extends Resource
 {
@@ -109,6 +112,28 @@ class RencanaMutasiResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
+                ]),
+                ExportBulkAction::make()->exports([
+                    ExcelExport::make()->withColumns([
+                        Column::make('nama')
+                            ->heading('Nama'),
+                        Column::make('tanggal_mulai')
+                            ->heading('Mulai'),
+                        Column::make('tanggal_berakhir')
+                            ->heading('Berakhir'),
+                        Column::make('is_aktif')
+                            ->getStateUsing(fn ($record) => (int) $record->is_aktif)
+                            ->heading('Aktif'),
+                        Column::make('usul_count')
+                            ->getStateUsing(fn ($record) => $record->usul()->count())
+                            ->heading('Usulan'),
+                        Column::make('pegawai_aktif_count')
+                            ->getStateUsing(fn ($record) => $record->pegawaiAktif()->count())
+                            ->heading('Pegawai'),
+                        Column::make('guru_aktif_count')
+                            ->getStateUsing(fn ($record) => $record->guruAktif()->count())
+                            ->heading('Guru'),
+                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
                 ]),
             ])
             ->emptyStateActions([

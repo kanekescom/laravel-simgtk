@@ -15,6 +15,9 @@ use Kanekescom\Simgtk\Filament\Resources\UsulMutasiResource\Pages;
 use Kanekescom\Simgtk\Models\RencanaMutasi;
 use Kanekescom\Simgtk\Models\Sekolah;
 use Kanekescom\Simgtk\Models\UsulMutasi;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class UsulMutasiResource extends Resource
 {
@@ -113,14 +116,12 @@ class UsulMutasiResource extends Resource
                 Tables\Columns\TextColumn::make('asalSekolah.nama')
                     ->description(fn (Model $record): string => "{$record->asalMataPelajaran?->nama}")
                     ->wrap()
-                    ->grow()
                     ->searchable()
                     ->sortable()
                     ->label('Sekolah Asal'),
                 Tables\Columns\TextColumn::make('tujuanSekolah.nama')
                     ->description(fn (Model $record): string => "{$record->tujuanMataPelajaran?->nama}")
                     ->wrap()
-                    ->grow()
                     ->searchable()
                     ->sortable()
                     ->label('Sekolah Tujuan'),
@@ -171,6 +172,28 @@ class UsulMutasiResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
+                ]),
+                ExportBulkAction::make()->exports([
+                    ExcelExport::make()->withColumns([
+                        Column::make('rencana.nama')
+                            ->heading('Nama Rencana Mutasi'),
+                        Column::make('rencana.tanggal_mulai')
+                            ->heading('Tanggal Mulai'),
+                        Column::make('rencana.tanggal_berakhir')
+                            ->heading('Tanggal Berakhir'),
+                        Column::make('pegawai.nama_gelar')
+                            ->heading('Nama Pegawai'),
+                        Column::make('pegawai.nama_id')
+                            ->heading('ID Pegawai'),
+                        Column::make('asalSekolah.nama')
+                            ->heading('Sekolah Asal'),
+                        Column::make('asalMataPelajaran.nama')
+                            ->heading('Mapel Asal'),
+                        Column::make('tujuanSekolah.nama')
+                            ->heading('Sekolah Tujuan'),
+                        Column::make('tujuanMataPelajaran.nama')
+                            ->heading('Mapel Tujuan'),
+                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
                 ]),
             ])
             ->emptyStateActions([

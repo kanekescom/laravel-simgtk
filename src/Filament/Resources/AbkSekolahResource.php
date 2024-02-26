@@ -7,8 +7,12 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 use Kanekescom\Simgtk\Filament\Resources\AbkSekolahResource\Pages;
 use Kanekescom\Simgtk\Models\Sekolah;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class AbkSekolahResource extends Resource
 {
@@ -28,6 +32,60 @@ class AbkSekolahResource extends Resource
 
     public static function table(Table $table): Table
     {
+        return $table
+            ->defaultGroup('wilayah.nama')
+            ->defaultSort('nama', 'asc')
+            ->columns(self::getTableColumns())
+            ->filters([
+                Tables\Filters\SelectFilter::make('status_kode')
+                    ->options(StatusSekolahEnum::class)
+                    ->multiple()
+                    ->searchable()
+                    ->preload()
+                    ->label('Status'),
+                Tables\Filters\SelectFilter::make('jenjang_sekolah')
+                    ->relationship('jenjangSekolah', 'nama')
+                    ->searchable()
+                    ->preload()
+                    ->label('Jenjang Sekolah'),
+                Tables\Filters\SelectFilter::make('wilayah_id')
+                    ->relationship('wilayah', 'nama')
+                    ->searchable()
+                    ->preload()
+                    ->label('Wilayah'),
+                Tables\Filters\TrashedFilter::make(),
+            ])
+            ->actions([
+                //
+            ])
+            ->bulkActions([
+                ExportBulkAction::make()->exports([
+                    ExcelExport::make()->withColumns(self::getExportColumns())
+                        ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
+                ]),
+            ])
+            ->emptyStateActions([
+                //
+            ]);
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->withoutGlobalScopes([
+                SoftDeletingScope::class,
+            ]);
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListAbkSekolah::route('/'),
+        ];
+    }
+
+    public static function getTableColumns(): array
+    {
         $columns = [];
         $columns[] = Tables\Columns\TextColumn::make('#')
             ->rowIndex();
@@ -37,6 +95,9 @@ class AbkSekolahResource extends Resource
             ->searchable(['nama', 'npsn'])
             ->sortable('nama')
             ->label('Nama');
+        $columns[] = Tables\Columns\TextColumn::make('status_kode')
+            ->sortable()
+            ->label('Status');
         $columns[] = Tables\Columns\TextInputColumn::make('jumlah_kelas')
             ->rules(['required', 'digits_between:0,100'])
             ->searchable()
@@ -119,46 +180,81 @@ class AbkSekolahResource extends Resource
                 ->label('JML');
         }
 
-        return $table
-            ->defaultGroup('wilayah.nama')
-            ->defaultSort('nama', 'asc')
-            ->columns($columns)
-            ->filters([
-                Tables\Filters\SelectFilter::make('jenjang_sekolah')
-                    ->relationship('jenjangSekolah', 'nama')
-                    ->searchable()
-                    ->preload()
-                    ->label('Jenjang Sekolah'),
-                Tables\Filters\SelectFilter::make('wilayah_id')
-                    ->relationship('wilayah', 'nama')
-                    ->searchable()
-                    ->preload()
-                    ->label('Wilayah'),
-                Tables\Filters\TrashedFilter::make(),
-            ])
-            ->actions([
-                //
-            ])
-            ->bulkActions([
-                //
-            ])
-            ->emptyStateActions([
-                //
-            ]);
+        return $columns;
     }
 
-    public static function getEloquentQuery(): Builder
+    public static function getExportColumns(): array
     {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
-    }
+        $columns = [];
+        $columns[] = Column::make('nama')
+            ->heading('Nama');
+        $columns[] = Column::make('status_kode')
+            ->heading('Status');
+        $columns[] = Column::make('jumlah_kelas')
+            ->heading('Kelas');
+        $columns[] = Column::make('jumlah_rombel')
+            ->heading('Rombel');
+        $columns[] = Column::make('jumlah_siswa')
+            ->heading('Siswa');
 
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListAbkSekolah::route('/'),
+        $jenjang_mapel_headers = [
+            'sd' => [
+                'kelas' => 'KLS',
+                'penjaskes' => 'PJK',
+                'agama' => 'AGM',
+                'agama_noni' => 'AGM NI',
+            ],
+            'smp' => [
+                'pai' => 'PAI',
+                'pjok' => 'PJOK',
+                'b_indonesia' => 'BIND',
+                'b_inggris' => 'BING',
+                'bk' => 'BK',
+                'ipa' => 'IPA',
+                'ips' => 'IPS',
+                'matematika' => 'MTK',
+                'ppkn' => 'PPKN',
+                'prakarya' => 'PKY',
+                'seni_budaya' => 'SEBUD',
+                'b_sunda' => 'BSUN',
+                'tik' => 'TIK',
+            ],
         ];
+
+        $jenjang_mapels = [
+            'sd' => [
+                'kelas',
+                'penjaskes',
+                'agama',
+                'agama_noni',
+            ],
+            'smp' => [
+                'pai',
+                'pjok',
+                'b_indonesia',
+                'b_inggris',
+                'bk',
+                'ipa',
+                'ips',
+                'matematika',
+                'ppkn',
+                'prakarya',
+                'seni_budaya',
+                'b_sunda',
+                'tik',
+            ],
+        ];
+
+        foreach ($jenjang_mapels as $jenjang_sekolah => $mapels) {
+            foreach ($mapels as $mapel) {
+                $columns[] = Column::make("{$jenjang_sekolah}_{$mapel}_abk")
+                    ->heading("{$jenjang_mapel_headers[$jenjang_sekolah][$mapel]}");
+            }
+
+            $columns[] = Column::make("{$jenjang_sekolah}_formasi_abk")
+                ->heading('JML');
+        }
+
+        return $columns;
     }
 }

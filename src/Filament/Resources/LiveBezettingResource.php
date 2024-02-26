@@ -81,17 +81,17 @@ class LiveBezettingResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultGroup('wilayah.nama')
+            ->defaultSort('nama', 'asc')
+            ->columns(self::getTableColumns())
+            ->filtersFormColumns(4)
+            ->filters(self::getTableFilters())
             ->bulkActions([
                 ExportBulkAction::make()->exports([
                     ExcelExport::make()->withColumns(self::getExportTableColumns())
                         ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
                 ]),
-            ])
-            ->defaultGroup('wilayah.nama')
-            ->defaultSort('nama', 'asc')
-            ->columns(self::getTableColumns())
-            ->filtersFormColumns(4)
-            ->filters(self::getTableFilters());
+            ]);
     }
 
     public static function getPages(): array
