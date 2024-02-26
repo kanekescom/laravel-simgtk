@@ -213,8 +213,8 @@ class PegawaiResource extends Resource
                             ->schema([
                                 Forms\Components\TextInput::make('nomor_sk_pangkat')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
-                                    ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
-                                    ->requiredWith(['nomor_sk_pangkat', 'golongan_kode', 'tmt_pangkat', 'tanggal_sk_pangkat'])
+                                    // ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    // ->requiredWith(['nomor_sk_pangkat', 'golongan_kode', 'tmt_pangkat', 'tanggal_sk_pangkat'])
                                     ->maxLength(255)
                                     ->label('Nomor SK Pangkat'),
                                 Forms\Components\Select::make('golongan_kode')
