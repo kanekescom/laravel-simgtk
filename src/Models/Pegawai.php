@@ -105,6 +105,36 @@ class Pegawai extends Model
         );
     }
 
+    public function scopeStatusKepegawaianAsn($query)
+    {
+        return $query
+            ->whereIn('status_kepegawaian_kode', [StatusKepegawaianEnum::PNS, StatusKepegawaianEnum::PPPK]);
+    }
+
+    public function scopeStatusKepegawaianPns($query)
+    {
+        return $query
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::PNS);
+    }
+
+    public function scopeStatusKepegawaianPppk($query)
+    {
+        return $query
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::PPPK);
+    }
+
+    public function scopeStatusKepegawaianNonAsn($query)
+    {
+        return $query
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::NONASN);
+    }
+
+    public function scopeStatusKepegawaian($query, $status_kepegawaian_kode)
+    {
+        return $query
+            ->where('status_kepegawaian_kode', $status_kepegawaian_kode);
+    }
+
     public function scopeGenderLakiLaki($query)
     {
         return $query
