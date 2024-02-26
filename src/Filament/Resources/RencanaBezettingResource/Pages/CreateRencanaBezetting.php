@@ -9,5 +9,5 @@ class CreateRencanaBezetting extends CreateRecord
 {
     protected static string $resource = RencanaBezettingResource::class;
 
-    protected static ?string $title = 'Create Rencana Bezetting';
+    protected static ?string $title = 'Create History Bezetting';
 }
