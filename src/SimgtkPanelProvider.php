@@ -52,6 +52,7 @@ class SimgtkPanelProvider extends PanelProvider
             ])
             ->navigationGroups([
                 'Pegawai',
+                'Pensiun',
                 'Sekolah',
                 'Bezetting',
                 'Mutasi',
