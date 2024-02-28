@@ -21,6 +21,7 @@ use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiCh
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByWilayah;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByJenjangSekolah;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByWilayah;
+use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 
 class SimgtkPanelProvider extends PanelProvider
 {
@@ -57,6 +58,7 @@ class SimgtkPanelProvider extends PanelProvider
                 'Bezetting',
                 'Mutasi',
             ])
+            ->plugin(FilamentSpatieLaravelBackupPlugin::make())
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
