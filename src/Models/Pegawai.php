@@ -48,7 +48,7 @@ class Pegawai extends Model
     public function getNamaIdAttribute()
     {
         if ($this->nip) {
-            return "NIP. {$this->nik}";
+            return "NIP. {$this->nip}";
         }
 
         if ($this->nuptk) {

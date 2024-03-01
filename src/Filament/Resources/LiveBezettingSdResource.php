@@ -6,9 +6,9 @@ use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Kanekescom\Simgtk\Filament\Resources\LiveBezettingSdResource\Pages;
+use Kanekescom\Simgtk\Filament\Traits\HasLiveBezettingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Sekolah;
-use Kanekescom\Simgtk\Traits\HasLiveBezettingResource;
 
 class LiveBezettingSdResource extends Resource
 {

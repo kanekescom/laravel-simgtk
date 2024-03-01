@@ -5,7 +5,7 @@ namespace Kanekescom\Simgtk\Filament\Resources;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiPppkResource\Pages;
-use Kanekescom\Simgtk\Traits\HasPegawaiResource;
+use Kanekescom\Simgtk\Filament\Traits\HasPegawaiResource;
 
 class PegawaiPppkResource extends PegawaiResource
 {

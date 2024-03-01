@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
-use Kanekescom\Simgtk\Traits\SekolahPegawaiRelationship;
+use Kanekescom\Simgtk\Traits\HasSekolahPegawaiRelationship;
 
 class Sekolah extends Model
 {
     use HasFactory;
+    use HasSekolahPegawaiRelationship;
     use HasUlids;
-    use SekolahPegawaiRelationship;
     use SoftDeletes;
 
     protected $guarded = [];

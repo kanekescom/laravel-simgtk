@@ -5,7 +5,7 @@ namespace Kanekescom\Simgtk\Filament\Resources;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Kanekescom\Simgtk\Filament\Resources\PensiunPnsResource\Pages;
-use Kanekescom\Simgtk\Traits\HasPensiunResource;
+use Kanekescom\Simgtk\Filament\Traits\HasPensiunResource;
 
 class PensiunPnsResource extends PensiunResource
 {
