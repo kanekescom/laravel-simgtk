@@ -57,6 +57,10 @@ class SimgtkPanelProvider extends PanelProvider
                 'Sekolah',
                 'Bezetting',
                 'Mutasi',
+                'Referensi Bezetting',
+                'Referensi Kependidikan',
+                'Referensi Wilayah',
+                'Tools',
             ])
             ->plugin(FilamentSpatieLaravelBackupPlugin::make())
             ->middleware([
