@@ -6,9 +6,9 @@ use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Kanekescom\Simgtk\Filament\Resources\HistoryBezettingSdResource\Pages;
+use Kanekescom\Simgtk\Filament\Traits\HasHistoryBezettingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\RancanganBezetting;
-use Kanekescom\Simgtk\Traits\HasHistoryBezettingResource;
 
 class HistoryBezettingSdResource extends Resource
 {

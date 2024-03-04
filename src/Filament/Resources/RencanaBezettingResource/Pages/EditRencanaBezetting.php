@@ -10,7 +10,7 @@ class EditRencanaBezetting extends EditRecord
 {
     protected static string $resource = RencanaBezettingResource::class;
 
-    protected static ?string $title = 'Edit Rencana Bezetting';
+    protected static ?string $title = 'Edit History Bezetting';
 
     protected function getHeaderActions(): array
     {

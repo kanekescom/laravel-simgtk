@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanekescom\Simgtk\Traits;
+namespace Kanekescom\Simgtk\Filament\Traits;
 
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
@@ -16,17 +16,17 @@ trait HasLiveBezettingResource
     public static function defaultTable(Table $table): Table
     {
         return $table
+            ->defaultGroup('wilayah.nama')
+            ->defaultSort('nama', 'asc')
+            ->columns(self::getTableColumns())
+            ->filtersFormColumns(4)
+            ->filters(self::getTableFilters())
             ->bulkActions([
                 ExportBulkAction::make()->exports([
                     ExcelExport::make()->withColumns(self::getExportTableColumns())
                         ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
                 ]),
-            ])
-            ->defaultGroup('wilayah.nama')
-            ->defaultSort('nama', 'asc')
-            ->columns(self::getTableColumns())
-            ->filtersFormColumns(4)
-            ->filters(self::getTableFilters());
+            ]);
     }
 
     public static function getTableColumns(): array
@@ -326,13 +326,13 @@ trait HasLiveBezettingResource
 
         $columns[] = Column::make('pegawai_kepsek_count')
             ->getStateUsing(fn ($record) => $record->pegawaiKepsek()->count())
-            ->heading('Def');
+            ->heading('Kepsek Def');
         $columns[] = Column::make('pegawai_plt_kepsek_count')
             ->getStateUsing(fn ($record) => $record->pegawaiPltKepsek()->count())
-            ->heading('Plt');
+            ->heading('Kepsek Plt');
         $columns[] = Column::make('pegawai_jabatan_kepsek_count')
             ->getStateUsing(fn ($record) => $record->pegawaiJabatanKepsek()->count())
-            ->heading('Ket');
+            ->heading('Jabatan Kepsek');
 
         foreach (self::$jenjangMapels as $jenjang_sekolah => $mapels) {
             $jenjang_sekolah_studly = str($jenjang_sekolah)->studly();

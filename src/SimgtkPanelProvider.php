@@ -21,6 +21,7 @@ use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiCh
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByWilayah;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByJenjangSekolah;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByWilayah;
+use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 
 class SimgtkPanelProvider extends PanelProvider
 {
@@ -31,6 +32,7 @@ class SimgtkPanelProvider extends PanelProvider
             ->id('simgtk')
             ->path('simgtk')
             ->login()
+            ->profile(isSimple: false)
             ->brandLogo(asset('storage/images/logo.png') ?? null)
             ->favicon(asset('storage/images/favicon.png') ?? null)
             ->colors([
@@ -50,8 +52,17 @@ class SimgtkPanelProvider extends PanelProvider
                 JumlahSekolahChartByJenjangSekolah::class,
             ])
             ->navigationGroups([
+                'Pegawai',
+                'Pensiun',
+                'Sekolah',
                 'Bezetting',
+                'Mutasi',
+                'Referensi Bezetting',
+                'Referensi Kependidikan',
+                'Referensi Wilayah',
+                'Tools',
             ])
+            ->plugin(FilamentSpatieLaravelBackupPlugin::make())
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

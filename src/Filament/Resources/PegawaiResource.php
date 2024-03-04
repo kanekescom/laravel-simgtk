@@ -25,6 +25,9 @@ use Kanekescom\Simgtk\Models\JenisPtk;
 use Kanekescom\Simgtk\Models\MataPelajaran;
 use Kanekescom\Simgtk\Models\Pegawai;
 use Kanekescom\Simgtk\Models\Sekolah;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Spatie\LaravelOptions\Options;
 
 class PegawaiResource extends Resource
@@ -35,7 +38,7 @@ class PegawaiResource extends Resource
 
     protected static ?string $model = Pegawai::class;
 
-    protected static bool $shouldRegisterNavigation = true;
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -210,8 +213,8 @@ class PegawaiResource extends Resource
                             ->schema([
                                 Forms\Components\TextInput::make('nomor_sk_pangkat')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
-                                    ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
-                                    ->requiredWith(['nomor_sk_pangkat', 'golongan_kode', 'tmt_pangkat', 'tanggal_sk_pangkat'])
+                                    // ->required(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::PNS)->value, (StatusKepegawaianEnum::PPPK)->value]))
+                                    // ->requiredWith(['nomor_sk_pangkat', 'golongan_kode', 'tmt_pangkat', 'tanggal_sk_pangkat'])
                                     ->maxLength(255)
                                     ->label('Nomor SK Pangkat'),
                                 Forms\Components\Select::make('golongan_kode')
@@ -482,6 +485,94 @@ class PegawaiResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
+                ]),
+                ExportBulkAction::make()->exports([
+                    ExcelExport::make()->withColumns([
+                        Column::make('nama')
+                            ->heading('Nama'),
+                        Column::make('nik')
+                            ->getStateUsing(fn ($record) => ' '.$record->nik)
+                            ->heading('NIK'),
+                        Column::make('nuptk')
+                            ->getStateUsing(fn ($record) => ' '.$record->nuptk)
+                            ->heading('NUPTK'),
+                        Column::make('nip')
+                            ->getStateUsing(fn ($record) => ' '.$record->nip)
+                            ->heading('NIP'),
+                        Column::make('gender_kode')
+                            ->heading('Gender'),
+                        Column::make('tempat_lahir')
+                            ->heading('Tempat Lahir'),
+                        Column::make('tanggal_lahir')
+                            ->heading('Tanggal Lahir'),
+                        Column::make('gelar_depan')
+                            ->heading('Gelar Depan'),
+                        Column::make('gelar_belakang')
+                            ->heading('Gelar Belakang'),
+                        Column::make('nomor_hp')
+                            ->getStateUsing(fn ($record) => (int) $record->nomor_hp)
+                            ->heading('Nomor HP'),
+                        Column::make('email')
+                            ->heading('Email'),
+                        Column::make('jenjang_pendidikan_kode')
+                            ->heading('Jenjang Pendidikan'),
+                        Column::make('status_kepegawaian_kode')
+                            ->heading('Status Kepegawaian'),
+                        Column::make('masa_kerja_tahun')
+                            ->heading('MK Tahun'),
+                        Column::make('masa_kerja_bulan')
+                            ->heading('MK Bulan'),
+                        Column::make('tmt_cpns')
+                            ->heading('TMT CPNS'),
+                        Column::make('tanggal_sk_cpns')
+                            ->heading('Tanggal SK CPNS'),
+                        Column::make('nomor_sk_cpns')
+                            ->heading('Nomor SK CPNS'),
+                        Column::make('tmt_pns')
+                            ->heading('TMT PNS'),
+                        Column::make('tanggal_sk_pns')
+                            ->heading('Tanggal SK PNS'),
+                        Column::make('nomor_sk_pns')
+                            ->heading('Nomor SK PNS'),
+                        Column::make('golongan_kode')
+                            ->heading('Golongan'),
+                        Column::make('tmt_pangkat')
+                            ->heading('TMT Pangkat'),
+                        Column::make('tanggal_sk_pangkat')
+                            ->heading('Tanggal SK Pangkat'),
+                        Column::make('nomor_sk_pangkat')
+                            ->heading('Nomor SK Pangkat'),
+                        Column::make('tmt_pensiun')
+                            ->heading('TMT Pensiun'),
+                        Column::make('tanggal_sk_pensiun')
+                            ->heading('Tanggal SK Pensiun'),
+                        Column::make('nomor_sk_pensiun')
+                            ->heading('Nomor SK Pensiun'),
+                        Column::make('sekolah.nama')
+                            ->heading('Sekolah'),
+                        Column::make('sekolah.status_kode')
+                            ->heading('Status Sekolah'),
+                        Column::make('wilayh.nama')
+                            ->heading('Wilayah'),
+                        Column::make('status_tugas_kode')
+                            ->heading('Status Tugas'),
+                        Column::make('jenisPtk.nama')
+                            ->heading('Jenis PTK'),
+                        Column::make('bidangStudiPendidikan.nama')
+                            ->heading('Bidang Studi Pendidikan'),
+                        Column::make('bidangStudiSertifikasi.nama')
+                            ->heading('Bidang Studi Sertifikasi'),
+                        Column::make('mataPelajaran.nama')
+                            ->heading('Mapel'),
+                        Column::make('jam_mengajar_perminggu')
+                            ->heading('Jam Mengajar Perminggu'),
+                        Column::make('is_kepsek')
+                            ->getStateUsing(fn ($record) => (int) $record->is_kepsek)
+                            ->heading('Kepsek'),
+                        Column::make('is_plt_kepsek')
+                            ->getStateUsing(fn ($record) => (int) $record->is_plt_kepsek)
+                            ->heading('Plt. Kepsek'),
+                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
                 ]),
             ])
             ->emptyStateActions([

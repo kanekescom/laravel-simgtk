@@ -13,6 +13,9 @@ use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Pages;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Sekolah;
+use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
+use pxlrbt\FilamentExcel\Columns\Column;
+use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Spatie\LaravelOptions\Options;
 
 class SekolahResource extends Resource
@@ -23,7 +26,7 @@ class SekolahResource extends Resource
 
     protected static ?string $model = Sekolah::class;
 
-    protected static bool $shouldRegisterNavigation = true;
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -112,7 +115,7 @@ class SekolahResource extends Resource
                     ->multiple()
                     ->searchable()
                     ->preload()
-                    ->label('Status Kepegawaian'),
+                    ->label('Status'),
                 Tables\Filters\SelectFilter::make('jenjang_sekolah')
                     ->relationship('jenjangSekolah', 'nama')
                     ->searchable()
@@ -138,6 +141,22 @@ class SekolahResource extends Resource
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),
+                ]),
+                ExportBulkAction::make()->exports([
+                    ExcelExport::make()->withColumns([
+                        Column::make('nama')
+                            ->heading('Nama'),
+                        Column::make('npsn')
+                            ->heading('NPSN'),
+                        Column::make('status_kode')
+                            ->heading('Status'),
+                        Column::make('pegawai_aktif_count')
+                            ->getStateUsing(fn ($record) => $record->pegawaiAktif()->count())
+                            ->heading('Pegawai'),
+                        Column::make('guru_aktif_count')
+                            ->getStateUsing(fn ($record) => $record->guruAktif()->count())
+                            ->heading('Guru'),
+                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
                 ]),
             ])
             ->emptyStateActions([

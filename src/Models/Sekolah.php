@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
-use Kanekescom\Simgtk\Traits\SekolahPegawaiRelationship;
+use Kanekescom\Simgtk\Traits\HasSekolahPegawaiRelationship;
 
 class Sekolah extends Model
 {
     use HasFactory;
+    use HasSekolahPegawaiRelationship;
     use HasUlids;
-    use SekolahPegawaiRelationship;
     use SoftDeletes;
 
     protected $guarded = [];
@@ -106,6 +106,18 @@ class Sekolah extends Model
     public function wilayah(): BelongsTo
     {
         return $this->belongsTo(Wilayah::class);
+    }
+
+    public function scopeCountGroupByStatus($query, $jenjang_sekolah_id = null)
+    {
+        return $query
+            ->select('status_kode', \DB::raw('COUNT(*) as count'))
+            ->where('jenjang_sekolah_id', function (Builder $query) use ($jenjang_sekolah_id) {
+                if (filled($jenjang_sekolah_id)) {
+                    $query->where('jenjang_sekolah_id', $jenjang_sekolah_id);
+                }
+            })
+            ->groupBy('status_kode');
     }
 
     public function scopeCountGroupByJenjangSekolah($query)

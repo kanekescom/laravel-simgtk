@@ -5,7 +5,7 @@ namespace Kanekescom\Simgtk\Traits;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 
-trait SekolahPegawaiRelationship
+trait HasSekolahPegawaiRelationship
 {
     public function pegawaiKepsek(): HasMany
     {

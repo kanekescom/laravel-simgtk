@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanekescom\Simgtk\Traits;
+namespace Kanekescom\Simgtk\Filament\Traits;
 
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;

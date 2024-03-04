@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 
 class RancanganBezetting extends Model
 {
@@ -16,6 +17,10 @@ class RancanganBezetting extends Model
     use SoftDeletes;
 
     protected $guarded = [];
+
+    protected $casts = [
+        'status_kode' => StatusSekolahEnum::class,
+    ];
 
     public function getTable()
     {

@@ -30,6 +30,7 @@ class Pegawai extends Model
         'golongan_kode' => GolonganAsnEnum::class,
         'status_tugas_kode' => StatusTugasEnum::class,
         'is_kepsek' => 'boolean',
+        'is_plt_kepsek' => 'boolean',
     ];
 
     public function getTable()
@@ -47,7 +48,7 @@ class Pegawai extends Model
     public function getNamaIdAttribute()
     {
         if ($this->nip) {
-            return "NIP. {$this->nik}";
+            return "NIP. {$this->nip}";
         }
 
         if ($this->nuptk) {
@@ -102,6 +103,36 @@ class Pegawai extends Model
             'sekolah_id',
             'wilayah_id',
         );
+    }
+
+    public function scopeStatusKepegawaianAsn($query)
+    {
+        return $query
+            ->whereIn('status_kepegawaian_kode', [StatusKepegawaianEnum::PNS, StatusKepegawaianEnum::PPPK]);
+    }
+
+    public function scopeStatusKepegawaianPns($query)
+    {
+        return $query
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::PNS);
+    }
+
+    public function scopeStatusKepegawaianPppk($query)
+    {
+        return $query
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::PPPK);
+    }
+
+    public function scopeStatusKepegawaianNonAsn($query)
+    {
+        return $query
+            ->where('status_kepegawaian_kode', StatusKepegawaianEnum::NONASN);
+    }
+
+    public function scopeStatusKepegawaian($query, $status_kepegawaian_kode)
+    {
+        return $query
+            ->where('status_kepegawaian_kode', $status_kepegawaian_kode);
     }
 
     public function scopeGenderLakiLaki($query)
