@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-simgtk` will be documented in this file.
 
+## v1.0.0-beta3 - 2024-03-05
+
+### What's Changed
+
+* Update psr/simple-cache to 3.0 by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/5
+* Bump ramsey/composer-install from 2 to 3 by @dependabot in https://github.com/kanekescom/laravel-simgtk/pull/4
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta2...v1.0.0-beta3
+
 ## v1.0.0-beta2 - 2024-03-04
 
 ### What's Changed
