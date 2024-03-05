@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-simgtk` will be documented in this file.
 
+## v1.0.0-beta6 - 2024-03-05
+
+### What's Changed
+
+* fix: back to psr/simple-cache v2.0 by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/8
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta5...v1.0.0-beta6
+
 ## v1.0.0-beta5 - 2024-03-05
 
 ### What's Changed
