@@ -30,6 +30,7 @@ class SimgtkPanelProvider extends PanelProvider
             ->default()
             ->id(config('simgtk.filament.id'))
             ->path(config('simgtk.filament.path'))
+            ->profile(isSimple: false)
             ->login()
             ->brandLogo(config('simgtk.filament.brandLogo'))
             ->favicon(config('simgtk.filament.favicon'))

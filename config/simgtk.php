@@ -14,7 +14,7 @@ return [
 
         'path' => 'simgtk',
 
-        'topbar' => false,
+        'topbar' => true,
 
         'brandLogo' => null,
 
