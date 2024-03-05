@@ -9,4 +9,32 @@ return [
         'smp' => 'SMP',
     ],
 
+    'filament' => [
+        'id' => 'simgtk',
+
+        'path' => 'simgtk',
+
+        'topbar' => false,
+
+        'brandLogo' => null,
+
+        'favicon' => null,
+
+        'colors' => [
+            'primary' => \Filament\Support\Colors\Color::Amber,
+        ],
+
+        'navigationGroups' => [
+            'Pegawai',
+            'Pensiun',
+            'Sekolah',
+            'Bezetting',
+            'Mutasi',
+            'Referensi Bezetting',
+            'Referensi Kependidikan',
+            'Referensi Wilayah',
+            'Tools',
+        ],
+    ],
+
 ];
