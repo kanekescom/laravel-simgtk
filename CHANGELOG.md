@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-simgtk` will be documented in this file.
 
+## v1.0.0-beta4 - 2024-03-05
+
+### What's Changed
+
+* refactor: config for panel by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/6
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta3...v1.0.0-beta4
+
 ## v1.0.0-beta3 - 2024-03-05
 
 ### What's Changed
