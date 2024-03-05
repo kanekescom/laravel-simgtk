@@ -8,7 +8,6 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -29,15 +28,14 @@ class SimgtkPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id('simgtk')
-            ->path('simgtk')
+            ->id(config('simgtk.filament.id'))
+            ->path(config('simgtk.filament.path'))
             ->login()
-            ->profile(isSimple: false)
-            ->brandLogo(asset('storage/images/logo.png') ?? null)
-            ->favicon(asset('storage/images/favicon.png') ?? null)
-            ->colors([
-                'primary' => Color::Amber,
-            ])
+            ->brandLogo(config('simgtk.filament.brandLogo'))
+            ->favicon(config('simgtk.filament.favicon'))
+            ->colors(config('simgtk.filament.colors'))
+            ->topbar(config('simgtk.filament.topbar'))
+            ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: __DIR__.'/Filament/Resources', for: 'Kanekescom\\Simgtk\\Filament\\Resources')
             ->discoverPages(in: __DIR__.'/Filament/Pages', for: 'Kanekescom\\Simgtk\\Filament\\Pages')
             ->pages([
@@ -51,17 +49,7 @@ class SimgtkPanelProvider extends PanelProvider
                 JumlahSekolahChartByWilayah::class,
                 JumlahSekolahChartByJenjangSekolah::class,
             ])
-            ->navigationGroups([
-                'Pegawai',
-                'Pensiun',
-                'Sekolah',
-                'Bezetting',
-                'Mutasi',
-                'Referensi Bezetting',
-                'Referensi Kependidikan',
-                'Referensi Wilayah',
-                'Tools',
-            ])
+            ->navigationGroups(config('simgtk.filament.navigationGroups'))
             ->plugin(FilamentSpatieLaravelBackupPlugin::make())
             ->middleware([
                 EncryptCookies::class,
