@@ -30,7 +30,7 @@
         "filament/filament": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
         "illuminate/contracts": "^10.0",
-        "psr/simple-cache": "3.0",
+        "psr/simple-cache": "2.0",
         "pxlrbt/filament-excel": "^2.3",
         "shuvroroy/filament-spatie-laravel-backup": "^2.1",
         "spatie/laravel-options": "^1.1",
