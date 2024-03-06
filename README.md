@@ -25,6 +25,14 @@ You can install the package via composer:
 composer require kanekescom/laravel-simgtk
 ```
 
+## Laravel > 9
+
+If composer require fails on Laravel 9 or greater because of the simple-cache dependency, you will have to specify the psr/simple-cache version as ^2.0 in your composer.json to satisfy the PhpSpreadsheet dependency. You can install both at the same time as:
+
+```bash
+composer require psr/simple-cache:^2.0 kanekescom/laravel-simgtk
+```
+
 You can publish and run the migrations with:
 
 ```bash

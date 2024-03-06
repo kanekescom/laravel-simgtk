@@ -77,6 +77,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
             // 'email' => $row[self::getField('email')],
             'jenjang_pendidikan_kode' => self::getEnumJenjangPendidikanGetValue($row[self::getField('Pendidikan')]),
             'status_kepegawaian_kode' => self::getEnumStatusKepegawaianGetValue($row[self::getField('Status Kepegawaian')]),
+            'status_kepegawaian' => $row[self::getField('Status Kepegawaian')],
             'masa_kerja_tahun' => $row[self::getField('Masa Kerja Tahun')],
             'masa_kerja_bulan' => $row[self::getField('Masa Kerja Bulan')],
             'tmt_cpns' => $row[self::getField('Tanggal CPNS')],
@@ -111,7 +112,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
 
     protected static function getEnumStatusKepegawaianGetValue($nama): ?string
     {
-        return self::getEnumValueByLabel(StatusKepegawaianEnum::class, $nama == 'CPNS' ? 'PNS' : $nama) ?? (StatusKepegawaianEnum::NONASN)->value;
+        return self::getEnumValueByLabel(StatusKepegawaianEnum::class, ($nama == 'CPNS' || str($nama)->startsWith('PNS ')) ? 'PNS' : $nama) ?? (StatusKepegawaianEnum::NONASN)->value;
     }
 
     protected static function getMataPelajaran($row): ?Model

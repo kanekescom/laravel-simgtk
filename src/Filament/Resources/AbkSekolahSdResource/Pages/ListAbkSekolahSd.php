@@ -3,8 +3,12 @@
 namespace Kanekescom\Simgtk\Filament\Resources\AbkSekolahSdResource\Pages;
 
 use EightyNine\ExcelImport\ExcelImportAction;
+use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
 use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 use Kanekescom\Simgtk\Filament\Resources\AbkSekolahSdResource;
 use Kanekescom\Simgtk\Imports\SekolahRombelImport;
@@ -20,6 +24,26 @@ class ListAbkSekolahSd extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            // Actions\Action::make('fix')
+            //     ->requiresConfirmation()
+            //     ->action(function () {
+            //         try {
+            //             Artisan::call('simgtk:fix-sekolah-abk');
+
+            //             Notification::make()
+            //                 ->title('Fixed successfully')
+            //                 ->success()
+            //                 ->send();
+            //         } catch (\Throwable $e) {
+            //             Notification::make()
+            //                 ->title('Something went wrong')
+            //                 ->danger()
+            //                 ->body($e->getMessage())
+            //                 ->send();
+
+            //             Log::error($e->getMessage());
+            //         }
+            //     }),
             ExcelImportAction::make()
                 ->use(SekolahRombelImport::class)
                 ->slideOver()
