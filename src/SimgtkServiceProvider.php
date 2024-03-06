@@ -30,9 +30,13 @@ class SimgtkServiceProvider extends PackageServiceProvider
                 '2023_11_01_000015_create_simgtk_rancangan_bezetting_pegawai_table',
             ])
             ->runsMigrations()
-            ->hasCommand(Commands\DemoSeedCommand::class)
-            ->hasCommand(Commands\UserDemoSeedCommand::class)
-            ->hasCommand(Commands\ImportCommand::class)
-            ->hasCommand(Commands\TruncateCommand::class);
+            ->hasCommands([
+                Commands\DemoSeedCommand::class,
+                Commands\UserDemoSeedCommand::class,
+                Commands\ImportCommand::class,
+                Commands\TruncateCommand::class,
+                Commands\FixSekolahAbkCommand::class,
+                Commands\FillDefaultSekolahAbkCommand::class,
+            ]);
     }
 }
