@@ -2,23 +2,24 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\SekolahSmpResource\Pages;
-use Kanekescom\Simgtk\Models\Sekolah;
+use Kanekescom\Simgtk\Models\SekolahSmp;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class SekolahSmpResource extends SekolahResource
+class SekolahSmpResource extends SekolahResource implements HasShieldPermissions
 {
     protected static ?string $slug = 'sekolah-smp';
 
     protected static ?string $pluralLabel = 'Sekolah SMP';
 
-    protected static ?string $model = Sekolah::class;
+    protected static ?string $model = SekolahSmp::class;
 
     protected static bool $shouldRegisterNavigation = true;
 
@@ -95,7 +96,7 @@ class SekolahSmpResource extends SekolahResource
                             ->getStateUsing(fn ($record) => $record->guruAktif()->count())
                             ->heading('Guru'),
                     ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
-                ]),
+                ])->visible(auth()->user()->can('export_'.self::class)),
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
@@ -116,6 +117,26 @@ class SekolahSmpResource extends SekolahResource
             'index' => Pages\ListSekolahSmp::route('/'),
             'create' => Pages\CreateSekolahSmp::route('/create'),
             'edit' => Pages\EditSekolahSmp::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
         ];
     }
 }

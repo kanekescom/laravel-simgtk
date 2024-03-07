@@ -2,6 +2,7 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -19,7 +20,7 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class UsulMutasiResource extends Resource
+class UsulMutasiResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $slug = 'usul-mutasi';
 
@@ -194,7 +195,7 @@ class UsulMutasiResource extends Resource
                         Column::make('tujuanMataPelajaran.nama')
                             ->heading('Mapel Tujuan'),
                     ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
-                ]),
+                ])->visible(auth()->user()->can('export_'.self::class)),
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
@@ -216,6 +217,26 @@ class UsulMutasiResource extends Resource
             'index' => Pages\ListUsulMutasi::route('/'),
             'create' => Pages\CreateUsulMutasi::route('/create'),
             'edit' => Pages\EditUsulMutasi::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
         ];
     }
 }

@@ -2,15 +2,16 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Kanekescom\Simgtk\Filament\Resources\HistoryBezettingSdResource\Pages;
 use Kanekescom\Simgtk\Filament\Traits\HasHistoryBezettingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
-use Kanekescom\Simgtk\Models\RancanganBezetting;
+use Kanekescom\Simgtk\Models\RancanganBezettingSd;
 
-class HistoryBezettingSdResource extends Resource
+class HistoryBezettingSdResource extends Resource implements HasShieldPermissions
 {
     use HasHistoryBezettingResource;
 
@@ -18,7 +19,7 @@ class HistoryBezettingSdResource extends Resource
 
     protected static ?string $pluralLabel = 'History Bezetting SD';
 
-    protected static ?string $model = RancanganBezetting::class;
+    protected static ?string $model = RancanganBezettingSd::class;
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -56,6 +57,26 @@ class HistoryBezettingSdResource extends Resource
     {
         return [
             'index' => Pages\ListHistoryBezettingSd::route('/'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
         ];
     }
 }

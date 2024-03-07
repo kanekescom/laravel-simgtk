@@ -54,6 +54,7 @@ class SimgtkPanelProvider extends PanelProvider
             ->plugins([
                 \ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin::make()
                     ->usingPage(Backups::class),
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ])
             ->middleware([
                 EncryptCookies::class,

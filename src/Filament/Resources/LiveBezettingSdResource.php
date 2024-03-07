@@ -2,15 +2,16 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Kanekescom\Simgtk\Filament\Resources\LiveBezettingSdResource\Pages;
 use Kanekescom\Simgtk\Filament\Traits\HasLiveBezettingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
-use Kanekescom\Simgtk\Models\Sekolah;
+use Kanekescom\Simgtk\Models\LiveBezettingSd;
 
-class LiveBezettingSdResource extends Resource
+class LiveBezettingSdResource extends Resource implements HasShieldPermissions
 {
     use HasLiveBezettingResource;
 
@@ -18,7 +19,7 @@ class LiveBezettingSdResource extends Resource
 
     protected static ?string $pluralLabel = 'Live Bezetting SD';
 
-    protected static ?string $model = Sekolah::class;
+    protected static ?string $model = LiveBezettingSd::class;
 
     protected static bool $shouldRegisterNavigation = true;
 
@@ -56,6 +57,26 @@ class LiveBezettingSdResource extends Resource
     {
         return [
             'index' => Pages\ListLiveBezettingSd::route('/'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
         ];
     }
 }

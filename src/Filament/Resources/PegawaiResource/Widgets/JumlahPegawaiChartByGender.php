@@ -9,6 +9,8 @@ use Kanekescom\Simgtk\Models\Pegawai;
 
 class JumlahPegawaiChartByGender extends ChartWidget
 {
+    use \BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
+
     protected static ?string $heading = 'Jumlah Pegawai Berdasarkan Gender';
 
     protected static ?string $pollingInterval = '10s';

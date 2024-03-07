@@ -2,6 +2,7 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -18,7 +19,7 @@ use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Spatie\LaravelOptions\Options;
 
-class SekolahResource extends Resource
+class SekolahResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $slug = 'sekolah';
 
@@ -157,7 +158,7 @@ class SekolahResource extends Resource
                             ->getStateUsing(fn ($record) => $record->guruAktif()->count())
                             ->heading('Guru'),
                     ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
-                ]),
+                ])->visible(auth()->user()->can('export_'.self::class)),
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
@@ -178,6 +179,26 @@ class SekolahResource extends Resource
             'index' => Pages\ListSekolah::route('/'),
             'create' => Pages\CreateSekolah::route('/create'),
             'edit' => Pages\EditSekolah::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
@@ -9,18 +10,18 @@ use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Kanekescom\Simgtk\Filament\Resources\LiveBezettingResource\Pages;
-use Kanekescom\Simgtk\Models\Sekolah;
+use Kanekescom\Simgtk\Models\LiveBezetting;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class LiveBezettingResource extends Resource
+class LiveBezettingResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $slug = 'live-bezetting';
 
     protected static ?string $pluralLabel = 'Live Bezetting';
 
-    protected static ?string $model = Sekolah::class;
+    protected static ?string $model = LiveBezetting::class;
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -90,7 +91,7 @@ class LiveBezettingResource extends Resource
                 ExportBulkAction::make()->exports([
                     ExcelExport::make()->withColumns(self::getExportTableColumns())
                         ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
-                ]),
+                ])->visible(auth()->user()->can('export_'.self::class)),
             ]);
     }
 
@@ -469,5 +470,25 @@ class LiveBezettingResource extends Resource
         }
 
         return $columns;
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
+        ];
     }
 }

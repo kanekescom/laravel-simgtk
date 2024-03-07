@@ -2,6 +2,7 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Form;
@@ -30,7 +31,7 @@ use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Spatie\LaravelOptions\Options;
 
-class PegawaiResource extends Resource
+class PegawaiResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $slug = 'pegawai';
 
@@ -573,7 +574,7 @@ class PegawaiResource extends Resource
                             ->getStateUsing(fn ($record) => (int) $record->is_plt_kepsek)
                             ->heading('Plt. Kepsek'),
                     ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
-                ]),
+                ])->visible(auth()->user()->can('export_'.self::class)),
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
@@ -594,6 +595,26 @@ class PegawaiResource extends Resource
             'index' => Pages\ListPegawai::route('/'),
             'create' => Pages\CreatePegawai::route('/create'),
             'edit' => Pages\EditPegawai::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
         ];
     }
 }

@@ -9,6 +9,8 @@ use Kanekescom\Simgtk\Models\Sekolah;
 
 class StatsOverview extends BaseWidget
 {
+    use \BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
+
     protected static ?string $pollingInterval = '10s';
 
     protected int|string|array $columnSpan = 'full';

@@ -2,6 +2,7 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\Alignment;
 use Filament\Tables;
@@ -17,7 +18,7 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class RancanganBezettingResource extends Resource
+class RancanganBezettingResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $slug = 'rancangan-bezetting';
 
@@ -103,7 +104,7 @@ class RancanganBezettingResource extends Resource
                 ExportBulkAction::make()->exports([
                     ExcelExport::make()->withColumns(self::getExportColumns())
                         ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
-                ]),
+                ])->visible(auth()->user()->can('export_'.self::class)),
             ]);
     }
 
@@ -434,5 +435,25 @@ class RancanganBezettingResource extends Resource
         }
 
         return $columns;
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
+        ];
     }
 }
