@@ -16,9 +16,9 @@ use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 class UserResource extends Resource implements HasShieldPermissions
 {
-    protected static ?string $slug = 'user';
+    protected static ?string $slug = 'users';
 
-    protected static ?string $pluralLabel = 'User';
+    protected static ?string $pluralLabel = 'Users';
 
     protected static ?string $model = User::class;
 
@@ -26,9 +26,9 @@ class UserResource extends Resource implements HasShieldPermissions
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'User';
+    protected static ?string $navigationLabel = 'Users';
 
-    protected static ?string $navigationGroup = null;
+    protected static ?string $navigationGroup = 'Users';
 
     public static function form(Form $form): Form
     {
