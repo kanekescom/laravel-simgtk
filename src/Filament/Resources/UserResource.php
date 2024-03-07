@@ -101,6 +101,9 @@ class UserResource extends Resource implements HasShieldPermissions
                             ->heading('Name'),
                         Column::make('email')
                             ->heading('Email'),
+                        Column::make('roles')
+                            ->getStateUsing(fn ($record) => $record->roles()->pluck('name')->implode(', '))
+                            ->heading('Roles'),
                     ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
                 ])->visible(auth()->user()->can('export_'.self::class)),
             ])
