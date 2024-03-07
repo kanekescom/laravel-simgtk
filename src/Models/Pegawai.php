@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
-use Kanekescom\Simgtk\Enums\JenjangPendidikanEnum;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Enums\StatusTugasEnum;
 
@@ -25,7 +24,6 @@ class Pegawai extends Model
 
     protected $casts = [
         'gender_kode' => GenderEnum::class,
-        'jenjang_pendidikan_kode' => JenjangPendidikanEnum::class,
         'status_kepegawaian_kode' => StatusKepegawaianEnum::class,
         'golongan_kode' => GolonganAsnEnum::class,
         'status_tugas_kode' => StatusTugasEnum::class,
@@ -76,6 +74,11 @@ class Pegawai extends Model
     public function jenisPtk(): BelongsTo
     {
         return $this->belongsTo(JenisPtk::class);
+    }
+
+    public function jenjangPendidikan(): BelongsTo
+    {
+        return $this->belongsTo(JenjangPendidikan::class);
     }
 
     public function bidangStudiPendidikan(): BelongsTo

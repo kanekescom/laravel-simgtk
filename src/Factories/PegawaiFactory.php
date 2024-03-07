@@ -5,12 +5,12 @@ namespace Kanekescom\Simgtk\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
-use Kanekescom\Simgtk\Enums\JenjangPendidikanEnum;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Enums\StatusTugasEnum;
 use Kanekescom\Simgtk\Models\BidangStudiPendidikan;
 use Kanekescom\Simgtk\Models\BidangStudiSertifikasi;
 use Kanekescom\Simgtk\Models\JenisPtk;
+use Kanekescom\Simgtk\Models\JenjangPendidikan;
 use Kanekescom\Simgtk\Models\MataPelajaran;
 use Kanekescom\Simgtk\Models\Pegawai;
 use Kanekescom\Simgtk\Models\Sekolah;
@@ -55,7 +55,8 @@ class PegawaiFactory extends Factory
             'gelar_belakang' => fake()->randomElement([null, 'S.Pd', 'S.Pd.I']),
             'nomor_hp' => fake()->boolean(85) ? null : fake()->e164PhoneNumber(),
             'email' => fake()->boolean(85) ? null : fake()->unique()->safeEmail(),
-            'jenjang_pendidikan_kode' => fake()->randomElement(JenjangPendidikanEnum::class),
+
+            'jenjang_pendidikan_id' => JenjangPendidikan::inRandomOrder()->first() ?? JenjangPendidikanFactory::new()->create(),
 
             'status_kepegawaian_kode' => $status_kepegawaian_kode,
             'masa_kerja_tahun' => $is_asn ? fake()->randomDigitNotNull() : null,

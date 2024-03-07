@@ -8,8 +8,6 @@ use Illuminate\Support\Collection;
 use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnLabelEnum;
-use Kanekescom\Simgtk\Enums\JenjangPendidikanEnum;
-use Kanekescom\Simgtk\Enums\JenjangPendidikanLabelEnum;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 use Kanekescom\Simgtk\Enums\StatusTugasEnum;
@@ -17,6 +15,7 @@ use Kanekescom\Simgtk\Enums\StatusTugasLabelEnum;
 use Kanekescom\Simgtk\Models\BidangStudiPendidikan;
 use Kanekescom\Simgtk\Models\BidangStudiSertifikasi;
 use Kanekescom\Simgtk\Models\JenisPtk;
+use Kanekescom\Simgtk\Models\JenjangPendidikan;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\MataPelajaran;
 use Kanekescom\Simgtk\Models\Pegawai;
@@ -75,7 +74,7 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
             // 'gelar_belakang' => $row[self::getField('gelar_belakang')],
             'nomor_hp' => $row[self::getField('Nomor HP')],
             // 'email' => $row[self::getField('email')],
-            'jenjang_pendidikan_kode' => self::getEnumJenjangPendidikanGetValue($row[self::getField('Pendidikan')]),
+            'jenjang_pendidikan_id' => self::getJenjangPendidikan($row[self::getField('Pendidikan')])?->id,
             'status_kepegawaian_kode' => self::getEnumStatusKepegawaianGetValue($row[self::getField('Status Kepegawaian')]),
             'status_kepegawaian' => $row[self::getField('Status Kepegawaian')],
             'masa_kerja_tahun' => $row[self::getField('Masa Kerja Tahun')],
@@ -128,6 +127,15 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
                 'jenjang_sekolah_id' => self::getJenjangSekolah($jenjang_sekolah_id)?->id,
                 'nama' => $nama,
             ]);
+        }
+
+        return null;
+    }
+
+    protected static function getJenjangPendidikan($nama): ?Model
+    {
+        if ($nama) {
+            return JenjangPendidikan::updateOrCreate(['nama' => $nama], ['nama' => $nama]);
         }
 
         return null;
@@ -245,13 +253,6 @@ class PegawaiDapodikImport implements ToModel, WithHeadingRow, WithProgressBar
     {
         return self::getEnumLabelValue(GolonganAsnEnum::class)->get(
             collect(Options::forEnum(GolonganAsnLabelEnum::class)->toArray())->pluck('label', 'value')->get($key)
-        );
-    }
-
-    protected static function getEnumJenjangPendidikanGetValue($key): ?string
-    {
-        return self::getEnumLabelValue(JenjangPendidikanEnum::class)->get(
-            collect(Options::forEnum(JenjangPendidikanLabelEnum::class)->toArray())->pluck('label', 'value')->get($key)
         );
     }
 
