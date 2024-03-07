@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('jenjang_pendidikan_kode')->nullable()->index('15_jenjang_pendidikan_kode');
 
             $table->string('status_kepegawaian_kode');
+            $table->string('status_kepegawaian')->nullable();
             $table->unsignedTinyInteger('masa_kerja_tahun')->nullable();
             $table->unsignedTinyInteger('masa_kerja_bulan')->nullable();
 
