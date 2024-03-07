@@ -28,7 +28,7 @@ class SimgtkPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id(config('simgtk.filament.id'))
+            ->id('simgtk')
             ->path(config('simgtk.filament.path'))
             ->profile(isSimple: false)
             ->login()
