@@ -2,6 +2,22 @@
 
 All notable changes to `laravel-simgtk` will be documented in this file.
 
+## v1.0.0-beta8 - 2024-03-07
+
+### What's Changed
+
+* add Roles and Permission by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/10
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta7...v1.0.0-beta8
+
+## v1.0.0-beta7 - 2024-03-06
+
+### What's Changed
+
+* fix: fixing abk and fill abk by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/9
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta6...v1.0.0-beta7
+
 ## v1.0.0-beta6 - 2024-03-05
 
 ### What's Changed
