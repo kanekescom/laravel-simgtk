@@ -18,6 +18,7 @@ class DemoDatabaseSeeder extends Seeder
             BidangStudiPendidikanSeeder::class,
             BidangStudiSertifikasiSeeder::class,
             JenisPtkSeeder::class,
+            JenjangPendidikanSeeder::class,
             JenjangSekolahSeeder::class,
             MataPelajaranSeeder::class,
             WilayahSeeder::class,

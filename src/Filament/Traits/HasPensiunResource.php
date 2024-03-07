@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
-use Kanekescom\Simgtk\Enums\JenjangPendidikanEnum;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Enums\StatusTugasEnum;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
@@ -69,9 +68,8 @@ trait HasPensiunResource
                     ->searchable()
                     ->preload()
                     ->label('Gender'),
-                Tables\Filters\SelectFilter::make('jenjang_pendidikan_kode')
-                    ->options(JenjangPendidikanEnum::class)
-                    ->multiple()
+                Tables\Filters\SelectFilter::make('jenjang_pendidikan_id')
+                    ->relationship('jenjangPendidikan', 'nama')
                     ->searchable()
                     ->preload()
                     ->label('Jenjang Pendidikan'),
@@ -185,7 +183,7 @@ trait HasPensiunResource
                     ->heading('Nomor HP'),
                 Column::make('email')
                     ->heading('Email'),
-                Column::make('jenjang_pendidikan_kode')
+                Column::make('jenjangPendidikan.nama')
                     ->heading('Jenjang Pendidikan'),
                 Column::make('status_kepegawaian_kode')
                     ->heading('Status Kepegawaian'),

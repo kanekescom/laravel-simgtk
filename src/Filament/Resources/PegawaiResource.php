@@ -16,13 +16,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
-use Kanekescom\Simgtk\Enums\JenjangPendidikanEnum;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Enums\StatusTugasEnum;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Pages;
 use Kanekescom\Simgtk\Models\BidangStudiPendidikan;
 use Kanekescom\Simgtk\Models\BidangStudiSertifikasi;
 use Kanekescom\Simgtk\Models\JenisPtk;
+use Kanekescom\Simgtk\Models\JenjangPendidikan;
 use Kanekescom\Simgtk\Models\MataPelajaran;
 use Kanekescom\Simgtk\Models\Pegawai;
 use Kanekescom\Simgtk\Models\Sekolah;
@@ -108,15 +108,11 @@ class PegawaiResource extends Resource implements HasShieldPermissions
                                 Forms\Components\TextInput::make('email')
                                     ->email()
                                     ->label('Email'),
-                                Forms\Components\Select::make('jenjang_pendidikan_kode')
-                                    ->options(JenjangPendidikanEnum::class)
-                                    ->in(
-                                        collect(Options::forEnum(JenjangPendidikanEnum::class)->toArray())
-                                            ->pluck('value')
-                                    )
+                                Forms\Components\Select::make('jenjang_pendidikan_id')
+                                    ->relationship('jenjangPendidikan', 'nama')
+                                    ->exists(table: JenjangPendidikan::class, column: 'id')
                                     ->searchable()
                                     ->preload()
-                                    ->required()
                                     ->label('Jenjang Pendidikan'),
                             ]),
                         Tabs\Tab::make('tab_kepegawaian')
@@ -399,9 +395,8 @@ class PegawaiResource extends Resource implements HasShieldPermissions
                     ->searchable()
                     ->preload()
                     ->label('Gender'),
-                Tables\Filters\SelectFilter::make('jenjang_pendidikan_kode')
-                    ->options(JenjangPendidikanEnum::class)
-                    ->multiple()
+                Tables\Filters\SelectFilter::make('jenjang_pendidikan_id')
+                    ->relationship('jenjangPendidikan', 'nama')
                     ->searchable()
                     ->preload()
                     ->label('Jenjang Pendidikan'),
@@ -515,7 +510,7 @@ class PegawaiResource extends Resource implements HasShieldPermissions
                             ->heading('Nomor HP'),
                         Column::make('email')
                             ->heading('Email'),
-                        Column::make('jenjang_pendidikan_kode')
+                        Column::make('jenjangPendidikan.nama')
                             ->heading('Jenjang Pendidikan'),
                         Column::make('status_kepegawaian_kode')
                             ->heading('Status Kepegawaian'),

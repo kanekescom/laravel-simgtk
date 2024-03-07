@@ -31,6 +31,7 @@ class SimgtkServiceProvider extends PackageServiceProvider
                 '2023_11_01_000013_create_simgtk_rencana_bezetting_table',
                 '2023_11_01_000014_create_simgtk_rancangan_bezetting_table',
                 '2023_11_01_000015_create_simgtk_rancangan_bezetting_pegawai_table',
+                '2023_11_01_000016_create_simgtk_jenjang_pendidikan',
             ])
             ->runsMigrations()
             ->hasCommands([
@@ -52,6 +53,7 @@ class SimgtkServiceProvider extends PackageServiceProvider
         Gate::policy(Models\RancanganBezettingSd::class, Policies\RancanganBezettingSdPolicy::class);
         Gate::policy(Models\RancanganBezettingSmp::class, Policies\RancanganBezettingSmpPolicy::class);
         Gate::policy(Models\JenisPtk::class, Policies\JenisPtkPolicy::class);
+        Gate::policy(Models\JenjangPendidikan::class, Policies\JenjangPendidikanPolicy::class);
         Gate::policy(Models\JenjangSekolah::class, Policies\JenjangSekolahPolicy::class);
         Gate::policy(Models\LiveBezetting::class, Policies\LiveBezettingPolicy::class);
         Gate::policy(Models\LiveBezettingSd::class, Policies\LiveBezettingSdPolicy::class);

@@ -24,7 +24,8 @@ return new class extends Migration
             $table->string('gelar_belakang')->nullable();
             $table->string('nomor_hp')->nullable();
             $table->string('email')->nullable();
-            $table->string('jenjang_pendidikan_kode')->nullable()->index('7_jenjang_pendidikan_kode');
+
+            $table->foreignUlid('jenjang_pendidikan_id')->nullable()->index('15_jenjang_pendidikan_id');
 
             $table->string('status_kepegawaian_kode');
             $table->string('status_kepegawaian')->nullable();
