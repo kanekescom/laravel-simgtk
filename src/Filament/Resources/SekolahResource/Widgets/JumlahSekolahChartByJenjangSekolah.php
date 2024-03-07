@@ -7,6 +7,8 @@ use Kanekescom\Simgtk\Models\Sekolah;
 
 class JumlahSekolahChartByJenjangSekolah extends ChartWidget
 {
+    use \BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
+
     protected static ?string $heading = 'Jumlah Sekolah Berdasarkan Jenjang';
 
     protected static ?string $pollingInterval = '10s';

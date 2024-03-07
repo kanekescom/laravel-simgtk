@@ -46,7 +46,8 @@ class ListAbkSekolah extends ListRecords
                 ->use(SekolahRombelImport::class)
                 ->slideOver()
                 ->icon(false)
-                ->label('Import Rombel'),
+                ->label('Import Rombel')
+                ->visible(auth()->user()->can('import_'.self::$resource)),
         ];
     }
 

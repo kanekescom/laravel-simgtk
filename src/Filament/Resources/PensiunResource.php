@@ -2,6 +2,7 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Form;
@@ -22,20 +23,20 @@ use Kanekescom\Simgtk\Models\BidangStudiPendidikan;
 use Kanekescom\Simgtk\Models\BidangStudiSertifikasi;
 use Kanekescom\Simgtk\Models\JenisPtk;
 use Kanekescom\Simgtk\Models\MataPelajaran;
-use Kanekescom\Simgtk\Models\Pegawai;
+use Kanekescom\Simgtk\Models\Pensiun;
 use Kanekescom\Simgtk\Models\Sekolah;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 use Spatie\LaravelOptions\Options;
 
-class PensiunResource extends Resource
+class PensiunResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $slug = 'pensiun';
 
     protected static ?string $pluralLabel = 'Pensiun';
 
-    protected static ?string $model = Pegawai::class;
+    protected static ?string $model = Pensiun::class;
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -605,7 +606,7 @@ class PensiunResource extends Resource
                             ->getStateUsing(fn ($record) => (int) $record->is_plt_kepsek)
                             ->heading('Plt. Kepsek'),
                     ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
-                ]),
+                ])->visible(auth()->user()->can('export_'.self::class)),
             ])
             ->emptyStateActions([
                 //
@@ -617,6 +618,26 @@ class PensiunResource extends Resource
         return [
             'index' => Pages\ListPensiun::route('/'),
             'edit' => Pages\EditPensiun::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
         ];
     }
 }

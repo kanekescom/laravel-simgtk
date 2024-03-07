@@ -2,8 +2,11 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources\LiveBezettingResource\Pages;
 
+use Filament\Pages\Actions;
 use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
+use Kanekescom\Simgtk\Filament\Resources\HistoryBezettingSdResource;
+use Kanekescom\Simgtk\Filament\Resources\HistoryBezettingSmpResource;
 use Kanekescom\Simgtk\Filament\Resources\LiveBezettingResource;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 
@@ -15,7 +18,16 @@ class ListLiveBezetting extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [];
+        return [
+            Actions\Action::make('history-sd')
+                ->label('History SD')
+                ->url(HistoryBezettingSdResource::getSlug())
+                ->visible(auth()->user()->can('view_any_'.HistoryBezettingSdResource::class)),
+            Actions\Action::make('history-smp')
+                ->label('History SMP')
+                ->url(HistoryBezettingSmpResource::getSlug())
+                ->visible(auth()->user()->can('view_any_'.HistoryBezettingSmpResource::class)),
+        ];
     }
 
     public function getTabs(): array

@@ -10,6 +10,8 @@ use Kanekescom\Simgtk\Models\Pegawai;
 
 class JumlahPegawaiChartByWilayah extends ChartWidget
 {
+    use \BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
+
     protected static ?string $heading = 'Jumlah Pegawai Berdasarkan Wilayah';
 
     protected static ?string $pollingInterval = '10s';

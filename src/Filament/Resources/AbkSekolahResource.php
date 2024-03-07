@@ -2,6 +2,7 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -9,18 +10,18 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 use Kanekescom\Simgtk\Filament\Resources\AbkSekolahResource\Pages;
-use Kanekescom\Simgtk\Models\Sekolah;
+use Kanekescom\Simgtk\Models\AbkSekolah;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-class AbkSekolahResource extends Resource
+class AbkSekolahResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $slug = 'referensi/bezetting/abk-sekolah';
 
     protected static ?string $pluralLabel = 'ABK Sekolah';
 
-    protected static ?string $model = Sekolah::class;
+    protected static ?string $model = AbkSekolah::class;
 
     protected static bool $shouldRegisterNavigation = false;
 
@@ -111,7 +112,7 @@ class AbkSekolahResource extends Resource
                 ExportBulkAction::make()->exports([
                     ExcelExport::make()->withColumns(self::getExportColumns())
                         ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
-                ]),
+                ])->visible(auth()->user()->can('export_'.self::class)),
             ])
             ->emptyStateActions([
                 //
@@ -233,5 +234,25 @@ class AbkSekolahResource extends Resource
         }
 
         return $columns;
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
+        ];
     }
 }

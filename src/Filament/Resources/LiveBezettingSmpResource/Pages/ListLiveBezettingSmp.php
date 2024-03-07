@@ -18,7 +18,8 @@ class ListLiveBezettingSmp extends ListRecords
         return [
             Actions\Action::make('history')
                 ->label('History')
-                ->url(HistoryBezettingSmpResource::getSlug()),
+                ->url(HistoryBezettingSmpResource::getSlug())
+                ->visible(auth()->user()->can('view_any_'.HistoryBezettingSmpResource::class)),
         ];
     }
 }

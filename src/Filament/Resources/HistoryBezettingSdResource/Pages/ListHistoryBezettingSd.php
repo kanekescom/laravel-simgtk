@@ -25,7 +25,8 @@ class ListHistoryBezettingSd extends ListRecords
         return [
             Actions\Action::make('live')
                 ->label('Live')
-                ->url(LiveBezettingSdResource::getSlug()),
+                ->url(LiveBezettingSdResource::getSlug())
+                ->visible(auth()->user()->can('view_any_'.LiveBezettingSdResource::class)),
         ];
     }
 }

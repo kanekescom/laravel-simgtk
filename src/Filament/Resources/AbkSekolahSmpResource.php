@@ -2,15 +2,16 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Kanekescom\Simgtk\Filament\Resources\AbkSekolahSmpResource\Pages;
 use Kanekescom\Simgtk\Filament\Traits\HasAbkSekolahResource;
+use Kanekescom\Simgtk\Models\AbkSekolahSmp;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
-use Kanekescom\Simgtk\Models\Sekolah;
 
-class AbkSekolahSmpResource extends Resource
+class AbkSekolahSmpResource extends Resource implements HasShieldPermissions
 {
     use HasAbkSekolahResource;
 
@@ -18,7 +19,7 @@ class AbkSekolahSmpResource extends Resource
 
     protected static ?string $pluralLabel = 'ABK Sekolah SMP';
 
-    protected static ?string $model = Sekolah::class;
+    protected static ?string $model = AbkSekolahSmp::class;
 
     protected static bool $shouldRegisterNavigation = true;
 
@@ -74,6 +75,26 @@ class AbkSekolahSmpResource extends Resource
     {
         return [
             'index' => Pages\ListAbkSekolahSmp::route('/'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
         ];
     }
 }

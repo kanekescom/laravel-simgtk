@@ -24,7 +24,8 @@ class ListPegawai extends ListRecords
                 ->use(PegawaiDapodikImport::class)
                 ->slideOver()
                 ->icon(false)
-                ->label('Import'),
+                ->label('Import')
+                ->visible(auth()->user()->can('import_'.self::$resource)),
             Actions\CreateAction::make()->label('Create'),
         ];
     }
