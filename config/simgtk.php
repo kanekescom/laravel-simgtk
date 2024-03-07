@@ -34,6 +34,7 @@ return [
             'Referensi Kependidikan',
             'Referensi Wilayah',
             'Tools',
+            'Users',
         ],
     ],
 
