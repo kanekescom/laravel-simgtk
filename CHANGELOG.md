@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-simgtk` will be documented in this file.
 
+## v1.0.0-beta11 - 2024-03-07
+
+### What's Changed
+
+* hardcode id by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/13
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta10...v1.0.0-beta11
+
 ## v1.0.0-beta10 - 2024-03-07
 
 ### What's Changed
