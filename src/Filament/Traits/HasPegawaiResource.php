@@ -10,6 +10,7 @@ use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Enums\StatusTugasEnum;
+use Kanekescom\Simgtk\Models\Pegawai;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
@@ -43,10 +44,10 @@ trait HasPegawaiResource
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%'.$search.'%');
+                                $query->where('nama', 'LIKE', '%' . $search . '%');
                             })
                             ->orWhereHas('sekolah', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%'.$search.'%');
+                                $query->where('nama', 'LIKE', '%' . $search . '%');
                             });
                     })
                     ->icon(fn (Model $record): string => $record->is_kepsek || $record->is_plt_kepsek ? 'heroicon-o-academic-cap' : '')
@@ -56,6 +57,31 @@ trait HasPegawaiResource
             ])
             ->filtersFormColumns(3)
             ->filters([
+                // Tables\Filters\SelectFilter::make('status_kepegawaian_kode')
+                //     ->options(StatusKepegawaianEnum::class)
+                //     ->multiple()
+                //     ->searchable()
+                //     ->preload()
+                //     ->label('Status Kepegawaian'),
+                Tables\Filters\SelectFilter::make('status_kepegawaian')
+                    ->options(function () {
+                        $status_kepegawaian = Pegawai::distinct()->pluck('status_kepegawaian')->toArray();
+                        return array_combine($status_kepegawaian, $status_kepegawaian);
+                    })
+                    ->searchable()
+                    ->preload()
+                    ->label('Status Kepegawaian Dapodik'),
+                Tables\Filters\SelectFilter::make('golongan_kode')
+                    ->options(GolonganAsnEnum::class)
+                    ->multiple()
+                    ->searchable()
+                    ->preload()
+                    ->label('Golongan'),
+                Tables\Filters\SelectFilter::make('sekolah_id')
+                    ->relationship('sekolah', 'nama')
+                    ->searchable()
+                    ->preload()
+                    ->label('Sekolah'),
                 Tables\Filters\SelectFilter::make('gender_kode')
                     ->options(GenderEnum::class)
                     ->multiple()
@@ -67,29 +93,12 @@ trait HasPegawaiResource
                     ->searchable()
                     ->preload()
                     ->label('Jenjang Pendidikan'),
-                Tables\Filters\SelectFilter::make('status_kepegawaian_kode')
-                    ->options(StatusKepegawaianEnum::class)
-                    ->multiple()
-                    ->searchable()
-                    ->preload()
-                    ->label('Status Kepegawaian'),
-                Tables\Filters\SelectFilter::make('golongan_kode')
-                    ->options(GolonganAsnEnum::class)
-                    ->multiple()
-                    ->searchable()
-                    ->preload()
-                    ->label('Golongan'),
                 Tables\Filters\SelectFilter::make('status_tugas_kode')
                     ->options(StatusTugasEnum::class)
                     ->multiple()
                     ->searchable()
                     ->preload()
                     ->label('Status Tugas'),
-                Tables\Filters\SelectFilter::make('sekolah_id')
-                    ->relationship('sekolah', 'nama')
-                    ->searchable()
-                    ->preload()
-                    ->label('Sekolah'),
                 Tables\Filters\SelectFilter::make('jenis_ptk_id')
                     ->relationship('jenisptk', 'nama')
                     ->searchable()
@@ -163,13 +172,13 @@ trait HasPegawaiResource
                 Column::make('nama')
                     ->heading('Nama'),
                 Column::make('nik')
-                    ->getStateUsing(fn ($record) => ' '.$record->nik)
+                    ->getStateUsing(fn ($record) => ' ' . $record->nik)
                     ->heading('NIK'),
                 Column::make('nuptk')
-                    ->getStateUsing(fn ($record) => ' '.$record->nuptk)
+                    ->getStateUsing(fn ($record) => ' ' . $record->nuptk)
                     ->heading('NUPTK'),
                 Column::make('nip')
-                    ->getStateUsing(fn ($record) => ' '.$record->nip)
+                    ->getStateUsing(fn ($record) => ' ' . $record->nip)
                     ->heading('NIP'),
                 Column::make('gender_kode')
                     ->heading('Gender'),
@@ -190,6 +199,8 @@ trait HasPegawaiResource
                     ->heading('Jenjang Pendidikan'),
                 Column::make('status_kepegawaian_kode')
                     ->heading('Status Kepegawaian'),
+                Column::make('status_kepegawaian')
+                    ->heading('Status Kepegawaian Dapodik'),
                 Column::make('masa_kerja_tahun')
                     ->heading('MK Tahun'),
                 Column::make('masa_kerja_bulan')
@@ -244,7 +255,7 @@ trait HasPegawaiResource
                 Column::make('is_plt_kepsek')
                     ->getStateUsing(fn ($record) => (int) $record->is_plt_kepsek)
                     ->heading('Plt. Kepsek'),
-            ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
-        ])->visible(auth()->user()->can('export_'.self::class));
+            ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d')),
+        ])->visible(auth()->user()->can('export_' . self::class));
     }
 }
