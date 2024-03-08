@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-simgtk` will be documented in this file.
 
+## v1.0.0-beta13 - 2024-03-08
+
+### What's Changed
+
+* feature: add status_kepegawaian filter and make JumlahSekolahChartByJenjangSekolah is column span full by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/15
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta12...v1.0.0-beta13
+
 ## v1.0.0-beta12 - 2024-03-08
 
 ### What's Changed
