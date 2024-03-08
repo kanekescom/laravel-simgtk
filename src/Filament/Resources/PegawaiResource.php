@@ -149,6 +149,15 @@ class PegawaiResource extends Resource implements HasShieldPermissions
                                     ->preload()
                                     ->required()
                                     ->label('Status Kepegawaian'),
+                                Forms\Components\Select::make('status_kepegawaian')
+                                    ->options(function () {
+                                        $status_kepegawaian = Pegawai::distinct()->pluck('status_kepegawaian')->toArray();
+
+                                        return array_combine($status_kepegawaian, $status_kepegawaian);
+                                    })
+                                    ->searchable()
+                                    ->preload()
+                                    ->label('Status Kepegawaian Dapodik'),
                                 Forms\Components\TextInput::make('masa_kerja_tahun')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::NONASN)->value]))
                                     ->required()

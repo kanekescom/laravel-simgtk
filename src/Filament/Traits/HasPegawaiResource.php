@@ -10,6 +10,7 @@ use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Enums\GolonganAsnEnum;
 use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Enums\StatusTugasEnum;
+use Kanekescom\Simgtk\Models\Pegawai;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
@@ -56,6 +57,32 @@ trait HasPegawaiResource
             ])
             ->filtersFormColumns(3)
             ->filters([
+                // Tables\Filters\SelectFilter::make('status_kepegawaian_kode')
+                //     ->options(StatusKepegawaianEnum::class)
+                //     ->multiple()
+                //     ->searchable()
+                //     ->preload()
+                //     ->label('Status Kepegawaian'),
+                Tables\Filters\SelectFilter::make('status_kepegawaian')
+                    ->options(function () {
+                        $status_kepegawaian = Pegawai::distinct()->pluck('status_kepegawaian')->toArray();
+
+                        return array_combine($status_kepegawaian, $status_kepegawaian);
+                    })
+                    ->searchable()
+                    ->preload()
+                    ->label('Status Kepegawaian Dapodik'),
+                Tables\Filters\SelectFilter::make('golongan_kode')
+                    ->options(GolonganAsnEnum::class)
+                    ->multiple()
+                    ->searchable()
+                    ->preload()
+                    ->label('Golongan'),
+                Tables\Filters\SelectFilter::make('sekolah_id')
+                    ->relationship('sekolah', 'nama')
+                    ->searchable()
+                    ->preload()
+                    ->label('Sekolah'),
                 Tables\Filters\SelectFilter::make('gender_kode')
                     ->options(GenderEnum::class)
                     ->multiple()
@@ -67,29 +94,12 @@ trait HasPegawaiResource
                     ->searchable()
                     ->preload()
                     ->label('Jenjang Pendidikan'),
-                Tables\Filters\SelectFilter::make('status_kepegawaian_kode')
-                    ->options(StatusKepegawaianEnum::class)
-                    ->multiple()
-                    ->searchable()
-                    ->preload()
-                    ->label('Status Kepegawaian'),
-                Tables\Filters\SelectFilter::make('golongan_kode')
-                    ->options(GolonganAsnEnum::class)
-                    ->multiple()
-                    ->searchable()
-                    ->preload()
-                    ->label('Golongan'),
                 Tables\Filters\SelectFilter::make('status_tugas_kode')
                     ->options(StatusTugasEnum::class)
                     ->multiple()
                     ->searchable()
                     ->preload()
                     ->label('Status Tugas'),
-                Tables\Filters\SelectFilter::make('sekolah_id')
-                    ->relationship('sekolah', 'nama')
-                    ->searchable()
-                    ->preload()
-                    ->label('Sekolah'),
                 Tables\Filters\SelectFilter::make('jenis_ptk_id')
                     ->relationship('jenisptk', 'nama')
                     ->searchable()
@@ -190,6 +200,8 @@ trait HasPegawaiResource
                     ->heading('Jenjang Pendidikan'),
                 Column::make('status_kepegawaian_kode')
                     ->heading('Status Kepegawaian'),
+                Column::make('status_kepegawaian')
+                    ->heading('Status Kepegawaian Dapodik'),
                 Column::make('masa_kerja_tahun')
                     ->heading('MK Tahun'),
                 Column::make('masa_kerja_bulan')

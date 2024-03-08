@@ -23,6 +23,7 @@ use Kanekescom\Simgtk\Models\BidangStudiSertifikasi;
 use Kanekescom\Simgtk\Models\JenisPtk;
 use Kanekescom\Simgtk\Models\JenjangPendidikan;
 use Kanekescom\Simgtk\Models\MataPelajaran;
+use Kanekescom\Simgtk\Models\Pegawai;
 use Kanekescom\Simgtk\Models\Pensiun;
 use Kanekescom\Simgtk\Models\Sekolah;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
@@ -160,6 +161,15 @@ class PensiunResource extends Resource implements HasShieldPermissions
                                     ->preload()
                                     ->required()
                                     ->label('Status Kepegawaian'),
+                                Forms\Components\Select::make('status_kepegawaian')
+                                    ->options(function () {
+                                        $status_kepegawaian = Pegawai::distinct()->pluck('status_kepegawaian')->toArray();
+
+                                        return array_combine($status_kepegawaian, $status_kepegawaian);
+                                    })
+                                    ->searchable()
+                                    ->preload()
+                                    ->label('Status Kepegawaian Dapodik'),
                                 Forms\Components\TextInput::make('masa_kerja_tahun')
                                     ->disabledOn('edit')
                                     ->visible(fn (Get $get) => in_array($get('status_kepegawaian_kode'), [(StatusKepegawaianEnum::NONASN)->value]))

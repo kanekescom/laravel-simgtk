@@ -18,6 +18,8 @@ class JumlahPegawaiChartByWilayah extends ChartWidget
 
     protected int|string|array $columnSpan = 'full';
 
+    protected static bool $isLazy = true;
+
     protected function getData(): array
     {
         $data = Pegawai::query()
