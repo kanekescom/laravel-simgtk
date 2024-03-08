@@ -234,4 +234,17 @@ class Pegawai extends Model
             })
             ->groupBy('status_kepegawaian_kode');
     }
+
+    public function scopeCountGroupByJenjangPendidikan($query, $jenjang_sekolah_id = null)
+    {
+        return $query
+            ->select('jenjang_pendidikan_id', \DB::raw('COUNT(*) as count'))
+            ->with('jenjangPendidikan')
+            ->whereHas('sekolah', function (Builder $query) use ($jenjang_sekolah_id) {
+                if (filled($jenjang_sekolah_id)) {
+                    $query->where('jenjang_sekolah_id', $jenjang_sekolah_id);
+                }
+            })
+            ->groupBy('jenjang_pendidikan_id');
+    }
 }
