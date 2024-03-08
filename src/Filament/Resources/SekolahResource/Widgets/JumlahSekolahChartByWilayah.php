@@ -17,6 +17,8 @@ class JumlahSekolahChartByWilayah extends ChartWidget
 
     protected int|string|array $columnSpan = 'full';
 
+    protected static bool $isLazy = true;
+
     protected function getData(): array
     {
         $data = Sekolah::query()
