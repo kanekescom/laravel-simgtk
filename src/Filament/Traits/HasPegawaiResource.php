@@ -44,10 +44,10 @@ trait HasPegawaiResource
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             })
                             ->orWhereHas('sekolah', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             });
                     })
                     ->icon(fn (Model $record): string => $record->is_kepsek || $record->is_plt_kepsek ? 'heroicon-o-academic-cap' : '')
@@ -66,6 +66,7 @@ trait HasPegawaiResource
                 Tables\Filters\SelectFilter::make('status_kepegawaian')
                     ->options(function () {
                         $status_kepegawaian = Pegawai::distinct()->pluck('status_kepegawaian')->toArray();
+
                         return array_combine($status_kepegawaian, $status_kepegawaian);
                     })
                     ->searchable()
@@ -172,13 +173,13 @@ trait HasPegawaiResource
                 Column::make('nama')
                     ->heading('Nama'),
                 Column::make('nik')
-                    ->getStateUsing(fn ($record) => ' ' . $record->nik)
+                    ->getStateUsing(fn ($record) => ' '.$record->nik)
                     ->heading('NIK'),
                 Column::make('nuptk')
-                    ->getStateUsing(fn ($record) => ' ' . $record->nuptk)
+                    ->getStateUsing(fn ($record) => ' '.$record->nuptk)
                     ->heading('NUPTK'),
                 Column::make('nip')
-                    ->getStateUsing(fn ($record) => ' ' . $record->nip)
+                    ->getStateUsing(fn ($record) => ' '.$record->nip)
                     ->heading('NIP'),
                 Column::make('gender_kode')
                     ->heading('Gender'),
@@ -255,7 +256,7 @@ trait HasPegawaiResource
                 Column::make('is_plt_kepsek')
                     ->getStateUsing(fn ($record) => (int) $record->is_plt_kepsek)
                     ->heading('Plt. Kepsek'),
-            ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d')),
-        ])->visible(auth()->user()->can('export_' . self::class));
+            ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
+        ])->visible(auth()->user()->can('export_'.self::class));
     }
 }

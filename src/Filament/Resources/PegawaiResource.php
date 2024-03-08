@@ -152,6 +152,7 @@ class PegawaiResource extends Resource implements HasShieldPermissions
                                 Forms\Components\Select::make('status_kepegawaian')
                                     ->options(function () {
                                         $status_kepegawaian = Pegawai::distinct()->pluck('status_kepegawaian')->toArray();
+
                                         return array_combine($status_kepegawaian, $status_kepegawaian);
                                     })
                                     ->searchable()
@@ -340,7 +341,7 @@ class PegawaiResource extends Resource implements HasShieldPermissions
                             ->columns(3)
                             ->schema([
                                 Forms\Components\DatePicker::make('tmt_pensiun')
-                                    ->helperText(fn (Get $get) => 'TMT Umur 60 pada ' . ($get('tanggal_lahir') ? now()->parse($get('tanggal_lahir'))->addYear(60)->addMonth(1)->firstOfMonth()->toDateString() : ''))
+                                    ->helperText(fn (Get $get) => 'TMT Umur 60 pada '.($get('tanggal_lahir') ? now()->parse($get('tanggal_lahir'))->addYear(60)->addMonth(1)->firstOfMonth()->toDateString() : ''))
                                     ->date()
                                     ->required()
                                     ->label('TMT Pensiun'),
@@ -384,10 +385,10 @@ class PegawaiResource extends Resource implements HasShieldPermissions
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->whereHas('mataPelajaran', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             })
                             ->orWhereHas('sekolah', function ($query) use ($search) {
-                                $query->where('nama', 'LIKE', '%' . $search . '%');
+                                $query->where('nama', 'LIKE', '%'.$search.'%');
                             });
                     })
                     ->icon(fn (Model $record): string => $record->is_kepsek || $record->is_plt_kepsek ? 'heroicon-o-academic-cap' : '')
@@ -495,13 +496,13 @@ class PegawaiResource extends Resource implements HasShieldPermissions
                         Column::make('nama')
                             ->heading('Nama'),
                         Column::make('nik')
-                            ->getStateUsing(fn ($record) => ' ' . $record->nik)
+                            ->getStateUsing(fn ($record) => ' '.$record->nik)
                             ->heading('NIK'),
                         Column::make('nuptk')
-                            ->getStateUsing(fn ($record) => ' ' . $record->nuptk)
+                            ->getStateUsing(fn ($record) => ' '.$record->nuptk)
                             ->heading('NUPTK'),
                         Column::make('nip')
-                            ->getStateUsing(fn ($record) => ' ' . $record->nip)
+                            ->getStateUsing(fn ($record) => ' '.$record->nip)
                             ->heading('NIP'),
                         Column::make('gender_kode')
                             ->heading('Gender'),
@@ -576,8 +577,8 @@ class PegawaiResource extends Resource implements HasShieldPermissions
                         Column::make('is_plt_kepsek')
                             ->getStateUsing(fn ($record) => (int) $record->is_plt_kepsek)
                             ->heading('Plt. Kepsek'),
-                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d')),
-                ])->visible(auth()->user()->can('export_' . self::class)),
+                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
+                ])->visible(auth()->user()->can('export_'.self::class)),
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
