@@ -60,6 +60,7 @@ class SimgtkPanelProvider extends PanelProvider
             ])
             ->spa()
             ->unsavedChangesAlerts()
+            ->databaseTransactions()
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
