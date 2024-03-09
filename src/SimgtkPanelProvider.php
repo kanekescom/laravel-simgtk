@@ -58,6 +58,7 @@ class SimgtkPanelProvider extends PanelProvider
                     ->usingPage(Backups::class),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ])
+            ->spa()
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
