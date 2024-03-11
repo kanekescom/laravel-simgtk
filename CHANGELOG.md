@@ -2,6 +2,46 @@
 
 All notable changes to `laravel-simgtk` will be documented in this file.
 
+## v1.0.0-beta13 - 2024-03-08
+
+### What's Changed
+
+* feature: add status_kepegawaian filter and make JumlahSekolahChartByJenjangSekolah is column span full by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/15
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta12...v1.0.0-beta13
+
+## v1.0.0-beta12 - 2024-03-08
+
+### What's Changed
+
+* feature: add jumlah pegawai berdasarkan jenjang pendidikan widget by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/14
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta11...v1.0.0-beta12
+
+## v1.0.0-beta11 - 2024-03-07
+
+### What's Changed
+
+* hardcode id by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/13
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta10...v1.0.0-beta11
+
+## v1.0.0-beta10 - 2024-03-07
+
+### What's Changed
+
+* feat: add jenjang_pendidikan by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/12
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta9...v1.0.0-beta10
+
+## v1.0.0-beta9 - 2024-03-07
+
+### What's Changed
+
+* feat: add crud user by @achmadhadikurnia in https://github.com/kanekescom/laravel-simgtk/pull/11
+
+**Full Changelog**: https://github.com/kanekescom/laravel-simgtk/compare/v1.0.0-beta8...v1.0.0-beta9
+
 ## v1.0.0-beta8 - 2024-03-07
 
 ### What's Changed
