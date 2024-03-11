@@ -30,13 +30,28 @@ class SimgtkPanelProvider extends PanelProvider
             ->default()
             ->id('simgtk')
             ->path(config('simgtk.filament.path'))
+            ->domain(config('simgtk.filament.domain'))
             ->profile(isSimple: false)
             ->login()
+            ->brandName(config('simgtk.filament.brandName'))
             ->brandLogo(config('simgtk.filament.brandLogo'))
+            ->brandLogoHeight(config('simgtk.filament.brandLogoHeight'))
             ->favicon(config('simgtk.filament.favicon'))
             ->colors(config('simgtk.filament.colors'))
-            ->topbar(config('simgtk.filament.topbar'))
-            ->sidebarCollapsibleOnDesktop()
+            ->darkMode(config('simgtk.filament.darkMode.enabled'))
+            ->topbar(config('simgtk.filament.topbar.enabled'))
+            ->topNavigation(config('simgtk.filament.topNavigation.enabled'))
+            ->breadcrumbs(config('simgtk.filament.breadcrumbs.enabled'))
+            ->databaseNotifications(config('simgtk.filament.databaseNotifications.enabled'))
+            ->databaseNotificationsPolling(config('simgtk.filament.databaseNotifications.polling'))
+            ->spa(config('simgtk.filament.spa.enabled'))
+            ->unsavedChangesAlerts(config('simgtk.filament.unsavedChangesAlerts.enabled'))
+            ->databaseTransactions(config('simgtk.filament.databaseTransactions.enabled'))
+            ->sidebarCollapsibleOnDesktop(config('simgtk.filament.sidebarCollapsibleOnDesktop.enabled'))
+            ->sidebarFullyCollapsibleOnDesktop(config('simgtk.filament.sidebarFullyCollapsibleOnDesktop.enabled'))
+            ->navigation(config('simgtk.filament.navigation.enabled'))
+            ->collapsibleNavigationGroups(config('simgtk.filament.collapsibleNavigationGroups.enabled'))
+            ->navigationGroups(config('simgtk.filament.navigationGroups'))
             ->discoverResources(in: __DIR__.'/Filament/Resources', for: 'Kanekescom\\Simgtk\\Filament\\Resources')
             ->discoverPages(in: __DIR__.'/Filament/Pages', for: 'Kanekescom\\Simgtk\\Filament\\Pages')
             ->pages([
@@ -51,15 +66,11 @@ class SimgtkPanelProvider extends PanelProvider
                 JumlahSekolahChartByWilayah::class,
                 JumlahSekolahChartByJenjangSekolah::class,
             ])
-            ->navigationGroups(config('simgtk.filament.navigationGroups'))
             ->plugins([
                 \ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin::make()
                     ->usingPage(\Kanekescom\Simgtk\Filament\Pages\Backups::class),
                 \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ])
-            ->spa()
-            ->unsavedChangesAlerts()
-            ->databaseTransactions()
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
