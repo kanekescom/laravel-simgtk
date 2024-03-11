@@ -2,7 +2,6 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
-use App\Models\User;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -10,6 +9,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Kanekescom\Simgtk\Filament\Resources\UserResource\Pages;
+use Kanekescom\Simgtk\Models\User;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
