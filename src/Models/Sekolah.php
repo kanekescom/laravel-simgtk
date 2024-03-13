@@ -150,29 +150,6 @@ class Sekolah extends Model
             ->groupBy('status_kode');
     }
 
-    public function scopeCountGroupByJenjangSekolah($query)
-    {
-        return $query
-            ->select('jenjang_sekolah_id', \DB::raw('COUNT(*) as count'))
-            ->with('jenjangSekolah')
-            ->groupBy('jenjang_sekolah_id');
-    }
-
-    public function scopeCountGroupByWilayah($query, $jenjang_sekolah_id = null)
-    {
-
-        return $query
-            ->select('wilayah_id', \DB::raw('COUNT(*) as count'))
-            ->with('wilayah')
-            ->where(function (Builder $query) use ($jenjang_sekolah_id) {
-                if (filled($jenjang_sekolah_id)) {
-                    return $query
-                        ->where('jenjang_sekolah_id', $jenjang_sekolah_id);
-                }
-            })
-            ->groupBy('wilayah_id');
-    }
-
     public function scopeDefaultOrder($query)
     {
         return $query
