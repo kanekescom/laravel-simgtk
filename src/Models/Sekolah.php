@@ -90,22 +90,52 @@ class Sekolah extends Model
 
     public function pegawaiAktif(): HasMany
     {
-        return $this->pegawai()->aktif();
+        return $this
+            ->pegawai()
+            ->aktif();
     }
 
     public function guru(): HasMany
     {
-        return $this->pegawai()->guru();
+        return $this
+            ->pegawai()
+            ->guru();
     }
 
     public function guruAktif(): HasMany
     {
-        return $this->pegawaiAktif()->guru();
+        return $this
+            ->pegawaiAktif()
+            ->guru();
     }
 
     public function wilayah(): BelongsTo
     {
         return $this->belongsTo(Wilayah::class);
+    }
+
+    public function scopeStatusNegeri($query)
+    {
+        return $query
+            ->where('status_kode', StatusSekolahEnum::NEGERI);
+    }
+
+    public function scopeStatusSwasta($query)
+    {
+        return $query
+            ->where('status_kode', StatusSekolahEnum::SWASTA);
+    }
+
+    public function scopeJenjangSekolahSd($query)
+    {
+        return $query
+            ->where('jenjang_sekolah_id', JenjangSekolah::where('kode', 'sd')->first()?->id);
+    }
+
+    public function scopeJenjangSekolahSmp($query)
+    {
+        return $query
+            ->where('jenjang_sekolah_id', JenjangSekolah::where('kode', 'smp')->first()?->id);
     }
 
     public function scopeCountGroupByStatus($query, $jenjang_sekolah_id = null)
