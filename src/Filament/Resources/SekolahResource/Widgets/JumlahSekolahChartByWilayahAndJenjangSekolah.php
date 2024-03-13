@@ -1,15 +1,16 @@
 <?php
 
-namespace Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets;
+namespace Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
-use Kanekescom\Simgtk\Models\JenjangPendidikan;
+use Kanekescom\Simgtk\Models\JenjangSekolah;
+use Kanekescom\Simgtk\Models\Wilayah;
 
-class JumlahPegawaiChartByJenjangPendidikan extends ChartWidget
+class JumlahSekolahChartByWilayahAndJenjangSekolah extends ChartWidget
 {
     use \BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
-    protected static ?string $heading = 'Jumlah Pegawai Berdasarkan Jenjang Pendidikan';
+    protected static ?string $heading = 'Jumlah Sekolah Berdasarkan Wilayah dan Jenjang Sekolah';
 
     protected static ?string $pollingInterval = '10s';
 
@@ -19,34 +20,31 @@ class JumlahPegawaiChartByJenjangPendidikan extends ChartWidget
 
     protected function getData(): array
     {
-        $data = JenjangPendidikan::query()
-            ->with([
-                'pegawai',
-                'pegawaiAktif',
-                'guru',
-                'guruAktif',
-            ])
+        $data = Wilayah::query()
+            ->with('sekolah')
             ->get();
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Pegawai',
+                    'label' => JenjangSekolah::where('kode', 'sd')->first()?->nama,
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',
                     'data' => $data->map(
                         fn ($value) => $value
-                            ->pegawaiAktif()
+                            ->sekolah()
+                            ->jenjangSekolahSd()
                             ->count()
                     ),
                 ],
                 [
-                    'label' => 'Guru',
+                    'label' => JenjangSekolah::where('kode', 'smp')->first()?->nama,
                     'backgroundColor' => '#FF0000',
                     'borderColor' => '#FFA07A',
                     'data' => $data->map(
                         fn ($value) => $value
-                            ->guruAktif()
+                            ->sekolah()
+                            ->jenjangSekolahSmp()
                             ->count()
                     ),
                 ],

@@ -3,13 +3,14 @@
 namespace Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
-use Kanekescom\Simgtk\Models\JenjangPendidikan;
+use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
+use Kanekescom\Simgtk\Models\Wilayah;
 
-class JumlahPegawaiChartByJenjangPendidikan extends ChartWidget
+class JumlahPegawaiChartByWilayahAndStatusKepegawaian extends ChartWidget
 {
     use \BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
-    protected static ?string $heading = 'Jumlah Pegawai Berdasarkan Jenjang Pendidikan';
+    protected static ?string $heading = 'Jumlah Pegawai Berdasarkan Wilayah dan Status';
 
     protected static ?string $pollingInterval = '10s';
 
@@ -19,34 +20,42 @@ class JumlahPegawaiChartByJenjangPendidikan extends ChartWidget
 
     protected function getData(): array
     {
-        $data = JenjangPendidikan::query()
-            ->with([
-                'pegawai',
-                'pegawaiAktif',
-                'guru',
-                'guruAktif',
-            ])
+        $data = Wilayah::query()
+            ->with('sekolah')
             ->get();
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Pegawai',
+                    'label' => StatusKepegawaianEnum::PNS->getLabel(),
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',
                     'data' => $data->map(
                         fn ($value) => $value
                             ->pegawaiAktif()
+                            ->StatusKepegawaianPns()
                             ->count()
                     ),
                 ],
                 [
-                    'label' => 'Guru',
+                    'label' => StatusKepegawaianEnum::PPPK->getLabel(),
                     'backgroundColor' => '#FF0000',
                     'borderColor' => '#FFA07A',
                     'data' => $data->map(
                         fn ($value) => $value
-                            ->guruAktif()
+                            ->pegawaiAktif()
+                            ->StatusKepegawaianPppk()
+                            ->count()
+                    ),
+                ],
+                [
+                    'label' => StatusKepegawaianEnum::NONASN->getLabel(),
+                    'backgroundColor' => '#FFA500',
+                    'borderColor' => '#FF8C00',
+                    'data' => $data->map(
+                        fn ($value) => $value
+                            ->pegawaiAktif()
+                            ->StatusKepegawaianNonAsn()
                             ->count()
                     ),
                 ],

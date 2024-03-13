@@ -3,13 +3,13 @@
 namespace Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
-use Kanekescom\Simgtk\Models\JenjangPendidikan;
+use Kanekescom\Simgtk\Models\Wilayah;
 
-class JumlahPegawaiChartByJenjangPendidikan extends ChartWidget
+class JumlahPegawaiChartByWilayahAndGuru extends ChartWidget
 {
     use \BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 
-    protected static ?string $heading = 'Jumlah Pegawai Berdasarkan Jenjang Pendidikan';
+    protected static ?string $heading = 'Jumlah Pegawai Berdasarkan Wilayah dan Guru';
 
     protected static ?string $pollingInterval = '10s';
 
@@ -19,13 +19,8 @@ class JumlahPegawaiChartByJenjangPendidikan extends ChartWidget
 
     protected function getData(): array
     {
-        $data = JenjangPendidikan::query()
-            ->with([
-                'pegawai',
-                'pegawaiAktif',
-                'guru',
-                'guruAktif',
-            ])
+        $data = Wilayah::query()
+            ->with('sekolah')
             ->get();
 
         return [

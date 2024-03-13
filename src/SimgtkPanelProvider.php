@@ -18,9 +18,11 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByGender;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByJenjangPendidikan;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByStatusKepegawaian;
-use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByWilayah;
-use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByJenjangSekolah;
-use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByWilayah;
+use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByWilayahAndGuru;
+use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByWilayahAndStatusKepegawaian;
+use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByJenjangSekolahAndStatus;
+use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByWilayahAndJenjangSekolah;
+use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByWilayahAndStatus;
 
 class SimgtkPanelProvider extends PanelProvider
 {
@@ -62,9 +64,11 @@ class SimgtkPanelProvider extends PanelProvider
                 JumlahPegawaiChartByStatusKepegawaian::class,
                 JumlahPegawaiChartByGender::class,
                 JumlahPegawaiChartByJenjangPendidikan::class,
-                JumlahPegawaiChartByWilayah::class,
-                JumlahSekolahChartByWilayah::class,
-                JumlahSekolahChartByJenjangSekolah::class,
+                JumlahPegawaiChartByWilayahAndGuru::class,
+                JumlahPegawaiChartByWilayahAndStatusKepegawaian::class,
+                JumlahSekolahChartByJenjangSekolahAndStatus::class,
+                JumlahSekolahChartByWilayahAndStatus::class,
+                JumlahSekolahChartByWilayahAndJenjangSekolah::class,
             ])
             ->plugins([
                 \ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin::make()
