@@ -4,6 +4,7 @@ namespace Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
 use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
+use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Sekolah;
 
 class JumlahSekolahChartByJenjangSekolahAndStatus extends ChartWidget
@@ -23,21 +24,33 @@ class JumlahSekolahChartByJenjangSekolahAndStatus extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'SD',
+                    'label' => JenjangSekolah::where('kode', 'sd')->first()?->nama,
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',
                     'data' => [
-                        Sekolah::jenjangSekolahSd()->statusNegeri()->count(),
-                        Sekolah::jenjangSekolahSd()->statusSwasta()->count(),
+                        Sekolah::query()
+                            ->jenjangSekolahSd()
+                            ->statusNegeri()
+                            ->count(),
+                        Sekolah::query()
+                            ->jenjangSekolahSd()
+                            ->statusSwasta()
+                            ->count(),
                     ],
                 ],
                 [
-                    'label' => 'SMP',
+                    'label' => JenjangSekolah::where('kode', 'smp')->first()?->nama,
                     'backgroundColor' => '#FF0000',
                     'borderColor' => '#FFA07A',
                     'data' => [
-                        Sekolah::jenjangSekolahSmp()->statusNegeri()->count(),
-                        Sekolah::jenjangSekolahSmp()->statusSwasta()->count(),
+                        Sekolah::query()
+                            ->jenjangSekolahSmp()
+                            ->statusNegeri()
+                            ->count(),
+                        Sekolah::query()
+                            ->jenjangSekolahSmp()
+                            ->statusSwasta()
+                            ->count(),
                     ],
                 ],
             ],

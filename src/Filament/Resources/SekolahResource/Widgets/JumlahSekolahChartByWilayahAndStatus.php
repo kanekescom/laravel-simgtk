@@ -3,6 +3,7 @@
 namespace Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
+use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 use Kanekescom\Simgtk\Models\Wilayah;
 
 class JumlahSekolahChartByWilayahAndStatus extends ChartWidget
@@ -26,7 +27,7 @@ class JumlahSekolahChartByWilayahAndStatus extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Negeri',
+                    'label' => StatusSekolahEnum::NEGERI->getLabel(),
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',
                     'data' => $data->map(
@@ -37,7 +38,7 @@ class JumlahSekolahChartByWilayahAndStatus extends ChartWidget
                     ),
                 ],
                 [
-                    'label' => 'Swasta',
+                    'label' => StatusSekolahEnum::SWASTA->getLabel(),
                     'backgroundColor' => '#FF0000',
                     'borderColor' => '#FFA07A',
                     'data' => $data->map(

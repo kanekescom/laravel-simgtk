@@ -3,6 +3,7 @@
 namespace Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
+use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Wilayah;
 
 class JumlahSekolahChartByWilayahAndJenjangSekolah extends ChartWidget
@@ -26,7 +27,7 @@ class JumlahSekolahChartByWilayahAndJenjangSekolah extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'SD',
+                    'label' => JenjangSekolah::where('kode', 'sd')->first()?->nama,
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',
                     'data' => $data->map(
@@ -37,7 +38,7 @@ class JumlahSekolahChartByWilayahAndJenjangSekolah extends ChartWidget
                     ),
                 ],
                 [
-                    'label' => 'SMP',
+                    'label' => JenjangSekolah::where('kode', 'smp')->first()?->nama,
                     'backgroundColor' => '#FF0000',
                     'borderColor' => '#FFA07A',
                     'data' => $data->map(
