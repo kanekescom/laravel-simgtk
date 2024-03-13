@@ -3,9 +3,7 @@
 namespace Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
-use Illuminate\Support\Arr;
-use Kanekescom\Simgtk\Models\JenjangSekolah;
-use Kanekescom\Simgtk\Models\Pegawai;
+use Kanekescom\Simgtk\Models\JenjangPendidikan;
 
 class JumlahPegawaiChartByJenjangPendidikan extends ChartWidget
 {
@@ -21,42 +19,44 @@ class JumlahPegawaiChartByJenjangPendidikan extends ChartWidget
 
     protected function getData(): array
     {
-        $data = Pegawai::query();
+        $data = JenjangPendidikan::query()
+            ->with([
+                'pegawai',
+                'pegawaiAktif',
+                'guru',
+                'guruAktif',
+            ])
+            ->get();
 
         return [
             'datasets' => [
                 [
-                    'label' => 'Jumlah Pegawai',
+                    'label' => 'Pegawai',
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',
-                    'data' => $data->aktif()
-                        ->countGroupByJenjangPendidikan($this->filter)
-                        ->get()
-                        ->map(fn ($value) => $value->count),
+                    'data' => $data->map(
+                        fn ($value) => $value
+                            ->pegawaiAktif()
+                            ->count()
+                    ),
                 ],
                 [
-                    'label' => 'Jumlah Guru',
+                    'label' => 'Guru',
                     'backgroundColor' => '#FF0000',
                     'borderColor' => '#FFA07A',
-                    'data' => $data->guruAktif()
-                        ->countGroupByJenjangPendidikan($this->filter)
-                        ->get()
-                        ->map(fn ($value) => $value->count),
+                    'data' => $data->map(
+                        fn ($value) => $value
+                            ->guruAktif()
+                            ->count()
+                    ),
                 ],
             ],
-            'labels' => $data->aktif()
-                ->get()
-                ->map(fn ($value) => $value->jenjangPendidikan->nama ?? ''),
+            'labels' => $data->pluck('nama'),
         ];
     }
 
     protected function getType(): string
     {
         return 'bar';
-    }
-
-    protected function getFilters(): ?array
-    {
-        return Arr::prepend(JenjangSekolah::pluck('nama', 'id')->toArray(), 'All', '');
     }
 }
