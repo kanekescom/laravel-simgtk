@@ -4,6 +4,7 @@ namespace Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Arr;
+use Kanekescom\Simgtk\Enums\StatusKepegawaianEnum;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Pegawai;
 
@@ -19,32 +20,58 @@ class JumlahPegawaiChartByStatusKepegawaian extends ChartWidget
 
     protected function getData(): array
     {
-        $data = Pegawai::query();
-
         return [
             'datasets' => [
                 [
-                    'label' => 'Jumlah Pegawai',
+                    'label' => 'Pegawai',
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',
-                    'data' => $data->aktif()
-                        ->countGroupByStatusKepegawaian($this->filter)
-                        ->get()
-                        ->map(fn ($value) => $value->count),
+                    'data' => [
+                        Pegawai::query()
+                            ->aktif()
+                            ->jenjangSekolahId($this->filter)
+                            ->statusKepegawaianPns()
+                            ->count(),
+                        Pegawai::query()
+                            ->aktif()
+                            ->jenjangSekolahId($this->filter)
+                            ->statusKepegawaianPppk()
+                            ->count(),
+                        Pegawai::query()
+                            ->aktif()
+                            ->jenjangSekolahId($this->filter)
+                            ->statusKepegawaianNonAsn()
+                            ->count(),
+                    ],
                 ],
                 [
-                    'label' => 'Jumlah Guru',
+                    'label' => 'Guru',
                     'backgroundColor' => '#FF0000',
                     'borderColor' => '#FFA07A',
-                    'data' => $data->guruAktif()
-                        ->countGroupByStatusKepegawaian($this->filter)
-                        ->get()
-                        ->map(fn ($value) => $value->count),
+                    'data' => [
+                        Pegawai::query()
+                            ->guruAktif()
+                            ->jenjangSekolahId($this->filter)
+                            ->statusKepegawaianPns()
+                            ->count(),
+                        Pegawai::query()
+                            ->guruAktif()
+                            ->jenjangSekolahId($this->filter)
+                            ->statusKepegawaianPppk()
+                            ->count(),
+                        Pegawai::query()
+                            ->guruAktif()
+                            ->jenjangSekolahId($this->filter)
+                            ->statusKepegawaianNonAsn()
+                            ->count(),
+                    ],
                 ],
             ],
-            'labels' => $data->aktif()
-                ->get()
-                ->map(fn ($value) => $value->status_kepegawaian_kode->getLabel()),
+            'labels' => [
+                StatusKepegawaianEnum::PNS->getLabel(),
+                StatusKepegawaianEnum::PPPK->getLabel(),
+                StatusKepegawaianEnum::NONASN->getLabel(),
+            ],
         ];
     }
 

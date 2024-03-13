@@ -18,6 +18,8 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByGender;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByJenjangPendidikan;
 use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByStatusKepegawaian;
+use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByWilayahAndGuru;
+use Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets\JumlahPegawaiChartByWilayahAndStatusKepegawaian;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByJenjangSekolahAndStatus;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByWilayahAndJenjangSekolah;
 use Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets\JumlahSekolahChartByWilayahAndStatus;
@@ -62,6 +64,8 @@ class SimgtkPanelProvider extends PanelProvider
                 JumlahPegawaiChartByStatusKepegawaian::class,
                 JumlahPegawaiChartByGender::class,
                 JumlahPegawaiChartByJenjangPendidikan::class,
+                JumlahPegawaiChartByWilayahAndGuru::class,
+                JumlahPegawaiChartByWilayahAndStatusKepegawaian::class,
                 JumlahSekolahChartByJenjangSekolahAndStatus::class,
                 JumlahSekolahChartByWilayahAndStatus::class,
                 JumlahSekolahChartByWilayahAndJenjangSekolah::class,

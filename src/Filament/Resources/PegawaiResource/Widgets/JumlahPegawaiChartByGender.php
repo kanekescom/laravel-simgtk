@@ -4,6 +4,7 @@ namespace Kanekescom\Simgtk\Filament\Resources\PegawaiResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
 use Illuminate\Support\Arr;
+use Kanekescom\Simgtk\Enums\GenderEnum;
 use Kanekescom\Simgtk\Models\JenjangSekolah;
 use Kanekescom\Simgtk\Models\Pegawai;
 
@@ -19,32 +20,47 @@ class JumlahPegawaiChartByGender extends ChartWidget
 
     protected function getData(): array
     {
-        $data = Pegawai::query();
-
         return [
             'datasets' => [
                 [
-                    'label' => 'Jumlah Pegawai',
+                    'label' => 'Pegawai',
                     'backgroundColor' => '#36A2EB',
                     'borderColor' => '#9BD0F5',
-                    'data' => $data->aktif()
-                        ->countGroupByGender($this->filter)
-                        ->get()
-                        ->map(fn ($value) => $value->count),
+                    'data' => [
+                        Pegawai::query()
+                            ->aktif()
+                            ->jenjangSekolahId($this->filter)
+                            ->genderLakiLaki()
+                            ->count(),
+                        Pegawai::query()
+                            ->aktif()
+                            ->jenjangSekolahId($this->filter)
+                            ->genderPerempuan()
+                            ->count(),
+                    ],
                 ],
                 [
-                    'label' => 'Jumlah Guru',
+                    'label' => 'Guru',
                     'backgroundColor' => '#FF0000',
                     'borderColor' => '#FFA07A',
-                    'data' => $data->guruAktif()
-                        ->countGroupByGender($this->filter)
-                        ->get()
-                        ->map(fn ($value) => $value->count),
+                    'data' => [
+                        Pegawai::query()
+                            ->guruAktif()
+                            ->jenjangSekolahId($this->filter)
+                            ->genderLakiLaki()
+                            ->count(),
+                        Pegawai::query()
+                            ->guruAktif()
+                            ->jenjangSekolahId($this->filter)
+                            ->genderPerempuan()
+                            ->count(),
+                    ],
                 ],
             ],
-            'labels' => $data->aktif()
-                ->get()
-                ->map(fn ($value) => $value->gender_kode->getLabel()),
+            'labels' => [
+                GenderEnum::LAKILAKI->getLabel(),
+                GenderEnum::PEREMPUAN->getLabel(),
+            ],
         ];
     }
 

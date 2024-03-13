@@ -2,7 +2,6 @@
 
 namespace Kanekescom\Simgtk\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -211,27 +210,13 @@ class Pegawai extends Model
             ->orderBy('tmt_pensiun');
     }
 
-    public function scopeCountGroupByGender($query, $jenjang_sekolah_id = null)
+    public function scopeJenjangSekolahId($query, $jenjang_sekolah_id = null)
     {
         return $query
-            ->select('gender_kode', \DB::raw('COUNT(*) as count'))
-            ->whereHas('sekolah', function (Builder $query) use ($jenjang_sekolah_id) {
+            ->whereHas('sekolah', function ($query) use ($jenjang_sekolah_id) {
                 if (filled($jenjang_sekolah_id)) {
                     $query->where('jenjang_sekolah_id', $jenjang_sekolah_id);
                 }
-            })
-            ->groupBy('gender_kode');
-    }
-
-    public function scopeCountGroupByStatusKepegawaian($query, $jenjang_sekolah_id = null)
-    {
-        return $query
-            ->select('status_kepegawaian_kode', \DB::raw('COUNT(*) as count'))
-            ->whereHas('sekolah', function (Builder $query) use ($jenjang_sekolah_id) {
-                if (filled($jenjang_sekolah_id)) {
-                    $query->where('jenjang_sekolah_id', $jenjang_sekolah_id);
-                }
-            })
-            ->groupBy('status_kepegawaian_kode');
+            });
     }
 }
