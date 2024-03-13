@@ -3,6 +3,7 @@
 namespace Kanekescom\Simgtk\Filament\Resources\SekolahResource\Widgets;
 
 use Filament\Widgets\ChartWidget;
+use Kanekescom\Simgtk\Enums\StatusSekolahEnum;
 use Kanekescom\Simgtk\Models\Sekolah;
 
 class JumlahSekolahChartByJenjangSekolahAndStatus extends ChartWidget
@@ -41,8 +42,8 @@ class JumlahSekolahChartByJenjangSekolahAndStatus extends ChartWidget
                 ],
             ],
             'labels' => [
-                'Negeri',
-                'Swasta',
+                StatusSekolahEnum::NEGERI->getLabel(),
+                StatusSekolahEnum::SWASTA->getLabel(),
             ],
         ];
     }
