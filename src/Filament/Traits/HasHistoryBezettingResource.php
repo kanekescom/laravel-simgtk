@@ -8,7 +8,6 @@ use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Kanekescom\Simgtk\Models\RencanaBezetting;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
@@ -22,7 +21,7 @@ trait HasHistoryBezettingResource
 
     public static function canEdit(Model $record): bool
     {
-        return RencanaBezetting::periodeAktif()->exists();
+        return false;
     }
 
     public static function defaultTable(Table $table): Table

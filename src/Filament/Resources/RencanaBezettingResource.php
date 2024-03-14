@@ -11,6 +11,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Kanekescom\Simgtk\Filament\Resources\RencanaBezettingResource\Pages;
+use Kanekescom\Simgtk\Filament\Resources\RencanaBezettingResource\RelationManagers;
 use Kanekescom\Simgtk\Models\RencanaBezetting;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
@@ -105,6 +106,7 @@ class RencanaBezettingResource extends Resource implements HasShieldPermissions
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                     Tables\Actions\ForceDeleteAction::make(),
@@ -138,8 +140,8 @@ class RencanaBezettingResource extends Resource implements HasShieldPermissions
                             ->heading('Guru'),
                         Column::make('created_at')
                             ->heading('Tanggal Buat'),
-                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
-                ])->visible(auth()->user()->can('export_'.self::class)),
+                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d')),
+                ])->visible(auth()->user()->can('export_' . self::class)),
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),
@@ -159,9 +161,18 @@ class RencanaBezettingResource extends Resource implements HasShieldPermissions
         return [
             'index' => Pages\ListRencanaBezetting::route('/'),
             'create' => Pages\CreateRencanaBezetting::route('/create'),
+            'view' => Pages\ViewRencanaBezetting::route('/{record}'),
             'edit' => Pages\EditRencanaBezetting::route('/{record}/edit'),
         ];
     }
+
+    // public static function getRelations(): array
+    // {
+    //     return [
+    //         RelationManagers\BezettingSdRelationManager::class,
+    //         RelationManagers\BezettingSmpRelationManager::class,
+    //     ];
+    // }
 
     public static function getPermissionPrefixes(): array
     {
