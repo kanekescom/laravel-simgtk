@@ -2,6 +2,7 @@
 
 namespace Kanekescom\Simgtk\Filament\Resources;
 
+use App\Models\User;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -9,7 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Kanekescom\Simgtk\Filament\Resources\UserResource\Pages;
-use Kanekescom\Simgtk\Models\User;
+use Kanekescom\Simgtk\Filament\Resources\UserResource\Pages\CreateUser;
 use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
@@ -45,13 +46,16 @@ class UserResource extends Resource implements HasShieldPermissions
                     ->email()
                     ->label('Email'),
                 Forms\Components\TextInput::make('password')
+                    ->dehydrated(fn ($state) => filled($state))
+                    ->required(fn ($livewire) => $livewire instanceof CreateUser)
                     ->revealable()
-                    ->required()
                     ->password()
+                    ->minLength(8)
                     ->maxLength(32)
                     ->label('Password'),
                 Forms\Components\Select::make('roles')
                     ->relationship('roles', 'name')
+                    ->required()
                     ->multiple()
                     ->preload()
                     ->searchable()

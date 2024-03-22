@@ -12,16 +12,21 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 use pxlrbt\FilamentExcel\Columns\Column;
 use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
-trait HasHistoryBezettingResource
+trait HasHistoryBezettingRelationManager
 {
-    public static function canCreate(): bool
+    public function canCreate(): bool
     {
         return false;
     }
 
-    public static function canEdit(Model $record): bool
+    public function canEdit(Model $record): bool
     {
         return false;
+    }
+
+    public function table(Table $table): Table
+    {
+        return self::defaultTable($table);
     }
 
     public static function defaultTable(Table $table): Table
@@ -29,18 +34,18 @@ trait HasHistoryBezettingResource
         return $table
             ->defaultGroup('wilayah.nama')
             ->defaultSort('nama', 'asc')
-            ->columns(self::getTableColumns())
+            ->columns(self::getDefaultTableColumns())
             ->filtersFormColumns(4)
-            ->filters(self::getTableFilters())
+            ->filters(self::getDefaultTableFilters())
             ->bulkActions([
                 ExportBulkAction::make()->exports([
-                    ExcelExport::make()->withColumns(self::getExportTableColumns())
+                    ExcelExport::make()->withColumns(self::getDefaultExportTableColumns())
                         ->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
                 ])->visible(auth()->user()->can('export_'.self::class)),
             ]);
     }
 
-    public static function getTableColumns(): array
+    public static function getDefaultTableColumns(): array
     {
         $columns = [];
         $columns[] = Tables\Columns\TextColumn::make('#')
@@ -166,7 +171,7 @@ trait HasHistoryBezettingResource
         return $columns;
     }
 
-    public static function getTableFilters(): array
+    public static function getDefaultTableFilters(): array
     {
         $filters = [];
         $filters[] = Tables\Filters\SelectFilter::make('wilayah_id')
@@ -287,7 +292,7 @@ trait HasHistoryBezettingResource
         return $filters;
     }
 
-    public static function getExportTableColumns(): array
+    public static function getDefaultExportTableColumns(): array
     {
         $columns = [];
         $columns[] = Column::make('nama')
@@ -341,5 +346,25 @@ trait HasHistoryBezettingResource
         }
 
         return $columns;
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'restore',
+            'restore_any',
+            'replicate',
+            'reorder',
+            'delete',
+            'delete_any',
+            'force_delete',
+            'force_delete_any',
+            'import',
+            'export',
+        ];
     }
 }

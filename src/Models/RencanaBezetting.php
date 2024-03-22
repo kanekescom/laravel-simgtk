@@ -136,6 +136,18 @@ class RencanaBezetting extends Model
         return $this->hasMany(RancanganBezetting::class);
     }
 
+    public function bezettingSd()
+    {
+        return $this->bezetting()
+            ->where('jenjang_sekolah_id', JenjangSekolah::where('kode', 'sd')->first()?->id);
+    }
+
+    public function bezettingSmp()
+    {
+        return $this->bezetting()
+            ->where('jenjang_sekolah_id', JenjangSekolah::where('kode', 'smp')->first()?->id);
+    }
+
     public function pegawai(): HasMany
     {
         return $this->hasMany(RancanganBezettingPegawai::class);
@@ -180,7 +192,6 @@ class RencanaBezetting extends Model
 
         return $query
             ->where('tanggal_mulai', '<=', $today)
-            ->where('tanggal_berakhir', '>=', $today)
-            ->where('is_aktif', true);
+            ->where('tanggal_berakhir', '>=', $today);
     }
 }

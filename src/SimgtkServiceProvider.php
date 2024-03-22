@@ -73,7 +73,7 @@ class SimgtkServiceProvider extends PackageServiceProvider
         Gate::policy(Models\Sekolah::class, Policies\SekolahPolicy::class);
         Gate::policy(Models\SekolahSd::class, Policies\SekolahSdPolicy::class);
         Gate::policy(Models\SekolahSmp::class, Policies\SekolahSmpPolicy::class);
-        Gate::policy(Models\User::class, Policies\UserPolicy::class);
+        Gate::policy(\App\Models\User::class, Policies\UserPolicy::class);
         Gate::policy(Models\UsulMutasi::class, Policies\UsulMutasiPolicy::class);
         Gate::policy(Models\Wilayah::class, Policies\WilayahPolicy::class);
 
