@@ -140,8 +140,8 @@ class RencanaBezettingResource extends Resource implements HasShieldPermissions
                             ->heading('Guru'),
                         Column::make('created_at')
                             ->heading('Tanggal Buat'),
-                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_') . '-' . now()->format('Y-m-d')),
-                ])->visible(auth()->user()->can('export_' . self::class)),
+                    ])->withFilename(fn ($resource) => str($resource::getSlug())->replace('/', '_').'-'.now()->format('Y-m-d')),
+                ])->visible(auth()->user()->can('export_'.self::class)),
             ])
             ->emptyStateActions([
                 Tables\Actions\CreateAction::make(),

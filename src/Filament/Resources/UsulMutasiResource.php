@@ -87,13 +87,25 @@ class UsulMutasiResource extends Resource implements HasShieldPermissions
                 Forms\Components\Select::make('tujuan_sekolah_id')
                     ->relationship('tujuanSekolah', 'nama')
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama_wilayah}")
+                    ->live()
+                    ->afterStateUpdated(function ($set) {
+                        $set('tujuan_mata_pelajaran_id', null);
+                    })
                     ->searchable()
                     ->preload()
                     ->required()
                     ->label('Tujuan Sekolah'),
                 Forms\Components\Select::make('tujuan_mata_pelajaran_id')
-                    ->relationship('tujuanMataPelajaran', 'nama', modifyQueryUsing: fn (Builder $query, Get $get) => $query->jenjangSekolahBy(Sekolah::where('id', $get('tujuan_sekolah_id'))->first()?->jenjang_sekolah_id))
+                    ->relationship(
+                        'tujuanMataPelajaran',
+                        'nama',
+                        modifyQueryUsing: function (Builder $query, Get $get) {
+                            $query->jenjangSekolahBy(Sekolah::where('id', $get('tujuan_sekolah_id'))->first()?->jenjang_sekolah_id);
+                        })
                     ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->nama}")
+                    ->visible(function ($get) {
+                        return filled($get('tujuan_sekolah_id'));
+                    })
                     ->searchable()
                     ->preload()
                     ->required()

@@ -4,7 +4,6 @@ namespace Kanekescom\Simgtk\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Kanekescom\Simgtk\Models\User as ModelsUser;
 
 class UserPolicy
 {
@@ -21,7 +20,7 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ModelsUser $modelsUser): bool
+    public function view(User $user, User $modelsUser): bool
     {
         return $user->can('view_Kanekescom\Simgtk\Filament\Resources\UserResource');
     }
@@ -37,7 +36,7 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ModelsUser $modelsUser): bool
+    public function update(User $user, User $modelsUser): bool
     {
         return $user->can('update_Kanekescom\Simgtk\Filament\Resources\UserResource');
     }
@@ -45,7 +44,7 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ModelsUser $modelsUser): bool
+    public function delete(User $user, User $modelsUser): bool
     {
         return $user->can('delete_Kanekescom\Simgtk\Filament\Resources\UserResource');
     }
@@ -61,7 +60,7 @@ class UserPolicy
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, ModelsUser $modelsUser): bool
+    public function forceDelete(User $user, User $modelsUser): bool
     {
         return $user->can('force_delete_Kanekescom\Simgtk\Filament\Resources\UserResource');
     }
@@ -77,7 +76,7 @@ class UserPolicy
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, ModelsUser $modelsUser): bool
+    public function restore(User $user, User $modelsUser): bool
     {
         return $user->can('restore_Kanekescom\Simgtk\Filament\Resources\UserResource');
     }
@@ -93,7 +92,7 @@ class UserPolicy
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, ModelsUser $modelsUser): bool
+    public function replicate(User $user, User $modelsUser): bool
     {
         return $user->can('replicate_Kanekescom\Simgtk\Filament\Resources\UserResource');
     }
